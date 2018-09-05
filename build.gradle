@@ -14,6 +14,7 @@ ext {
     springVersion = '5.0.4.RELEASE'
     swaggerVersion = '1.5.0'
     validationVersion = '2.0.1.Final'
+    log4j2Version = '2.11.1'
 }
 
 repositories {
@@ -22,6 +23,10 @@ repositories {
 
 dependencies {
     compile "com.thetransactioncompany:cors-filter:${corsFilterVersin}"
+
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+    compile "org.apache.logging.log4j:log4j-api:${log4j2Version}"
+    compile "org.apache.logging.log4j:log4j-core:${log4j2Version}"
 
     compile "javax.validation:validation-api:${validationVersion}"
 
