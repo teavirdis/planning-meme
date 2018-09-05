@@ -12,6 +12,7 @@ ext {
     lombokVersion = '1.18.2'
     mockitoVersion = '1.10.19'
     springVersion = '5.0.4.RELEASE'
+    springDataJpaVersion = '2.0.9.RELEASE'
     swaggerVersion = '1.5.0'
     validationVersion = '2.0.1.Final'
     log4j2Version = '2.11.1'
@@ -49,7 +50,7 @@ dependencies {
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
     compile "org.springframework:spring-web:${springVersion}"
-    compile "org.springframework.data:spring-data-jpa:${springVersion}"
+    compile "org.springframework.data:spring-data-jpa:${springDataJpaVersion}"
 
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile group: 'junit', name: 'junit', version: junitVersion
