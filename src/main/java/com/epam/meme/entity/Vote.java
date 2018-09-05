@@ -16,6 +16,8 @@ public class Vote {
     private LocalDateTime startDateTime;
     private LocalDateTime finishDateTime;
 
+    //TODO Andrei, ahtung! Fix it: add many to many
+
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "vote", fetch = FetchType.EAGER)
     private List<User> votedUsers;
 }
