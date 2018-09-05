@@ -15,6 +15,7 @@ ext {
     swaggerVersion = '1.5.0'
     validationVersion = '2.0.1.Final'
     log4j2Version = '2.11.1'
+    persistenceVersion = '2.1.1'
 }
 
 repositories {
@@ -41,10 +42,14 @@ dependencies {
 
     compile "org.projectlombok:lombok:${lombokVersion}"
 
+    compile "org.eclipse.persistence:javax.persistence:${persistenceVersion}"
+
+
     compile "org.springframework:spring-context-support:${springVersion}"
     compile "org.springframework:spring-core:${springVersion}"
     compile "org.springframework:spring-tx:${springVersion}"
     compile "org.springframework:spring-web:${springVersion}"
+    compile "org.springframework.data:spring-data-jpa:${springVersion}"
 
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile group: 'junit', name: 'junit', version: junitVersion
