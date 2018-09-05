@@ -1,0 +1,46 @@
+plugins {
+    id 'war'
+}
+
+group 'com.epam.meme'
+version '1.0-SNAPSHOT'
+
+ext {
+    corsFilterVersin = '2.6'
+    jerseyVersion = '2.26'
+    junitVersion = '4.12'
+    lombokVersion = '1.18.2'
+    mockitoVersion = '1.10.19'
+    springVersion = '5.0.4.RELEASE'
+    swaggerVersion = '1.5.0'
+    validationVersion = '2.0.1.Final'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "com.thetransactioncompany:cors-filter:${corsFilterVersin}"
+
+    compile "javax.validation:validation-api:${validationVersion}"
+
+    compile "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
+
+    compile "org.glassfish.jersey.containers:jersey-container-servlet-core:${jerseyVersion}"
+    compile("org.glassfish.jersey.ext:jersey-spring4:${jerseyVersion}"){
+        exclude group: 'org.springframework', module: 'spring-core'
+        exclude group: 'org.springframework', module: 'spring-web'
+        exclude group: 'org.springframework', module:'spring-beans'
+    }
+
+    compile "org.projectlombok:lombok:${lombokVersion}"
+
+    compile "org.springframework:spring-context-support:${springVersion}"
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-tx:${springVersion}"
+    compile "org.springframework:spring-web:${springVersion}"
+
+    testCompile "org.mockito:mockito-core:${mockitoVersion}"
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+}
