@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.epam.meme'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 ext {
     corsFilterVersin = '2.6'
