@@ -1,15 +1,15 @@
-package com.epam.meme.dao;
+package com.epam.meme.service;
 
 import java.util.Optional;
 
-public interface BaseDao<T> {
+public interface BaseService<T> {
 
     /**
      * Adds new entity to the storage.
      *
      * @param entity to add
      */
-    void add(T entity);
+    void create(T entity);
 
     /**
      * Finds entity entity in storage by id specified.
@@ -24,15 +24,13 @@ public interface BaseDao<T> {
      * passed  as parameter.
      *
      * @param entity to fetch new attribute values
-     * @return true if entity has been found and updated, false otherwise
      */
-    boolean update(T entity);
+    void update(T entity);
 
     /**
      * Deletes entity from the storage if it is present.
      *
      * @param entity to delete
-     * @return true if entity has been found and deleted, false otherwise
      */
-    boolean delete(T entity);
+    void delete(T entity);
 }
