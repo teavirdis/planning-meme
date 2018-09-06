@@ -7,6 +7,7 @@ import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,9 +16,10 @@ import javax.annotation.Resource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"com.epam.meme.service", "com.epam.meme.dao"})
+@ComponentScan({"com.epam.meme.service", "com.epam.meme.repository"})
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories
 @Import({HanaConfigurationImpl.class, TestConfigurationImpl.class, PostgresConfigurationImpl.class})
 public class ApplicationConfiguration {
     private static final String PROP_ECLIPSE_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
