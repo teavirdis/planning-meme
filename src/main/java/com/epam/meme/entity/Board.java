@@ -18,8 +18,9 @@ public class Board {
     @JoinColumn(name = "admin_id")
     private User admin;
 
-    //TODO Andrei, ahtung! Fix it: add many to many
-
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "board", fetch = FetchType.EAGER)
-    private List<User> members;
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "boards_users",
+            joinColumns = {@JoinColumn(name = "board_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private List<User> users;
 }

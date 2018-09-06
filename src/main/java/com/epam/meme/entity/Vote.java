@@ -16,8 +16,12 @@ public class Vote {
     private LocalDateTime startDateTime;
     private LocalDateTime finishDateTime;
 
-    //TODO Andrei, ahtung! Fix it: add many to many
-
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "vote", fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_votes",
+            joinColumns = {@JoinColumn(name = "vote_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> votedUsers;
+
+    @OneToMany(mappedBy = "vote", orphanRemoval = true)
+    private List<UserVote> userVotes;
 }
