@@ -16,12 +16,6 @@ public class Vote {
     private LocalDateTime startDateTime;
     private LocalDateTime finishDateTime;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "users_votes",
-            joinColumns = {@JoinColumn(name = "vote_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private List<User> votedUsers;
-
     @OneToMany(mappedBy = "vote", orphanRemoval = true)
     private List<UserVote> userVotes;
 }

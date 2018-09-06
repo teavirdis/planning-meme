@@ -10,6 +10,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
+import javax.validation.constraints.NotNull;
 
 public class WebAppInitializerConfig implements WebApplicationInitializer {
     private static final String DEV_PROFILE = "dev";
@@ -18,7 +19,7 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
     private static final String RS_APPLICATION = "javax.ws.rs.Application";
 
     @Override
-    public void onStartup(ServletContext servletContext) {
+    public void onStartup(@NotNull ServletContext servletContext) {
         AnnotationConfigWebApplicationContext configWebApplicationContext = new AnnotationConfigWebApplicationContext();
         servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
         configWebApplicationContext.register(ApplicationConfiguration.class);
