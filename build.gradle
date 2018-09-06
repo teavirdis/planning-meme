@@ -47,11 +47,8 @@ dependencies {
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
     compile "org.projectlombok:lombok:${lombokVersion}"
+    compile "org.eclipse.persistence:org.eclipse.persistence.jpa:${eclipsePersistenceVersion}"
 
-//    compile "org.eclipse.persistence:javax.persistence:${persistenceVersion}"
-    compile ("org.eclipse.persistence:eclipselink:${eclipsePersistenceVersion}"){
-//        exclude group: 'org.eclipse.persistence', module: 'javax.persistence'
-    }
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 
     compile "org.springframework:spring-context-support:${springVersion}"
@@ -60,7 +57,7 @@ dependencies {
     compile "org.springframework:spring-web:${springVersion}"
     compile "org.springframework.data:spring-data-jpa:${springDataJpaVersion}"
 
-    testCompile group: 'org.springframework', name: 'spring-test', version: ${springVersion}
+    testCompile "org.springframework:spring-test:${springVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile group: 'junit', name: 'junit', version: junitVersion
 }

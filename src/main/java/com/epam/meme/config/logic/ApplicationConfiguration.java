@@ -26,6 +26,8 @@ public class ApplicationConfiguration {
     private static final String ECLIPSE_HBM2DDL_AUTO = "generateDdl";
     private static final String PROP_ECLIPSE_HBM2DDL_AUTO = "db.eclipse.hbm2ddl.auto";
     private static final String ECLIPSE_SHOW_SQL = "showSql";
+    private static final String ECLIPSE_WEAVING = "eclipselink.weaving";
+    private static final String PROP_ECLIPSE_WEAVING = "db.eclipse.weaving";
     private static final String PROP_ECLIPSE_SHOW_SQL = "db.eclipse.show_sql";
 
     @Resource
@@ -59,7 +61,8 @@ public class ApplicationConfiguration {
     private Properties getEclipseProperties() {
         Properties eclipseProperties = new Properties();
 
-        //TODO eclipseProperties
+        //TODO read about eclipselink.weaving
+        eclipseProperties.setProperty(ECLIPSE_WEAVING, env.getProperty(PROP_ECLIPSE_WEAVING));
         eclipseProperties.setProperty(ECLIPSE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_ECLIPSE_HBM2DDL_AUTO));
         eclipseProperties.setProperty(ECLIPSE_SHOW_SQL, env.getRequiredProperty(PROP_ECLIPSE_SHOW_SQL));
         return eclipseProperties;

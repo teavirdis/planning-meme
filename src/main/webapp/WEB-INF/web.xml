@@ -5,57 +5,57 @@
 	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     <display-name>Planning Meme</display-name>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!--<listener>-->
+        <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--</listener>-->
 
-    <servlet>
-        <servlet-name>PlanningServerApplication</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.epam.meme.config.web.WebAppInitializerConfig</param-value>
-        </init-param>
+    <!--<servlet>-->
+        <!--<servlet-name>PlanningServerApplication</servlet-name>-->
+        <!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>javax.ws.rs.Application</param-name>-->
+            <!--<param-value>com.epam.meme.config.web.WebAppInitializerConfig</param-value>-->
+        <!--</init-param>-->
 
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>PlanningServerApplication</servlet-name>
-        <url-pattern>/meme/*</url-pattern>
-    </servlet-mapping>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>PlanningServerApplication</servlet-name>-->
+        <!--<url-pattern>/meme/*</url-pattern>-->
+    <!--</servlet-mapping>-->
 
     <!--<context-param>-->
         <!--<param-name>contextConfigLocation</param-name>-->
         <!--<param-value>/resource/applicationContext.xml</param-value>-->
     <!--</context-param>-->
 
-    <filter>
-        <filter-name>CORS</filter-name>
-        <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+    <!--<filter>-->
+        <!--<filter-name>CORS</filter-name>-->
+        <!--<filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>-->
 
-        <init-param>
-            <param-name>cors.allowOrigin</param-name>
-            <param-value>*</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.supportsCredentials</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.supportedHeaders</param-name>
-            <param-value>Accept, Authorization, Origin, X-Requested-With, Content-Type, Last-Modified</param-value>
-        </init-param>
-        <init-param>
-            <param-name>cors.supportedMethods</param-name>
-            <param-value>GET, POST, PUT, DELETE, HEAD, OPTIONS</param-value>
-        </init-param>
-    </filter>
+        <!--<init-param>-->
+            <!--<param-name>cors.allowOrigin</param-name>-->
+            <!--<param-value>*</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>cors.supportsCredentials</param-name>-->
+            <!--<param-value>false</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>cors.supportedHeaders</param-name>-->
+            <!--<param-value>Accept, Authorization, Origin, X-Requested-With, Content-Type, Last-Modified</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>cors.supportedMethods</param-name>-->
+            <!--<param-value>GET, POST, PUT, DELETE, HEAD, OPTIONS</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
 
-    <filter-mapping>
-        <filter-name>CORS</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    <!--<filter-mapping>-->
+        <!--<filter-name>CORS</filter-name>-->
+        <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
 
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

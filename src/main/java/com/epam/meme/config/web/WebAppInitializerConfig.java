@@ -8,25 +8,19 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
 public class WebAppInitializerConfig implements WebApplicationInitializer {
-    private static final String TEST_PROFILE = "test";
-    private static final String RUNTIME_PROFILE = "runtime";
     private static final String DEV_PROFILE = "dev";
     private static final String SERVLET_NAME = "PlanningServerApplication";
     private static final String URL_PATTERN = "/meme/*";
     private static final String RS_APPLICATION = "javax.ws.rs.Application";
-    private static final String CORS_FILTER_NAME = "CORS";
 
     @Override
     public void onStartup(ServletContext servletContext) {
-        //TODO find more pretty solution for web initializer
-        servletContext.addListener(ContextLoaderListener.class);
-
         AnnotationConfigWebApplicationContext configWebApplicationContext = new AnnotationConfigWebApplicationContext();
+        servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
         configWebApplicationContext.register(ApplicationConfiguration.class);
         configWebApplicationContext.getEnvironment().setActiveProfiles(DEV_PROFILE);
         configWebApplicationContext.setServletContext(servletContext);
@@ -34,7 +28,7 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
 
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet(
                 SERVLET_NAME,
-                ServletContainer.class.getName()
+                ServletContainer.class
         );
 
         servletRegistration.addMapping(URL_PATTERN);
