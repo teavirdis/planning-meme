@@ -18,4 +18,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserVote> userVotes;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Board> boards;
 }
