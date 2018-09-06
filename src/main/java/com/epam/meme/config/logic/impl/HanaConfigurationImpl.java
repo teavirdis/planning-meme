@@ -32,6 +32,7 @@ public class HanaConfigurationImpl implements DataConfiguration {
         try {
             dataSource = (BasicDataSource) new JndiTemplate().lookup(Objects.requireNonNull(env.getProperty(JDBC_URL)));
         } catch (NamingException e) {
+            //TODO AOP Logger
             e.printStackTrace();
         }
         return dataSource;
