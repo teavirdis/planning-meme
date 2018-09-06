@@ -39,15 +39,5 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         servletRegistration.addMapping(URL_PATTERN);
         servletRegistration.setLoadOnStartup(1);
         servletRegistration.setInitParameter(RS_APPLICATION, MemeResourceConfiguration.class.getName());
-
-        FilterRegistration.Dynamic filter = servletContext.addFilter(CORS_FILTER_NAME, CORSFilter.class);
-
-        //TODO replace initParameter to initParameters(map)
-        filter.setInitParameter("cors.allowOrigin", "*");
-        filter.setInitParameter("cors.supportsCredentials", "false");
-        filter.setInitParameter("cors.supportedHeaders", "Accept, Authorization, Origin, X-Requested-With, Content-Type, Last-Modified");
-        filter.setInitParameter("cors.supportedMethods", "GET, POST, PUT, DELETE, HEAD, OPTIONS");
-
-        filter.addMappingForServletNames(null, true, SERVLET_NAME);
     }
 }
