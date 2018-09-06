@@ -3,13 +3,19 @@ package com.epam.meme.service.impl;
 import com.epam.meme.entity.Board;
 import com.epam.meme.repository.BoardRepository;
 import com.epam.meme.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Service
+@Transactional
 public class BoardServiceImpl implements BoardService {
 
     private BoardRepository repository;
 
+    @Autowired
     public BoardServiceImpl(BoardRepository repository) {
         this.repository = repository;
     }
@@ -19,6 +25,7 @@ public class BoardServiceImpl implements BoardService {
         repository.saveAndFlush(entity);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Optional<Board> findById(Long entityId) {
         return repository.findById(entityId);

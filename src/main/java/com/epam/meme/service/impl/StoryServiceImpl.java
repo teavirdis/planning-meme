@@ -3,13 +3,19 @@ package com.epam.meme.service.impl;
 import com.epam.meme.entity.Story;
 import com.epam.meme.repository.StoryRepository;
 import com.epam.meme.service.StoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
+@Service
+@Transactional
 public class StoryServiceImpl implements StoryService {
 
     private StoryRepository repository;
 
+    @Autowired
     public StoryServiceImpl(StoryRepository repository) {
         this.repository = repository;
     }
@@ -20,6 +26,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Story> findById(Long entityId) {
         return repository.findById(entityId);
     }

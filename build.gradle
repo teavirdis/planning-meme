@@ -60,6 +60,7 @@ dependencies {
     compile "org.springframework:spring-web:${springVersion}"
     compile "org.springframework.data:spring-data-jpa:${springDataJpaVersion}"
 
+    testCompile group: 'org.springframework', name: 'spring-test', version: ${springVersion}
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile group: 'junit', name: 'junit', version: junitVersion
 }
