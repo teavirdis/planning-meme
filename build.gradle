@@ -17,6 +17,7 @@ ext {
     validationVersion = '2.0.1.Final'
     log4j2Version = '2.11.1'
     persistenceVersion = '2.2.1'
+    eclipsePersistenceVersion = '2.7.3'
     commonJdbcVersion = '1.4'
     servletApiVersion = '3.0.1'
 }
@@ -48,6 +49,7 @@ dependencies {
     compile "org.projectlombok:lombok:${lombokVersion}"
 
     compile "org.eclipse.persistence:javax.persistence:${persistenceVersion}"
+    compile "org.eclipse.persistence:eclipselink:${eclipsePersistenceVersion}"
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 
     compile "org.springframework:spring-context-support:${springVersion}"

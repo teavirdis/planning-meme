@@ -1,7 +1,9 @@
 package com.epam.meme.config.logic;
 
 import com.epam.meme.config.logic.impl.HanaConfigurationImpl;
+import com.epam.meme.config.logic.impl.PostgresConfigurationImpl;
 import com.epam.meme.config.logic.impl.TestConfigurationImpl;
+import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -10,14 +12,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
-import javax.persistence.spi.PersistenceProvider;
 import java.util.Properties;
 
 @Configuration
 @ComponentScan({"com.epam.meme.service", "com.epam.meme.dao"})
-@PropertySource("classpath:h2/h2.properties")
+@PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@Import({HanaConfigurationImpl.class, TestConfigurationImpl.class})
+@Import({HanaConfigurationImpl.class, TestConfigurationImpl.class, PostgresConfigurationImpl.class})
 public class ApplicationConfiguration {
     private static final String PROP_ECLIPSE_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
     private static final String ECLIPSE_HBM2DDL_AUTO = "generateDdl";
