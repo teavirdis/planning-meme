@@ -6,11 +6,11 @@ INSERT INTO USERS(id, username, email, password) VALUES(4, 'user4', 'user4@gmail
 INSERT INTO USERS(id, username, email, password) VALUES(5, 'user5', 'user5@gmail.com', 'qwerty');
 
 --Insert into stories
-INSERT INTO STORIES(id, description, board_id) VALUES(1, 'No description', 1);
-INSERT INTO STORIES(id, description, board_id) VALUES(2, 'No description2', 1);
-INSERT INTO STORIES(id, description, board_id) VALUES(3, 'No description3', 1);
-INSERT INTO STORIES(id, description, board_id) VALUES(4, 'No description4', 1);
-INSERT INTO STORIES(id, description, board_id) VALUES(5, 'No description5', 1);
+INSERT INTO STORIES(id, description) VALUES(1, 'No description');
+INSERT INTO STORIES(id, description) VALUES(2, 'No description2');
+INSERT INTO STORIES(id, description) VALUES(3, 'No description3');
+INSERT INTO STORIES(id, description) VALUES(4, 'No description4');
+INSERT INTO STORIES(id, description) VALUES(5, 'No description5');
 
 --Insert into votes
 INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(1, 1, '2018-04-05-08.48.28.020005', '2018-04-05-08.49.28.020005');
