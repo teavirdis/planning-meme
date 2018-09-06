@@ -5,6 +5,11 @@ INSERT INTO USERS(id, username, email, password) VALUES(3, 'user3', 'user3@gmail
 INSERT INTO USERS(id, username, email, password) VALUES(4, 'user4', 'user4@gmail.com', 'qwerty');
 INSERT INTO USERS(id, username, email, password) VALUES(5, 'user5', 'user5@gmail.com', 'qwerty');
 
+
+--Insert into boards
+INSERT INTO BOARDS(id, name, admin_id) VALUES(1, 'Board1', 1);
+INSERT INTO BOARDS(id, name, admin_id) VALUES(2, 'Board1', 2);
+
 --Insert into stories
 INSERT INTO STORIES(id, description, board_id) VALUES(1, 'No description', 1);
 INSERT INTO STORIES(id, description, board_id) VALUES(2, 'No description2', 1);
@@ -13,18 +18,14 @@ INSERT INTO STORIES(id, description, board_id) VALUES(4, 'No description4', 1);
 INSERT INTO STORIES(id, description, board_id) VALUES(5, 'No description5', 1);
 
 --Insert into votes
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(1, 1, '2018-04-05-08.48.28.020005', '2018-04-05-08.49.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(2, 1, '2018-04-05-09.49.28.020005', '2018-04-05-09.59.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(3, 2, '2018-04-05-09.50.28.020005', '2018-04-05-09.52.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(4, 3, '2018-04-05-09.51.28.020005', '2018-04-05-09.53.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(5, 3, '2018-04-05-09.54.28.020005', '2018-04-05-09.55.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(6, 4, '2018-04-05-09.56.28.020005', '2018-04-05-09.58.28.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(7, 4, '2018-04-05-09.59.28.020005', '2018-04-05-09.59.38.020005');
-INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(8, 5, '2018-04-05-10.51.28.020005', '2018-04-05-10.53.28.020005');
-
---Insert into boards
-INSERT INTO BOARDS(id, name, admin_id) VALUES(1, 'Board1', 1);
-INSERT INTO BOARDS(id, name, admin_id) VALUES(2, 'Board1', 2);
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(1, 1, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(2, 1, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(3, 2, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(4, 3, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(5, 3, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(6, 4, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(7, 4, '2018-04-05', '2018-04-05');
+INSERT INTO VOTES(id, story_id, start_date, finish_date) VALUES(8, 5, '2018-04-05', '2018-04-05');
 
 --Insert into estimate_stories
 INSERT INTO ESTIMATE_STORIES(id, story_id, estimate) VALUES (1, 1, 5);
