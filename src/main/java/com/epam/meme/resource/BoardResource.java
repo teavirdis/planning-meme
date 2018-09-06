@@ -4,7 +4,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/rooms")
-@Produces({MediaType.APPLICATION_JSON})
+
 public class BoardResource {
 
     @GET
