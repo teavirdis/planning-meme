@@ -19,7 +19,7 @@ import java.util.Properties;
 @ComponentScan({"com.epam.meme.service", "com.epam.meme.repository"})
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories("com.epam.meme.repository")
 @Import({HanaConfigurationImpl.class, TestConfigurationImpl.class, PostgresConfigurationImpl.class})
 public class ApplicationConfiguration {
     private static final String PROP_ECLIPSE_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
