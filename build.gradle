@@ -12,7 +12,6 @@ ext {
     lombokVersion = '1.18.2'
     mockitoVersion = '1.10.19'
     springVersion = '5.0.4.RELEASE'
-    postgresVersion = '42.2.2'
     springDataJpaVersion = '2.0.9.RELEASE'
     swaggerVersion = '1.5.0'
     validationVersion = '2.0.1.Final'
@@ -21,7 +20,9 @@ ext {
     eclipsePersistenceVersion = '2.7.3'
     commonJdbcVersion = '1.4'
     servletApiVersion = '3.0.1'
+    javaxElVersion = '2.2.4'
     h2Version = '1.4.187'
+    postgresVersion = '9.3-1100-jdbc41';
 }
 
 repositories {
@@ -40,17 +41,15 @@ dependencies {
     compile "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
 
     compile "org.glassfish.jersey.containers:jersey-container-servlet-core:${jerseyVersion}"
-    compile("org.glassfish.jersey.ext:jersey-spring4:${jerseyVersion}"){
+    compile("org.glassfish.jersey.ext:jersey-spring4:${jerseyVersion}") {
         exclude group: 'org.springframework', module: 'spring-core'
         exclude group: 'org.springframework', module: 'spring-web'
-        exclude group: 'org.springframework', module:'spring-beans'
+        exclude group: 'org.springframework', module: 'spring-beans'
     }
 
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
     compile "org.projectlombok:lombok:${lombokVersion}"
-
-    compile "org.postgresql:postgresql:${postgresVersion}"
     compile "org.eclipse.persistence:org.eclipse.persistence.jpa:${eclipsePersistenceVersion}"
 
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
@@ -60,9 +59,15 @@ dependencies {
     compile "org.springframework:spring-tx:${springVersion}"
     compile "org.springframework:spring-web:${springVersion}"
     compile "org.springframework.data:spring-data-jpa:${springDataJpaVersion}"
+    compile "org.postgresql:postgresql:${postgresVersion}"
+
+
+    testCompile "org.glassfish.web:javax.el:${javaxElVersion}"
+    testCompile "javax.el:javax.el-api:${javaxElVersion}"
 
     testCompile "com.h2database:h2:${h2Version}"
     testCompile "org.springframework:spring-test:${springVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
-    testCompile group: 'junit', name: 'junit', version: junitVersion
+    testCompile "junit:junit:${junitVersion}"
 }
+
