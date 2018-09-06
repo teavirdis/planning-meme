@@ -23,4 +23,7 @@ public class Board {
             joinColumns = {@JoinColumn(name = "board_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users;
+
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "story", fetch = FetchType.LAZY)
+    private List<Story> stories;
 }
