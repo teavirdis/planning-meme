@@ -24,7 +24,7 @@ public class PostgresConfigurationImpl implements DataConfiguration {
     private static final String PROP_DATABASE_USERNAME = "db.username";
     private static final String PROP_DATABASE_MIN_IDLE = "db.minidle";
     private static final String PROP_DATABASE_MAX_IDLE = "db.maxidle";
-    private static final String PROP_POSTGRES_DIALECT = "db.dialect";
+    private static final String PROP_DATABASE_PLATFORM = "org.eclipse.persistence.platform.database.PostgreSQLPlatform";
 
     @Resource
     private Environment env;
@@ -46,7 +46,7 @@ public class PostgresConfigurationImpl implements DataConfiguration {
     public JpaVendorAdapter jpaVendorAdapter() {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.POSTGRESQL);
-        vendorAdapter.setDatabasePlatform(env.getRequiredProperty(PROP_POSTGRES_DIALECT));
+        vendorAdapter.setDatabasePlatform(PROP_DATABASE_PLATFORM);
         return vendorAdapter;
     }
 

@@ -12,6 +12,7 @@ ext {
     lombokVersion = '1.18.2'
     mockitoVersion = '1.10.19'
     springVersion = '5.0.4.RELEASE'
+    postgresVersion = '42.2.2'
     springDataJpaVersion = '2.0.9.RELEASE'
     swaggerVersion = '1.5.0'
     validationVersion = '2.0.1.Final'
@@ -48,6 +49,8 @@ dependencies {
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
     compile "org.projectlombok:lombok:${lombokVersion}"
+
+    compile "org.postgresql:postgresql:${postgresVersion}"
     compile "org.eclipse.persistence:org.eclipse.persistence.jpa:${eclipsePersistenceVersion}"
 
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
