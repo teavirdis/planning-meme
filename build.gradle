@@ -20,7 +20,8 @@ ext {
     eclipsePersistenceVersion = '2.7.3'
     commonJdbcVersion = '1.4'
     servletApiVersion = '3.0.1'
-    javaxElVersion = '2.2.4'
+    javaxElVersion = '3.0.0'
+    glassfishElVersion = '2.2.6'
     h2Version = '1.4.187'
     postgresVersion = '9.3-1100-jdbc41';
 }
@@ -62,8 +63,8 @@ dependencies {
     compile "org.postgresql:postgresql:${postgresVersion}"
 
 
-    testCompile "org.glassfish.web:javax.el:${javaxElVersion}"
     testCompile "javax.el:javax.el-api:${javaxElVersion}"
+    testCompile "org.glassfish.web:javax.el:${glassfishElVersion}"
 
     testCompile "com.h2database:h2:${h2Version}"
     testCompile "org.springframework:spring-test:${springVersion}"
