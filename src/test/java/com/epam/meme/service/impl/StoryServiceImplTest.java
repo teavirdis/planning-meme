@@ -34,6 +34,7 @@ public class StoryServiceImplTest {
     @Test
     public void create_created() {
         Story story = new Story();
+        story.setId(10L);
         story.setDescription("Cool story, Bob");
         service.create(story);
     }

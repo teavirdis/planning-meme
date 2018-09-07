@@ -19,11 +19,11 @@ import java.util.Properties;
 @ComponentScan({"com.epam.meme.service", "com.epam.meme.repository"})
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
-@EnableJpaRepositories
+@EnableJpaRepositories("com.epam.meme.repository")
 @Import({HanaConfigurationImpl.class, TestConfigurationImpl.class, PostgresConfigurationImpl.class})
 public class ApplicationConfiguration {
     private static final String PROP_ECLIPSE_PACKAGES_TO_SCAN = "db.entitymanager.packages.to.scan";
-    private static final String ECLIPSE_HBM2DDL_AUTO = "generateDdl";
+    private static final String ECLIPSE_HBM2DDL_AUTO = "eclipselink.ddl-generation";
     private static final String PROP_ECLIPSE_HBM2DDL_AUTO = "db.eclipse.hbm2ddl.auto";
     private static final String ECLIPSE_SHOW_SQL = "showSql";
     private static final String ECLIPSE_WEAVING = "eclipselink.weaving";
@@ -61,7 +61,6 @@ public class ApplicationConfiguration {
     private Properties getEclipseProperties() {
         Properties eclipseProperties = new Properties();
 
-        //TODO read about eclipselink.weaving
         eclipseProperties.setProperty(ECLIPSE_WEAVING, env.getProperty(PROP_ECLIPSE_WEAVING));
         eclipseProperties.setProperty(ECLIPSE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_ECLIPSE_HBM2DDL_AUTO));
         eclipseProperties.setProperty(ECLIPSE_SHOW_SQL, env.getRequiredProperty(PROP_ECLIPSE_SHOW_SQL));

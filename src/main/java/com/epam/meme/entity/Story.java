@@ -14,6 +14,7 @@ public class Story {
     private Long id;
     private String description;
 
-    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "story", fetch = FetchType.EAGER)
+    @OneToMany
+    @JoinColumn(name = "story_id")
     private List<Vote> votes;
 }
