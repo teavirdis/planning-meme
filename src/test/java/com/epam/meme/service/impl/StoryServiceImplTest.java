@@ -53,5 +53,5 @@ public class StoryServiceImplTest {
         service.update(story);
     }
 
-    
+
 }
