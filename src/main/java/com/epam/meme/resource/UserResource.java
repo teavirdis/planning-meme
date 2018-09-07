@@ -1,10 +1,13 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.dto.UserDto;
 import com.epam.meme.entity.User;
 import com.epam.meme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.*;
 import javax.ws.rs.*;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 @Path("/users")
@@ -16,7 +19,9 @@ public class UserResource {
     private UserService userService;
 
     @POST
-    public void create(User user) {
+    public void create(@Valid UserDto userDto) {
+        User user = new User();
+        user.setUsername(userDto.username);
         userService.create(user);
     }
 
@@ -26,7 +31,7 @@ public class UserResource {
         return userService.findById(userId).get();
     }
 
-    /*@PUT
+    /*@PUT //TODO later
     @Path("/{id}")
     public void updateUser(@PathParam("id") long userId) {
         User user = userService.findById(userId).get();

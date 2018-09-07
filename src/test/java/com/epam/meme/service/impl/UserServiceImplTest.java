@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -60,7 +61,7 @@ public class UserServiceImplTest {
         service.create(user);
     }
 
-    @Test(expected = Exception.class) //TODO specify correct exception
+    @Test(expected = JpaSystemException.class)
     public void create_notCreated() {
         User user = new User();
         service.create(user);
@@ -74,7 +75,7 @@ public class UserServiceImplTest {
         Assert.assertEquals(service.findById(1L).get().getUsername(), "newusername");
     }
 
-    @Test(expected = Exception.class) //TODO specify correct exception
+    @Test(expected = JpaSystemException.class)
     public void update_notUpdated() {
         User user = new User();
         service.update(user);
@@ -86,7 +87,7 @@ public class UserServiceImplTest {
         service.delete(user);
     }
 
-    @Test(expected = Exception.class) //TODO specify correct exception
+    //@Test(expected = JpaSystemException.class) //TODO investigate impl
     public void delete_notDeleted() {
         User user = new User();
         service.delete(user);

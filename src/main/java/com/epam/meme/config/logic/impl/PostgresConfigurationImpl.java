@@ -24,7 +24,8 @@ public class PostgresConfigurationImpl implements DataConfiguration {
     private static final String PROP_DATABASE_USERNAME = "db.username";
     private static final String PROP_DATABASE_MIN_IDLE = "db.minidle";
     private static final String PROP_DATABASE_MAX_IDLE = "db.maxidle";
-    private static final String PROP_DATABASE_PLATFORM = "org.eclipse.persistence.platform.database.PostgreSQLPlatform";
+    private static final String PROP_DATABASE_PLATFORM =
+            "org.eclipse.persistence.platform.database.PostgreSQLPlatform";
 
     @Resource
     private Environment env;
