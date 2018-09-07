@@ -23,8 +23,4 @@ public class Board {
             joinColumns = {@JoinColumn(name = "board_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users;
-
-    @OneToMany
-    @JoinColumn(name = "board_id")
-    private List<Story> stories;
 }

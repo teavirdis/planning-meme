@@ -13,9 +13,11 @@ public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private LocalDateTime startDateTime;
-    private LocalDateTime finishDateTime;
 
-    @OneToMany(mappedBy = "vote", orphanRemoval = true)
-    private List<UserVote> userVotes;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private Short round;
+    private Short estimation;
 }
