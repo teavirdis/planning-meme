@@ -24,8 +24,17 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        registerContextLoaderListener(servletContext);
         servletContext.setInitParameter("contextConfigLocation", "");
+        registerContextLoaderListener(servletContext);
+
+        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet(
+                SERVLET_NAME,
+                ServletContainer.class
+        );
+        servletRegistration.addMapping(URL_PATTERN);
+        servletRegistration.setLoadOnStartup(1);
+
+        servletRegistration.setInitParameter(RS_APPLICATION, MemeResourceConfiguration.class.getName());
     }
 
     private void registerContextLoaderListener(ServletContext servletContext) {
@@ -36,15 +45,6 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         configWebApplicationContext.refresh();
 
         servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
-
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet(
-                SERVLET_NAME,
-                ServletContainer.class
-        );
-        servletRegistration.addMapping(URL_PATTERN);
-        servletRegistration.setLoadOnStartup(1);
-
-        servletRegistration.setInitParameter(RS_APPLICATION, MemeResourceConfiguration.class.getName());
     }
 
 
