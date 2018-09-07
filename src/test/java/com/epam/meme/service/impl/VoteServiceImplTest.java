@@ -2,6 +2,8 @@ package com.epam.meme.service.impl;
 
 import com.epam.meme.config.logic.ApplicationConfiguration;
 import com.epam.meme.service.VoteService;
+import org.junit.Assert;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,5 +20,8 @@ public class VoteServiceImplTest {
     @Autowired
     private VoteService service;
 
-
+    @Test
+    public void findById_found() {
+        Assert.assertTrue(service.findById(1L).isPresent());
+    }
 }

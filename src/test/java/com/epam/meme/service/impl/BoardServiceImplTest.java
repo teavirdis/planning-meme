@@ -70,5 +70,4 @@ public class BoardServiceImplTest {
         Board board = new Board();
         service.delete(board);
     }
-
 }
