@@ -34,11 +34,14 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         servletRegistration.addMapping(URL_PATTERN);
         servletRegistration.setLoadOnStartup(1);
 
-        servletRegistration.setInitParameter(RS_APPLICATION, MemeResourceConfiguration.class.getName());
+        servletRegistration.setInitParameter(
+                RS_APPLICATION,
+                MemeResourceConfiguration.class.getName());
     }
 
     private void registerContextLoaderListener(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext configWebApplicationContext = new AnnotationConfigWebApplicationContext();
+        AnnotationConfigWebApplicationContext configWebApplicationContext =
+                new AnnotationConfigWebApplicationContext();
         configWebApplicationContext.register(ApplicationConfiguration.class);
         configWebApplicationContext.getEnvironment().setActiveProfiles(DEV_PROFILE);
         configWebApplicationContext.setServletContext(servletContext);
@@ -47,31 +50,4 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
     }
 
-
-
-
-
-    /*private static final String DEV_PROFILE = "dev";
-    private static final String SERVLET_NAME = "PlanningServerApplication";
-    private static final String URL_PATTERN = "/meme/*";
-    private static final String RS_APPLICATION = "javax.ws.rs.Application";
-
-    @Override
-    public void onStartup(ServletContext servletContext) {
-        AnnotationConfigWebApplicationContext configWebApplicationContext = new AnnotationConfigWebApplicationContext();
-        servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
-        configWebApplicationContext.register(ApplicationConfiguration.class);
-        configWebApplicationContext.getEnvironment().setActiveProfiles(DEV_PROFILE);
-        configWebApplicationContext.setServletContext(servletContext);
-        configWebApplicationContext.refresh();
-
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet(
-                SERVLET_NAME,
-                new ServletContainer(new MemeResourceConfiguration())
-        );
-
-        servletRegistration.addMapping(URL_PATTERN);
-        servletRegistration.setLoadOnStartup(1);
-        //servletRegistration.setInitParameter(RS_APPLICATION, MemeResourceConfiguration.class.getName());
-    }*/
 }
