@@ -8,7 +8,7 @@ INSERT INTO USERS(id, username, email, password) VALUES(5, 'user5', 'user5@gmail
 
 --Insert into boards
 INSERT INTO BOARDS(id, name, admin_id) VALUES(1, 'Board1', 1);
-INSERT INTO BOARDS(id, name, admin_id) VALUES(2, 'Board1', 2);
+INSERT INTO BOARDS(id, name, admin_id) VALUES(2, 'Board2', 2);
 
 --Insert into stories
 INSERT INTO STORIES(id, description, board_id) VALUES(1, 'No description', 1);

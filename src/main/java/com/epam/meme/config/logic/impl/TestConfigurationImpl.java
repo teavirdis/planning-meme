@@ -5,12 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Configuration
@@ -20,6 +22,9 @@ public class TestConfigurationImpl implements DataConfiguration {
     private static final String H2_PLATFORM = "h2.platform";
     private static final String H2_CREATE_SQL = "h2/schema.sql";
     private static final String H2_INIT_SQL = "h2/init.sql";
+
+    @Resource
+    private Environment env;
 
     @Bean
     public DataSource dataSource() {
@@ -35,7 +40,7 @@ public class TestConfigurationImpl implements DataConfiguration {
     public JpaVendorAdapter jpaVendorAdapter() {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
-        vendorAdapter.setDatabasePlatform(H2_PLATFORM);
+        vendorAdapter.setDatabasePlatform(env.getProperty(H2_PLATFORM));
         return vendorAdapter;
     }
 

@@ -21,6 +21,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
+    //TODO Change save
     public void create(Story entity) {
         repository.saveAndFlush(entity);
     }
