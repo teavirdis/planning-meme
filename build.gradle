@@ -23,7 +23,8 @@ ext {
     javaxElVersion = '3.0.0'
     glassfishElVersion = '2.2.6'
     h2Version = '1.4.187'
-    postgresVersion = '9.3-1100-jdbc41';
+    postgresVersion = '9.3-1100-jdbc41'
+    jsonBindingVersion = '2.27'
 }
 
 repositories {
@@ -47,6 +48,8 @@ dependencies {
         exclude group: 'org.springframework', module: 'spring-web'
         exclude group: 'org.springframework', module: 'spring-beans'
     }
+
+    compile "org.glassfish.jersey.media:jersey-media-json-binding:${jsonBindingVersion}"
 
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
