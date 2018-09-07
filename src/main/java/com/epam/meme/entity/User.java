@@ -16,9 +16,6 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserVote> userVotes;
-
     @ManyToMany(mappedBy = "users")
     private List<Board> boards;
 }
