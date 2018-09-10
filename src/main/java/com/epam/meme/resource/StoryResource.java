@@ -1,14 +1,18 @@
 package com.epam.meme.resource;
 
 import com.epam.meme.dto.StoryDto;
+import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
+import com.epam.meme.repository.VoteRepository;
 import com.epam.meme.service.StoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 
 public class StoryResource {
+
     @Autowired
     private StoryService storyService;
 
@@ -16,38 +20,54 @@ public class StoryResource {
     private ModelMapper modelMapper;
 
     @POST
-    public void addStory(StoryDto story) {
-        //TODO storyService.addStory ...
+    public void create(@PathParam("boardId") Long boardId, @Valid StoryDto storyDto) {
+        Story story = convertToEntity(storyDto);
+        Board board = new Board();
+        board.setId(boardId);
+        story.setBoard(board);
+        storyService.create(story);
     }
 
     @GET
-    public void defineStories(@QueryParam("startIndex") long startIndex, @QueryParam("maxResult") long maxResult){
+    public void findAll(
+            @QueryParam("startIndex") int startIndex,
+            @QueryParam("maxResults")  int maxResult){
         //TODO realize needed method
     }
 
     @GET
-    @Path("/{id}")
-    public Story defineStory(@PathParam("id") long storyId) {
+    @Path("/{storyId}")
+    public Story findById(@PathParam("storyId") Long storyId) {
         return storyService.findById(storyId).get();
     }
 
     @PUT
-    @Path("/{id}")
-    public void updateStory(@PathParam("id") long storyId) {
+    @Path("/{storyId}")
+    public void update(@PathParam("storyId") Long storyId, StoryDto storyDto) {
         Story story = storyService.findById(storyId).get();
+
+        if (storyDto.getDescription() != null) {
+            story.setDescription(storyDto.getDescription());
+        }
+        if (storyDto.getEstimation() != null) {
+            story.setEstimation(storyDto.getEstimation());
+        }
+        if (storyDto.getFinishTime() != null) {
+            story.setFinishTime(storyDto.getFinishTime());
+        }
+
         storyService.update(story);
     }
 
-    @Path("/{id}/votes")
-    public VoteResource defineVoteResource(){
-        return new VoteResource();
+    @DELETE
+    @Path("/{storyId}")
+    public void delete(@PathParam("storyId") Long storyId) {
+        storyService.deleteById(storyId);
     }
 
-    @DELETE
-    @Path("/{id}")
-    public void deleteStory(@PathParam("id") long storyId) {
-        Story story = storyService.findById(storyId).get();
-        storyService.delete(story);
+    @Path("/{storyId}/votes")
+    public Class<VoteResource> voteResource(){
+        return VoteResource.class;
     }
 
     private Story convertToEntity(StoryDto storyDto) {

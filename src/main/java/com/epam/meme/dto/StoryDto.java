@@ -1,21 +1,16 @@
 package com.epam.meme.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Data
+@Getter
+@Setter
 public class StoryDto {
 
     private String description;
-
-    private List<VoteDto> votes;
-
-    private BoardDto board;
-
     private LocalDateTime startTime;
     private LocalDateTime finishTime;
-
     private Short estimation;
 }

@@ -48,6 +48,7 @@ public class PostgresConfigurationImpl implements DataConfiguration {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.POSTGRESQL);
         vendorAdapter.setDatabasePlatform(PROP_DATABASE_PLATFORM);
+        vendorAdapter.setShowSql(true);
         return vendorAdapter;
     }
 

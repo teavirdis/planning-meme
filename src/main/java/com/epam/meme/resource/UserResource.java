@@ -28,31 +28,30 @@ public class UserResource {
 
     @GET
     @Path("/{userId}")
-    public User findById(@PathParam("userId") long userId) {
+    public User findById(@PathParam("userId") Long userId) {
         return userService.findById(userId).get();
     }
 
-    /*@PUT //TODO later
-    @Path("/{id}")
-    public void updateUser(@PathParam("id") long userId) {
-        User user = userService.findById(userId).get();
-        userService.update(user);
-    }*/
+//    @PUT
+//    @Path("/{userId}")
+//    public void update(@PathParam("userId") Long userId) {
+//        User user = userService.findById(userId).get();
+//        userService.update(user);
+//    }
 
     @DELETE
     @Path("/{userId}")
-    public void delete(@PathParam("userId") long userId) {
-        User user = userService.findById(userId).get();
-        userService.delete(user);
+    public void delete(@PathParam("userId") Long userId) {
+        userService.deleteById(userId);
     }
 
-    @Path("/{userId}/votes")
-    public Class<VoteResource> findVotes(
-            @PathParam("userId")     long userId,
-            @QueryParam("startIndex") int startIndex,
-            @QueryParam("maxResults") int maxResults) {
-        return VoteResource.class;
-    }
+//    @Path("/{userId}/votes")
+//    public Class<VoteResource> findVotes(
+//            @PathParam("userId")     long userId,
+//            @QueryParam("startIndex") int startIndex,
+//            @QueryParam("maxResults") int maxResults) {
+//        return VoteResource.class;
+//    }
 
     private User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);

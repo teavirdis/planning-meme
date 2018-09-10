@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -55,7 +58,7 @@ public class BoardServiceImplTest {
                 service.findById(1L).orElseThrow(RuntimeException::new).getName());
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = JpaSystemException.class)
     public void updated_notUpdated() {
         Board board = new Board();
         service.update(board);
@@ -67,9 +70,29 @@ public class BoardServiceImplTest {
         service.delete(board);
     }
 
-    //@Test(expected = Exception.class)
-    public void delete_notDeleted() {
+    @Test
+    public void deleteNotExistingEntity_nothingDeleted() {
         Board board = new Board();
         service.delete(board);
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void deleteNull_exceptionThrown() {
+        service.delete(null);
+    }
+
+    @Test
+    public void deleteById_deleted() {
+        service.deleteById(1L);
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void deleteByIdNotExistingEntity_nothingDeleted() {
+        service.deleteById(Long.MAX_VALUE);
+    }
+
+    @Test(expected = InvalidDataAccessApiUsageException.class)
+    public void deleteByNullId_exceptionThrown() {
+        service.deleteById(null);
     }
 }

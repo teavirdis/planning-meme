@@ -40,4 +40,9 @@ public class VoteServiceImpl implements VoteService {
     public void delete(Vote entity) {
         repository.delete(entity);
     }
+
+    @Override
+    public void deleteById(Long entityId) {
+        repository.deleteById(entityId);
+    }
 }

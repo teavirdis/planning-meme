@@ -90,7 +90,7 @@ public class UserServiceImplTest {
         service.delete(user);
     }
 
-    //@Test(expected = JpaSystemException.class) //TODO investigate impl
+    @Test
     public void delete_notDeleted() {
         User user = new User();
         service.delete(user);

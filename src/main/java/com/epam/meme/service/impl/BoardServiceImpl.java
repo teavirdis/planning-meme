@@ -40,4 +40,9 @@ public class BoardServiceImpl implements BoardService {
     public void delete(Board entity) {
         repository.delete(entity);
     }
+
+    @Override
+    public void deleteById(Long entityId) {
+        repository.deleteById(entityId);
+    }
 }

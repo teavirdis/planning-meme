@@ -33,4 +33,12 @@ public interface BaseService<T> {
      * @param entity to delete
      */
     void delete(T entity);
+
+    /**
+     * Deletes entity from the storage if it is present
+     *
+     * @param entityId id of entity to delete
+     * @throws IllegalArgumentException in case the given id is null
+     */
+    void deleteById(Long entityId);
 }
