@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 public class Story {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
 
@@ -23,7 +23,10 @@ public class Story {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    @Column(name = "start_time")
     private LocalDateTime startTime;
+
+    @Column(name = "finish_time")
     private LocalDateTime finishTime;
     private Short estimation;
 }
