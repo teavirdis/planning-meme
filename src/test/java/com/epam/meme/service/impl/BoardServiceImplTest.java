@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -24,34 +23,33 @@ public class BoardServiceImplTest {
     private BoardService service;
 
     @Test
-    public void  findById_found() {
+    public void findById_found() {
         Assert.assertTrue(service.findById(1L).isPresent());
     }
 
     @Test
-    public void  findById_notFound() {
+    public void findById_notFound() {
         Assert.assertFalse(service.findById(Long.MAX_VALUE).isPresent());
     }
 
     @Test
     public void create_created() {
-        Board board = new Board();
-        User admin = new User();
-        admin.setId(1L);
-        board.setAdmin(admin);
-        board.setName("name");
+        Board board = Board.builder().id(10L).name("name").admin(
+                User.builder().id(10L).email("email").username("username").password("password").build())
+                .build();
+
         service.create(board);
     }
 
     @Test
     public void update_updated() {
-        Board board = service.findById(1L).get();
+        Board board = service.findById(1L).orElseThrow(RuntimeException::new);
         board.setName("newname");
         service.update(board);
-        Assert.assertEquals("newname", service.findById(1L).get().getName());
+        Assert.assertEquals("newname", service.findById(1L).orElseThrow(RuntimeException::new).getName());
     }
 
-    @Test(expected = JpaSystemException.class)
+    @Test(expected = Exception.class)
     public void updated_notUpdated() {
         Board board = new Board();
         service.update(board);
@@ -59,12 +57,12 @@ public class BoardServiceImplTest {
 
     @Test
     public void delete_deleted() {
-        Board board = service.findById(1L).get();
+        Board board = service.findById(1L).orElseThrow(RuntimeException::new);
         service.delete(board);
     }
 
-    //@Test(expected = Exception.class) //TODO investigate
-    public void  delete_notDeleted() {
+    //@Test(expected = Exception.class)
+    public void delete_notDeleted() {
         Board board = new Board();
         service.delete(board);
     }

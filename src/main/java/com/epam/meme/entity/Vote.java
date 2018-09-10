@@ -1,17 +1,21 @@
 package com.epam.meme.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "votes")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "votes")
 public class Vote {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne

@@ -1,17 +1,23 @@
 package com.epam.meme.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "stories")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "stories")
 public class Story {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
 
@@ -25,7 +31,6 @@ public class Story {
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
-
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
     private Short estimation;

@@ -3,6 +3,7 @@ package com.epam.meme.service.impl;
 import com.epam.meme.config.logic.ApplicationConfiguration;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
+import com.epam.meme.entity.User;
 import com.epam.meme.service.StoryService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,22 +37,27 @@ public class StoryServiceImplTest {
 
     @Test
     public void create_created() {
-        Board board = new Board();
-        board.setId(1L);
+        Story story = Story.builder().id(10L)
+                .startTime(LocalDateTime.now())
+                .finishTime(LocalDateTime.now())
+                .description("Cool story, bro")
+                .estimation((short) 5)
+                .board(Board.builder().id(10L).name("name")
+                        .admin(
+                                User.builder().id(10L).email("email").username("username").password("password").build()
+                        ).build())
+                .build();
 
-        Story story = new Story();
-        story.setDescription("Cool story, Bob");
-        story.setStartTime(LocalDateTime.now());
-        story.setBoard(board);
         service.create(story);
     }
 
     @Test
     public void update_updated() {
-        Story story = service.findById(1L).get();
+        Story story = service.findById(1L).orElseThrow(RuntimeException::new);
         story.setDescription("newdescription");
         service.update(story);
-        Assert.assertEquals("newdescription", service.findById(1L).get().getDescription());
+        Assert.assertEquals("newdescription", service.findById(1L)
+                .orElseThrow(RuntimeException::new).getDescription());
     }
 
     @Test(expected = Exception.class) //TODO specify correct exception
@@ -59,6 +65,4 @@ public class StoryServiceImplTest {
         Story story = new Story();
         service.update(story);
     }
-
-
 }
