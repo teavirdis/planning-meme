@@ -53,7 +53,11 @@ public class UserServiceImplTest {
 
     @Test
     public void create_created() {
-        User user = User.builder().id(10L).email("email").username("username").password("password").build();
+        User user = User.builder()
+                .email("email")
+                .username("username")
+                .password("password")
+                .build();
         service.create(user);
     }
 
@@ -68,8 +72,10 @@ public class UserServiceImplTest {
         User user = service.findById(1L).orElseThrow(RuntimeException::new);
         user.setUsername("newusername");
         service.update(user);
-        Assert.assertEquals(service.findById(1L)
-                .orElseThrow(RuntimeException::new).getUsername(), "newusername");
+        Assert.assertEquals(
+                "newusername",
+                service.findById(1L)
+                    .orElseThrow(RuntimeException::new).getUsername());
     }
 
     @Test(expected = JpaSystemException.class)

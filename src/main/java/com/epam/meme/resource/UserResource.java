@@ -6,9 +6,8 @@ import com.epam.meme.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.*;
+import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
 @Path("/users")
