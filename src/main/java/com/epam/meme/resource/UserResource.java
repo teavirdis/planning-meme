@@ -27,9 +27,10 @@ public class UserResource {
     }
 
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
     public User findById(@PathParam("userId") Long userId) {
-        return userService.findById(userId).get();
+        return userService.findById(userId).orElseThrow(NotFoundException::new);
     }
 
 //    @PUT

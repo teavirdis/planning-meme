@@ -26,7 +26,7 @@ public class VoteResource {
     @GET
     @Path("/{voteId}")
     public Vote findById(@PathParam("voteId") Long id){
-        return voteService.findById(id).get();
+        return voteService.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @GET
