@@ -1,8 +1,5 @@
 package com.epam.meme.service.impl;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import com.epam.meme.config.logic.ApplicationConfiguration;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.User;
@@ -11,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,9 +36,8 @@ public class BoardServiceImplTest {
     @Test
     public void create_created() {
         Board board = new Board();
-        board.setId(10L); //TODO why not generates
-        User admin = mock(User.class);
-        when(admin.getId()).thenReturn(1L);
+        User admin = new User();
+        admin.setId(1L);
         board.setAdmin(admin);
         board.setName("name");
         service.create(board);
@@ -54,7 +51,7 @@ public class BoardServiceImplTest {
         Assert.assertEquals("newname", service.findById(1L).get().getName());
     }
 
-    @Test(expected = Exception.class) //TODO specify correct exception
+    @Test(expected = JpaSystemException.class)
     public void updated_notUpdated() {
         Board board = new Board();
         service.update(board);

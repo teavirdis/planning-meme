@@ -54,7 +54,6 @@ public class UserServiceImplTest {
     @Test
     public void create_created() {
         User user = new User();
-        user.setId(10L);
         user.setEmail("email");
         user.setUsername("username");
         user.setPassword("password");
