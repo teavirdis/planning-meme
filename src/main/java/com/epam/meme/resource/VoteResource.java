@@ -1,7 +1,9 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.dto.VoteDto;
 import com.epam.meme.entity.Vote;
 import com.epam.meme.service.VoteService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -9,6 +11,9 @@ import javax.ws.rs.*;
 public class VoteResource {
     @Autowired
     private VoteService voteService;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GET
     public void defineVotes(@QueryParam("startIndex") long startIndex, @QueryParam("maxResult") long maxResult){
@@ -20,8 +25,8 @@ public class VoteResource {
     }
 
     @POST
-    public void addVotes(Vote vote){
-        voteService.create(vote);
+    public void addVotes(VoteDto voteDto){
+        voteService.create(convertToEntity(voteDto));
     }
 
     @GET
@@ -35,5 +40,9 @@ public class VoteResource {
     public void updaterVote(@PathParam("id") long id){
         Vote vote = voteService.findById(id).get();
         voteService.update(vote);
+    }
+
+    private Vote convertToEntity(VoteDto voteDto) {
+        return modelMapper.map(voteDto, Vote.class);
     }
 }

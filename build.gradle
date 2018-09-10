@@ -24,6 +24,7 @@ ext {
     glassfishElVersion = '2.2.6'
     h2Version = '1.4.187'
     postgreVersion = '9.3-1100-jdbc41'
+    modelMapperVersion = '2.1.0'
 }
 
 repositories {
@@ -69,6 +70,8 @@ dependencies {
 
     compile "javax.el:javax.el-api:${javaxElVersion}"
     compile "org.glassfish.web:javax.el:${glassfishElVersion}"
+
+    compile "org.modelmapper:modelmapper:${modelMapperVersion}"
 
     testCompile "com.h2database:h2:${h2Version}"
     testCompile "org.springframework:spring-test:${springVersion}"
