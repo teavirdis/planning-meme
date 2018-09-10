@@ -26,13 +26,13 @@ public class BoardResource {
     @GET
     @Path("/{boardId}")
     public Board findById(@PathParam("boardId") Long boardId){
-        return boardService.findById(boardId).get();
+        return boardService.findById(boardId).orElseThrow(NotFoundException::new);
     }
 
     @PUT
     @Path("/{boardId}")
     public void update(@PathParam("boardId") Long boardId, BoardDto boardDto){
-        Board board = boardService.findById(boardId).get();
+        Board board = boardService.findById(boardId).orElseThrow(NotFoundException::new);
         if (boardDto.getName() != null) {
             board.setName(boardDto.getName());
             boardService.update(board);

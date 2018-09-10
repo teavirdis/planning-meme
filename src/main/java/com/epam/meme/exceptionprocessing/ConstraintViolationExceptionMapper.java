@@ -22,12 +22,12 @@ public class ConstraintViolationExceptionMapper
         for (ConstraintViolation<?> violation : exception.getConstraintViolations()) {
             messages.add(violation.getMessage());
         }
-        ExceptionInfo exceptionInfo = new ExceptionInfo();
-        exceptionInfo.setMessages(messages.toArray(new String[] {}));
-        exceptionInfo.setStatus(5);
+        ValidationInfo validationInfo = new ValidationInfo();
+        validationInfo.setMessages(messages.toArray(new String[] {}));
+        validationInfo.setStatus(5);
 
         return Response.status(400)
-                .entity(exceptionInfo)
+                .entity(validationInfo)
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

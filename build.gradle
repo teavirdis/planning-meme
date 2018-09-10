@@ -49,6 +49,7 @@ dependencies {
 
     compile "org.glassfish.jersey.media:jersey-media-json-binding:${jerseyVersion}"
 
+
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
     compile "org.projectlombok:lombok:${lombokVersion}"

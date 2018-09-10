@@ -38,13 +38,13 @@ public class StoryResource {
     @GET
     @Path("/{storyId}")
     public Story findById(@PathParam("storyId") Long storyId) {
-        return storyService.findById(storyId).get();
+        return storyService.findById(storyId).orElseThrow(NotFoundException::new);
     }
 
     @PUT
     @Path("/{storyId}")
     public void update(@PathParam("storyId") Long storyId, StoryDto storyDto) {
-        Story story = storyService.findById(storyId).get();
+        Story story = storyService.findById(storyId).orElseThrow(NotFoundException::new);
 
         if (storyDto.getDescription() != null) {
             story.setDescription(storyDto.getDescription());
