@@ -41,4 +41,9 @@ public class StoryServiceImpl implements StoryService {
     public void delete(Story entity) {
         repository.delete(entity);
     }
+
+    @Override
+    public void deleteById(Long entityId) {
+        repository.deleteById(entityId);
+    }
 }

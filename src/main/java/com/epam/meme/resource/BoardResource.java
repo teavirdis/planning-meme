@@ -6,6 +6,7 @@ import com.epam.meme.service.BoardService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 
 @Path("/boards")
@@ -18,33 +19,35 @@ public class BoardResource {
     private ModelMapper modelMapper;
 
     @POST
-    public void addBoard(BoardDto boardDto){
+    public void create(@Valid BoardDto boardDto){
         boardService.create(convertToEntity(boardDto));
     }
 
-    @Path("{id}/stories")
-    public StoryResource defineStoryResource(@PathParam("id") long boardId){
-        return new StoryResource();
-    }
-
     @GET
-    @Path("/{id}")
-    public Board defineBoard(@PathParam("id") long boardId){
+    @Path("/{boardId}")
+    public Board findById(@PathParam("boardId") Long boardId){
         return boardService.findById(boardId).get();
     }
 
     @PUT
-    @Path("/{id}")
-    public void updateBoard(@PathParam("id") long boardId){
+    @Path("/{boardId}")
+    public void update(@PathParam("boardId") Long boardId, BoardDto boardDto){
         Board board = boardService.findById(boardId).get();
-        boardService.update(board);
+        if (boardDto.getName() != null) {
+            board.setName(boardDto.getName());
+            boardService.update(board);
+        }
     }
 
     @DELETE
-    @Path("/{id}")
-    public void deleteBoard(@PathParam("id") long boardId){
-        Board board = boardService.findById(boardId).get();
-        boardService.delete(board);
+    @Path("/{boardId}")
+    public void delete(@PathParam("boardId") Long boardId){
+        boardService.deleteById(boardId);
+    }
+
+    @Path("{boardId}/stories")
+    public Class<StoryResource> storyResource(){
+        return StoryResource.class;
     }
 
     private Board convertToEntity(BoardDto boardDto) {

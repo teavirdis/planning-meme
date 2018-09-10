@@ -41,6 +41,7 @@ public class TestConfigurationImpl implements DataConfiguration {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
         vendorAdapter.setDatabasePlatform(env.getProperty(H2_PLATFORM));
+        vendorAdapter.setShowSql(true);
         return vendorAdapter;
     }
 
