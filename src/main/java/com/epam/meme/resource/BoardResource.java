@@ -1,7 +1,9 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.service.BoardService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -12,9 +14,12 @@ public class BoardResource {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @POST
-    public void addBoard(Board board){
-        boardService.create(board);
+    public void addBoard(BoardDto boardDto){
+        boardService.create(convertToEntity(boardDto));
     }
 
     @Path("{id}/stories")
@@ -40,5 +45,9 @@ public class BoardResource {
     public void deleteBoard(@PathParam("id") long boardId){
         Board board = boardService.findById(boardId).get();
         boardService.delete(board);
+    }
+
+    private Board convertToEntity(BoardDto boardDto) {
+        return modelMapper.map(boardDto, Board.class);
     }
 }

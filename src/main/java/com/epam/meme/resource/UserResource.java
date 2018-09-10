@@ -3,6 +3,7 @@ package com.epam.meme.resource;
 import com.epam.meme.dto.UserDto;
 import com.epam.meme.entity.User;
 import com.epam.meme.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.*;
@@ -18,11 +19,12 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @POST
     public void create(@Valid UserDto userDto) {
-        User user = new User();
-        user.setUsername(userDto.username);
-        userService.create(user);
+        userService.create(convertToEntity(userDto));
     }
 
     @GET
@@ -52,4 +54,9 @@ public class UserResource {
             @QueryParam("maxResults") int maxResults) {
         return VoteResource.class;
     }
+
+    private User convertToEntity(UserDto userDto) {
+        return modelMapper.map(userDto, User.class);
+    }
+
 }

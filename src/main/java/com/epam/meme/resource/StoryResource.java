@@ -1,7 +1,9 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Story;
 import com.epam.meme.service.StoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
@@ -10,8 +12,11 @@ public class StoryResource {
     @Autowired
     private StoryService storyService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @POST
-    public void addStory(Story story) {
+    public void addStory(StoryDto story) {
         //TODO storyService.addStory ...
     }
 
@@ -43,5 +48,9 @@ public class StoryResource {
     public void deleteStory(@PathParam("id") long storyId) {
         Story story = storyService.findById(storyId).get();
         storyService.delete(story);
+    }
+
+    private Story convertToEntity(StoryDto storyDto) {
+        return modelMapper.map(storyDto, Story.class);
     }
 }

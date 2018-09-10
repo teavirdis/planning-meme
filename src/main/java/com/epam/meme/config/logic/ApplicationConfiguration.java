@@ -4,6 +4,7 @@ import com.epam.meme.config.logic.impl.HanaConfigurationImpl;
 import com.epam.meme.config.logic.impl.PostgresConfigurationImpl;
 import com.epam.meme.config.logic.impl.TestConfigurationImpl;
 import org.eclipse.persistence.jpa.PersistenceProvider;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -58,6 +59,11 @@ public class ApplicationConfiguration {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 
     private Properties getEclipseProperties() {
