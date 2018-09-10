@@ -42,10 +42,12 @@ public class ApplicationConfiguration {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
+                new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataConfiguration.dataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(PersistenceProvider.class);
-        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ECLIPSE_PACKAGES_TO_SCAN));
+        entityManagerFactoryBean.setPackagesToScan(
+                env.getRequiredProperty(PROP_ECLIPSE_PACKAGES_TO_SCAN));
         entityManagerFactoryBean.setJpaVendorAdapter(dataConfiguration.jpaVendorAdapter());
         entityManagerFactoryBean.setJpaProperties(getEclipseProperties());
         return entityManagerFactoryBean;
@@ -62,8 +64,12 @@ public class ApplicationConfiguration {
         Properties eclipseProperties = new Properties();
 
         eclipseProperties.setProperty(ECLIPSE_WEAVING, env.getProperty(PROP_ECLIPSE_WEAVING));
-        eclipseProperties.setProperty(ECLIPSE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_ECLIPSE_HBM2DDL_AUTO));
-        eclipseProperties.setProperty(ECLIPSE_SHOW_SQL, env.getRequiredProperty(PROP_ECLIPSE_SHOW_SQL));
+        eclipseProperties.setProperty(
+                ECLIPSE_HBM2DDL_AUTO,
+                env.getRequiredProperty(PROP_ECLIPSE_HBM2DDL_AUTO));
+        eclipseProperties.setProperty(
+                ECLIPSE_SHOW_SQL,
+                env.getRequiredProperty(PROP_ECLIPSE_SHOW_SQL));
         return eclipseProperties;
     }
 }

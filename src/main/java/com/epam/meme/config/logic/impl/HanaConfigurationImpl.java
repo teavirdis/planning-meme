@@ -20,7 +20,8 @@ import java.util.Objects;
 @Profile("runtime")
 public class HanaConfigurationImpl implements DataConfiguration {
 
-    private static final String PROP_DATABASE_PLATFORM = "org.eclipse.persistence.platform.database.HANAPlatform";
+    private static final String PROP_DATABASE_PLATFORM =
+            "org.eclipse.persistence.platform.database.HANAPlatform";
     private static final String JDBC_URL = "java:comp/env/jdbc/dshana";
 
     @Resource
@@ -30,7 +31,8 @@ public class HanaConfigurationImpl implements DataConfiguration {
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = null;
         try {
-            dataSource = (BasicDataSource) new JndiTemplate().lookup(Objects.requireNonNull(env.getProperty(JDBC_URL)));
+            dataSource = (BasicDataSource) new JndiTemplate()
+                    .lookup(Objects.requireNonNull(env.getProperty(JDBC_URL)));
         } catch (NamingException e) {
             //TODO AOP Logger
             e.printStackTrace();
