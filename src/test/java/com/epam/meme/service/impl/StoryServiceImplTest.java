@@ -37,15 +37,12 @@ public class StoryServiceImplTest {
 
     @Test
     public void create_created() {
-        Story story = Story.builder().id(10L)
+        Story story = Story.builder()
                 .startTime(LocalDateTime.now())
-                .finishTime(LocalDateTime.now())
-                .description("Cool story, bro")
-                .estimation((short) 5)
-                .board(Board.builder().id(10L).name("name")
-                        .admin(
-                                User.builder().id(10L).email("email").username("username").password("password").build()
-                        ).build())
+                .description("Cool story, Bob")
+                .board(Board.builder()
+                        .id(1L)
+                        .build())
                 .build();
 
         service.create(story);

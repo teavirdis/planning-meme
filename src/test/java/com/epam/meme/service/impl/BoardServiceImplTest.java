@@ -34,8 +34,12 @@ public class BoardServiceImplTest {
 
     @Test
     public void create_created() {
-        Board board = Board.builder().id(10L).name("name").admin(
-                User.builder().id(10L).email("email").username("username").password("password").build())
+        Board board = Board.builder()
+                .name("name")
+                .admin(
+                    User.builder()
+                            .id(1L)
+                            .build())
                 .build();
 
         service.create(board);
@@ -46,7 +50,9 @@ public class BoardServiceImplTest {
         Board board = service.findById(1L).orElseThrow(RuntimeException::new);
         board.setName("newname");
         service.update(board);
-        Assert.assertEquals("newname", service.findById(1L).orElseThrow(RuntimeException::new).getName());
+        Assert.assertEquals(
+                "newname",
+                service.findById(1L).orElseThrow(RuntimeException::new).getName());
     }
 
     @Test(expected = Exception.class)
