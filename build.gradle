@@ -24,7 +24,7 @@ ext {
     glassfishElVersion = '2.2.6'
     h2Version = '1.4.187'
     postgreVersion = '9.3-1100-jdbc41'
-    modelMapperVersion = '2.1.0'
+    modelMapperVersion = '2.2.0'
 }
 
 repositories {

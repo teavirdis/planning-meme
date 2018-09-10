@@ -1,13 +1,19 @@
 package com.epam.meme.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "boards")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "boards")
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
