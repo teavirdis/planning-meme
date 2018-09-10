@@ -1,6 +1,7 @@
 package com.epam.meme.service.impl;
 
 import com.epam.meme.config.logic.ApplicationConfiguration;
+import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
 import com.epam.meme.service.StoryService;
 import org.junit.Assert;
@@ -11,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
@@ -33,9 +36,13 @@ public class StoryServiceImplTest {
 
     @Test
     public void create_created() {
+        Board board = new Board();
+        board.setId(1L);
+
         Story story = new Story();
-        story.setId(10L);
         story.setDescription("Cool story, Bob");
+        story.setStartTime(LocalDateTime.now());
+        story.setBoard(board);
         service.create(story);
     }
 
