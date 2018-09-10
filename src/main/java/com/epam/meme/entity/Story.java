@@ -31,6 +31,7 @@ public class Story {
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
+
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
     private Short estimation;
