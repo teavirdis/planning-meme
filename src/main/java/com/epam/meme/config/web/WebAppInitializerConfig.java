@@ -17,7 +17,6 @@ import javax.servlet.ServletRegistration;
 @Order(1)
 public class WebAppInitializerConfig implements WebApplicationInitializer {
 
-    private static final String DEV_PROFILE = "dev";
     private static final String SERVLET_NAME = "PlanningServerApplication";
     private static final String URL_PATTERN = "/meme/*";
     private static final String RS_APPLICATION = "javax.ws.rs.Application";
@@ -43,7 +42,6 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         AnnotationConfigWebApplicationContext configWebApplicationContext =
                 new AnnotationConfigWebApplicationContext();
         configWebApplicationContext.register(ApplicationConfiguration.class);
-        configWebApplicationContext.getEnvironment().setActiveProfiles(DEV_PROFILE);
         configWebApplicationContext.setServletContext(servletContext);
         configWebApplicationContext.refresh();
 

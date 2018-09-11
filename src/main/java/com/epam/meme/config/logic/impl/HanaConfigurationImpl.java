@@ -1,6 +1,7 @@
 package com.epam.meme.config.logic.impl;
 
 import com.epam.meme.config.logic.DataConfiguration;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,12 @@ import java.util.Objects;
 
 @Configuration
 @Profile("runtime")
+@Slf4j
 public class HanaConfigurationImpl implements DataConfiguration {
 
     private static final String PROP_DATABASE_PLATFORM =
             "org.eclipse.persistence.platform.database.HANAPlatform";
-    private static final String JDBC_URL = "java:comp/env/jdbc/dshana";
+    private static final String DATASOURCE = "java:comp/env/jdbc/dshana";
 
     @Resource
     private Environment env;
@@ -32,7 +34,7 @@ public class HanaConfigurationImpl implements DataConfiguration {
         BasicDataSource dataSource = null;
         try {
             dataSource = (BasicDataSource) new JndiTemplate()
-                    .lookup(Objects.requireNonNull(env.getProperty(JDBC_URL)));
+                    .lookup(DATASOURCE);
         } catch (NamingException e) {
             //TODO AOP Logger
             e.printStackTrace();
@@ -43,7 +45,6 @@ public class HanaConfigurationImpl implements DataConfiguration {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
-        vendorAdapter.setDatabase(Database.POSTGRESQL);
         vendorAdapter.setDatabasePlatform(PROP_DATABASE_PLATFORM);
         return vendorAdapter;
     }

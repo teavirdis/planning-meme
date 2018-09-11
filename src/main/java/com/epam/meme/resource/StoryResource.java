@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 
-
 public class StoryResource {
 
     @Autowired
