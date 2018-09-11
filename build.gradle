@@ -5,6 +5,10 @@ plugins {
 group 'com.epam.meme'
 version '1.0'
 
+configurations {
+    runtime.exclude group: 'org.slf4j' , module: 'slf4j-api'
+}
+
 ext {
     corsFilterVersin = '2.6'
     jerseyVersion = '2.27'
@@ -25,6 +29,7 @@ ext {
     h2Version = '1.4.187'
     postgreVersion = '9.3-1100-jdbc41'
     modelMapperVersion = '2.2.0'
+    slf4jVersion = '1.7.25'
 }
 
 repositories {
@@ -34,7 +39,7 @@ repositories {
 dependencies {
     compile "com.thetransactioncompany:cors-filter:${corsFilterVersin}"
 
-    compile "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+    compileOnly "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
     compile "org.apache.logging.log4j:log4j-api:${log4j2Version}"
     compile "org.apache.logging.log4j:log4j-core:${log4j2Version}"
 
@@ -48,7 +53,6 @@ dependencies {
     }
 
     compile "org.glassfish.jersey.media:jersey-media-json-binding:${jerseyVersion}"
-
 
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 
