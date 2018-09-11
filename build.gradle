@@ -1,6 +1,9 @@
 plugins {
     id 'war'
+    id "org.sonarqube" version "2.6.2"
 }
+
+apply plugin: 'jacoco'
 
 group 'com.epam.meme'
 version '1.0'
