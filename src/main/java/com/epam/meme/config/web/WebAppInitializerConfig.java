@@ -26,14 +26,14 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
     private static final String RS_APPLICATION = "javax.ws.rs.Application";
 
     private static final String API_VERSION = "1.0.0";
-    private static final String SWAGGER_BASE_PATH = "http://localhost:8081/chat-server/meme";
+    private static final String SWAGGER_BASE_PATH = "http://localhost:8081/meme";
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         servletContext.setInitParameter("contextConfigLocation", "");
         registerContextLoaderListener(servletContext);
         registerJerseyServlet(servletContext);
-
+        registerSwaggerServlet(servletContext);
     }
 
     private void registerContextLoaderListener(ServletContext servletContext) {
