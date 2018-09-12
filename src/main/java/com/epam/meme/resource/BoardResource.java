@@ -3,6 +3,7 @@ package com.epam.meme.resource;
 import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.service.BoardService;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 
 @Path("/boards")
+@Api(value = "/boards", description = "Manage boards")
 public class BoardResource {
 
     @Autowired

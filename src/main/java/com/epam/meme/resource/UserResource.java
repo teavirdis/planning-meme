@@ -3,6 +3,7 @@ package com.epam.meme.resource;
 import com.epam.meme.dto.UserDto;
 import com.epam.meme.entity.User;
 import com.epam.meme.service.UserService;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Api(value = "/boards", description = "Manage users")
 public class UserResource {
 
     @Autowired
