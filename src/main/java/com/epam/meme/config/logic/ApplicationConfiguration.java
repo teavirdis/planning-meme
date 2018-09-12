@@ -3,6 +3,8 @@ package com.epam.meme.config.logic;
 import com.epam.meme.config.logic.impl.HanaConfigurationImpl;
 import com.epam.meme.config.logic.impl.PostgresConfigurationImpl;
 import com.epam.meme.config.logic.impl.TestConfigurationImpl;
+import org.eclipse.persistence.config.PersistenceUnitProperties;
+import org.eclipse.persistence.config.TargetDatabase;
 import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,7 @@ public class ApplicationConfiguration {
         this.dataConfiguration = dataConfiguration;
     }
 
+//    @Profile("dev")
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
@@ -53,6 +56,31 @@ public class ApplicationConfiguration {
         entityManagerFactoryBean.setJpaProperties(getEclipseProperties());
         return entityManagerFactoryBean;
     }
+
+//    @Profile("runtime")
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactoryHana() {
+//        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
+//                new LocalContainerEntityManagerFactoryBean();
+//        entityManagerFactoryBean.setDataSource(dataConfiguration.dataSource());
+//        entityManagerFactoryBean.setPersistenceProviderClass(PersistenceProvider.class);
+//        entityManagerFactoryBean.setPackagesToScan(
+//                env.getRequiredProperty(PROP_ECLIPSE_PACKAGES_TO_SCAN));
+//        //entityManagerFactoryBean.setJpaVendorAdapter(dataConfiguration.jpaVendorAdapter());
+//
+//        Properties eclipseProperties = new Properties();
+//        eclipseProperties.setProperty(ECLIPSE_WEAVING, env.getProperty(PROP_ECLIPSE_WEAVING));
+//        eclipseProperties.setProperty(PersistenceUnitProperties.TARGET_DATABASE, TargetDatabase.HANA);
+//        eclipseProperties.setProperty(
+//                PersistenceUnitProperties.DDL_GENERATION,
+//                PersistenceUnitProperties.CREATE_ONLY);
+//        eclipseProperties.setProperty(
+//                ECLIPSE_SHOW_SQL,
+//                env.getRequiredProperty(PROP_ECLIPSE_SHOW_SQL));
+//
+//        entityManagerFactoryBean.setJpaProperties(eclipseProperties);
+//        return entityManagerFactoryBean;
+//    }
 
     @Bean
     public JpaTransactionManager transactionManager() {
