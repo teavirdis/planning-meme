@@ -8,10 +8,6 @@ apply plugin: 'jacoco'
 group 'com.epam.meme'
 version '1.0'
 
-//configurations {
-//    runtime.exclude group: 'org.slf4j' , module: 'slf4j-api'
-//}
-
 ext {
     corsFilterVersin = '2.6'
     jerseyVersion = '2.27'
@@ -43,11 +39,14 @@ repositories {
 dependencies {
     compile "com.thetransactioncompany:cors-filter:${corsFilterVersin}"
 
-    compileOnly "org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}"
+    compileOnly "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile ("org.apache.logging.log4j:log4j-slf4j-impl:${log4j2Version}") {
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
     compile "org.apache.logging.log4j:log4j-api:${log4j2Version}"
     compile "org.apache.logging.log4j:log4j-core:${log4j2Version}"
 
-    //compile "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
+    compile "io.swagger:swagger-jersey2-jaxrs:${swaggerVersion}"
 
     compile "org.glassfish.jersey.containers:jersey-container-servlet-core:${jerseyVersion}"
     compile("org.glassfish.jersey.ext:jersey-spring4:${jerseyVersion}") {
