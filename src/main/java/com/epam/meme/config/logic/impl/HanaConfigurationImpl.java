@@ -3,6 +3,7 @@ package com.epam.meme.config.logic.impl;
 import com.epam.meme.config.logic.DataConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.eclipse.persistence.platform.database.DatabasePlatform;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -26,9 +27,6 @@ public class HanaConfigurationImpl implements DataConfiguration {
             "org.eclipse.persistence.platform.database.HANAPlatform";
     private static final String DATASOURCE = "java:comp/env/jdbc/dshana";
 
-    @Resource
-    private Environment env;
-
     @Bean
     public BasicDataSource dataSource() {
         BasicDataSource dataSource = null;
@@ -36,8 +34,7 @@ public class HanaConfigurationImpl implements DataConfiguration {
             dataSource = (BasicDataSource) new JndiTemplate()
                     .lookup(DATASOURCE);
         } catch (NamingException e) {
-            //TODO AOP Logger
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         return dataSource;
     }
@@ -46,6 +43,7 @@ public class HanaConfigurationImpl implements DataConfiguration {
     public JpaVendorAdapter jpaVendorAdapter() {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabasePlatform(PROP_DATABASE_PLATFORM);
+        //vendorAdapter.setGenerateDdl(true);
         return vendorAdapter;
     }
 
