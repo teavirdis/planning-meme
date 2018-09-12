@@ -8,10 +8,6 @@ apply plugin: 'jacoco'
 group 'com.epam.meme'
 version '1.0'
 
-configurations {
-    //runtime.exclude group: 'org.slf4j' , module: 'slf4j-api'
-}
-
 ext {
     corsFilterVersin = '2.6'
     jerseyVersion = '2.27'
@@ -33,6 +29,7 @@ ext {
     postgreVersion = '9.3-1100-jdbc41'
     modelMapperVersion = '2.2.0'
     slf4jVersion = '1.7.25'
+    swaggerJerseyVersion = '1.5.20'
 }
 
 repositories {
@@ -83,6 +80,8 @@ dependencies {
     compile "org.glassfish.web:javax.el:${glassfishElVersion}"
 
     compile "org.modelmapper:modelmapper:${modelMapperVersion}"
+
+    compile "io.swagger:swagger-jersey2-jaxrs:${swaggerJerseyVersion}"
 
     testCompile "com.h2database:h2:${h2Version}"
     testCompile "org.springframework:spring-test:${springVersion}"

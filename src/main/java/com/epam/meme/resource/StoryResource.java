@@ -5,12 +5,14 @@ import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
 import com.epam.meme.repository.VoteRepository;
 import com.epam.meme.service.StoryService;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
 
+@Api(value = "/boards/{boardId}/stories", description = "Manage stories")
 public class StoryResource {
 
     @Autowired

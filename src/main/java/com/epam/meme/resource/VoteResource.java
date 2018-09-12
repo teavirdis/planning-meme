@@ -3,6 +3,7 @@ package com.epam.meme.resource;
 import com.epam.meme.dto.VoteDto;
 import com.epam.meme.entity.Vote;
 import com.epam.meme.service.VoteService;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import java.util.List;
 
+@Api(value = "/boards/{boardId}/stories/{storyId}/votes", description = "Manage votes")
 public class VoteResource {
 
     @Autowired
