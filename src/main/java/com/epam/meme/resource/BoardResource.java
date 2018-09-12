@@ -4,6 +4,7 @@ import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.service.BoardService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,17 +22,20 @@ public class BoardResource {
     private ModelMapper modelMapper;
 
     @POST
+    @ApiOperation(value = "Save board")
     public void create(@Valid BoardDto boardDto){
         boardService.create(convertToEntity(boardDto));
     }
 
     @GET
+    @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
     public Board findById(@PathParam("boardId") Long boardId){
         return boardService.findById(boardId).orElseThrow(NotFoundException::new);
     }
 
     @PUT
+    @ApiOperation(value = "Update board by id")
     @Path("/{boardId}")
     public void update(@PathParam("boardId") Long boardId, BoardDto boardDto){
         Board board = boardService.findById(boardId).orElseThrow(NotFoundException::new);
@@ -42,6 +46,7 @@ public class BoardResource {
     }
 
     @DELETE
+    @ApiOperation(value = "Delete board by id")
     @Path("/{boardId}")
     public void delete(@PathParam("boardId") Long boardId){
         boardService.deleteById(boardId);
