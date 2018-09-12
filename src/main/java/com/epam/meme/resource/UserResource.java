@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -26,9 +25,17 @@ public class UserResource {
 
     @POST
     @ApiOperation(value = "Create user")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void create(User user) {
+        userService.create(user);
+    }
 
-    public void create(@Valid UserDto userDto) {
-        userService.create(convertToEntity(userDto));
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public User identifyUser(@QueryParam("name") String name){
+        System.out.println(userService.findByUsername(name).orElseThrow(NotFoundException::new));
+        return userService.findByUsername(name).orElseThrow(NotFoundException::new);
     }
 
     @GET
