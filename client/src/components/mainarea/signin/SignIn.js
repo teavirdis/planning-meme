@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import './css/style.css'
 
 class SignIn extends Component {
     componentDidUpdate() {
-        $('.createNewUser').bootstrapToggle();
+        $('.form-group').bootstrapToggle();
     }
-
     render() {
         return (
             <div id="signIn" className="collapse indent in">
@@ -15,8 +15,9 @@ class SignIn extends Component {
                         <input type="text" className="fa form-control" placeholder="Enter your name"
                                required="required"/>
                     </div>
-                    <div className="form-group" onClick={this.handleClick}>
-                        <a className="createNewUser btn btn-primary hidden-xs" name="collapseLogin" data-toggle="collapse">Enter</a>
+                    <div className="form-group">
+                        <a className="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin"
+                           data-toggle="collapse">Enter</a>
                     </div>
                 </form>
             </div>
