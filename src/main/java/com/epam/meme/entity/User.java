@@ -16,7 +16,12 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(
+            name = "user_generator",
+            sequenceName = "users_id_seq",
+            allocationSize = 1
+    )
     private Long id;
     private String username;
     private String email;

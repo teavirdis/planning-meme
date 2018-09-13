@@ -46,9 +46,6 @@ public class ApplicationConfiguration {
                 .setDataSource(dataSource);
 
         entityManagerFactoryBean
-                .setPersistenceProviderClass(PersistenceProvider.class);
-
-        entityManagerFactoryBean
                 .setPackagesToScan(env.getRequiredProperty(PROP_ECLIPSE_PACKAGES_TO_SCAN));
 
         entityManagerFactoryBean

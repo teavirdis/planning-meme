@@ -17,7 +17,12 @@ import java.util.List;
 @Table(name = "stories")
 public class Story {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "story_generator")
+    @SequenceGenerator(
+            name = "story_generator",
+            sequenceName = "stories_id_seq",
+            allocationSize = 1
+    )
     private Long id;
     private String description;
 
