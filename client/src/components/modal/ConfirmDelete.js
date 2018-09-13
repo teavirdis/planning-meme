@@ -16,7 +16,7 @@ class ConfirmDelete extends Component {
                         <div className="modal-body">Are you sure to delete this?</div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <a className="btn btn-danger btn-ok">Delete anyway</a>
+                            <a className="btn btn-danger btn-ok" data-dismiss="modal">Delete anyway</a>
                         </div>
                     </div>
                 </div>

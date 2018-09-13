@@ -1,23 +1,57 @@
-import React, { Component } from 'react';
-import $ from 'jquery';
+import React, {Component} from 'react';
 import './css/style.css'
+import axios from 'axios';
+
+const $ = window.jQuery;
+const divStyle = {
+    width: '100%'
+};
 
 class SignIn extends Component {
-    componentDidUpdate() {
-        $('.form-group').bootstrapToggle();
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+        this.addValue = this.addValue.bind(this);
+        this.updateInput = this.updateInput.bind(this);
     }
+
+    addValue(evt) {
+        evt.preventDefault();
+        axios.post('http://localhost:8081/meme/users/', {
+            username: this.state.value,
+            password: '123',
+            email: this.state.value
+        })
+            .then(function (response) {
+                console.log(response);
+                $('.collapse').collapse('hide');
+                $('#loginNavBar').hide();
+                $('#boardArea').show();
+                $('#storyArea').hide();
+                $('#mainNavBar').show();
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+            });
+        return false;
+    }
+
+    updateInput(evt) {
+        this.state = {value: evt.target.value};
+    }
+
     render() {
         return (
             <div id="signIn" className="collapse indent in">
-                <form>
+                <form onSubmit={this.addValue}>
                     <h2 className="text-center">Let's start!</h2>
-                    <div className="form-group">
-                        <input type="text" className="fa form-control" placeholder="Enter your name"
-                               required="required"/>
+                    <div>
+                        <input type="text" className="fa form-control" placeholder="Enter your name" required="required"
+                               onChange={this.updateInput}/>
                     </div>
-                    <div className="form-group">
-                        <a className="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin"
-                           data-toggle="collapse">Enter</a>
+                    <div>
+                        <button type="submit" className="btn btn-primary hidden-xs" style={divStyle}>Enter</button>
                     </div>
                 </form>
             </div>

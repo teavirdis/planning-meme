@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import './css/style.css'
-import jQuery from 'jquery'
-import $ from "jquery";
+const $ = window.jQuery;
 
 const divStyle = {
     padding: '0.25%'
 };
 
 function goFromStoryToBoard(){
-    jQuery('#storyArea').hide();
-    jQuery('#boardArea').show();
+    $('#mainNavBar').show();
+    $('#storyArea').hide();
+    $('#boardArea').show();
 }
 
 class MainNavigation extends Component {
-    componentDidUpdate() {
-        $('.signOut').bootstrapToggle();
-        $('.dropdown').bootstrapToggle();
+    componentDidMount() {
+        $("[name='collapseHref']").click(function () {
+            $(".collapse").collapse('hide');
+            $('#mainNavBar').hide();
+            $('#boardArea').hide();
+            $('#storyArea').hide();
+            $('#loginNavBar').show();
+        });
     }
     render() {
         return (

@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import jQuery from 'jquery'
-import $ from 'jquery';
 import './css/style.css'
 
+const $ = window.jQuery;
+
 function goFromBoardToStory(){
-    jQuery('#storyArea').show();
-    jQuery('#boardArea').hide();
+    $('#storyArea').show();
+    $('#boardArea').hide();
 }
 
 class BoardTable extends Component {
     componentDidUpdate() {
-        $('.editButton').bootstrapToggle();
-        $('.deleteButton').bootstrapToggle();
+        $('.editButton').toggle();
+        $('.deleteButton').toggle();
     }
     render() {
         return (
@@ -35,10 +36,10 @@ class BoardTable extends Component {
                         <td className="hidden-xs" onClick={goFromBoardToStory}>
                             <div>Total:<span className="ng-binding ng-scope">00:00:00</span></div>
                         </td>
-                        <td className="hidden-xs" onClick={goFromBoardToStory()}>
+                        <td className="hidden-xs" onClick={goFromBoardToStory}>
                             <div className="ng-binding">Today</div>
                         </td>
-                        <td className="hidden-xs" onClick={goFromBoardToStory()}>
+                        <td className="hidden-xs" onClick={goFromBoardToStory}>
                             <div className="of ng-binding ng-scope">0 of 0</div>
                         </td>
                         <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
