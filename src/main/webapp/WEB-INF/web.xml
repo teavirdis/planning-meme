@@ -12,7 +12,11 @@
     </resource-ref>
 
     <welcome-file-list>
-        <welcome-file>meme.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/meme.html</location>
+    </error-page>
 </web-app>

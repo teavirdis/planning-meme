@@ -19,10 +19,12 @@
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!--        Login navigation bar, on the first page -->
-        <div id="loginNavBar" >
+        <div id="loginNavBar">
             <ul class="nav navbar-nav navbar-right navbar-collapse" style="padding-top: 0.25%">
-                <li><a class="btn btn-primary hidden-xs" href="#signIn" name="collapseHref" class="btn btn-default" data-toggle="collapse">Sign In</a></li>
-                <li><a class="btn btn-default btn-one hidden-xs" href="#signUp" name="collapseHref" class="btn btn-default" data-toggle="collapse">Sign Up</a></li>
+                <li><a class="btn btn-primary hidden-xs" href="#signIn" name="collapseHref" class="btn btn-default"
+                       data-toggle="collapse">Sign In</a></li>
+                <li><a class="btn btn-default btn-one hidden-xs" href="#signUp" name="collapseHref"
+                       class="btn btn-default" data-toggle="collapse">Sign Up</a></li>
             </ul>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -35,7 +37,8 @@
         <!--        Profile navigation bar, on the main page -->
         <div id="mainNavBar">
             <ul class="nav navbar-nav navbar-right " style="padding-top: 0.25%">
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b
+                        class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">My Profile</a></li>
                         <li><a href="#" onclick="goFromStoryToBoard()">Board</a></li>
@@ -65,10 +68,12 @@
                 <form>
                     <h2 class="text-center">Let's start!</h2>
                     <div class="form-group">
-                        <input type="text" class="fa form-control" placeholder="&#xf007 Enter your name" required="required"/>
+                        <input type="text" class="fa form-control" placeholder="&#xf007 Enter your name"
+                               required="required"/>
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin" class="btn btn-default" data-toggle="collapse">Enter</a>
+                        <a class="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin"
+                           class="btn btn-default" data-toggle="collapse">Enter</a>
                     </div>
                 </form>
             </div>
@@ -77,16 +82,20 @@
                 <form>
                     <h2 class="text-center">Sign up for free!</h2>
                     <div class="form-group">
-                        <input type="text" class="fa form-control" placeholder="&#xf007 Enter your name" required="required">
+                        <input type="text" class="fa form-control" placeholder="&#xf007 Enter your name"
+                               required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="fa form-control" placeholder="&#xf0e0 Enter your email" required="required">
+                        <input type="text" class="fa form-control" placeholder="&#xf0e0 Enter your email"
+                               required="required">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="fa form-control" placeholder="&#xf023 Enter your password" required="required">
+                        <input type="text" class="fa form-control" placeholder="&#xf023 Enter your password"
+                               required="required">
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin" class="btn btn-default" name="collapseLogin" data-toggle="collapse">Sign up</a>
+                        <a class="btn btn-primary hidden-xs" href="#mainWindow" name="collapseLogin"
+                           class="btn btn-default" name="collapseLogin" data-toggle="collapse">Sign up</a>
                     </div>
                 </form>
             </div>
@@ -101,7 +110,8 @@
                     <div class="title">Recent Boards</div>
                     <!--                    Create board -->
                     <div class="no-left-padding">
-                        <a class="btn btn-primary pull-right" data-toggle="modal" href="#createBoard" class="fa btn btn-default"><i class="fa fa-plus"></i> Create Board</a>
+                        <a class="btn btn-primary pull-right" data-toggle="modal" href="#createBoard"
+                           class="fa btn btn-default"><i class="fa fa-plus"></i> Create Board</a>
                     </div><!--End of Create board -->
                     <!--                      Table of current boards -->
                     <div class="row grayed-box-app" ng-show="isLoading == false">
@@ -117,19 +127,25 @@
                             </tr>
                             </thead>
                             <tbody class="text-left">
-                            <tr class="clickable ng-scope" >
+                            <tr class="clickable ng-scope">
                                 <td class="name-td" onclick="goFromBoardToStory()">
                                     <div>vvb</div>
                                 </td>
-                                <td class="hidden-xs" onclick="goFromBoardToStory()"><div>Total:<span class="ng-binding ng-scope">00:00:00</span></div>
+                                <td class="hidden-xs" onclick="goFromBoardToStory()">
+                                    <div>Total:<span class="ng-binding ng-scope">00:00:00</span></div>
                                 </td>
-                                <td class="hidden-xs" onclick="goFromBoardToStory()"><div class="ng-binding">Today</div>
+                                <td class="hidden-xs" onclick="goFromBoardToStory()">
+                                    <div class="ng-binding">Today</div>
                                 </td>
-                                <td class="hidden-xs" onclick="goFromBoardToStory()"><div class="of ng-binding ng-scope">0 of 0</div>
+                                <td class="hidden-xs" onclick="goFromBoardToStory()">
+                                    <div class="of ng-binding ng-scope">0 of 0</div>
                                 </td>
-                                <td class="edit-icon"><i data-toggle="modal" data-target="#editBoard" class="fa fa-edit"></i>
+                                <td class="edit-icon"><i data-toggle="modal" data-target="#editBoard"
+                                                         class="fa fa-edit"></i>
                                 </td>
-                                <td class="delete-icon"><span data-toggle="modal" data-target="#confirm-delete" class=""><img class="hover deleteImg" src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"></span>
+                                <td class="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
+                                                              class=""><img class="hover deleteImg"
+                                                                            src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"></span>
                                 </td>
                             </tr>
                             </tbody>
@@ -237,7 +253,8 @@
                                                 <button class="ng-scope">
                                                     <div class="left-icon">C</div>
                                                     <div class="center-icon cofee">
-                                                        <img class="hover" src="https://planitpoker.azureedge.net/Content/cofee.png">
+                                                        <img class="hover"
+                                                             src="https://planitpoker.azureedge.net/Content/cofee.png">
                                                     </div>
                                                     <div class="right-icon">C</div>
                                                 </button>
@@ -257,7 +274,10 @@
                                         </div>
                                         <div class="col-xs-6 col-right">
                                             <div class="timer">
-                                                <div><img class="clock-icon" src="https://planitpoker.azureedge.net/Content/clock.png" width="16" height="16"><span class="ng-binding">00:00:00</span></div>
+                                                <div><img class="clock-icon"
+                                                          src="https://planitpoker.azureedge.net/Content/clock.png"
+                                                          width="16" height="16"><span
+                                                        class="ng-binding">00:00:00</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -295,19 +315,24 @@
                                 <th class="hidden-xs">Finish time</th>
                                 <th class="hidden-xs">Votes</th>
                                 <th class="hidden-xs">Estimation</th>
-                                <th class="create-icon"><i data-toggle="modal" data-target="#createStory" class="fa fa-plus"></i> New</td>
+                                <th class="create-icon"><i data-toggle="modal" data-target="#createStory"
+                                                           class="fa fa-plus"></i> New
+                                </td>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody class="text-left">
-                            <tr class="clickable ng-scope" >
+                            <tr class="clickable ng-scope">
                                 <td class="name-td">First story</td>
                                 <td class="hidden-xs">08:54</td>
                                 <td class="hidden-xs">08:56</td>
                                 <td class="hidden-xs">3 of 3</td>
                                 <td class="hidden-xs">5</td>
-                                <td class="edit-icon"><i data-toggle="modal" data-target="#editStory" class="fa fa-edit"></i></td>
-                                <td class="delete-icon"><span data-toggle="modal" data-target="#confirm-delete" class=""><img class="hover deleteImg" src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"></span>
+                                <td class="edit-icon"><i data-toggle="modal" data-target="#editStory"
+                                                         class="fa fa-edit"></i></td>
+                                <td class="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
+                                                              class=""><img class="hover deleteImg"
+                                                                            src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"></span>
                                 </td>
                             </tr>
                             </tbody>
@@ -342,7 +367,8 @@
                 <h4 class="modal-title">Update Board</h4>
             </div>
             <div class="modal-body">
-                <input type="text" class="form-control" placeholder="Enter board name" required="required" value="Chosen board name"/>
+                <input type="text" class="form-control" placeholder="Enter board name" required="required"
+                       value="Chosen board name"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -360,7 +386,9 @@
                 <h4 class="modal-title">Edit Story</h4>
             </div>
             <div class="modal-body">
-                <textarea ng-bs-form-control="" name="inputName" class="form-control" rows="6" placeholder="Put your stories text here." value="Put your stories text here." required=""></textarea>
+                <textarea ng-bs-form-control="" name="inputName" class="form-control" rows="6"
+                          placeholder="Put your stories text here." value="Put your stories text here."
+                          required=""></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -378,7 +406,8 @@
                 <h4 class="modal-title">Create New Story</h4>
             </div>
             <div class="modal-body">
-                <textarea ng-bs-form-control="" name="inputName" class="form-control" rows="6" placeholder="Put your stories text here."  required=""></textarea>
+                <textarea ng-bs-form-control="" name="inputName" class="form-control" rows="6"
+                          placeholder="Put your stories text here." required=""></textarea>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -421,7 +450,7 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script  src="js/meme.js"></script>
+<script src="js/meme.js"></script>
 
 </body>
 

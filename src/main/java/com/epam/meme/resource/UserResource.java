@@ -26,7 +26,6 @@ public class UserResource {
 
     @POST
     @ApiOperation(value = "Create user")
-
     public void create(@Valid UserDto userDto) {
         userService.create(convertToEntity(userDto));
     }
