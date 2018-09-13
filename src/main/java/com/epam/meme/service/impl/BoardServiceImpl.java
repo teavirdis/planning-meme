@@ -4,9 +4,12 @@ import com.epam.meme.entity.Board;
 import com.epam.meme.repository.BoardRepository;
 import com.epam.meme.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,5 +47,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public void deleteById(Long entityId) {
         repository.deleteById(entityId);
+    }
+
+    @Override
+    public Page<Board> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }
