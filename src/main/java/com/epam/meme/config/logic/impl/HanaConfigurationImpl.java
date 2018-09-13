@@ -9,18 +9,21 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter;
 
 import javax.annotation.Resource;
 import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.util.Objects;
+import java.util.Properties;
 
 @Configuration
-@Profile("runtime")
-@Slf4j
+@Profile("neo")
 public class HanaConfigurationImpl implements DataConfiguration {
 
     private static final String PROP_DATABASE_PLATFORM =
@@ -28,14 +31,9 @@ public class HanaConfigurationImpl implements DataConfiguration {
     private static final String DATASOURCE = "java:comp/env/jdbc/dshana";
 
     @Bean
-    public BasicDataSource dataSource() {
-        BasicDataSource dataSource = null;
-        try {
-            dataSource = (BasicDataSource) new JndiTemplate()
-                    .lookup(DATASOURCE);
-        } catch (NamingException e) {
-            log.error(e.getMessage(), e);
-        }
+    public DataSource dataSource() {
+        JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+        DataSource dataSource = dsLookup.getDataSource(DATASOURCE);
         return dataSource;
     }
 
@@ -43,8 +41,6 @@ public class HanaConfigurationImpl implements DataConfiguration {
     public JpaVendorAdapter jpaVendorAdapter() {
         EclipseLinkJpaVendorAdapter vendorAdapter = new EclipseLinkJpaVendorAdapter();
         vendorAdapter.setDatabasePlatform(PROP_DATABASE_PLATFORM);
-        //vendorAdapter.setGenerateDdl(true);
         return vendorAdapter;
     }
-
 }
