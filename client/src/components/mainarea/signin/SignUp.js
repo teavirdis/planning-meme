@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import $ from "jquery";
 import './css/style.css'
 
+const $ = window.jQuery;
 
 class SignUp extends Component {
     componentDidUpdate() {
-        $('.form-group').bootstrapToggle();
+        $('.form-group').toggle();
     }
     render() {
         return (
