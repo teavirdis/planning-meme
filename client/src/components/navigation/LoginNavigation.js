@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import $ from "jquery";
 import './css/style.css'
+
+const $ = window.jQuery;
 
 const divStyle = {
     padding: '0.25%'
 };
 
 class LoginNavigation extends Component {
-    componentDidUpdate() {
-        $('.homeButton').bootstrapToggle();
-        $('.SignInX').bootstrapToggle();
-        $('.SignUpX').bootstrapToggle();
+    componentDidMount() {
+        $('.SignInX').toggle();
+        $('.SignUpX').toggle();
     }
     render() {
         return (

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import './css/style.css'
+
+const $ = window.jQuery;
 
 class CreateBoardButton extends Component {
     componentDidUpdate() {
-        $('.boardButton').bootstrapToggle();
+        $('.boardButton').toggle();
     }
     render() {
         return (

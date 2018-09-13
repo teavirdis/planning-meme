@@ -6,7 +6,7 @@ class CreateStory extends Component {
     handleClick(event) {
         event.preventDefault();
         event.stopPropagation();
-        axios.post('http://localhost:8080/meme/boards/1/stories/', "story")
+        axios.post('http://localhost:8081/meme/boards/1/stories/', "story")
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -34,7 +34,7 @@ class CreateStory extends Component {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.handleClick}>Create</button>
+                            <button type="button" className="btn btn-primary" onClick={this.handleClick} data-dismiss="modal">Create</button>
                         </div>
                     </div>
                 </div>
