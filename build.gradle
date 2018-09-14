@@ -30,6 +30,9 @@ ext {
     modelMapperVersion = '2.2.0'
     slf4jVersion = '1.7.25'
     swaggerJerseyVersion = '1.5.20'
+    selenideVersion = '3.5'
+    cucumberJava8Version = '1.2.5'
+    cucumberJunitVersion = '1.2.4'
 }
 
 repositories {
@@ -70,7 +73,7 @@ dependencies {
     compile "org.postgresql:postgresql:${postgreVersion}"
 
     compile "javax.validation:validation-api:${beanValidationVersion}"
-    //hibernate validator included
+
     compile "org.glassfish.jersey.ext:jersey-bean-validation:${jerseyVersion}"
 
     compile "javax.el:javax.el-api:${javaxElVersion}"
@@ -84,4 +87,8 @@ dependencies {
     testCompile "org.springframework:spring-test:${springVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile "junit:junit:${junitVersion}"
+    testCompile "com.codeborne:selenide:${selenideVersion}"
+    testCompile "info.cukes:cucumber-java8:${cucumberJava8Version}"
+    testCompile "info.cukes:cucumber-spring:${cucumberJava8Version}"
+    testCompile "info.cukes:cucumber-junit:${cucumberJunitVersion}"
 }
