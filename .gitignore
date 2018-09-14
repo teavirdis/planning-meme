@@ -28,3 +28,8 @@ hs_err_pid*
 build
 out
 cloud/*.properties
+
+#react
+node_modules
+frontend/package.json
+frontend/package-lock.json
