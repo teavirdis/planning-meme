@@ -14,10 +14,9 @@ class CreateBoard extends Component {
     addValue(evt)
     {
         evt.preventDefault();
-        axios.post('http://localhost:8080/meme/users/', {
-            username: this.state.value,
-            password: '123',
-            email: this.state.value
+        alert(this.state.value);
+        axios.post('/MemePlanning-1.0/meme/boards/', {
+            name: this.state.value,
         })
             .then(function (response) {
                 console.log(response);

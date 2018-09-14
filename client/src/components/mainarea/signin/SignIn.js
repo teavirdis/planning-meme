@@ -17,7 +17,7 @@ class SignIn extends Component {
 
     addValue(evt) {
         evt.preventDefault();
-        axios.post('http://localhost:8081/meme/users/', {
+        axios.post('/MemePlanning-1.0/meme/users/', {
             username: this.state.value,
             password: '123',
             email: this.state.value
