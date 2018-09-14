@@ -88,6 +88,11 @@ dependencies {
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile "junit:junit:${junitVersion}"
 
+    testCompile "com.codeborne:selenide:${selenideVersion}"
+    testCompile "info.cukes:cucumber-java8:${cucumberJava8Version}"
+    testCompile "info.cukes:cucumber-spring:${cucumberJava8Version}"
+    testCompile "info.cukes:cucumber-junit:${cucumberJunitVersion}"
+
     task buildUi(type: Exec){
         commandLine './buildUI.bat'
     }
@@ -106,8 +111,4 @@ dependencies {
     war{
         dependsOn(buildUiToWebapp)
     }
-    testCompile "com.codeborne:selenide:${selenideVersion}"
-    testCompile "info.cukes:cucumber-java8:${cucumberJava8Version}"
-    testCompile "info.cukes:cucumber-spring:${cucumberJava8Version}"
-    testCompile "info.cukes:cucumber-junit:${cucumberJunitVersion}"
 }
