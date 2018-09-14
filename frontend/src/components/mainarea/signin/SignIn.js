@@ -17,10 +17,8 @@ class SignIn extends Component {
 
     addValue(evt) {
         evt.preventDefault();
-        axios.post('/MemePlanning-1.0/meme/users/', {
-            username: this.state.value,
-            password: '123',
-            email: this.state.value
+        axios.post('http://localhost:8081/meme/users/', {
+            username: this.state.value
         })
             .then(function (response) {
                 console.log(response);
@@ -47,11 +45,11 @@ class SignIn extends Component {
                 <form onSubmit={this.addValue}>
                     <h2 className="text-center">Let's start!</h2>
                     <div>
-                        <input type="text" className="fa form-control" placeholder="Enter your name" required="required"
+                        <input type="text" className="fa form-control" placeholder="Enter your name" name="usernameArea" required="required"
                                onChange={this.updateInput}/>
                     </div>
                     <div>
-                        <button type="submit" className="btn btn-primary hidden-xs" style={divStyle}>Enter</button>
+                        <button type="submit" className="btn btn-primary hidden-xs" name="loginButton" style={divStyle}>Enter</button>
                     </div>
                 </form>
             </div>
