@@ -84,4 +84,23 @@ dependencies {
     testCompile "org.springframework:spring-test:${springVersion}"
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
     testCompile "junit:junit:${junitVersion}"
+
+    task buildUi(type: Exec){
+        commandLine './buildUI.bat'
+    }
+
+    task buildUiToWebapp(type: Copy) {
+        group 'build'
+        description 'moves compiled react files in webapp '
+        dependsOn(buildUi)
+
+        from 'frontend/build'
+        into 'src/main/webapp'
+        include 'static/css/*.css', 'static/js/*.js', 'index.html'
+
+    }
+
+    war{
+        dependsOn(buildUiToWebapp)
+    }
 }
