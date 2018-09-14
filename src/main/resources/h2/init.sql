@@ -6,9 +6,9 @@ INSERT INTO USERS(id, username, email, password) VALUES
 (DEFAULT, 'user4', 'user4@gmail.com', 'qwerty'),
 (DEFAULT, 'user5', 'user5@gmail.com', 'qwerty');
 
-INSERT INTO BOARDS(id, name, admin_id) VALUES
-(DEFAULT, 'Board1', 1),
-(DEFAULT, 'Board2', 2);
+INSERT INTO BOARDS(id, name, admin_id, start_time) VALUES
+(DEFAULT, 'Board1', 1, '2018-01-01 14:44:00.367'),
+(DEFAULT, 'Board2', 2, '2018-01-01 14:44:00.367');
 
 INSERT INTO STORIES(id, description, ESTIMATION, START_TIME, FINISH_TIME, board_id) VALUES
 (DEFAULT, 'No description', NULL, '2018-01-01 14:44:00.367', NULL,  1),

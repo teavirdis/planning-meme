@@ -1,16 +1,15 @@
 package com.epam.meme.dto;
 
 import com.epam.meme.entity.User;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public class BoardDto {
-
     private String name;
+    private LocalDateTime startTime;
     private User admin;
 }
