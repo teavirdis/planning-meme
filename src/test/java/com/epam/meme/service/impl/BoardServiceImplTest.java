@@ -16,6 +16,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("test")
 @ContextConfiguration(classes = {ApplicationConfiguration.class})
@@ -43,6 +45,7 @@ public class BoardServiceImplTest {
                     User.builder()
                             .id(1L)
                             .build())
+                .startTime(LocalDateTime.now())
                 .build();
 
         service.create(board);

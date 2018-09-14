@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,8 @@ public class Board {
     )
     private Long id;
     private String name;
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
