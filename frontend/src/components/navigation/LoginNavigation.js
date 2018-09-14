@@ -16,7 +16,7 @@ class LoginNavigation extends Component {
         return (
             <div id="loginNavBar">
                 <ul className="nav navbar-nav navbar-right navbar-collapse" style={divStyle}>
-                    <li><a className="SignInX btn btn-primary hidden-xs" href="#signIn" name="collapseHref"
+                    <li><a id="signInButton" className="SignInX btn btn-primary hidden-xs" href="#signIn" name="collapseHref"
                            data-toggle="collapse">Sign In</a></li>
                     <li><a className="SignUpX btn btn-default btn-one hidden-xs" href="#signUp" name="collapseHref"
                            data-toggle="collapse">Sign Up</a></li>
