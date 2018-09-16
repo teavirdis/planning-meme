@@ -93,22 +93,26 @@ dependencies {
     testCompile "info.cukes:cucumber-spring:${cucumberJava8Version}"
     testCompile "info.cukes:cucumber-junit:${cucumberJunitVersion}"
 
-    task buildUi(type: Exec){
+    task buildUi(type: Exec) {
         commandLine './buildUI.bat'
+    }
+
+    task UIEdit(type: Exec) {
+        dependsOn(buildUi)
+        commandLine './frontend/UIEditor.bat'
     }
 
     task buildUiToWebapp(type: Copy) {
         group 'build'
         description 'moves compiled react files in webapp '
-        dependsOn(buildUi)
+        dependsOn(UIEdit)
 
         from 'frontend/build'
-        into 'src/main/webapp'
-        include 'static/css/*.css', 'static/js/*.js', 'index.html'
-
+        into 'src/main/webapp/resources'
+        include 'static/css/*.*', 'static/js/*.*', 'index.html'
     }
 
-    war{
+    war {
         dependsOn(buildUiToWebapp)
     }
 }
