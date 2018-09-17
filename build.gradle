@@ -98,7 +98,7 @@ dependencies {
     }
 
     task UIEdit(type: Exec) {
-        dependsOn(buildUi)
+        //dependsOn(buildUi)
         commandLine './frontend/UIEditor.bat'
     }
 
