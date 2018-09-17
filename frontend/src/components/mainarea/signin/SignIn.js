@@ -10,8 +10,8 @@ const Button = styled.button.attrs(
         type: "submit",
         className: "btn btn-primary hidden-xs",
         name: "loginButton"
-    })`
-     width: 100%`;
+    })
+    `width: 100%`;
 
 const Input = styled.input.attrs({
     type: "text",
@@ -46,15 +46,15 @@ class SignIn extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/meme/users/', {
-            username: this.state.username
-        })
-            .then(() => {
-                SignIn.collapseRequirementElements();
-            })
-            .catch(error => {
-                alert(error);
-            });
+        axios.post('meme/users/', {
+                    username: this.state.username
+                })
+                .then(() => {
+                    SignIn.collapseRequirementElements();
+                })
+                .catch(error => {
+                    alert(error);
+                });
         return false;
     };
 

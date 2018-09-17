@@ -15,7 +15,7 @@ class CreateBoard extends Component {
     {
         evt.preventDefault();
         alert(this.state.value);
-        axios.post('/MemePlanning-1.0/meme/boards/', {
+        axios.post('/meme/boards/', {
             name: this.state.value,
         })
             .then(function (response) {

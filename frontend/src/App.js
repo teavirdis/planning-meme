@@ -16,7 +16,6 @@ function Home() {
 }
 
 class App extends Component {
-    REACT_APP_ROUTER_BASE: "/meme";
 
     render() {
         return (
