@@ -102,17 +102,26 @@ dependencies {
         commandLine './frontend/UIEditor.bat'
     }
 
-    task buildUiToWebapp(type: Copy) {
-        group 'build'
+    task buildStaticUiToWebapp(type: Copy) {
         description 'moves compiled react files in webapp '
         dependsOn(UIEdit)
 
         from 'frontend/build'
         into 'src/main/webapp/resources'
-        include 'static/css/*.*', 'static/js/*.*', 'index.html'
+        include 'static/css/*.*', 'static/js/*.*'
+    }
+
+    task buildIndexUiToWebapp(type: Copy) {
+        description 'moves compiled react files in webapp '
+        dependsOn(UIEdit)
+
+        from 'frontend/build'
+        into 'src/main/webapp/'
+        include 'index.html'
     }
 
     war {
-        dependsOn(buildUiToWebapp)
+        dependsOn(buildStaticUiToWebapp)
+        dependsOn(buildIndexUiToWebapp)
     }
 }
