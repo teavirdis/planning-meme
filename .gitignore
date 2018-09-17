@@ -32,6 +32,7 @@ out
 frontend/build
 node_modules
 package-lock.json
+package-lock.json*
 src/main/webapp/resources
 
 # Individual properties

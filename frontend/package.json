@@ -12,6 +12,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
+    "styled-components": "^3.4.6",
     "tether": "^1.4.4",
     "universal-cookie": "^3.0.4",
     "webpack-war-plugin": "^1.0.0-beta.3"
