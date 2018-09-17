@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import jQuery from 'jquery'
 import './css/style.css'
 
 const $ = window.jQuery;
@@ -10,10 +9,6 @@ function goFromBoardToStory(){
 }
 
 class BoardTable extends Component {
-    componentDidUpdate() {
-        $('.editButton').toggle();
-        $('.deleteButton').toggle();
-    }
     render() {
         return (
             <div className="row grayed-box-app">

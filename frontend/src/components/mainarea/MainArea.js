@@ -7,20 +7,19 @@ import './css/style.css'
 
 const $ = window.jQuery;
 
-
 class MainArea extends Component {
     componentDidMount() {
         $('#mainNavBar').hide();
         $('#storyArea').hide();
         $('#boardArea').hide();
-        $("[name='collapseHref']").click(function () {
+        $("[name='collapseHref']").click(()=>{
             $(".collapse").collapse('hide');
             $('#mainNavBar').hide();
             $('#boardArea').hide();
             $('#storyArea').hide();
             $('#loginNavBar').show();
         });
-        $("[name='collapseLogin']").click(function (e) {
+        $("[name='collapseLogin']").click((e)=>{
             $('.collapse').collapse('hide');
             $('#loginNavBar').hide();
             $('#boardArea').show();
@@ -33,7 +32,7 @@ class MainArea extends Component {
         return (
             <div className="container">
                 <div className="starter-template">
-                    <div className="col-md-12 login-form">
+                    <div className="login-form">
                         <SignIn/>
                         <SignUp/>
                         <BoardArea/>
