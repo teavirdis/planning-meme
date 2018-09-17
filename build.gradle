@@ -121,6 +121,7 @@ dependencies {
     }
 
     war {
+        archiveName = 'ROOT.war'
         dependsOn(buildStaticUiToWebapp)
         dependsOn(buildIndexUiToWebapp)
     }
