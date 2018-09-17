@@ -1,58 +1,76 @@
 import React, {Component} from 'react';
 import './css/style.css'
 import axios from 'axios';
+import styled from "styled-components";
 
 const $ = window.jQuery;
-const divStyle = {
-    width: '100%'
-};
+
+const Button = styled.button.attrs(
+    {
+        type: "submit",
+        className: "btn btn-primary hidden-xs",
+        name: "loginButton"
+    })`
+     width: 100%`;
+
+const Input = styled.input.attrs({
+    type: "text",
+    className: "fa form-control",
+    placeholder: "Enter your name",
+    name: "usernameArea"
+})` width: 100%
+    margin-bottom: 2px`;
+
+const H2 = styled.h2.attrs({
+    className: "text-center"
+})``;
+
+const SignInDiv = styled.div.attrs({
+    id: "signIn",
+    className: "collapse indent in"
+})``;
 
 class SignIn extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
-        this.addValue = this.addValue.bind(this);
-        this.updateInput = this.updateInput.bind(this);
+
+    state = {
+        username: ''
+    };
+
+    static collapseRequirementElements() {
+        $('.collapse').collapse('hide');
+        $('#loginNavBar').hide();
+        $('#boardArea').show();
+        $('#storyArea').hide();
+        $('#mainNavBar').show();
     }
 
-    addValue(evt) {
-        evt.preventDefault();
+    addValue = (e) => {
+        e.preventDefault();
         axios.post('http://localhost:8081/meme/users/', {
-            username: this.state.value
+            username: this.state.username
         })
-            .then(function (response) {
-                console.log(response);
-                $('.collapse').collapse('hide');
-                $('#loginNavBar').hide();
-                $('#boardArea').show();
-                $('#storyArea').hide();
-                $('#mainNavBar').show();
+            .then(() => {
+                SignIn.collapseRequirementElements();
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(error => {
                 alert(error);
             });
         return false;
-    }
+    };
 
-    updateInput(evt) {
-        this.state = {value: evt.target.value};
-    }
+    onInputChange = (e) => this.setState({
+        username: e.target.value
+    });
 
     render() {
         return (
-            <div id="signIn" className="collapse indent in">
+            <SignInDiv>
                 <form onSubmit={this.addValue}>
-                    <h2 className="text-center">Let's start!</h2>
-                    <div>
-                        <input type="text" className="fa form-control" placeholder="Enter your name" name="usernameArea" required="required"
-                               onChange={this.updateInput}/>
-                    </div>
-                    <div>
-                        <button type="submit" className="btn btn-primary hidden-xs" name="loginButton" style={divStyle}>Enter</button>
-                    </div>
+                    <H2>Let's start!</H2>
+                    <Input required="required" onChange={this.onInputChange}/>
+                    <Button>Enter</Button>
                 </form>
-            </div>
+            </SignInDiv>
         );
     }
 }
