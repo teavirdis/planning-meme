@@ -6,6 +6,7 @@ const $ = window.jQuery;
 function goFromBoardToStory(){
     $('#storyArea').show();
     $('#boardArea').hide();
+    window.sessionStorage.setItem('boardName', 'Chosen board\'s name');
 }
 
 class BoardTable extends Component {
@@ -40,8 +41,8 @@ class BoardTable extends Component {
                         <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
                                                      className="editButton fa fa-edit"/>
                         </td>
-                        <td className="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
-                                                          className="deleteButton"><img className="hover deleteImg"
+                        <td className="delete-icon">
+                            <span data-toggle="modal" data-target="#confirm-delete" className="deleteButton"><img className="hover deleteImg"
                                                                                         src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
                         </td>
                     </tr>

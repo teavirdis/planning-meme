@@ -5,14 +5,30 @@ import Footer from "./components/mainarea/footer/Footer";
 import Route from "react-router/es/Route";
 import BrowserRouter from "react-router-dom/es/BrowserRouter";
 
-function Home() {
-    return (
-        <div>
-            <NavigationBar/>
-            <MainArea/>
-            <Footer/>
-        </div>
-    );
+class Home extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {isLoggedIn: false};
+        this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
+    }
+
+    handleAuthStatusChange() {
+        this.setState(state => ({
+            isLoggedIn: !state.isLoggedIn
+        }));
+    }
+
+    render () {
+        return (
+            <div>
+                <NavigationBar onAuthStateChange={this.handleAuthStatusChange} isLoggedIn={this.state.isLoggedIn}/>
+                <MainArea onAuthStateChange={this.handleAuthStatusChange} isLoggedIn={this.state.isLoggedIn}/>
+                <Footer/>
+            </div>
+        )
+    };
 }
 
 class App extends Component {
