@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
+import MainNavigation from "../../navigation/MainNavigation";
 
 const $ = window.jQuery;
 
 const formStyle = {
     marginTop: '10%'
 }
-const Button = styled.button.attrs({
-    type: "submit",
-    className: "btn btn-primary hidden-xs",
-    name: "loginButton"
-})`width: 100%`;
+const Button = styled.button.attrs(
+    {
+        type: "submit",
+        className: "btn btn-primary hidden-xs",
+        name: "loginButton"
+    })`
+     width: 100%`;
 
 const Input = styled.input.attrs({
     type: "text",
@@ -52,11 +55,9 @@ class SignIn extends Component {
         axios.post('/meme/users/', {
             username: this.state.username
         })
-            .then((response) => {
+            .then((responce) => {
                 SignIn.collapseRequirementElements();
-                this.state = response.data.username;
-                window.sessionStorage.removeItem("user");
-                window.sessionStorage.setItem("user", response.data.username);
+                window.sessionStorage.setItem('user', responce.data.username);
             })
             .catch(error => {
                 alert(error);
