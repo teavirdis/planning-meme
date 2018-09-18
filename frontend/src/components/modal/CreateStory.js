@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './css/style.css'
+import axios from "axios";
 
 class CreateStory extends Component {
     state = {
@@ -31,19 +31,19 @@ class CreateStory extends Component {
     }
     addValue = (e) => {
         e.preventDefault();
-        // axios.post('http://localhost:8081/meme/boards/'+this.state.currentBoardId+'/stories',
-        //     {
-        //         description: this.state.description,
-        //         startTime: CreateStory.IsoDateString(new Date())
-        //     })
-        //     .then(res => {
-        //         console.log(res);
-        //         console.log(res.data);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         console.log(err.data);
-        //     });
+        axios.post('/meme/boards/'+this.state.currentBoardId+'/stories',
+            {
+                description: this.state.description,
+                startTime: CreateStory.IsoDateString(new Date())
+            })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+                console.log(err.data);
+            });
         return false;
     };
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css'
 import axios from "axios";
+import CreateStory from "./CreateStory";
 
 class CreateBoard extends Component {
     state = {
@@ -9,18 +10,17 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        alert(this.state.name);
-        // axios.post('http://localhost:8081/meme/boards/', {
-        //     name: this.state.value,
-        //     startTime: '2018-09-18T08:32:17.179',
-        //     admin: localStorage.getItem('user')
-        // })
-        //     .then((response) => {
-        //         console.log(response);
-        //     })
-        //     .catch((error) =>{
-        //         console.log(error);
-        //     });
+        axios.post('/meme/boards/', {
+            name: this.state.name,
+            startTime: CreateStory.IsoDateString(new Date())
+            //TODO: add admin setting
+        })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
         return false;
     };
 
