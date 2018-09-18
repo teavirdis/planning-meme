@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import $ from 'jquery'
 import './css/style.css'
 
-//const $ = window.jQuery;
+const $ = window.jQuery;
 
 function goFromBoardToStory(){
     $('#storyArea').show();
@@ -10,10 +9,6 @@ function goFromBoardToStory(){
 }
 
 class BoardTable extends Component {
-    componentDidUpdate() {
-        $('.editButton').toggle();
-        $('.deleteButton').toggle();
-    }
     render() {
         return (
             <div className="row grayed-box-app">
@@ -45,13 +40,9 @@ class BoardTable extends Component {
                         <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
                                                      className="editButton fa fa-edit"/>
                         </td>
-                        <td className="delete-icon">
-                            <span data-toggle="modal"
-                                  data-target="#confirm-delete"
-                                  className="deleteButton">
-                                <img className="hover deleteImg"
-                                     src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/>
-                            </span>
+                        <td className="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
+                                                          className="deleteButton"><img className="hover deleteImg"
+                                                                                        src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
                         </td>
                     </tr>
                     </tbody>

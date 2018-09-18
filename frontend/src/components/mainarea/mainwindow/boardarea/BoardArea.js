@@ -3,7 +3,6 @@ import CreateBoardButton from "./CreateBoardButton";
 import BoardTable from "./BoardTable";
 import './css/style.css'
 import EditBoard from "../../../modal/EditBoard";
-import ConfirmDelete from "../../../modal/ConfirmDelete";
 import CreateBoard from "../../../modal/CreateBoard";
 
 class BoardArea extends Component {
@@ -16,7 +15,6 @@ class BoardArea extends Component {
                     <BoardTable/>
                     <EditBoard/>
                     <CreateBoard/>
-                    <ConfirmDelete/>
                 </div>
             </div>
         );
