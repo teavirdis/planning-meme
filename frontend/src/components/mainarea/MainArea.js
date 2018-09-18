@@ -1,42 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
 import SignIn from "./signin/SignIn";
-import SignUp from "./signin/SignUp";
 import BoardArea from "./mainwindow/boardarea/BoardArea";
-import StoryArea from "./mainwindow/storyboard/StoryArea";
 import './css/style.css'
 
 const $ = window.jQuery;
 
-class MainArea extends Component {
-    componentDidMount() {
-        $('#mainNavBar').hide();
-        $('#storyArea').hide();
-        $('#boardArea').hide();
-        $("[name='collapseHref']").click(()=>{
-            $(".collapse").collapse('hide');
-            $('#mainNavBar').hide();
-            $('#boardArea').hide();
-            $('#storyArea').hide();
-            $('#loginNavBar').show();
-        });
-        $("[name='collapseLogin']").click((e)=>{
-            $('.collapse').collapse('hide');
-            $('#loginNavBar').hide();
-            $('#boardArea').show();
-            $('#storyArea').hide();
-            $('#mainNavBar').show();
-        });
-    }
-
+class MainArea extends React.Component {
     render() {
         return (
             <div className="container">
                 <div className="starter-template">
                     <div className="login-form">
                         <SignIn/>
-                        <SignUp/>
                         <BoardArea/>
-                        <StoryArea/>
                     </div>
                 </div>
             </div>
