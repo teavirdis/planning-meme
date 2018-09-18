@@ -10,8 +10,10 @@ class StoryArea extends Component {
         boardName: ''
     };
     componentDidMount() {
-        this.timerID = setInterval(()=>this.tick(),1000);
-        this.setState({boardName: localStorage.getItem('boardName')});
+        this.timerID = setInterval(()=>this.tick(),3000);
+        this.setState({
+            boardName: window.sessionStorage.getItem('boardName')
+        });
     }
 
     componentWillUnmount(){
