@@ -4,11 +4,6 @@ import './css/style.css'
 const $ = window.jQuery;
 
 class StoryTable extends Component {
-    componentDidUpdate() {
-        $('.createStory').toggle();
-        $('.editStory').toggle();
-        $('.confirm-delete').toggle();
-    }
 
     render() {
         return (
@@ -21,8 +16,8 @@ class StoryTable extends Component {
                         <th className="hidden-xs">Finish time</th>
                         <th className="hidden-xs">Votes</th>
                         <th className="hidden-xs">Estimation</th>
-                        <th className="create-icon"><i data-toggle="modal" data-target="#createStory"
-                                                       className="createStory fa fa-plus"/> New
+                        <th className="create-icon">
+                            <i data-toggle="modal" data-target="#createStory" className="createStory fa fa-plus"/> New
                         </th>
                         <th/>
                     </tr>
@@ -34,11 +29,11 @@ class StoryTable extends Component {
                         <td className="hidden-xs">08:56</td>
                         <td className="hidden-xs">3 of 3</td>
                         <td className="hidden-xs">5</td>
-                        <td className="edit-icon"><i data-toggle="modal" data-target="#editStory"
-                                                     className="editStory fa fa-edit"/></td>
-                        <td className="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
-                                                          className="confirm-delete"><img className="hover deleteImg"
-                                                                                          src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
+                        <td className="edit-icon">
+                            <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/></td>
+                        <td className="delete-icon">
+                            <span data-toggle="modal" data-target="#deleteStory" className="deleteButton"><img className="hover deleteImg"
+                                                                                                                  src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
                         </td>
                     </tr>
                     </tbody>
