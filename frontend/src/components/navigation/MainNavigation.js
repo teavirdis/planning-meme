@@ -18,6 +18,8 @@ class MainNavigation extends Component {
         username: ''
     };
     componentDidMount() {
+        this.timerID = setInterval(()=>this.tick(),1000);
+
         $("[name='collapseHref']").click(()=>{
             $(".collapse").collapse('hide');
             $('#mainNavBar').hide();
@@ -25,8 +27,18 @@ class MainNavigation extends Component {
             $('#storyArea').hide();
             $('#loginNavBar').show();
         });
-        this.state.username = window.sessionStorage.getItem("user");
     }
+
+    componentWillUnmount(){
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            username: window.sessionStorage.getItem("user")
+        });
+    }
+
     render() {
         return (
             <div id="mainNavBar">
