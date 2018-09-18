@@ -28,7 +28,9 @@ public class UserResource {
     @ApiOperation(value = "Create user")
     public User create(@Valid UserDto userDto) {
         User user = convertToEntity(userDto);
-        userService.create(convertToEntity(userDto));
+        if (!userService.findByUsername(user.getUsername()).isPresent()) {
+            userService.create(user);
+        }
         return user;
     }
 

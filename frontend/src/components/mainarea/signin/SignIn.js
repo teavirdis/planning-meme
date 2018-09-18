@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
+import MainNavigation from "../../navigation/MainNavigation";
 
 const $ = window.jQuery;
 
@@ -51,14 +52,12 @@ class SignIn extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/meme/users/', {
+        axios.post('/meme/users/', {
             username: this.state.username
         })
             .then((responce) => {
                 SignIn.collapseRequirementElements();
-                this.state = responce.data.username;
-                window.sessionStorage.removeItem("user");
-                window.sessionStorage.setItem("user", responce.data.username);
+                window.sessionStorage.setItem('user', responce.data.username);
             })
             .catch(error => {
                 alert(error);
