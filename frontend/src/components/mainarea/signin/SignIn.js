@@ -46,7 +46,7 @@ class SignIn extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8081/meme/users/', {
+        axios.post('/meme/users/', {
             username: this.state.username
         })
             .then((response) => {
