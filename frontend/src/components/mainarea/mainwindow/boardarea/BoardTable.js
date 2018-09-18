@@ -36,7 +36,6 @@ class BoardTable extends Component {
                     <tr>
                         <th>Title</th>
                         <th className="hidden-xs">Time</th>
-                        <th className="hidden-xs">Last Used</th>
                         <th className="hidden-xs">Stories</th>
                         <th/>
                         <th/>
