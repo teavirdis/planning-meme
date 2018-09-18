@@ -3,48 +3,46 @@ import './css/style.css'
 import axios from "axios";
 
 class CreateBoard extends Component {
-    constructor(props)
-    {
-        super(props);
-        this.state = {value: ''};
-        this.addValue = this.addValue.bind(this);
-        this.updateInput = this.updateInput.bind(this);
-    }
+    state = {
+        name: ''
+    };
 
-    addValue(evt)
-    {
-        evt.preventDefault();
-        alert(this.state.value);
-        axios.post('/MemePlanning-1.0/meme/boards/', {
-            name: this.state.value,
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    addValue = (e) => {
+        e.preventDefault();
+        // axios.post('http://localhost:8081/meme/boards/', {
+        //     name: this.state.value,
+        //     startTime: '2018-09-18T08:32:17.179',
+        //     admin: localStorage.getItem('user')
+        // })
+        //     .then((response) => {
+        //         console.log(response);
+        //     })
+        //     .catch((error) =>{
+        //         console.log(error);
+        //     });
         return false;
     }
-    updateInput(evt){
-        this.state={value: evt.target.value};
-    }
+
+    onInputChange = (e) => this.setState({
+        name: e.target.value
+    });
+
     render() {
         return (
             <div id="createBoard" className="modal fade">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <form onSubmit={this.addValue}>
+                        <form>
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             <h4 className="modal-title">Create New Board</h4>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control" placeholder="Enter board name" onChange={ this.updateInput } required="required"/>
+                            <input type="text" className="form-control" placeholder="Enter board name" required="required" onChange={this.onInputChange}/>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="submit" className="btn btn-primary" data-dismiss="modal">Create</button>
+                            <button className="btn btn-primary" onClick={this.addValue} data-dismiss="modal">Create</button>
                         </div>
                         </form>
                     </div>
