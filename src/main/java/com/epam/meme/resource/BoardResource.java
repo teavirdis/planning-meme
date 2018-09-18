@@ -27,20 +27,20 @@ public class BoardResource {
 
     @POST
     @ApiOperation(value = "Save board")
-    public void create(@Valid BoardDto boardDto){
+    public void create(@Valid BoardDto boardDto) {
         boardService.create(convertToEntity(boardDto));
     }
 
     /**
      * Finds specified subset of all boards
      *
-     * @param page number of page (starting from 0)
+     * @param page     number of page (starting from 0)
      * @param pageSize max number of elements on page
      * @return
      */
     @GET
-    public List<BoardDto> findAll(@QueryParam("page")     int page,
-                               @QueryParam("pageSize") int pageSize) {
+    public List<BoardDto> findAll(@QueryParam("page") int page,
+                                  @QueryParam("pageSize") int pageSize) {
 
         Pageable pageable = PageRequest.of(page, pageSize);
         return boardService.findAll(pageable).getContent().stream()
@@ -51,14 +51,14 @@ public class BoardResource {
     @GET
     @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
-    public Board findById(@PathParam("boardId") Long boardId){
+    public Board findById(@PathParam("boardId") Long boardId) {
         return boardService.findById(boardId).orElseThrow(NotFoundException::new);
     }
 
     @PUT
     @ApiOperation(value = "Update board by id")
     @Path("/{boardId}")
-    public void update(@PathParam("boardId") Long boardId, BoardDto boardDto){
+    public void update(@PathParam("boardId") Long boardId, BoardDto boardDto) {
         Board board = boardService.findById(boardId).orElseThrow(NotFoundException::new);
         if (boardDto.getName() != null) {
             board.setName(boardDto.getName());
@@ -69,12 +69,12 @@ public class BoardResource {
     @DELETE
     @ApiOperation(value = "Delete board by id")
     @Path("/{boardId}")
-    public void delete(@PathParam("boardId") Long boardId){
+    public void delete(@PathParam("boardId") Long boardId) {
         boardService.deleteById(boardId);
     }
 
     @Path("{boardId}/stories")
-    public Class<StoryResource> storyResource(){
+    public Class<StoryResource> storyResource() {
         return StoryResource.class;
     }
 

@@ -3,6 +3,7 @@ package com.epam.meme.resource;
 import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
+import com.epam.meme.service.BoardService;
 import com.epam.meme.service.StoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,18 +30,16 @@ public class StoryResource {
     @ApiOperation(value = "Save story")
     public void create(@PathParam("boardId") Long boardId, @Valid StoryDto storyDto) {
         Story story = convertToEntity(storyDto);
-        Board board = new Board();
-        board.setId(boardId);
-        story.setBoard(board);
+        //story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
         storyService.create(story);
     }
 
     @GET
     @ApiOperation(value = "Find stories in range")
-    public List<StoryDto> findAll(@QueryParam("page")     int page,
+    public List<StoryDto> findAll(@PathParam("boardId") Long boardId, @QueryParam("page")     int page,
                                @QueryParam("pageSize") int pageSize){
         Pageable pageable = PageRequest.of(page, pageSize);
-        return storyService.findAll(pageable).getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        return storyService.findAllByBoardId(boardId, pageable).getContent().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @GET

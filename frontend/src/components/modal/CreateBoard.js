@@ -9,6 +9,7 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
+        alert(this.state.name);
         // axios.post('http://localhost:8081/meme/boards/', {
         //     name: this.state.value,
         //     startTime: '2018-09-18T08:32:17.179',
@@ -21,7 +22,7 @@ class CreateBoard extends Component {
         //         console.log(error);
         //     });
         return false;
-    }
+    };
 
     onInputChange = (e) => this.setState({
         name: e.target.value

@@ -19,6 +19,7 @@ class BoardTable extends Component {
                     listItems: response.data.map(item =>
                         <BoardElement
                             key={item.id}
+                            id={item.id}
                             name={item.name}
                             startTime={item.startTime}
                             storiesCount={item.storiesCount}/>
