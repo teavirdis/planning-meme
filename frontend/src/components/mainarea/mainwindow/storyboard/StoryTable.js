@@ -24,20 +24,22 @@ class StoryTable extends Component {
                 boardId: window.sessionStorage.getItem('boardId')
             }
         );
-        axios.get('http://localhost:8081/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
-            .then((response) => {
-                this.setState({
-                    storyList: response.data.map(story => <StoryElement
-                        key={story.id}
-                        description={story.description}
-                        startTime={story.startTime}
-                        finishTime={story.finishTime}
-                        estimation={story.estimation}/>)
+        if (this.state.boardId!=null) {
+            axios.get('/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+                .then((response) => {
+                    this.setState({
+                        storyList: response.data.map(story => <StoryElement
+                            key={story.id}
+                            description={story.description}
+                            startTime={story.startTime}
+                            finishTime={story.finishTime}
+                            estimation={story.estimation}/>)
+                    })
                 })
-            })
-            .catch(error => {
-                alert(error);
-            });
+                .catch(error => {
+                    alert(error);
+                });
+        }
     }
 
     render() {

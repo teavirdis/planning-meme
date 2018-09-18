@@ -24,13 +24,16 @@ public class StoryResource {
     private StoryService storyService;
 
     @Autowired
+    private BoardService boardService;
+
+    @Autowired
     private ModelMapper modelMapper;
 
     @POST
     @ApiOperation(value = "Save story")
     public void create(@PathParam("boardId") Long boardId, @Valid StoryDto storyDto) {
         Story story = convertToEntity(storyDto);
-        //story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
+        story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
         storyService.create(story);
     }
 

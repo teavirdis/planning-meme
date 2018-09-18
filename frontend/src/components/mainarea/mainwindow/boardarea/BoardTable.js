@@ -13,7 +13,7 @@ class BoardTable extends Component {
     }
 
     tick() {
-        axios.get('http://localhost:8081/meme/boards?page=0&pageSize=10')
+        axios.get('/meme/boards?page=0&pageSize=10')
             .then((response) => {
                 this.setState({
                     listItems: response.data.map(item =>

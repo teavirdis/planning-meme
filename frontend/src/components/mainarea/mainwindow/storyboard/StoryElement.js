@@ -6,8 +6,8 @@ class StoryElement extends Component{
         return (
           <tr className="clickable ng-scope">
                         <td className="name-td">{this.props.description}</td>
-                        {/*<td className="hidden-xs">{String(this.props.startTime).replace('T', ' / ')}</td>*/}
-                        {/*<td className="hidden-xs">{String(this.props.finishTime).replace('T', ' / ')}</td>*/}
+                        <td className="hidden-xs">{String(this.props.startTime).replace('T', ' / ')}</td>
+                        <td className="hidden-xs">{String(this.props.finishTime).replace('T', ' / ')}</td>
                         <td className="hidden-xs">3 of 3</td>
                         <td className="hidden-xs">{this.props.estimation}</td>
                         <td className="edit-icon">
