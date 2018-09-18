@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/boards")
 @Api(value = "/boards", description = "Manage boards")
@@ -38,11 +39,13 @@ public class BoardResource {
      * @return
      */
     @GET
-    public List<Board> findAll(@QueryParam("page")     int page,
+    public List<BoardDto> findAll(@QueryParam("page")     int page,
                                @QueryParam("pageSize") int pageSize) {
 
         Pageable pageable = PageRequest.of(page, pageSize);
-        return boardService.findAll(pageable).getContent();
+        return boardService.findAll(pageable).getContent().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @GET
@@ -73,6 +76,10 @@ public class BoardResource {
     @Path("{boardId}/stories")
     public Class<StoryResource> storyResource(){
         return StoryResource.class;
+    }
+
+    private BoardDto convertToDto(Board board) {
+        return modelMapper.map(board, BoardDto.class);
     }
 
     private Board convertToEntity(BoardDto boardDto) {

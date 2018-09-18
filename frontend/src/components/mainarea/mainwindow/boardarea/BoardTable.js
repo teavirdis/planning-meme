@@ -1,16 +1,33 @@
 import React, {Component} from 'react';
 import './css/style.css'
-
-const $ = window.jQuery;
-
-function goFromBoardToStory(){
-    $('#storyArea').show();
-    $('#boardArea').hide();
-    window.sessionStorage.setItem('boardName', 'Chosen board\'s name');
-    window.sessionStorage.setItem('boardId', '2');
-}
+import BoardElement from "./BoardElement";
+import axios from "axios";
 
 class BoardTable extends Component {
+
+    state ={
+    };
+
+    componentDidMount() {
+        this.timerID = setInterval(() => this.tick(), 3000);
+    }
+
+    tick() {
+        axios.get('http://localhost:8081/meme/boards?page=0&pageSize=10')
+            .then((response) => {
+                this.setState({
+                    listItems: response.data.map(item =>
+                        <BoardElement
+                            key={item.id}
+                            name={item.name}
+                            startTime={item.startTime}
+                            storiesCount={item.storiesCount}/>
+                    )})})
+            .catch(error => {
+                alert(error);
+            });
+    }
+
     render() {
         return (
             <div className="row grayed-box-app">
@@ -19,34 +36,13 @@ class BoardTable extends Component {
                     <tr>
                         <th>Title</th>
                         <th className="hidden-xs">Time</th>
-                        <th className="hidden-xs">Last Used</th>
                         <th className="hidden-xs">Stories</th>
                         <th/>
                         <th/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    <tr className="clickable ng-scope">
-                        <td className="name-td" onClick={goFromBoardToStory}>
-                            <div>vvb</div>
-                        </td>
-                        <td className="hidden-xs" onClick={goFromBoardToStory}>
-                            <div>Total:<span className="ng-binding ng-scope">00:00:00</span></div>
-                        </td>
-                        <td className="hidden-xs" onClick={goFromBoardToStory}>
-                            <div className="ng-binding">Today</div>
-                        </td>
-                        <td className="hidden-xs" onClick={goFromBoardToStory}>
-                            <div className="of ng-binding ng-scope">0 of 0</div>
-                        </td>
-                        <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
-                                                     className="editButton fa fa-edit"/>
-                        </td>
-                        <td className="delete-icon">
-                            <span data-toggle="modal" data-target="#confirm-delete" className="deleteButton"><img className="hover deleteImg"
-                                                                                        src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
-                        </td>
-                    </tr>
+                    {this.state.listItems}
                     </tbody>
                 </table>
             </div>

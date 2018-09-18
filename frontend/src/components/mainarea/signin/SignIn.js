@@ -49,9 +49,9 @@ class SignIn extends Component {
         axios.post('http://localhost:8081/meme/users/', {
             username: this.state.username
         })
-            .then((responce) => {
+            .then((response) => {
                 SignIn.collapseRequirementElements();
-                window.sessionStorage.setItem('user', responce.data.username);
+                window.sessionStorage.setItem('user', response.data.username);
             })
             .catch(error => {
                 alert(error);

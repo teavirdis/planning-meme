@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BoardDto {
+    private String id;
     private String name;
     private LocalDateTime startTime;
-    private User admin;
+    private UserDto admin;
 }
