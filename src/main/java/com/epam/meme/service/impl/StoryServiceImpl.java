@@ -52,4 +52,9 @@ public class StoryServiceImpl implements StoryService {
     public Page<Story> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
+
+    @Override
+    public Page<Story> findAllByBoardId(long boardId, Pageable pageable){
+        return repository.findAllByBoardId(boardId, pageable);
+    }
 }

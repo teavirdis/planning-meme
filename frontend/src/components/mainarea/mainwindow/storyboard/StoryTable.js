@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './css/style.css'
 import axios from "axios";
+import StoryElement from "./StoryElement";
 
 const $ = window.jQuery;
 
@@ -20,13 +21,18 @@ class StoryTable extends Component {
 
     tick() {
         this.setState({
-                boardId: window.sessionStorage.getItem("boardId")
+                boardId: window.sessionStorage.getItem('boardId')
             }
         );
         axios.get('http://localhost:8081/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
             .then((response) => {
                 this.setState({
-                    storyList: response.data
+                    storyList: response.data.map(story => <StoryElement
+                        key={story.id}
+                        description={story.description}
+                        startTime={story.startTime}
+                        finishTime={story.finishTime}
+                        estimation={story.estimation}/>)
                 })
             })
             .catch(error => {
@@ -52,20 +58,7 @@ class StoryTable extends Component {
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    {this.state.storyList.map(story => <tr className="clickable ng-scope">
-                        <td className="name-td">{story.description}</td>
-                        <td className="hidden-xs">{story.startTime}</td>
-                        <td className="hidden-xs">{story.finishTime}</td>
-                        <td className="hidden-xs">3 of 3</td>
-                        <td className="hidden-xs">{story.estimation}</td>
-                        <td className="edit-icon">
-                            <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/></td>
-                        <td className="delete-icon">
-                            <span data-toggle="modal" data-target="#deleteStory" className="deleteButton"><img
-                                className="hover deleteImg"
-                                src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
-                        </td>
-                    </tr>)}
+                    {this.state.storyList}
                     </tbody>
                 </table>
             </div>
