@@ -8,10 +8,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Api(value = "/stories", description = "Manage stories")
 public class StoryResource {
@@ -34,10 +37,10 @@ public class StoryResource {
 
     @GET
     @ApiOperation(value = "Find stories in range")
-    public void findAll(
-            @QueryParam("startIndex") int startIndex,
-            @QueryParam("maxResults")  int maxResult){
-        //TODO realize needed method
+    public List<StoryDto> findAll(@QueryParam("page")     int page,
+                               @QueryParam("pageSize") int pageSize){
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return storyService.findAll(pageable).getContent().stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @GET
@@ -80,5 +83,9 @@ public class StoryResource {
 
     private Story convertToEntity(StoryDto storyDto) {
         return modelMapper.map(storyDto, Story.class);
+    }
+
+    private StoryDto convertToDto(Story story){
+        return modelMapper.map(story, StoryDto.class);
     }
 }

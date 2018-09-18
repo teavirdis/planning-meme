@@ -1,9 +1,38 @@
 import React, {Component} from 'react';
 import './css/style.css'
+import axios from "axios";
 
 const $ = window.jQuery;
 
 class StoryTable extends Component {
+    state = {
+        storyList: [],
+        boardId: ''
+    };
+
+    componentDidMount() {
+        this.timerID = setInterval(() => this.tick(), 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+                boardId: window.sessionStorage.getItem("boardId")
+            }
+        );
+        axios.get('http://localhost:8081/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+            .then((response) => {
+                this.setState({
+                    storyList: response.data
+                })
+            })
+            .catch(error => {
+                alert(error);
+            });
+    }
 
     render() {
         return (
@@ -23,19 +52,20 @@ class StoryTable extends Component {
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    <tr className="clickable ng-scope">
-                        <td className="name-td">First story</td>
-                        <td className="hidden-xs">08:54</td>
-                        <td className="hidden-xs">08:56</td>
+                    {this.state.storyList.map(story => <tr className="clickable ng-scope">
+                        <td className="name-td">{story.description}</td>
+                        <td className="hidden-xs">{story.startTime}</td>
+                        <td className="hidden-xs">{story.finishTime}</td>
                         <td className="hidden-xs">3 of 3</td>
-                        <td className="hidden-xs">5</td>
+                        <td className="hidden-xs">{story.estimation}</td>
                         <td className="edit-icon">
                             <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/></td>
                         <td className="delete-icon">
-                            <span data-toggle="modal" data-target="#deleteStory" className="deleteButton"><img className="hover deleteImg"
-                                                                                                                  src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
+                            <span data-toggle="modal" data-target="#deleteStory" className="deleteButton"><img
+                                className="hover deleteImg"
+                                src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
                         </td>
-                    </tr>
+                    </tr>)}
                     </tbody>
                 </table>
             </div>
