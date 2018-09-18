@@ -10,20 +10,18 @@ function goFromBoardToStory(){
 }
 
 class BoardElement extends Component{
+
     render() {
         return (
             <tr className="clickable ng-scope">
                 <td className="name-td" onClick={goFromBoardToStory}>
-                    <div></div>
+                    <div>{this.props.name}</div>
                 </td>
                 <td className="hidden-xs" onClick={goFromBoardToStory}>
-                    <div>Total:<span className="ng-binding ng-scope">00:00:00</span></div>
+                    <div>In: <span className="ng-binding ng-scope">{this.props.startTime.replace('T', ' / ')}</span></div>
                 </td>
                 <td className="hidden-xs" onClick={goFromBoardToStory}>
-                    <div className="ng-binding">Today</div>
-                </td>
-                <td className="hidden-xs" onClick={goFromBoardToStory}>
-                    <div className="of ng-binding ng-scope">0 of 0</div>
+                    <div className="of ng-binding ng-scope">{this.props.storiesCount}</div>
                 </td>
                 <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
                                              className="editButton fa fa-edit"/>

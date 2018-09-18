@@ -33,6 +33,12 @@ class MainNavigation extends Component {
         clearInterval(this.timerID);
     }
 
+    tick() {
+        this.setState({
+            username: window.sessionStorage.getItem("user")
+        });
+    }
+
     render() {
         return (
             <div id="mainNavBar">
