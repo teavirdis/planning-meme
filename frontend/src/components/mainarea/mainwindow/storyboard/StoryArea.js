@@ -29,7 +29,7 @@ class StoryArea extends Component {
         return (
             <div id="storyArea">
                 <div className="col-md-12 col-md-12 text-left no-top-padding">
-                    <div className="title">{this.state.name}</div>
+                    <div className="title">{this.state.boardName}</div>
                     <div className="row">
                         <StoryTable />
                         <EditStory/>

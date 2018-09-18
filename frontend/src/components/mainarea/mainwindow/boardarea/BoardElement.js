@@ -7,6 +7,8 @@ const $ = window.jQuery;
 function goFromBoardToStory(){
     $('#storyArea').show();
     $('#boardArea').hide();
+    window.sessionStorage.setItem('boardName', 'Chosen board\'s name');
+    window.sessionStorage.setItem('boardId', '2');
 }
 
 class BoardElement extends Component{
