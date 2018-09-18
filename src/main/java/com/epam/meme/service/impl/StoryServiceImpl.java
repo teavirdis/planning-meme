@@ -4,6 +4,8 @@ import com.epam.meme.entity.Story;
 import com.epam.meme.repository.StoryRepository;
 import com.epam.meme.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,5 +46,10 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public void deleteById(Long entityId) {
         repository.deleteById(entityId);
+    }
+
+    @Override
+    public Page<Story> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

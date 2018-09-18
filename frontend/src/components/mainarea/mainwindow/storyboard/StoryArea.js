@@ -1,25 +1,40 @@
 import React, {Component} from 'react';
-import PlayArea from "./PlayArea";
-import VoteArea from "./VoteArea";
 import StoryTable from "./StoryTable";
 import './css/style.css'
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
-import ConfirmDelete from "../../../modal/ConfirmDelete";
+import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
 
 class StoryArea extends Component {
+    state={
+        boardName: ''
+    };
+    componentDidMount() {
+        this.timerID = setInterval(()=>this.tick(),3000);
+        this.setState({
+            boardName: window.sessionStorage.getItem('boardName')
+        });
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            boardName: window.sessionStorage.getItem("boardName")
+        });
+    }
     render() {
         return (
             <div id="storyArea">
                 <div className="col-md-12 col-md-12 text-left no-top-padding">
-                    <div className="title">Recent Stories</div>
+                    <div className="title">{this.state.boardName}</div>
                     <div className="row">
-                        <PlayArea />
-                        <VoteArea />
                         <StoryTable />
                         <EditStory/>
+                        <ConfirmStoryDelete/>
                         <CreateStory/>
-                        <ConfirmDelete/>
                     </div>
                 </div>
             </div>
