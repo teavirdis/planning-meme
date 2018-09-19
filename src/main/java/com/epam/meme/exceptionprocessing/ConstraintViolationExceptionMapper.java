@@ -1,5 +1,7 @@
 package com.epam.meme.exceptionprocessing;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Produces;
@@ -10,6 +12,7 @@ import javax.ws.rs.ext.Provider;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 public class ConstraintViolationExceptionMapper
@@ -17,6 +20,7 @@ public class ConstraintViolationExceptionMapper
 
     @Override
     public Response toResponse(ConstraintViolationException exception) {
+        log.error(exception.getLocalizedMessage(),exception);
 
         List<String> messages = new ArrayList<>();
         for (ConstraintViolation<?> violation : exception.getConstraintViolations()) {

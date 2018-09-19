@@ -16,6 +16,10 @@ class BoardElement extends Component{
     deleteBoard(){
         $('#boardToDelete').val(this.props.id);
     }
+    
+    editBoard(){
+        $('#boardToEdit').val(this.props.id);
+    }
 
     render() {
         return (
@@ -29,7 +33,7 @@ class BoardElement extends Component{
                 <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
                     <div className="of ng-binding ng-scope">{this.props.storiesCount}</div>
                 </td>
-                <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
+                <td className="edit-icon"><i onClick={(e) => this.editBoard(e)} data-toggle="modal" data-target="#editBoard"
                                              className="editButton fa fa-edit"/>
                 </td>
                 <td className="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
