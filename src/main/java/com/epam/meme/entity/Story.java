@@ -35,9 +35,12 @@ public class Story {
     private Board board;
 
     @Column(name = "start_time")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime startTime;
 
     @Column(name = "finish_time")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime finishTime;
+
     private Short estimation;
 }

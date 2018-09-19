@@ -16,13 +16,13 @@ class BoardElement extends Component{
     render() {
         return (
             <tr className="clickable ng-scope">
-                <td className="name-td" onClick={(e) => this.goFromBoardToStory(e)}>
+                <td className="name-td" onClick={() => this.goFromBoardToStory()}>
                     <div>{this.props.name}</div>
                 </td>
-                <td className="hidden-xs" onClick={(e) => this.goFromBoardToStory(e)}>
+                <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
                     <div>In: <span className="ng-binding ng-scope">{String(this.props.startTime).replace('T', ' / ')}</span></div>
                 </td>
-                <td className="hidden-xs" onClick={(e) => this.goFromBoardToStory(e)}>
+                <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
                     <div className="of ng-binding ng-scope">{this.props.storiesCount}</div>
                 </td>
                 <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
