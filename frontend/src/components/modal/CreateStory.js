@@ -15,23 +15,9 @@ class CreateStory extends Component {
             + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds())
     }
 
-    componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 3000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-                currentBoardId: window.sessionStorage.getItem('boardId')
-            }
-        );
-    }
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/boards/'+this.state.currentBoardId+'/stories',
+        axios.post('/meme/boards/'+sessionStorage.getItem('boardId')+'/stories',
             {
                 description: this.state.description,
                 startTime: CreateStory.IsoDateString(new Date())

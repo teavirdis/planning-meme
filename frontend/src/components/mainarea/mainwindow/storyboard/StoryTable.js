@@ -30,6 +30,7 @@ class StoryTable extends Component {
                     this.setState({
                         storyList: response.data.map(story => <StoryElement
                             key={story.id}
+                            id={story.id}
                             description={story.description}
                             startTime={story.startTime}
                             finishTime={story.finishTime}
