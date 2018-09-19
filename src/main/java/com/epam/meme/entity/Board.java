@@ -1,16 +1,15 @@
 package com.epam.meme.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"stories"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -39,4 +38,11 @@ public class Board {
             joinColumns = {@JoinColumn(name = "board_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     private List<User> users;
+
+    @OneToMany(
+            mappedBy = "board",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Story> stories;
 }

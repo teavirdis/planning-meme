@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,8 +31,7 @@ public class Story {
     @JoinColumn(name = "story_id")
     private List<Vote> votes;
 
-    @ManyToOne
-    @JoinColumn(name = "board_id")
+    @JsonbTransient
     private Board board;
 
     @Column(name = "start_time")
