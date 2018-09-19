@@ -26,7 +26,9 @@ public class Board {
     )
     private Long id;
     private String name;
+
     @Column(name = "start_time")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime startTime;
 
     @ManyToOne
