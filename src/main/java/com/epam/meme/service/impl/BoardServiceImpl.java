@@ -49,4 +49,9 @@ public class BoardServiceImpl implements BoardService {
     public Page<Board> findAll(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
+
+    @Transactional(readOnly = true)
+    public int getUserBoardCount(Long id) {
+        return boardRepository.countAllByAdminId(id);
+    }
 }

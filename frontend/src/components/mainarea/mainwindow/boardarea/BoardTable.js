@@ -1,19 +1,28 @@
 import React, {Component} from 'react';
 import './css/style.css'
 import BoardElement from "./BoardElement";
+import BoardPagination from "./BoardPagination";
 import axios from "axios";
 
 class BoardTable extends Component {
 
     state ={
+        pageNumber : 0,
+        pageSize : 2,
     };
 
     componentDidMount() {
         //this.timerID = setInterval(() => this.tick(), 3000);
     }
 
+    onInputPageNumberChange = (e) => this.setState({
+        pageNumber: Number(e.target.text) - 1
+    });
+
     tick() {
-        axios.get('/meme/boards?page=0&pageSize=10')
+        console.log(this.state.pageNumber);
+        let userId = sessionStorage.getItem("userId");
+        axios.get('/meme/users/'+userId+'/boards?page='+this.state.pageNumber+'&pageSize='+this.state.pageSize)
             .then((response) => {
                 this.setState({
                     listItems: response.data.map(item =>
@@ -25,8 +34,8 @@ class BoardTable extends Component {
                             storiesCount={item.storiesCount}/>
                     )})})
             .catch(error => {
-                alert(error);
-            });
+                console.log(error);
+            });    
     }
 
     render() {
@@ -46,6 +55,7 @@ class BoardTable extends Component {
                     {this.state.listItems}
                     </tbody>
                 </table>
+                <BoardPagination pageNumberHandler={this.onInputPageNumberChange}/>
             </div>
         );
     }
