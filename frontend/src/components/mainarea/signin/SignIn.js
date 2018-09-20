@@ -38,24 +38,14 @@ class SignIn extends Component {
         username: ''
     };
 
-    static collapseRequirementElements() {
-        // $('.collapse').collapse('hide');
-        // $('#loginNavBar').hide();
-        // $('#boardArea').show();
-        // $('#storyArea').hide();
-        // $('#mainNavBar').show();
-    }
-
     addValue = (e) => {
         e.preventDefault();
         axios.post('/meme/users/', {
             username: this.state.username
         })
             .then((response) => {
-                console.log(response.data);
-                SignIn.collapseRequirementElements();
-                window.sessionStorage.setItem('user', response.data.username);
-                window.sessionStorage.setItem('userId', response.data.id);
+                localStorage.setItem("username", response.data.username);
+                localStorage.setItem("userId", response.data.id);
                 this.props.onAuthStateChange();
             })
             .catch(error => {

@@ -4,7 +4,6 @@ import MainArea from "./components/mainarea/MainArea";
 import Footer from "./components/mainarea/footer/Footer";
 import { Route, Redirect, Switch } from "react-router-dom";
 import BoardArea from "./components/mainarea/mainwindow/boardarea/BoardArea";
-import SignIn from "./components/mainarea/signin/SignIn";
 
 class Home extends React.Component {
 
@@ -15,7 +14,8 @@ class Home extends React.Component {
     render () {
         return (
             <div>
-                <NavigationBar onAuthStateChange={this.props.onAuthStateChange} isLoggedIn={this.props.isLoggedIn} />
+                <NavigationBar onAuthStateChange={ this.props.onAuthStateChange }
+                               isLoggedIn={ this.props.isLoggedIn } />
                 <Footer/>
             </div>
         )
@@ -50,16 +50,26 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Route path="/" render={() => <Home onAuthStateChange={this.handleAuthStatusChange} isLoggedIn={this.state.isLoggedIn}/>}/>
+                <Route path="/"
+                       render={() => <Home onAuthStateChange={ this.handleAuthStatusChange }
+                                           isLoggedIn={ this.state.isLoggedIn } /> } />
                 {this.state.isLoggedIn
                     ?
                     <Switch>
-                        <Route path="/boards" render={() => <BoardArea onAuthStateChange={this.handleAuthStatusChange} isLoggedIn={this.state.isLoggedIn} /> } />
+                        <Route exact path="/boards"
+                               render={() => <BoardArea onAuthStateChange={ this.handleAuthStatusChange }
+                                                        isLoggedIn={ this.state.isLoggedIn } /> }>
+                            <Route path="">
+
+                            </Route>
+                        </Route>
                         <Redirect from="/" to="/boards" />
                     </Switch>
                     :
                     <Switch>
-                        <Route path="/sign-in" render={() => <MainArea onAuthStateChange={this.handleAuthStatusChange} isLoggedIn={this.state.isLoggedIn}    /> } />
+                        <Route path="/sign-in"
+                               render={() => <MainArea onAuthStateChange={ this.handleAuthStatusChange }
+                                                       isLoggedIn={ this.state.isLoggedIn } /> } />
                         <Redirect from="/" to="/sign-in" />
                     </Switch>
                 }

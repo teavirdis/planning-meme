@@ -1,17 +1,10 @@
 import React from 'react';
 import './css/style.css'
-const $ = window.jQuery;
 
 const divStyle = {
     padding: '0.25%',
     marginBottom: '-5px'
 };
-
-function goFromStoryToBoard(){
-    // $('#mainNavBar').show();
-    // $('#storyArea').hide();
-    // $('#boardArea').show();
-}
 
 class MainNavigation extends React.Component {
     constructor(props) {
@@ -20,30 +13,12 @@ class MainNavigation extends React.Component {
         this.state = { username: "" };
     }
 
-    state = {
-        username: ''
-    };
-
     componentDidMount() {
-        this.timerID = setInterval(()=>this.tick(),1000);
-        // $("[name='collapseHref']").click(()=>{
-        //     $(".collapse").collapse('hide');
-        //     $('#mainNavBar').hide();
-        //     $('#boardArea').hide();
-        //     $('#storyArea').hide();
-        //     $('#loginNavBar').show();
-        // });
-        this.setState({username: localStorage.getItem('username')});
+        this.setState({username: window.localStorage.getItem("username")});
     }
 
-    componentWillUnmount(){
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            username: window.sessionStorage.getItem("user")
-        });
+    handleSignOut() {
+        window.localStorage.removeItem("isLoggedIn");
     }
 
     render() {
@@ -51,18 +26,18 @@ class MainNavigation extends React.Component {
             <div id="mainNavBar">
                 <ul className="nav navbar-nav navbar-right " style={divStyle}>
                     <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown">
                             <b id="userPlace">{this.state.username}</b><b className="caret"/>
                         </a>
                         <ul className="dropdown-menu">
                             <li>
-                                <a href="/boards" onClick={goFromStoryToBoard}>
+                                <a href="/boards">
                                     My boards
                                 </a>
                             </li>
                             <li className="divider"/>
                             <li>
-                                <a className="signOut" href="#signIn" name="collapseHref" data-toggle="collapse">
+                                <a className="sign-out" href="/" onClick={ this.handleSignOut }>
                                     Sign Out
                                 </a>
                             </li>

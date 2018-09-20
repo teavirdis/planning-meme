@@ -12,8 +12,8 @@ class CreateBoard extends Component {
         e.preventDefault();
         axios.post('/meme/boards/', {
             name: this.state.name,
-            startTime: CreateStory.IsoDateString(new Date()),
-            admin: {id: sessionStorage.getItem("userId")}
+            startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
+            admin: { id: localStorage.getItem("userId") }
         })
             .then((response) => {
                 console.log(response);
@@ -35,15 +35,30 @@ class CreateBoard extends Component {
                     <div className="modal-content">
                         <form>
                         <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <button type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true">
+                                &times;
+                            </button>
                             <h4 className="modal-title">Create New Board</h4>
                         </div>
                         <div className="modal-body">
-                            <input type="text" className="form-control" placeholder="Enter board name" required="required" onChange={this.onInputChange}/>
+                            <input type="text"
+                                   className="form-control"
+                                   placeholder="Enter board name"
+                                   required="required"
+                                   onChange={ this.onInputChange }/>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button className="btn btn-primary" onClick={this.addValue} data-dismiss="modal">Create</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button className="btn btn-primary"
+                                    onClick={ this.addValue }
+                                    data-dismiss="modal">
+                                Create
+                            </button>
                         </div>
                         </form>
                     </div>
