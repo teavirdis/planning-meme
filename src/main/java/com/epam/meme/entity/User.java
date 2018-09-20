@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class User {
     private String email;
     private String password;
 
+    @JsonbTransient
     @ManyToMany(mappedBy = "users")
     private List<Board> boards;
 }
