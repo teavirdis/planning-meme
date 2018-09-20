@@ -9,7 +9,7 @@ public interface BaseService<T> {
      *
      * @param entity to add
      */
-    void create(T entity);
+    T create(T entity);
 
     /**
      * Finds entity entity in storage by id specified.

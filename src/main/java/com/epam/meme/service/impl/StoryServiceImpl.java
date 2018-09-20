@@ -23,8 +23,8 @@ public class StoryServiceImpl implements StoryService {
     }
 
     @Override
-    public void create(Story entity) {
-        repository.saveAndFlush(entity);
+    public Story create(Story entity) {
+        return repository.saveAndFlush(entity);
     }
 
     @Override
