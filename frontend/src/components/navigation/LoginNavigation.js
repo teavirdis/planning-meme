@@ -16,7 +16,7 @@ class LoginNavigation extends React.Component {
             <div id="loginNavBar">
                 <div className="navbar" style={divStyle}>
                     <ul className="nav navbar-nav">
-                        <li className="activeHome active"><a className="homeButton" href="#signIn">Home</a></li>
+                        <li className="activeHome active"><a className="homeButton" href="/">Home</a></li>
                     </ul>
                 </div>
             </div>

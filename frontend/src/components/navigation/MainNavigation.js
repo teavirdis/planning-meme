@@ -8,9 +8,9 @@ const divStyle = {
 };
 
 function goFromStoryToBoard(){
-    $('#mainNavBar').show();
-    $('#storyArea').hide();
-    $('#boardArea').show();
+    // $('#mainNavBar').show();
+    // $('#storyArea').hide();
+    // $('#boardArea').show();
 }
 
 class MainNavigation extends React.Component {
@@ -26,13 +26,13 @@ class MainNavigation extends React.Component {
 
     componentDidMount() {
         this.timerID = setInterval(()=>this.tick(),1000);
-        $("[name='collapseHref']").click(()=>{
-            $(".collapse").collapse('hide');
-            $('#mainNavBar').hide();
-            $('#boardArea').hide();
-            $('#storyArea').hide();
-            $('#loginNavBar').show();
-        });
+        // $("[name='collapseHref']").click(()=>{
+        //     $(".collapse").collapse('hide');
+        //     $('#mainNavBar').hide();
+        //     $('#boardArea').hide();
+        //     $('#storyArea').hide();
+        //     $('#loginNavBar').show();
+        // });
         this.setState({username: localStorage.getItem('username')});
     }
 
@@ -50,11 +50,13 @@ class MainNavigation extends React.Component {
         return (
             <div id="mainNavBar">
                 <ul className="nav navbar-nav navbar-right " style={divStyle}>
-                    <li className="dropdown"><a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                        <b id="userPlace">{this.state.username}</b><b className="caret"/></a>
+                    <li className="dropdown">
+                        <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                            <b id="userPlace">{this.state.username}</b><b className="caret"/>
+                        </a>
                         <ul className="dropdown-menu">
                             <li>
-                                <a href="#" onClick={goFromStoryToBoard}>
+                                <a href="/boards" onClick={goFromStoryToBoard}>
                                     My boards
                                 </a>
                             </li>
@@ -70,7 +72,7 @@ class MainNavigation extends React.Component {
                 <div className="collapse navbar-collapse">
                     <ul className="nav navbar-nav">
                         <li className="active">
-                            <a href="#" onClick={goFromStoryToBoard}>
+                            <a href="/">
                                 Home
                             </a>
                         </li>
