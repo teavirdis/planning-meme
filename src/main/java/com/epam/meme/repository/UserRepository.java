@@ -1,6 +1,9 @@
 package com.epam.meme.repository;
 
+import com.epam.meme.entity.Board;
 import com.epam.meme.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select user from User user where user.email = :email")
     Optional<User> findByEmail(@Param("email") String email);
 
+    @Query("select board from User user join user.boards board where user.id = :id")
+    Page<Board> findUserBoards(@Param("id") Long id, Pageable pageable);
 }
