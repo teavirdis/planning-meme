@@ -7,10 +7,6 @@ const divStyle = {
 
 class LoginNavigation extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div id="loginNavBar">

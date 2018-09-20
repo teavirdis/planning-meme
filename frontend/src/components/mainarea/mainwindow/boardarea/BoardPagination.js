@@ -12,7 +12,8 @@ class BoardPagination extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 3000);
+        //this.timerID = setInterval(() => this.tick(), 3000);
+        this.tick();
     }
 
     initializePagination(size){
@@ -27,7 +28,7 @@ class BoardPagination extends Component {
     }
 
     tick() {
-        let userId = sessionStorage.getItem("userId");
+        let userId = localStorage.getItem("userId");
         axios.get('/meme/users/'+userId)
             .then((response) => {
                 this.initializePagination(response.data.countOfBoards)
