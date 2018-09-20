@@ -13,6 +13,14 @@ class BoardElement extends Component{
         window.sessionStorage.setItem('boardId', this.props.id);
     }
 
+    deleteBoard(){
+        $('#boardToDelete').val(this.props.id);
+    }
+    
+    editBoard(){
+        $('#boardToEdit').val(this.props.id);
+    }
+
     render() {
         return (
             <tr className="clickable ng-scope">
@@ -25,11 +33,11 @@ class BoardElement extends Component{
                 <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
                     <div className="of ng-binding ng-scope">{this.props.storiesCount}</div>
                 </td>
-                <td className="edit-icon"><i data-toggle="modal" data-target="#editBoard"
+                <td className="edit-icon"><i onClick={(e) => this.editBoard(e)} data-toggle="modal" data-target="#editBoard"
                                              className="editButton fa fa-edit"/>
                 </td>
                 <td className="delete-icon"><span data-toggle="modal" data-target="#confirm-delete"
-                                                  className="deleteButton"><img className="hover deleteImg"
+                                                  className="deleteButton"><img onClick={(e) => this.deleteBoard(e)} className="hover deleteImg"
                                                                                 src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
                 </td>
             </tr>

@@ -51,8 +51,9 @@ public class BoardResource {
     @GET
     @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
-    public Board findById(@PathParam("boardId") Long boardId) {
-        return boardService.findById(boardId).orElseThrow(NotFoundException::new);
+    public BoardDto findById(@PathParam("boardId") Long boardId) {
+        return convertToDto(boardService.findById(boardId)
+                .orElseThrow(NotFoundException::new));
     }
 
     @PUT

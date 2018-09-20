@@ -21,8 +21,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void create(User user) {
-        repository.saveAndFlush(user);
+    public User create(User user) {
+        return repository.saveAndFlush(user);
     }
 
     @Transactional(readOnly = true)
