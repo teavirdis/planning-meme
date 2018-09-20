@@ -30,17 +30,20 @@ const SignInDiv = styled.div.attrs({
 })``;
 
 class SignIn extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     state = {
         username: ''
     };
 
     static collapseRequirementElements() {
-        $('.collapse').collapse('hide');
-        $('#loginNavBar').hide();
-        $('#boardArea').show();
-        $('#storyArea').hide();
-        $('#mainNavBar').show();
+        // $('.collapse').collapse('hide');
+        // $('#loginNavBar').hide();
+        // $('#boardArea').show();
+        // $('#storyArea').hide();
+        // $('#mainNavBar').show();
     }
 
     addValue = (e) => {
@@ -53,11 +56,11 @@ class SignIn extends Component {
                 SignIn.collapseRequirementElements();
                 window.sessionStorage.setItem('user', response.data.username);
                 window.sessionStorage.setItem('userId', response.data.id);
+                this.props.onAuthStateChange();
             })
             .catch(error => {
                 alert(error);
             });
-        return false;
     };
 
     onInputChange = (e) => this.setState({
