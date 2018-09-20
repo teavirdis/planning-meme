@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './css/style.css'
 import axios from "axios";
 import CreateStory from "./CreateStory";
@@ -12,8 +12,8 @@ class CreateBoard extends Component {
         e.preventDefault();
         axios.post('/meme/boards/', {
             name: this.state.name,
-            startTime: CreateStory.IsoDateString(new Date())
-            //TODO: add admin setting
+            startTime: CreateStory.IsoDateString(new Date()),
+            admin: {id: sessionStorage.getItem("userId")}
         })
             .then((response) => {
                 console.log(response);

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
-import MainNavigation from "../../navigation/MainNavigation";
 
 const $ = window.jQuery;
 
@@ -50,8 +49,10 @@ class SignIn extends Component {
             username: this.state.username
         })
             .then((response) => {
+                console.log(response.data);
                 SignIn.collapseRequirementElements();
                 window.sessionStorage.setItem('user', response.data.username);
+                window.sessionStorage.setItem('userId', response.data.id);
             })
             .catch(error => {
                 alert(error);

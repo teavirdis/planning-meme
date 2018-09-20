@@ -21,8 +21,8 @@ public class VoteServiceImpl implements VoteService {
     }
 
     @Override
-    public void create(Vote entity) {
-        repository.saveAndFlush(entity);
+    public Vote create(Vote entity) {
+        return repository.saveAndFlush(entity);
     }
 
     @Transactional(readOnly = true)

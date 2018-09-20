@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Optional;
 
 @Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -27,11 +28,14 @@ public class UserResource {
     @POST
     @ApiOperation(value = "Create user")
     public User create(@Valid UserDto userDto) {
+
+        Optional<User> optionalUser;
         User user = convertToEntity(userDto);
-        if (!userService.findByUsername(user.getUsername()).isPresent()) {
-            userService.create(user);
+
+        if (!(optionalUser = userService.findByUsername(user.getUsername())).isPresent()) {
+           optionalUser = Optional.of(userService.create(user));
         }
-        return user;
+        return optionalUser.get();
     }
 
     @GET

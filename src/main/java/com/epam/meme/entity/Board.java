@@ -2,9 +2,9 @@ package com.epam.meme.entity;
 
 import lombok.*;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,12 +37,12 @@ public class Board {
     @JoinTable(name = "boards_users",
             joinColumns = {@JoinColumn(name = "board_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "board",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             orphanRemoval = true
     )
-    private List<Story> stories;
+    private List<Story> stories = new ArrayList<>();
 }
