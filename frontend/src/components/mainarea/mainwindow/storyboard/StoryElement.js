@@ -2,25 +2,39 @@ import React, {Component} from 'react';
 import './css/style.css'
 
 class StoryElement extends Component{
-    getStoryProps(){
+
+    setStoryProps(){
         sessionStorage.setItem('storyId', this.props.id);
     }
+
     render() {
         return (
-          <tr className="clickable ng-scope">
-                        <td className="name-td">{this.props.description}</td>
-                        <td className="hidden-xs">{String(this.props.startTime).replace('T', ' / ')}</td>
-                        <td className="hidden-xs">{String(this.props.finishTime).replace('T', ' / ')}</td>
-                        <td className="hidden-xs">3 of 3</td>
-                        <td className="hidden-xs">{this.props.estimation}</td>
-                        <td className="edit-icon" onClick={() => this.getStoryProps()}>
-                            <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/></td>
-                        <td className="delete-icon" onClick={() => this.getStoryProps()}>
-                            <span data-toggle="modal" data-target="#deleteStory" className="deleteButton"><img
-                                className="hover deleteImg"
-                                src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/></span>
-                        </td>
-                    </tr>
+            <tr className="clickable ng-scope">
+                <td className="name-td">
+                    { this.props.description }
+                </td>
+                <td className="hidden-xs">
+                    { String(this.props.startTime).replace('T', ' / ') }
+                </td>
+                <td className="hidden-xs">
+                    { String(this.props.finishTime).replace('T', ' / ') }
+                </td>
+                <td className="hidden-xs">
+                    stub
+                </td>
+                <td className="hidden-xs">
+                    { this.props.estimation }
+                </td>
+                <td className="edit-icon" onClick={() => this.setStoryProps()}>
+                    <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/>
+                </td>
+                <td className="delete-icon"
+                    onClick={() => this.setStoryProps()}
+                    data-toggle="modal"
+                    data-target="#deleteStory">
+                    <i className="delete-icon-trash fa fa-trash"/>
+                </td>
+            </tr>
         );
     }
 }

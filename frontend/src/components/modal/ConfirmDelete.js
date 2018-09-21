@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import './css/style.css'
 import axios from "axios";
-import CreateStory from "./CreateStory";
 
 const $ = window.jQuery;
 

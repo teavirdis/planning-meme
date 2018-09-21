@@ -21,7 +21,7 @@ class StoryTable extends Component {
 
     tick() {
         this.setState({
-                boardId: window.sessionStorage.getItem('boardId')
+                boardId: this.props.match.params.boardId
             }
         );
         if (this.state.boardId!=null) {
@@ -54,14 +54,14 @@ class StoryTable extends Component {
                         <th className="hidden-xs">Finish time</th>
                         <th className="hidden-xs">Votes</th>
                         <th className="hidden-xs">Estimation</th>
-                        <th className="create-icon">
-                            <i data-toggle="modal" data-target="#createStory" className="createStory fa fa-plus"/> New
+                        <th data-toggle="modal" data-target="#createStory">
+                            <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
                         </th>
                         <th/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    {this.state.storyList}
+                        { this.state.storyList }
                     </tbody>
                 </table>
             </div>

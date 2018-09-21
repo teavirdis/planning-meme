@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from "axios";
 
 class EditStory extends Component {
@@ -31,18 +30,35 @@ class EditStory extends Component {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal"
-                                    aria-hidden="true">&times;</button>
-                            <h4 className="modal-title">Edit Story</h4>
+                            <button type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 className="modal-title">
+                                Edit Story
+                            </h4>
                         </div>
                         <div className="modal-body">
-                          <textarea name="inputName" className="form-control" rows="6"
-                                    placeholder="Put your stories text here." onChange={this.onInputChange} required=""/>
+                          <textarea name="inputName"
+                                    className="form-control"
+                                    rows="6"
+                                    placeholder="Put your stories text here."
+                                    onChange={ this.onInputChange }
+                                    required=""/>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal"
-                                    onClick={this.editValue}>Edit
+                            <button type="button"
+                                    className="btn btn-default"
+                                    data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="button"
+                                    className="btn btn-primary"
+                                    data-dismiss="modal"
+                                    onClick={this.editValue}>
+                                Edit
                             </button>
                         </div>
                     </div>
