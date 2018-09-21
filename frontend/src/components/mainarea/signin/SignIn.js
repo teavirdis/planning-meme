@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
 
@@ -67,7 +66,7 @@ class SignIn extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/users/', {
+        axios.post('http://localhost:8090/meme/users/', {
             username: this.state.username
         })
             .then((response) => {

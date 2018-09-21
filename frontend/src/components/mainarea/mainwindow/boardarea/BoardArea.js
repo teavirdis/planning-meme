@@ -14,7 +14,7 @@ class BoardArea extends Component {
                     <div className="col-md-12 col-md-12 text-left no-top-padding">
                         <div className="title">Recent Boards</div>
                         <CreateBoardButton/>
-                        <BoardTable/>
+                        <BoardTable {...this.props} />
                         <EditBoard/>
                         <CreateBoard/>
                         <ConfirmDelete/>

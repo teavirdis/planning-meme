@@ -60,7 +60,7 @@ a, abbr, acronym, address, b, blockquote, button, caption, cite, code, dd, dfn, 
     line-height: 18px;
     line-height: 1.8rem;
     font-weight: 400;
-    font-family: "Open Sans",sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
 }
 table{
     border-spacing: 0;

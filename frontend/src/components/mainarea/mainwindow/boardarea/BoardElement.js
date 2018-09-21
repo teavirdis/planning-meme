@@ -1,16 +1,23 @@
 import React, {Component} from 'react';
 import './css/style.css';
+import { Link, Route } from "react-router-dom";
 
 
 const $ = window.jQuery;
 
 class BoardElement extends Component{
 
-    goFromBoardToStory(){
-        $('#storyArea').show();
-        $('#boardArea').hide();
-        window.sessionStorage.setItem('boardName', this.props.name);
-        window.sessionStorage.setItem('boardId', this.props.id);
+    // goFromBoardToStory(){
+    //     $('#storyArea').show();
+    //     $('#boardArea').hide();
+    //     window.sessionStorage.setItem('boardName', this.props.name);
+    //     window.sessionStorage.setItem('boardId', this.props.id);
+    // }
+
+    constructor(props) {
+        super(props)
+
+        this.goToStory = this.goToStory.bind(this);
     }
 
     deleteBoard(){
@@ -21,20 +28,25 @@ class BoardElement extends Component{
         $('#boardToEdit').val(this.props.id);
     }
 
+    goToStory() {
+        this.props.history.push(`${this.props.match.url}/` + this.props.id + `/stories`);
+        window.sessionStorage.setItem("boardName", this.props.name);
+    }
+
     render() {
         return (
             <tr className="clickable ng-scope">
-                <td className="name-td" onClick={() => this.goFromBoardToStory()}>
+                <td className="name-td" onClick={ this.goToStory }>
                     <div>{ this.props.name }</div>
                 </td>
-                <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
+                <td className="hidden-xs" onClick={ this.goToStory }>
                     <div>
                         In: <span className="ng-binding ng-scope">
                             { String(this.props.startTime).replace('T', ' / ') }
                         </span>
                     </div>
                 </td>
-                <td className="hidden-xs" onClick={() => this.goFromBoardToStory()}>
+                <td className="hidden-xs" onClick={ this.goToStory }>
                     <div className="of ng-binding ng-scope">
                         { this.props.storiesCount }
                     </div>
@@ -48,10 +60,9 @@ class BoardElement extends Component{
                 <td className="delete-icon">
                     <span data-toggle="modal"
                           data-target="#confirm-delete"
-                          className="deleteButton">
-                        <img onClick={ (e) => this.deleteBoard(e) }
-                             className="hover deleteImg"
-                             src="https://planitpoker.azureedge.net/Content/delete-icon-hover.png"/>
+                          className="deleteButton"
+                          onClick={ (e) => this.deleteBoard(e) }>
+                        <i className="delete-icon-trash fa fa-trash"/>
                     </span>
                 </td>
             </tr>

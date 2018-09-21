@@ -22,7 +22,7 @@ class BoardPagination extends Component {
         for(let i=1; i <= Math.ceil(size/2); i++){
             this.state.buttonList.push(
                 <li className="page-item">
-                    <a className="page-link" onClick={this.props.pageNumberHandler} href="#">{i}</a>
+                    <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
                 </li>
             );
         }
@@ -30,7 +30,7 @@ class BoardPagination extends Component {
 
     tick() {
         let userId = SignIn.getCookie('userId');
-        axios.get('/meme/users/'+userId)
+        axios.get('http://localhost:8090/meme/users/'+userId)
             .then((response) => {
                 this.initializePagination(response.data.countOfBoards)
             })

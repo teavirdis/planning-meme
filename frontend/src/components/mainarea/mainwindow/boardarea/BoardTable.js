@@ -17,15 +17,18 @@ class BoardTable extends Component {
         this.tick();
     }
 
-    onInputPageNumberChange = (e) => this.setState({
-        pageNumber: Number(e.target.text) - 1
-    });
+    onInputPageNumberChange = (e) => {
+        this.setState({
+            pageNumber: Number(e.target.text) - 1
+        });
+        console.log(this.state.pageNumber);
+    };
 
     tick() {
         console.log(this.state.pageNumber);
         let userId = SignIn.getCookie('userId');
         axios.get(
-            "/meme/users/"
+            "http://localhost:8090/meme/users/"
             + userId
             + "/boards?page="
             + this.state.pageNumber
@@ -39,7 +42,7 @@ class BoardTable extends Component {
                             id={item.id}
                             name={item.name}
                             startTime={item.startTime}
-                            storiesCount={item.storiesCount} />
+                            storiesCount={item.storiesCount} {...this.props} />
                     )
                 })
             })
@@ -65,6 +68,7 @@ class BoardTable extends Component {
                     { this.state.listItems }
                     </tbody>
                 </table>
+
                 <BoardPagination pageNumberHandler={ this.onInputPageNumberChange } />
             </div>
         );
