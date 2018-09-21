@@ -30,17 +30,39 @@ const SignInDiv = styled.div.attrs({
 })``;
 
 class SignIn extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     state = {
         username: ''
     };
 
-    static collapseRequirementElements() {
-        $('.collapse').collapse('hide');
-        $('#loginNavBar').hide();
-        $('#boardArea').show();
-        $('#storyArea').hide();
-        $('#mainNavBar').show();
+    static getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+
+    static setCookie(name, value, minutes) {
+
+        value = encodeURIComponent(value);
+
+        let updatedCookie = name + "=" + value;
+        let d = new Date();
+        d.setTime(d.getTime() + (minutes*60*1000));
+
+        updatedCookie +="; path=/; expires="+d;
+
+        document.cookie = updatedCookie;
+    }
+
+    static deleteCookie(name) {
+        SignIn.setCookie(name, "", {
+            expires: -1
+        })
     }
 
     addValue = (e) => {
@@ -49,15 +71,13 @@ class SignIn extends Component {
             username: this.state.username
         })
             .then((response) => {
-                console.log(response.data);
-                SignIn.collapseRequirementElements();
-                window.sessionStorage.setItem('user', response.data.username);
-                window.sessionStorage.setItem('userId', response.data.id);
+                SignIn.setCookie('userId', response.data.id, 60);
+                SignIn.setCookie('username', response.data.username, 60);
+                this.props.onAuthStateChange();
             })
             .catch(error => {
                 alert(error);
             });
-        return false;
     };
 
     onInputChange = (e) => this.setState({

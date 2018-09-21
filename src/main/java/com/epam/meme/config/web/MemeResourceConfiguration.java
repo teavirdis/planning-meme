@@ -25,6 +25,7 @@ public class MemeResourceConfiguration extends ResourceConfig implements Servlet
         packages(MEME_RESOURCE);
         register(ConstraintViolationExceptionMapper.class);
         register(GenericExceptionMapper.class);
+       // register(MemeFilter.class);
         register(CorsResponseFilter.class);
         configureSwagger();
     }

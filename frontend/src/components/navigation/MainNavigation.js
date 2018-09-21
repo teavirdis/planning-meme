@@ -1,17 +1,11 @@
 import React from 'react';
 import './css/style.css'
-const $ = window.jQuery;
+import SignIn from "../mainarea/signin/SignIn";
 
 const divStyle = {
     padding: '0.25%',
     marginBottom: '-5px'
 };
-
-function goFromStoryToBoard(){
-    $('#mainNavBar').show();
-    $('#storyArea').hide();
-    $('#boardArea').show();
-}
 
 class MainNavigation extends React.Component {
     constructor(props) {
@@ -20,47 +14,32 @@ class MainNavigation extends React.Component {
         this.state = { username: "" };
     }
 
-    state = {
-        username: ''
-    };
-
     componentDidMount() {
-        this.timerID = setInterval(()=>this.tick(),1000);
-        $("[name='collapseHref']").click(()=>{
-            $(".collapse").collapse('hide');
-            $('#mainNavBar').hide();
-            $('#boardArea').hide();
-            $('#storyArea').hide();
-            $('#loginNavBar').show();
-        });
-        this.setState({username: localStorage.getItem('username')});
+        this.setState({username: SignIn.getCookie('username')});
     }
 
-    componentWillUnmount(){
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-            username: window.sessionStorage.getItem("user")
-        });
+    handleSignOut() {
+        SignIn.deleteCookie('username');
+        window.localStorage.removeItem("isLoggedIn");
     }
 
     render() {
         return (
             <div id="mainNavBar">
                 <ul className="nav navbar-nav navbar-right " style={divStyle}>
-                    <li className="dropdown"><a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                        <b id="userPlace">{this.state.username}</b><b className="caret"/></a>
+                    <li className="dropdown">
+                        <a className="dropdown-toggle" data-toggle="dropdown">
+                            <b id="userPlace">{this.state.username}</b><b className="caret"/>
+                        </a>
                         <ul className="dropdown-menu">
                             <li>
-                                <a href="#" onClick={goFromStoryToBoard}>
+                                <a href="/boards">
                                     My boards
                                 </a>
                             </li>
                             <li className="divider"/>
                             <li>
-                                <a className="signOut" href="#signIn" name="collapseHref" data-toggle="collapse">
+                                <a className="sign-out" href="/" onClick={ this.handleSignOut }>
                                     Sign Out
                                 </a>
                             </li>
@@ -70,7 +49,7 @@ class MainNavigation extends React.Component {
                 <div className="collapse navbar-collapse">
                     <ul className="nav navbar-nav">
                         <li className="active">
-                            <a href="#" onClick={goFromStoryToBoard}>
+                            <a href="/">
                                 Home
                             </a>
                         </li>

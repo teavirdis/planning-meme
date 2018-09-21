@@ -3,16 +3,18 @@ import './css/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
+import SignIn from "../../signin/SignIn";
 
 class BoardTable extends Component {
 
-    state ={
+    state = {
         pageNumber : 0,
         pageSize : 2,
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 3000);
+        //this.timerID = setInterval(() => this.tick(), 3000);
+        this.tick();
     }
 
     onInputPageNumberChange = (e) => this.setState({
@@ -21,8 +23,14 @@ class BoardTable extends Component {
 
     tick() {
         console.log(this.state.pageNumber);
-        let userId = sessionStorage.getItem("userId");
-        axios.get('/meme/users/'+userId+'/boards?page='+this.state.pageNumber+'&pageSize='+this.state.pageSize)
+        let userId = SignIn.getCookie('userId');
+        axios.get(
+            "/meme/users/"
+            + userId
+            + "/boards?page="
+            + this.state.pageNumber
+            + "&pageSize="
+            + this.state.pageSize )
             .then((response) => {
                 this.setState({
                     listItems: response.data.map(item =>
@@ -31,8 +39,10 @@ class BoardTable extends Component {
                             id={item.id}
                             name={item.name}
                             startTime={item.startTime}
-                            storiesCount={item.storiesCount}/>
-                    )})})
+                            storiesCount={item.storiesCount} />
+                    )
+                })
+            })
             .catch(error => {
                 console.log(error);
             });    
@@ -55,7 +65,7 @@ class BoardTable extends Component {
                     {this.state.listItems}
                     </tbody>
                 </table>
-                <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={this.onInputPageNumberChange}/>
+                <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={ this.onInputPageNumberChange}/>
             </div>
         );
     }

@@ -9,14 +9,16 @@ import CreateBoard from "../../../modal/CreateBoard";
 class BoardArea extends Component {
     render() {
         return (
-            <div id="boardArea">
-                <div className="col-md-12 col-md-12 text-left no-top-padding">
-                    <div className="title">Recent Boards</div>
-                    <CreateBoardButton/>
-                    <BoardTable/>
-                    <EditBoard/>
-                    <CreateBoard/>
-                    <ConfirmDelete/>
+            <div className="container">
+                <div id="boardArea">
+                    <div className="col-md-12 col-md-12 text-left no-top-padding">
+                        <div className="title">Recent Boards</div>
+                        <CreateBoardButton/>
+                        <BoardTable/>
+                        <EditBoard/>
+                        <CreateBoard/>
+                        <ConfirmDelete/>
+                    </div>
                 </div>
             </div>
         );

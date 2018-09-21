@@ -32,7 +32,11 @@ class ConfirmDelete extends Component {
                         <div className="modal-footer">
                             <input id="boardToDelete" type="hidden"/>
                             <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <a onClick={(e) => this.deleteBoard(e)} className="btn btn-danger btn-ok" data-dismiss="modal">Delete anyway</a>
+                            <a onClick={(e) => this.deleteBoard(e)}
+                               className="btn btn-danger btn-ok"
+                               data-dismiss="modal">
+                                Delete anyway
+                            </a>
                         </div>
                     </div>
                 </div>

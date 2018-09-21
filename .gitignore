@@ -37,3 +37,4 @@ src/main/webapp/resources
 
 # Individual properties
 cloud/*.properties
+src/main/webapp/index.html
