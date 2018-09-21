@@ -12,7 +12,7 @@ class StoryTable extends Component {
     };
 
     componentDidMount() {
-        axios.get('http://localhost:8090/meme/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
+        axios.get('/meme/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
             .then((response) => {
                 this.setState({
                     storyList: response.data.map(story => <StoryElement

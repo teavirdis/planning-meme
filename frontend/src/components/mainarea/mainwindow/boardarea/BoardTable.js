@@ -15,7 +15,7 @@ class BoardTable extends Component {
     componentDidMount() {
         let userId = SignIn.getCookie('userId');
         axios.get(
-            "http://localhost:8090/meme/users/"
+            "/meme/users/"
             + userId
             + "/boards?page="
             + this.state.pageNumber

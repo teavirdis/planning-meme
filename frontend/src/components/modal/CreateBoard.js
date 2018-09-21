@@ -16,7 +16,7 @@ class CreateBoard extends Component {
             admin: { id: SignIn.getCookie('userId') }
         }
 
-        axios.post('http://localhost:8090/meme/boards/', newBoard)
+        axios.post('/meme/boards/', newBoard)
             .then((response) => {
                 console.log(response);
                 this.props.onAdd(newBoard);

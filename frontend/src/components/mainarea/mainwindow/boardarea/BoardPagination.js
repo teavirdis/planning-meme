@@ -30,7 +30,7 @@ class BoardPagination extends Component {
 
     tick() {
         let userId = SignIn.getCookie('userId');
-        axios.get('http://localhost:8090/meme/users/'+userId)
+        axios.get('/meme/users/'+userId)
             .then((response) => {
                 this.initializePagination(response.data.countOfBoards)
             })
