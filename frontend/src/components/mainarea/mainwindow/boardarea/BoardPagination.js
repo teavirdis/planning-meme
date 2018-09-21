@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './css/style.css'
 import axios from "axios";
+import SignIn from "../../signin/SignIn";
 
 
 const $ = window.jQuery;
@@ -28,7 +29,7 @@ class BoardPagination extends Component {
     }
 
     tick() {
-        let userId = localStorage.getItem("userId");
+        let userId = SignIn.getCookie('userId');
         axios.get('/meme/users/'+userId)
             .then((response) => {
                 this.initializePagination(response.data.countOfBoards)

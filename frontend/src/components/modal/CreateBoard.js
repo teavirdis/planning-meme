@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './css/style.css'
 import axios from "axios";
 import CreateStory from "./CreateStory";
+import SignIn from "../mainarea/signin/SignIn";
 
 class CreateBoard extends Component {
     state = {
@@ -13,7 +14,7 @@ class CreateBoard extends Component {
         axios.post('/meme/boards/', {
             name: this.state.name,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
-            admin: { id: localStorage.getItem("userId") }
+            admin: { id: SignIn.getCookie('userId') }
         })
             .then((response) => {
                 console.log(response);

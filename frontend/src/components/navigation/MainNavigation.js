@@ -1,5 +1,6 @@
 import React from 'react';
 import './css/style.css'
+import SignIn from "../mainarea/signin/SignIn";
 
 const divStyle = {
     padding: '0.25%',
@@ -14,10 +15,11 @@ class MainNavigation extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({username: window.localStorage.getItem("username")});
+        this.setState({username: SignIn.getCookie('username')});
     }
 
     handleSignOut() {
+        SignIn.deleteCookie('username');
         window.localStorage.removeItem("isLoggedIn");
     }
 

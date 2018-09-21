@@ -3,6 +3,7 @@ import './css/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
+import SignIn from "../../signin/SignIn";
 
 class BoardTable extends Component {
 
@@ -22,7 +23,7 @@ class BoardTable extends Component {
 
     tick() {
         console.log(this.state.pageNumber);
-        let userId = localStorage.getItem("userId");
+        let userId = SignIn.getCookie('userId');
         axios.get(
             "/meme/users/"
             + userId
