@@ -11,7 +11,7 @@ const divStyle = {
 class ConfirmDelete extends Component {
     
     deleteBoard(){
-        axios.delete('/meme/boards/' + $('#boardToDelete').val())
+        axios.delete('/meme/users/current-user/boards/' + $('#boardToDelete').val())
             .then((response) => {
                 console.log(response);
             })

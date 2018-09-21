@@ -69,8 +69,9 @@ class SignIn extends Component {
             username: this.state.username
         })
             .then((response) => {
-                SignIn.setCookie('userId', response.data.id, 60);
-                SignIn.setCookie('username', response.data.username, 60);
+                // SignIn.setCookie('userId', response.data.id, 60);
+                //                 // SignIn.setCookie('username', response.data.username, 60);
+                //                 // SignIn.setCookie('user', JSON.stringify(response.data));
                 this.props.onAuthStateChange();
             })
             .catch(error => {

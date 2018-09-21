@@ -9,15 +9,22 @@ class BoardTable extends Component {
 
     state = {
         pageNumber : 0,
-        pageSize : 15,
+        pageSize : 5
     };
 
     componentDidMount() {
-        let userId = SignIn.getCookie('userId');
+        this.timerID = setInterval(() => this.tick(), 1000);
+        this.tick();
+    }
+
+    onInputPageNumberChange = (e) => this.setState({
+        pageNumber: Number(e.target.text) - 1
+    });
+
+    tick() {
+        console.log(this.state.pageNumber);
         axios.get(
-            "/meme/users/"
-            + userId
-            + "/boards?page="
+            "/meme/users/current-user/boards?page="
             + this.state.pageNumber
             + "&pageSize="
             + this.state.pageSize )
@@ -36,13 +43,6 @@ class BoardTable extends Component {
             });
     }
 
-    onInputPageNumberChange = (e) => {
-        this.setState({
-            pageNumber: Number(e.target.text) - 1
-        });
-        console.log(this.state.pageNumber);
-    };
-
     render() {
         return (
             <div className="row grayed-box-app">
@@ -60,8 +60,7 @@ class BoardTable extends Component {
                     { this.props.boardList }
                     </tbody>
                 </table>
-
-                <BoardPagination pageNumberHandler={ this.onInputPageNumberChange } />
+                <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={ this.onInputPageNumberChange } />
             </div>
         );
     }

@@ -12,21 +12,35 @@ class StoryTable extends Component {
     };
 
     componentDidMount() {
-        axios.get('/meme/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
-            .then((response) => {
-                this.setState({
-                    storyList: response.data.map(story => <StoryElement
-                        key={story.id}
-                        id={story.id}
-                        description={story.description}
-                        startTime={story.startTime}
-                        finishTime={story.finishTime}
-                        estimation={story.estimation}/>)
+        this.timerID = setInterval(() => this.tick(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+                boardId: this.props.match.params.boardId
+            }
+        );
+        if (this.state.boardId!=null) {
+            axios.get('/meme/users/current-user/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+                .then((response) => {
+                    this.setState({
+                        storyList: response.data.map(story => <StoryElement
+                            key={story.id}
+                            id={story.id}
+                            description={story.description}
+                            startTime={story.startTime}
+                            finishTime={story.finishTime}
+                            estimation={story.estimation}/>)
+                    })
                 })
-            })
-            .catch(error => {
-                alert(error);
-            });
+                .catch(error => {
+                    alert(error);
+                });
+        }
     }
 
     render() {

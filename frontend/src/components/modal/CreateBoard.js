@@ -14,9 +14,8 @@ class CreateBoard extends Component {
             name: this.state.name,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
             admin: { id: SignIn.getCookie('userId') }
-        }
-
-        axios.post('/meme/boards/', newBoard)
+        };
+        axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
                 console.log(response);
                 this.props.onAdd(newBoard);

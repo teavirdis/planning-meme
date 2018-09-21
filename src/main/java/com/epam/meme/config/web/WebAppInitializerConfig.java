@@ -1,14 +1,12 @@
 package com.epam.meme.config.web;
 
 import com.epam.meme.config.logic.ApplicationConfiguration;
-import com.thetransactioncompany.cors.CORSFilter;
 import io.swagger.jersey.config.JerseyJaxrsConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.springframework.core.annotation.Order;
-import org.springframework.lang.NonNullApi;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -44,7 +42,10 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
         configWebApplicationContext.refresh();
 
         servletContext.addListener(new ContextLoaderListener(configWebApplicationContext));
+        servletContext.addListener(new RequestContextListener());
     }
+
+
 
     private void registerJerseyServlet(ServletContext servletContext) {
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet(

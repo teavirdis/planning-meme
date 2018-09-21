@@ -16,7 +16,7 @@ class CreateStory extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/boards/' + this.props.match.params.boardId + '/stories',
+        axios.post('/meme/users/current-user/boards/'+this.props.match.params.boardId+'/stories',
             {
                 description: this.state.description,
                 startTime: CreateStory.IsoDateString(new Date())

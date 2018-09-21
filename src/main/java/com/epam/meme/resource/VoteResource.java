@@ -1,11 +1,11 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.converter.VoteConverter;
 import com.epam.meme.dto.VoteDto;
 import com.epam.meme.entity.Vote;
 import com.epam.meme.service.VoteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ public class VoteResource {
     private VoteService voteService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private VoteConverter voteConverter;
 
     @POST
     @ApiOperation(value = "Save vote")
     public void create(@Valid VoteDto voteDto){
-        voteService.create(convertToEntity(voteDto));
+        voteService.create(voteConverter.convertToEntity(voteDto));
     }
 
     @GET
@@ -43,7 +43,4 @@ public class VoteResource {
         throw new UnsupportedOperationException();
     }
 
-    private Vote convertToEntity(VoteDto voteDto) {
-        return modelMapper.map(voteDto, Vote.class);
-    }
 }

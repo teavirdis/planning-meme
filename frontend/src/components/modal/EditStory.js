@@ -8,7 +8,7 @@ class EditStory extends Component {
 
     editValue = (e) => {
         e.preventDefault();
-        axios.put('/meme/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'), {
+        axios.put('/meme/users/current-user/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'), {
             description: this.state.description
         })
             .then((response) => {
