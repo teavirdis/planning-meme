@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import SignIn from "./signin/SignIn";
-import BoardArea from "./mainwindow/boardarea/BoardArea";
-import './css/style.css'
+import '../../css/style.css'
 
 const $ = window.jQuery;
 
@@ -11,8 +10,6 @@ class MainArea extends Component {
     }
 
     render() {
-        let {propOne, propTwo, ...leftOver} = this.props;
-
         return (
             <div className="container">
                 <div className="starter-template">

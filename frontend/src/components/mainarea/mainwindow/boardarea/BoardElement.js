@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
 import './css/style.css';
-import { Link, Route } from "react-router-dom";
-
 
 const $ = window.jQuery;
 
 class BoardElement extends Component{
-
-    // goFromBoardToStory(){
-    //     $('#storyArea').show();
-    //     $('#boardArea').hide();
-    //     window.sessionStorage.setItem('boardName', this.props.name);
-    //     window.sessionStorage.setItem('boardId', this.props.id);
-    // }
 
     constructor(props) {
         super(props)

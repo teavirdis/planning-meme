@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+
 const divStyle = {
     background:'#545454',
     color:'darkgray',
@@ -12,7 +13,7 @@ class Footer extends Component {
                 <div className="navbar-inner" style={divStyle}>
                     <div className="container">
                         <p className="text-center">
-                            <small>&copy; 2018 Planning Meme</small>
+                            <small>Planning Meme &copy; 2018</small>
                         </p>
                     </div>
                 </div>

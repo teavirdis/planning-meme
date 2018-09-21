@@ -1,7 +1,6 @@
 import React from 'react';
 import LoginNavigation from "./LoginNavigation";
 import MainNavigation from "./MainNavigation";
-import './css/style.css'
 
 
 class NavigationBar extends React.Component {

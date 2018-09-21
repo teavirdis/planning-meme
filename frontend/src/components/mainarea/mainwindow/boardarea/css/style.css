@@ -20,3 +20,8 @@ tr td a:hover {
 .edit-icon:hover, .delete-icon:hover {
     color: black;
 }
+
+.no-left-padding a {
+    font-family: Verdana, Geneva, sans-serif;
+    padding-top: 11px;
+}

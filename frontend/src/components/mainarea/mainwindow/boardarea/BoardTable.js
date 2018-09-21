@@ -9,23 +9,10 @@ class BoardTable extends Component {
 
     state = {
         pageNumber : 0,
-        pageSize : 2,
+        pageSize : 15,
     };
 
     componentDidMount() {
-        //this.timerID = setInterval(() => this.tick(), 3000);
-        this.tick();
-    }
-
-    onInputPageNumberChange = (e) => {
-        this.setState({
-            pageNumber: Number(e.target.text) - 1
-        });
-        console.log(this.state.pageNumber);
-    };
-
-    tick() {
-        console.log(this.state.pageNumber);
         let userId = SignIn.getCookie('userId');
         axios.get(
             "http://localhost:8090/meme/users/"
@@ -35,21 +22,26 @@ class BoardTable extends Component {
             + "&pageSize="
             + this.state.pageSize )
             .then((response) => {
-                this.setState({
-                    listItems: response.data.map(item =>
-                        <BoardElement
-                            key={item.id}
-                            id={item.id}
-                            name={item.name}
-                            startTime={item.startTime}
-                            storiesCount={item.storiesCount} {...this.props} />
-                    )
-                })
+                this.props.onLoad(response.data.map(item =>
+                    <BoardElement
+                        key={item.id}
+                        id={item.id}
+                        name={item.name}
+                        startTime={item.startTime}
+                        storiesCount={item.storiesCount} {...this.props} />
+                ))
             })
             .catch(error => {
                 console.log(error);
-            });    
+            });
     }
+
+    onInputPageNumberChange = (e) => {
+        this.setState({
+            pageNumber: Number(e.target.text) - 1
+        });
+        console.log(this.state.pageNumber);
+    };
 
     render() {
         return (
@@ -65,7 +57,7 @@ class BoardTable extends Component {
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    { this.state.listItems }
+                    { this.props.boardList }
                     </tbody>
                 </table>
 
