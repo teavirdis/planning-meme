@@ -11,7 +11,7 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/boards/', {
+        axios.post('/meme/users/current-user/boards/', {
             name: this.state.name,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
             admin: { id: SignIn.getCookie('userId') }

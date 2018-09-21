@@ -2,7 +2,7 @@ package com.epam.meme.config.web;
 
 import com.epam.meme.exceptionprocessing.ConstraintViolationExceptionMapper;
 import com.epam.meme.exceptionprocessing.GenericExceptionMapper;
-import com.epam.meme.filter.CorsResponseFilter;
+import com.epam.meme.filter.MemeFilter;
 import io.swagger.jaxrs.config.SwaggerContextService;
 import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
@@ -25,8 +25,7 @@ public class MemeResourceConfiguration extends ResourceConfig implements Servlet
         packages(MEME_RESOURCE);
         register(ConstraintViolationExceptionMapper.class);
         register(GenericExceptionMapper.class);
-       // register(MemeFilter.class);
-        register(CorsResponseFilter.class);
+        register(MemeFilter.class);
         configureSwagger();
     }
 

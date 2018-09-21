@@ -11,7 +11,7 @@ class EditBoard extends Component {
     };
 
     editBoard() {
-        axios.put('/meme/boards/' + $('#boardToEdit').val(), {
+        axios.put('/meme/users/current-user/boards/' + $('#boardToEdit').val(), {
             name: this.state.name
             })
             .then((response) => {

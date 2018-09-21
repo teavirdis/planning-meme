@@ -10,7 +10,7 @@ const divStyle = {
 class ConfirmStoryDelete extends Component {
     handleClick = (e) => {
         e.preventDefault();
-        axios.delete('/meme/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'))
+        axios.delete('/meme/users/current-user/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'))
             .then((response) => {
                 console.log(response);
             })

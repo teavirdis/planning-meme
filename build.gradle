@@ -33,6 +33,7 @@ ext {
     selenideVersion = '3.5'
     cucumberJava8Version = '1.2.5'
     cucumberJunitVersion = '1.2.4'
+    jacksonVersion = '2.0.1'
 }
 
 repositories {
@@ -56,6 +57,7 @@ dependencies {
     }
 
     compile "org.glassfish.jersey.media:jersey-media-json-binding:${jerseyVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
 
     compile "commons-dbcp:commons-dbcp:${commonJdbcVersion}"
 

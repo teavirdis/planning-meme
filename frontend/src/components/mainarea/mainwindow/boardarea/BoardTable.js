@@ -9,11 +9,11 @@ class BoardTable extends Component {
 
     state = {
         pageNumber : 0,
-        pageSize : 2,
+        pageSize : 2
     };
 
     componentDidMount() {
-        //this.timerID = setInterval(() => this.tick(), 3000);
+        this.timerID = setInterval(() => this.tick(), 1000);
         this.tick();
     }
 
@@ -23,11 +23,8 @@ class BoardTable extends Component {
 
     tick() {
         console.log(this.state.pageNumber);
-        let userId = SignIn.getCookie('userId');
         axios.get(
-            "/meme/users/"
-            + userId
-            + "/boards?page="
+            "/meme/users/current-user/boards?page="
             + this.state.pageNumber
             + "&pageSize="
             + this.state.pageSize )
@@ -65,7 +62,7 @@ class BoardTable extends Component {
                     { this.state.listItems }
                     </tbody>
                 </table>
-                <BoardPagination pageNumberHandler={ this.onInputPageNumberChange } />
+                <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={ this.onInputPageNumberChange } />
             </div>
         );
     }

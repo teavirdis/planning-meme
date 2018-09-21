@@ -12,7 +12,7 @@ class StoryTable extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 3000);
+        this.timerID = setInterval(() => this.tick(), 1000);
     }
 
     componentWillUnmount() {
@@ -25,7 +25,7 @@ class StoryTable extends Component {
             }
         );
         if (this.state.boardId!=null) {
-            axios.get('/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+            axios.get('/meme/users/current-user/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
                 .then((response) => {
                     this.setState({
                         storyList: response.data.map(story => <StoryElement
