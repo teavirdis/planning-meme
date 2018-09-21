@@ -1,5 +1,4 @@
 import React from 'react';
-import './css/style.css'
 import SignIn from "../mainarea/signin/SignIn";
 
 const divStyle = {

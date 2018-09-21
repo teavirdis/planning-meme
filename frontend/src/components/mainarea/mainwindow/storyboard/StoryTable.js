@@ -12,35 +12,21 @@ class StoryTable extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 3000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        this.setState({
-                boardId: window.sessionStorage.getItem('boardId')
-            }
-        );
-        if (this.state.boardId!=null) {
-            axios.get('/meme/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
-                .then((response) => {
-                    this.setState({
-                        storyList: response.data.map(story => <StoryElement
-                            key={story.id}
-                            id={story.id}
-                            description={story.description}
-                            startTime={story.startTime}
-                            finishTime={story.finishTime}
-                            estimation={story.estimation}/>)
-                    })
+        axios.get('/meme/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
+            .then((response) => {
+                this.setState({
+                    storyList: response.data.map(story => <StoryElement
+                        key={story.id}
+                        id={story.id}
+                        description={story.description}
+                        startTime={story.startTime}
+                        finishTime={story.finishTime}
+                        estimation={story.estimation}/>)
                 })
-                .catch(error => {
-                    alert(error);
-                });
-        }
+            })
+            .catch(error => {
+                alert(error);
+            });
     }
 
     render() {
@@ -54,14 +40,14 @@ class StoryTable extends Component {
                         <th className="hidden-xs">Finish time</th>
                         <th className="hidden-xs">Votes</th>
                         <th className="hidden-xs">Estimation</th>
-                        <th className="create-icon">
-                            <i data-toggle="modal" data-target="#createStory" className="createStory fa fa-plus"/> New
+                        <th data-toggle="modal" data-target="#createStory">
+                            <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
                         </th>
                         <th/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                    {this.state.storyList}
+                        { this.state.storyList }
                     </tbody>
                 </table>
             </div>

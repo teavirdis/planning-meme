@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
 
-const $ = window.jQuery;
 
 const formStyle = {
     marginTop: '10%'

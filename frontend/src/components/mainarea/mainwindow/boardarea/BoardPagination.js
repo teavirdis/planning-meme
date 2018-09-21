@@ -22,7 +22,7 @@ class BoardPagination extends Component {
         for(let i=1; i <= Math.ceil(size/2); i++){
             this.state.buttonList.push(
                 <li className="page-item">
-                    <a className="page-link" onClick={this.props.pageNumberHandler} href="#">{i}</a>
+                    <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
                 </li>
             );
         }
