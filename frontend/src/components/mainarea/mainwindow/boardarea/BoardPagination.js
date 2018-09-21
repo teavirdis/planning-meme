@@ -17,7 +17,7 @@ class BoardPagination extends Component {
 
     initializePagination(size){
         this.state.buttonList = [];
-        for(let i=1; i <= Math.ceil(size/2); i++){
+        for(let i=1; i <= Math.ceil(size/this.props.pageSize); i++){
             this.state.buttonList.push(
                 <li className="page-item">
                     <a className="page-link" onClick={this.props.pageNumberHandler} href="#">{i}</a>

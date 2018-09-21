@@ -55,7 +55,7 @@ class BoardTable extends Component {
                     {this.state.listItems}
                     </tbody>
                 </table>
-                <BoardPagination pageNumberHandler={this.onInputPageNumberChange}/>
+                <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={this.onInputPageNumberChange}/>
             </div>
         );
     }
