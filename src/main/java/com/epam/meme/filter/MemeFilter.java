@@ -36,7 +36,7 @@ public class MemeFilter implements ContainerRequestFilter {
         Cookie cookie = cookies.get(USER_PROP);
         ObjectMapper objectMapper = new ObjectMapper();
         User user;
-        if (cookie != null) {
+        if (cookie != null && cookie.getValue()!=null && !cookie.getValue().isEmpty()) {
             user = userConverter.convertToEntityFromCookieDto(objectMapper.readValue(
                     UriUtils.decode(cookie.getValue(), "UTF-8"), UserCookieDto.class
             ));
