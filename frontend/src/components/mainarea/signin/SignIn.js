@@ -37,9 +37,12 @@ class SignIn extends Component {
     };
 
     static getCookie(name) {
+        console.log( document.cookie );
         let matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([.$?*|()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
         ));
+
+        console.log(matches[1]);
 
        return matches ? decodeURIComponent(matches[1]) : undefined;
     }
@@ -70,7 +73,7 @@ class SignIn extends Component {
             username: this.state.username
         })
             .then((response) => {
-                 SignIn.setCookie('user', JSON.stringify(response.data));
+                // SignIn.setCookie('user', JSON.stringify(response.data));
                 // alert(SignIn.getCookie('user'));
                 // alert(SignIn.getCookie('user').username);
                 this.props.onAuthStateChange();

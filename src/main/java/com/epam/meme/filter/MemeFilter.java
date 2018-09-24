@@ -6,7 +6,7 @@ import com.epam.meme.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriUtils;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -36,10 +36,11 @@ public class MemeFilter implements ContainerRequestFilter {
         Cookie cookie = cookies.get(USER_PROP);
         ObjectMapper objectMapper = new ObjectMapper();
         User user;
-        if (cookie != null && cookie.getValue()!=null && !cookie.getValue().isEmpty()) {
-            user = userConverter.convertToEntityFromCookieDto(objectMapper.readValue(
-                    UriUtils.decode(cookie.getValue(), "UTF-8"), UserCookieDto.class
-            ));
+        if (cookie != null && cookie.getValue() != null && !cookie.getValue().isEmpty()) {
+            user = userConverter.convertToEntityFromCookieDto(
+                    objectMapper.readValue(
+                            UriEncoder.decode(cookie.getValue()).replace('|',','), UserCookieDto.class
+                    ));
             currentUser.setId(user.getId());
             currentUser.setUsername(user.getUsername());
         }
