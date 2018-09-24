@@ -8,13 +8,17 @@ import com.epam.meme.entity.User;
 import com.epam.meme.service.BoardService;
 import com.epam.meme.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.yaml.snakeyaml.util.UriEncoder;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Path("/users")
@@ -40,7 +44,7 @@ public class UserResource {
 
     @POST
     @ApiOperation(value = "Create user")
-    public UserCookieDto create(@Valid UserDto userDto) throws JsonProcessingException {
+    public Response create(@Valid UserDto userDto) throws JsonProcessingException {
 
         Optional<User> optionalUser;
         User user = userConverter.convertToEntity(userDto);
@@ -48,11 +52,16 @@ public class UserResource {
         if (!(optionalUser = userService.findByUsername(user.getUsername())).isPresent()) {
             optionalUser = Optional.of(userService.create(user));
         }
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        String userJson = objectMapper.writeValueAsString(
-//                userConverter.convertToCookieDto(
-//                        optionalUser.orElseThrow(NotFoundException::new)));
-        return userConverter.convertToCookieDto(optionalUser.orElseThrow(NotFoundException::new));
+        UserCookieDto userCookieDto = userConverter.convertToCookieDto(optionalUser.orElseThrow(NotFoundException::new));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String userJson = objectMapper.writeValueAsString(userCookieDto);
+
+        return Response
+                .ok(userCookieDto)
+                .header("Set-Cookie", "userAccessToken=toke;lang=en-US; Path=*; Domain=localhost")
+                .cookie(new NewCookie("user", UriEncoder.encode(userJson.replace(',','|'))))
+                .build();
     }
 
     @GET
