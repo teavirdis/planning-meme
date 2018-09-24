@@ -10,8 +10,15 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
+        let boardName = "Empty";
+        if (this.state.name.length > 0 && this.state.name.length < 50) {
+            boardName = this.state.name;
+        } else if (this.state.name.length >= 50 ) {
+            boardName = this.state.name.substr(0, 49);
+        }
+
         let newBoard = {
-            name: this.state.name,
+            name: boardName,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
             admin: { id: JSON.parse(SignIn.getCookie('user'))["id"] }
         };
@@ -26,9 +33,11 @@ class CreateBoard extends Component {
         return false;
     };
 
-    onInputChange = (e) => this.setState({
-        name: e.target.value
-    });
+    onInputChange = (e) => {
+        this.setState({
+            name: e.target.value
+        });
+    }
 
     render() {
         return (

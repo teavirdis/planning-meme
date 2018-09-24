@@ -31,7 +31,7 @@ class MainNavigation extends React.Component {
                         </a>
                         <ul className="dropdown-menu">
                             <li>
-                                <a href="/boards">
+                                <a href="/#/boards">
                                     My boards
                                 </a>
                             </li>
