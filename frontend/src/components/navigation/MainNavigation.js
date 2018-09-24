@@ -9,16 +9,15 @@ const divStyle = {
 class MainNavigation extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = { username: "" };
     }
 
     componentDidMount() {
-        this.setState({username: SignIn.getCookie('username')});
+        this.setState({username: JSON.parse(SignIn.getCookie('user'))["username"]});
     }
 
     handleSignOut() {
-        SignIn.deleteCookie('username');
+        SignIn.deleteCookie('user');
         window.localStorage.removeItem("isLoggedIn");
     }
 

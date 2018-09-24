@@ -2,12 +2,12 @@ package com.epam.meme.resource;
 
 import com.epam.meme.converter.BoardConverter;
 import com.epam.meme.converter.UserConverter;
+import com.epam.meme.dto.UserCookieDto;
 import com.epam.meme.dto.UserDto;
 import com.epam.meme.entity.User;
 import com.epam.meme.service.BoardService;
 import com.epam.meme.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
-import javax.ws.rs.core.Response;
 import java.util.Optional;
 
 @Path("/users")
@@ -42,7 +40,7 @@ public class UserResource {
 
     @POST
     @ApiOperation(value = "Create user")
-    public Response create(@Valid UserDto userDto) throws JsonProcessingException {
+    public UserCookieDto create(@Valid UserDto userDto) throws JsonProcessingException {
 
         Optional<User> optionalUser;
         User user = userConverter.convertToEntity(userDto);
@@ -50,11 +48,11 @@ public class UserResource {
         if (!(optionalUser = userService.findByUsername(user.getUsername())).isPresent()) {
             optionalUser = Optional.of(userService.create(user));
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        String userJson = objectMapper.writeValueAsString(
-                userConverter.convertToCookieDto(
-                        optionalUser.orElseThrow(NotFoundException::new)));
-        return Response.ok().cookie(new NewCookie("user", userJson)).build();
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        String userJson = objectMapper.writeValueAsString(
+//                userConverter.convertToCookieDto(
+//                        optionalUser.orElseThrow(NotFoundException::new)));
+        return userConverter.convertToCookieDto(optionalUser.orElseThrow(NotFoundException::new));
     }
 
     @GET

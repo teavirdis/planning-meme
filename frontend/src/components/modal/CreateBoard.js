@@ -13,7 +13,7 @@ class CreateBoard extends Component {
         let newBoard = {
             name: this.state.name,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
-            admin: { id: SignIn.getCookie('userId') }
+            admin: { id: JSON.parse(SignIn.getCookie('user'))["id"] }
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
