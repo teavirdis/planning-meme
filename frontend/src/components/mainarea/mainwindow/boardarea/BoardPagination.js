@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './css/style.css'
 import axios from "axios";
-import SignIn from "../../signin/SignIn";
 
 
 const $ = window.jQuery;
@@ -13,7 +12,7 @@ class BoardPagination extends Component {
     };
 
     componentDidMount() {
-        //this.timerID = setInterval(() => this.tick(), 3000);
+        this.timerID = setInterval(() => this.tick(), 1000);
         this.tick();
     }
 
@@ -22,15 +21,14 @@ class BoardPagination extends Component {
         for(let i=1; i <= Math.ceil(size/this.props.pageSize); i++){
             this.state.buttonList.push(
                 <li className="page-item">
-                    <a className="page-link" onClick={this.props.pageNumberHandler} href="#">{i}</a>
+                    <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
                 </li>
             );
         }
     }
 
     tick() {
-        let userId = SignIn.getCookie('userId');
-        axios.get('/meme/users/'+userId)
+        axios.get('/meme/users/current-user/')
             .then((response) => {
                 this.initializePagination(response.data.countOfBoards)
             })

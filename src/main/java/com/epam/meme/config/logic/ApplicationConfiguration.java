@@ -3,11 +3,9 @@ package com.epam.meme.config.logic;
 import com.epam.meme.config.logic.impl.HanaConfigurationImpl;
 import com.epam.meme.config.logic.impl.PostgresConfigurationImpl;
 import com.epam.meme.config.logic.impl.TestConfigurationImpl;
+import com.epam.meme.entity.User;
 import org.eclipse.persistence.config.PersistenceUnitProperties;
-import org.eclipse.persistence.config.TargetDatabase;
-import org.eclipse.persistence.jpa.PersistenceProvider;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -15,13 +13,18 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"com.epam.meme.service", "com.epam.meme.repository"})
+@ComponentScan({"com.epam.meme.service",
+        "com.epam.meme.repository",
+        "com.epam.meme.converter",
+        "com.epam.meme.filter",
+        "com.epam.meme.resource"})
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories("com.epam.meme.repository")
@@ -31,6 +34,12 @@ public class ApplicationConfiguration {
 
     @Resource
     private Environment env;
+
+    @Bean
+    @RequestScope
+    public User getCurrentUser() {
+        return new User();
+    }
 
     @Profile({"test", "dev"})
     @Bean(name = "entityManagerFactory")
@@ -95,7 +104,7 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 

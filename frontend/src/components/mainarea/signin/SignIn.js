@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from 'axios';
 import styled from "styled-components";
 
-const $ = window.jQuery;
 
 const formStyle = {
     marginTop: '10%'
@@ -71,8 +69,9 @@ class SignIn extends Component {
             username: this.state.username
         })
             .then((response) => {
-                SignIn.setCookie('userId', response.data.id, 60);
-                SignIn.setCookie('username', response.data.username, 60);
+                // SignIn.setCookie('userId', response.data.id, 60);
+                //                 // SignIn.setCookie('username', response.data.username, 60);
+                //                 // SignIn.setCookie('user', JSON.stringify(response.data));
                 this.props.onAuthStateChange();
             })
             .catch(error => {

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from "axios";
 import CreateStory from "./CreateStory";
 import SignIn from "../mainarea/signin/SignIn";
@@ -11,13 +10,15 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/boards/', {
+        let newBoard = {
             name: this.state.name,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
             admin: { id: SignIn.getCookie('userId') }
-        })
+        };
+        axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
                 console.log(response);
+                this.props.onAdd(newBoard);
             })
             .catch((error) =>{
                 console.log(error);

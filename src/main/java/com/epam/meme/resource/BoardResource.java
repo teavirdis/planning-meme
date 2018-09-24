@@ -1,11 +1,13 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.converter.BoardConverter;
 import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
+import com.epam.meme.entity.User;
 import com.epam.meme.service.BoardService;
+import com.epam.meme.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +17,7 @@ import javax.ws.rs.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("/boards")
+
 @Api(value = "/boards", description = "Manage boards")
 public class BoardResource {
 
@@ -23,12 +25,18 @@ public class BoardResource {
     private BoardService boardService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private BoardConverter boardConverter;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private User currentUser;
 
     @POST
     @ApiOperation(value = "Save board")
     public void create(@Valid BoardDto boardDto) {
-        boardService.create(convertToEntity(boardDto));
+        boardService.create(boardConverter.convertToEntity(boardDto));
     }
 
     /**
@@ -39,12 +47,12 @@ public class BoardResource {
      * @return
      */
     @GET
-    public List<BoardDto> findAll(@QueryParam("page") int page,
+    public List<BoardDto> findAllByAdmin(@QueryParam("page") int page,
                                   @QueryParam("pageSize") int pageSize) {
-
         Pageable pageable = PageRequest.of(page, pageSize);
-        return boardService.findAll(pageable).getContent().stream()
-                .map(this::convertToDto)
+        System.out.println("\n\n\n\n"+currentUser);
+        return userService.findUserBoards(currentUser.getId(), pageable).getContent().stream()
+                .map(this.boardConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
@@ -52,7 +60,7 @@ public class BoardResource {
     @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
     public BoardDto findById(@PathParam("boardId") Long boardId) {
-        return convertToDto(boardService.findById(boardId)
+        return boardConverter.convertToDto(boardService.findById(boardId)
                 .orElseThrow(NotFoundException::new));
     }
 
@@ -79,11 +87,4 @@ public class BoardResource {
         return StoryResource.class;
     }
 
-    private BoardDto convertToDto(Board board) {
-        return modelMapper.map(board, BoardDto.class);
-    }
-
-    private Board convertToEntity(BoardDto boardDto) {
-        return modelMapper.map(boardDto, Board.class);
-    }
 }

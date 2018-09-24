@@ -1,5 +1,6 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.converter.StoryConverter;
 import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
@@ -27,12 +28,12 @@ public class StoryResource {
     private BoardService boardService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    private StoryConverter storyConverter;
 
     @POST
     @ApiOperation(value = "Save story")
     public void create(@PathParam("boardId") Long boardId, @Valid StoryDto storyDto) {
-        Story story = convertToEntity(storyDto);
+        Story story = storyConverter.convertToEntity(storyDto);
         story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
         storyService.create(story);
     }
@@ -42,7 +43,7 @@ public class StoryResource {
     public List<StoryDto> findAll(@PathParam("boardId") Long boardId, @QueryParam("page")     int page,
                                @QueryParam("pageSize") int pageSize){
         Pageable pageable = PageRequest.of(page, pageSize);
-        return storyService.findAllByBoardId(boardId, pageable).getContent().stream().map(this::convertToDto).collect(Collectors.toList());
+        return storyService.findAllByBoardId(boardId, pageable).getContent().stream().map(this.storyConverter::convertToDto).collect(Collectors.toList());
     }
 
     @GET
@@ -83,11 +84,4 @@ public class StoryResource {
         return VoteResource.class;
     }
 
-    private Story convertToEntity(StoryDto storyDto) {
-        return modelMapper.map(storyDto, Story.class);
-    }
-
-    private StoryDto convertToDto(Story story){
-        return modelMapper.map(story, StoryDto.class);
-    }
 }
