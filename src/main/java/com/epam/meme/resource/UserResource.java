@@ -1,6 +1,5 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.BoardConverter;
 import com.epam.meme.converter.UserConverter;
 import com.epam.meme.dto.UserCookieDto;
 import com.epam.meme.dto.UserDto;
@@ -27,6 +26,12 @@ import java.util.Optional;
 @Api(value = "/users", description = "Manage users")
 public class UserResource {
 
+    private static final String COOKIE_NAME = "user";
+    private static final String COOKIE_PATH = "/";
+    private static final String COOKIE_DOMAIN = ".hanatrial.ondemand.com";
+    private static final short COOKIE_EXPIRES_TIME = 3600;
+    private static final boolean COOKIE_SECURE = false;
+
     @Autowired
     private UserService userService;
 
@@ -38,9 +43,6 @@ public class UserResource {
 
     @Autowired
     private User currentUser;
-
-    @Autowired
-    private BoardConverter boardConverter;
 
     @POST
     @ApiOperation(value = "Create user")
@@ -55,12 +57,19 @@ public class UserResource {
         UserCookieDto userCookieDto = userConverter.convertToCookieDto(optionalUser.orElseThrow(NotFoundException::new));
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String userJson = objectMapper.writeValueAsString(userCookieDto);
+        String encodedUserJson = UriEncoder.encode(objectMapper
+                .writeValueAsString(userCookieDto)
+                .replace(',', '|'));
 
         return Response
                 .ok(userCookieDto)
-                .header("Set-Cookie", "userAccessToken=toke;lang=en-US; Path=*; Domain=localhost")
-                .cookie(new NewCookie("user", UriEncoder.encode(userJson.replace(',','|'))))
+                .cookie(new NewCookie(COOKIE_NAME,
+                        encodedUserJson,
+                        COOKIE_PATH,
+                        COOKIE_DOMAIN,
+                        null,
+                        COOKIE_EXPIRES_TIME,
+                        COOKIE_SECURE))
                 .build();
     }
 

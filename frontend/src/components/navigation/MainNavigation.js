@@ -13,7 +13,7 @@ class MainNavigation extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({username: JSON.parse(SignIn.getCookie('user'))["username"]});
+        this.setState({username: JSON.parse(SignIn.getCookie('user')).username});
     }
 
     handleSignOut() {
