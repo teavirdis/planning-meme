@@ -37,14 +37,12 @@ class SignIn extends Component {
     };
 
     static getCookie(name) {
-        console.log( document.cookie );
         let matches = document.cookie.match(new RegExp(
             "(?:^|; )" + name.replace(/([.$?*|()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
         ));
 
-        console.log(matches[1]);
-
-       return matches ? decodeURIComponent(matches[1]) : undefined;
+       let decodedJson =  matches ? decodeURIComponent(matches[1]).replace('|',',') : undefined;
+       return decodedJson;
     }
 
 
