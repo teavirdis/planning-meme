@@ -40,10 +40,15 @@ public class StoryResource {
 
     @GET
     @ApiOperation(value = "Find stories in range")
-    public List<StoryDto> findAll(@PathParam("boardId") Long boardId, @QueryParam("page")     int page,
-                               @QueryParam("pageSize") int pageSize){
+    public List<StoryDto> findAll(@PathParam("boardId")   Long boardId,
+                                  @QueryParam("page")     int page,
+                                  @QueryParam("pageSize") int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
-        return storyService.findAllByBoardId(boardId, pageable).getContent().stream().map(this.storyConverter::convertToDto).collect(Collectors.toList());
+        return storyService.findAllByBoardId(boardId, pageable)
+                .getContent()
+                .stream()
+                .map(this.storyConverter::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @GET

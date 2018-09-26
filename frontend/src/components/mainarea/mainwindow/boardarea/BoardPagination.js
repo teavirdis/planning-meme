@@ -15,14 +15,17 @@ class BoardPagination extends Component {
     }
 
     initializePagination(size){
-        this.state.buttonList = [];
-        for(let i=1; i <= Math.ceil(size/this.props.pageSize); i++){
-            this.state.buttonList.push(
+        let buttons = [];
+        for(let i = 1; i <= Math.ceil(size/this.props.pageSize); i++){
+            buttons.push(
                 <li className="page-item">
                     <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
                 </li>
             );
         }
+        this.setState({
+            buttonList: buttons.slice()
+        })
     }
 
     tick() {
@@ -34,6 +37,7 @@ class BoardPagination extends Component {
                 console.log(error);
             });
     }
+
     render() {
         return (
             <ul className="pagination pagination-lg">

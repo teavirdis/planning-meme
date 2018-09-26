@@ -1,9 +1,6 @@
 package com.epam.meme.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
@@ -11,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"boards"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

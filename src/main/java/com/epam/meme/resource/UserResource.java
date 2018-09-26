@@ -54,7 +54,8 @@ public class UserResource {
         if (!(optionalUser = userService.findByUsername(user.getUsername())).isPresent()) {
             optionalUser = Optional.of(userService.create(user));
         }
-        UserCookieDto userCookieDto = userConverter.convertToCookieDto(optionalUser.orElseThrow(NotFoundException::new));
+        UserCookieDto userCookieDto = userConverter.convertToCookieDto(
+                optionalUser.orElseThrow(NotFoundException::new));
 
         ObjectMapper objectMapper = new ObjectMapper();
         String encodedUserJson = UriEncoder.encode(objectMapper
@@ -63,7 +64,8 @@ public class UserResource {
 
         return Response
                 .ok(userCookieDto)
-                .cookie(new NewCookie(COOKIE_NAME,
+                .cookie(new NewCookie(
+                        COOKIE_NAME,
                         encodedUserJson,
                         COOKIE_PATH,
                         COOKIE_DOMAIN,
@@ -89,11 +91,6 @@ public class UserResource {
         return BoardResource.class;
     }
 
-    @Path("{boardId}/stories")
-    public Class<StoryResource> storyResource() {
-        return StoryResource.class;
-    }
-
     @DELETE
     @ApiOperation(value = "Delete user by id")
     @Path("/current-user")
@@ -101,11 +98,4 @@ public class UserResource {
         userService.deleteById(currentUser.getId());
     }
 
-//    @Path("/{userId}/votes")
-//    public Class<VoteResource> findVotes(
-//            @PathParam("userId")     long userId,
-//            @QueryParam("startIndex") int startIndex,
-//            @QueryParam("maxResults") int maxResults) {
-//        return VoteResource.class;
-//    }
 }
