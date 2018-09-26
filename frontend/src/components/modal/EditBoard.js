@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
 
-const $ = window.jQuery;
 
 class EditBoard extends Component {
 
@@ -10,11 +9,12 @@ class EditBoard extends Component {
     };
 
     editBoard() {
-        axios.put('/meme/users/current-user/boards/' + $('#boardToEdit').val(), {
+        axios.put('/meme/users/current-user/boards/' + sessionStorage.getItem("idOfBoardToEdit"), {
             name: this.state.name
             })
             .then((response) => {
                 console.log(response);
+                sessionStorage.removeItem("idOfBoardToEdit");
             })
             .catch((error) => {
                 console.log(error);
@@ -47,7 +47,6 @@ class EditBoard extends Component {
                                    required="required" />
                         </div>
                         <div className="modal-footer">
-                            <input id="boardToEdit" type="hidden"/>
                             <button type="button"
                                     className="btn btn-default"
                                     data-dismiss="modal">

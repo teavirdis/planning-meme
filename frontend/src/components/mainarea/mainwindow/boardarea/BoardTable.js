@@ -3,7 +3,6 @@ import './css/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
-import SignIn from "../../signin/SignIn";
 
 class BoardTable extends Component {
 

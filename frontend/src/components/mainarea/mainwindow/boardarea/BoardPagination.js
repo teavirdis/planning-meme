@@ -3,8 +3,6 @@ import './css/style.css'
 import axios from "axios";
 
 
-const $ = window.jQuery;
-
 class BoardPagination extends Component {
 
     state = {

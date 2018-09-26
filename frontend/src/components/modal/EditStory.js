@@ -2,13 +2,18 @@ import React, {Component} from 'react';
 import axios from "axios";
 
 class EditStory extends Component {
+
     state = {
         description: ''
     };
 
     editValue = (e) => {
         e.preventDefault();
-        axios.put('/meme/users/current-user/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'), {
+        axios.put(
+            '/meme/users/current-user/boards/'
+            + sessionStorage.getItem('boardId')
+            + '/stories/'
+            + sessionStorage.getItem('storyId'), {
             description: this.state.description
         })
             .then((response) => {
