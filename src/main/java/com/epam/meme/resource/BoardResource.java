@@ -47,11 +47,13 @@ public class BoardResource {
      * @return
      */
     @GET
-    public List<BoardDto> findAllByAdmin(@QueryParam("page") int page,
-                                  @QueryParam("pageSize") int pageSize) {
+    public List<BoardDto> findAllByAdmin(@QueryParam("page")     int page,
+                                         @QueryParam("pageSize") int pageSize) {
+
         Pageable pageable = PageRequest.of(page, pageSize);
-        System.out.println("\n\n\n\n"+currentUser);
-        return userService.findUserBoards(currentUser.getId(), pageable).getContent().stream()
+        return userService.findUserBoards(currentUser.getId(), pageable)
+                .getContent()
+                .stream()
                 .map(this.boardConverter::convertToDto)
                 .collect(Collectors.toList());
     }
@@ -60,8 +62,8 @@ public class BoardResource {
     @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
     public BoardDto findById(@PathParam("boardId") Long boardId) {
-        return boardConverter.convertToDto(boardService.findById(boardId)
-                .orElseThrow(NotFoundException::new));
+        return boardConverter.convertToDto(
+                boardService.findById(boardId).orElseThrow(NotFoundException::new));
     }
 
     @PUT
