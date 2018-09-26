@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"stories"})
+@EqualsAndHashCode(exclude = {"stories", "users"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,9 +34,11 @@ public class Board {
     private User admin;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "boards_users",
+    @JoinTable(
+            name = "boards_users",
             joinColumns = {@JoinColumn(name = "board_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
     private List<User> users = new ArrayList<>();
 
     @OneToMany(
