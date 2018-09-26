@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import './css/style.css';
-import EditBoard from "../../../modal/EditBoard";
-
 
 class BoardElement extends Component{
 
     constructor(props) {
-        super(props)
+        super(props);
 
         this.goToStory = this.goToStory.bind(this);
     }
@@ -17,7 +15,6 @@ class BoardElement extends Component{
     
     editBoard(){
         sessionStorage.setItem("idOfBoardToEdit", this.props.id);
-        //EditBoard.inputTitle.value = this.props.name;
     }
 
     goToStory() {

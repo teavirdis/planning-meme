@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class VoteConverter {
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public VoteConverter(@Autowired ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public Vote convertToEntity(VoteDto voteDto) {
         return modelMapper.map(voteDto, Vote.class);

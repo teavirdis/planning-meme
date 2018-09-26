@@ -9,8 +9,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserConverter {
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public UserConverter(@Autowired ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public User convertToEntity(UserDto userDto) {
         return modelMapper.map(userDto, User.class);

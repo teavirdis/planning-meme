@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 
-
 const formStyle = {
     marginTop: '10%'
 };
@@ -41,28 +40,11 @@ class SignIn extends Component {
             "(?:^|; )" + name.replace(/([.$?*|()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
         ));
 
-       let decodedJson =  matches ? decodeURIComponent(matches[1]).replace('|',',') : undefined;
-       return decodedJson;
-    }
-
-
-    static setCookie(name, value, minutes) {
-
-        value = encodeURIComponent(value);
-
-        let updatedCookie = name + "=" + value;
-        let d = new Date();
-        d.setTime(d.getTime() + (minutes*60*1000));
-
-        updatedCookie +="; path=/; expires="+d;
-
-        document.cookie = updatedCookie;
+       return matches ? decodeURIComponent(matches[1]).replace('|', ',') : undefined;
     }
 
     static deleteCookie(name) {
-        SignIn.setCookie(name, "", {
-            expires: -1
-        })
+        document.cookie = name+"=; path=/; domain=.hanatrial.ondemand.com; expires=Session";
     }
 
     addValue = (e) => {
@@ -70,10 +52,7 @@ class SignIn extends Component {
         axios.post('/meme/users/', {
             username: this.state.username
         })
-            .then((response) => {
-                // SignIn.setCookie('user', JSON.stringify(response.data));
-                // alert(SignIn.getCookie('user'));
-                // alert(SignIn.getCookie('user').username);
+            .then(() => {
                 this.props.onAuthStateChange();
             })
             .catch(error => {
