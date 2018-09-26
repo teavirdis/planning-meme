@@ -21,7 +21,6 @@ class BoardTable extends Component {
     });
 
     tick() {
-        console.log(this.state.pageNumber);
         axios.get(
             "/meme/users/current-user/boards?page="
             + this.state.pageNumber
