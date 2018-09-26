@@ -16,7 +16,7 @@ class MainNavigation extends React.Component {
         this.setState({username: JSON.parse(SignIn.getCookie('user')).username});
     }
 
-    handleSignOut() {
+    static handleSignOut() {
         SignIn.deleteCookie('user');
         window.localStorage.removeItem("isLoggedIn");
     }
@@ -37,7 +37,7 @@ class MainNavigation extends React.Component {
                             </li>
                             <li className="divider"/>
                             <li>
-                                <a className="sign-out" href="/" onClick={ this.handleSignOut }>
+                                <a className="sign-out" href="/" onClick={ MainNavigation.handleSignOut }>
                                     Sign Out
                                 </a>
                             </li>

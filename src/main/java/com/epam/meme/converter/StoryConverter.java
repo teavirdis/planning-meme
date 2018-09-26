@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class StoryConverter {
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public StoryConverter(@Autowired ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public Story convertToEntity(StoryDto storyDto) {
         return modelMapper.map(storyDto, Story.class);

@@ -5,7 +5,7 @@ class CreateBoardButton extends Component {
     render() {
         return (
             <div className="no-left-padding">
-                <a className="btn btn-primary pull-right fa btn btn-default" href="#createBoard" data-toggle="modal">
+                <a className="btn btn-primary pull-right fa btn btn-default" data-target="#createBoard" data-toggle="modal">
                     <i className="fa fa-plus"/> Create Board
                 </a>
             </div>
