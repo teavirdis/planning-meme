@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './css/style.css';
 
-const $ = window.jQuery;
 
 class BoardElement extends Component{
 
@@ -12,11 +11,11 @@ class BoardElement extends Component{
     }
 
     deleteBoard(){
-        $('#boardToDelete').val(this.props.id);
+        sessionStorage.setItem("idOfBoardToDelete", this.props.id);
     }
     
     editBoard(){
-        $('#boardToEdit').val(this.props.id);
+        sessionStorage.setItem("idOfBoardToEdit", this.props.id);
     }
 
     goToStory() {

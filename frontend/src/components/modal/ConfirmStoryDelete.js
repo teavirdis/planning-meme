@@ -10,7 +10,12 @@ class ConfirmStoryDelete extends Component {
 
     handleClick = (e) => {
         e.preventDefault();
-        axios.delete('/meme/users/current-user/boards/'+sessionStorage.getItem('boardId')+'/stories/'+sessionStorage.getItem('storyId'))
+        axios.delete(
+            '/meme/users/current-user/boards/'
+            + sessionStorage.getItem('boardId')
+            + '/stories/'
+            + sessionStorage.getItem('storyId')
+        )
             .then((response) => {
                 console.log(response);
             })
@@ -35,7 +40,7 @@ class ConfirmStoryDelete extends Component {
                             </button>
                             <a className="btn btn-danger btn-ok"
                                data-dismiss="modal"
-                               onClick={this.handleClick}>
+                               onClick={ this.handleClick }>
                                 Delete anyway
                             </a>
                         </div>
