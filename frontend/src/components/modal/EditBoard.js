@@ -4,17 +4,22 @@ import axios from "axios";
 
 class EditBoard extends Component {
 
-    state = {
-        name: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = { name: "" };
+    }
 
     editBoard() {
         axios.put('/meme/users/current-user/boards/' + sessionStorage.getItem("idOfBoardToEdit"), {
             name: this.state.name
-            })
+        })
             .then((response) => {
                 console.log(response);
                 sessionStorage.removeItem("idOfBoardToEdit");
+                this.setState({
+                    name: ""
+                })
             })
             .catch((error) => {
                 console.log(error);
@@ -44,7 +49,8 @@ class EditBoard extends Component {
                                    className="form-control"
                                    placeholder="Enter board name"
                                    onChange={ this.onInputChange }
-                                   required="required" />
+                                   required="required"
+                                   value={ this.state.name } />
                         </div>
                         <div className="modal-footer">
                             <button type="button"
