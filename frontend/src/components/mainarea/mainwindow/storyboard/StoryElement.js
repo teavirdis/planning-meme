@@ -1,40 +1,35 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
+import {
+    DeleteIAttribute,
+    TableEditIcon,
+    TableHiddenXs,
+    TableNamedTd,
+    TableTrClickableTitle
+} from "../style/MainWindowStyle";
+import {StoryDeleteTdAttribute, StoryEditIAttribute} from "./style/StoryAreaStyle";
 
-class StoryElement extends Component{
+class StoryElement extends Component {
 
-    setStoryProps(){
+    setStoryProps() {
         sessionStorage.setItem('storyId', this.props.id);
     }
 
     render() {
         return (
-            <tr className="clickable ng-scope">
-                <td className="name-td">
-                    { this.props.description }
-                </td>
-                <td className="hidden-xs">
-                    { String(this.props.startTime).replace('T', ' / ') }
-                </td>
-                <td className="hidden-xs">
-                    { String(this.props.finishTime).replace('T', ' / ') }
-                </td>
-                <td className="hidden-xs">
-                    stub
-                </td>
-                <td className="hidden-xs">
-                    { this.props.estimation }
-                </td>
-                <td className="edit-icon" onClick={() => this.setStoryProps()}>
-                    <i data-toggle="modal" data-target="#editStory" className="editStory fa fa-edit"/>
-                </td>
-                <td className="delete-icon"
-                    onClick={() => this.setStoryProps()}
-                    data-toggle="modal"
-                    data-target="#deleteStory">
-                    <i className="delete-icon-trash fa fa-trash"/>
-                </td>
-            </tr>
+            <TableTrClickableTitle>
+                <TableNamedTd>{this.props.description}</TableNamedTd>
+                <TableHiddenXs>{String(this.props.startTime).replace('T', ' / ')} </TableHiddenXs>
+                <TableHiddenXs>{String(this.props.finishTime).replace('T', ' / ')}</TableHiddenXs>
+                <TableHiddenXs>stub</TableHiddenXs>
+                <TableHiddenXs>{this.props.estimation}</TableHiddenXs>
+                <TableEditIcon onClick={() => this.setStoryProps()}>
+                    <StoryEditIAttribute/>
+                </TableEditIcon>
+                <StoryDeleteTdAttribute onClick={() => this.setStoryProps()}>
+                    <DeleteIAttribute/>
+                </StoryDeleteTdAttribute>
+            </TableTrClickableTitle>
         );
     }
 }

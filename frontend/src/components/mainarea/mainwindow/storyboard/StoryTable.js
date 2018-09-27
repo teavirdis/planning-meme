@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
 import axios from "axios";
 import StoryElement from "./StoryElement";
+import {Table, TableRow} from "../style/MainWindowStyle";
 
 const $ = window.jQuery;
 
@@ -45,8 +46,8 @@ class StoryTable extends Component {
 
     render() {
         return (
-            <div className="row grayed-box-app">
-                <table className="table table-hover table-boards">
+            <TableRow>
+                <Table>
                     <thead>
                     <tr>
                         <th>Title</th>
@@ -63,8 +64,8 @@ class StoryTable extends Component {
                     <tbody className="text-left">
                         { this.state.storyList }
                     </tbody>
-                </table>
-            </div>
+                </Table>
+            </TableRow>
         );
     }
 }

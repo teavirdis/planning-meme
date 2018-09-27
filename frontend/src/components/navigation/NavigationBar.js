@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginNavigation from "./LoginNavigation";
 import MainNavigation from "./MainNavigation";
+import {NavigationArea, NavigationContainer} from "./style/NavigationStyle";
 
 
 class NavigationBar extends React.Component {
@@ -10,20 +11,12 @@ class NavigationBar extends React.Component {
     }
 
     render() {
-        let navBar;
-
-        if (this.props.isLoggedIn) {
-            navBar = <MainNavigation/>;
-        } else {
-            navBar = <LoginNavigation/>;
-        }
+        let navBar = (this.props.isLoggedIn) ? <MainNavigation/> : <LoginNavigation/>;
 
         return (
-            <div className="navbar navbar-inverse navbar-fixed-top">
-                <div className="container">
-                    {navBar}
-                </div>
-            </div>
+            <NavigationArea>
+                <NavigationContainer>{navBar}</NavigationContainer>
+            </NavigationArea>
         );
     }
 }
