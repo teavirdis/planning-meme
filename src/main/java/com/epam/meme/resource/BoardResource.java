@@ -39,6 +39,14 @@ public class BoardResource {
         boardService.create(boardConverter.convertToEntity(boardDto));
     }
 
+
+    @POST
+    @Path("/{boardId}/members")
+    public void addMember(@PathParam("boardId") Long boardId) {
+        //TODO check duplicates, change list to set or collection
+        boardService.addMember(boardId, currentUser.getId());
+    }
+
     /**
      * Finds specified subset of all boards
      *

@@ -3,20 +3,24 @@ import StoryTable from "./StoryTable";
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
+import {Route} from "react-router-dom";
+import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
-import PlayArea from "./votearea/PlayArea";
 
 
 class StoryArea extends Component {
 
-    state = {
-        boardName: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = { boardName: "", isUserMemberOfBoard: false };
+    }
 
     componentDidMount() {
         this.setState({
-            boardName: window.sessionStorage.getItem('boardName')
+            boardName: window.sessionStorage.getItem("boardName")
         });
+        //TODO set boolean property
     }
 
     render() {
@@ -25,6 +29,9 @@ class StoryArea extends Component {
                 <AreaColumns>
                     <AreaTitle>{ this.state.boardName }</AreaTitle>
                     <AreaRow>
+                        <Route path={`${this.props.match.url}/:storyId`}
+                               render={(props) => <JoinOrVoteView isUserMemberOfBoard={ this.state.isUserMemberOfBoard }
+                                                                  {...props} /> } />
                         <StoryTable {...this.props} />
                         <EditStory/>
                         <ConfirmStoryDelete/>

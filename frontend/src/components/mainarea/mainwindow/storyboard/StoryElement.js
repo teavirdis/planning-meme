@@ -10,18 +10,28 @@ import {StoryDeleteTdAttribute, StoryEditIAttribute} from "./style/StoryAreaStyl
 
 class StoryElement extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.goToStory = this.goToStory.bind(this);
+    }
+
     setStoryProps() {
         sessionStorage.setItem('storyId', this.props.id);
+    }
+
+    goToStory() {
+        this.props.history.push(`${this.props.match.url}/` + this.props.id);
     }
 
     render() {
         return (
             <TableTrClickableTitle>
-                <TableNamedTd>{this.props.description}</TableNamedTd>
-                <TableHiddenXs>{String(this.props.startTime).replace('T', ' / ')} </TableHiddenXs>
-                <TableHiddenXs>{String(this.props.finishTime).replace('T', ' / ')}</TableHiddenXs>
-                <TableHiddenXs>stub</TableHiddenXs>
-                <TableHiddenXs>{this.props.estimation}</TableHiddenXs>
+                <TableNamedTd onClick={ this.goToStory }>{this.props.description}</TableNamedTd>
+                <TableHiddenXs onClick={ this.goToStory }>{String(this.props.startTime).replace('T', ' / ')} </TableHiddenXs>
+                <TableHiddenXs onClick={ this.goToStory }>{String(this.props.finishTime).replace('T', ' / ')}</TableHiddenXs>
+                <TableHiddenXs onClick={ this.goToStory }>stub</TableHiddenXs>
+                <TableHiddenXs onClick={ this.goToStory }>{this.props.estimation}</TableHiddenXs>
                 <TableEditIcon onClick={() => this.setStoryProps()}>
                     <StoryEditIAttribute/>
                 </TableEditIcon>
