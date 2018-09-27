@@ -3,7 +3,6 @@ import './css/style.css'
 import axios from "axios";
 import StoryElement from "./StoryElement";
 
-const $ = window.jQuery;
 
 class StoryTable extends Component {
     state = {
@@ -24,7 +23,7 @@ class StoryTable extends Component {
                 boardId: this.props.match.params.boardId
             }
         );
-        if (this.state.boardId!=null) {
+        if (this.state.boardId != null) {
             axios.get('/meme/users/current-user/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
                 .then((response) => {
                     this.setState({
@@ -34,7 +33,8 @@ class StoryTable extends Component {
                             description={story.description}
                             startTime={story.startTime}
                             finishTime={story.finishTime}
-                            estimation={story.estimation}/>)
+                            estimation={story.estimation}
+                            {...this.props} />)
                     })
                 })
                 .catch(error => {

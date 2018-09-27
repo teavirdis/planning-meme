@@ -1,8 +1,10 @@
 package com.epam.meme.service.impl;
 
 import com.epam.meme.entity.Board;
+import com.epam.meme.entity.User;
 import com.epam.meme.repository.BoardRepository;
 import com.epam.meme.service.BoardService;
+import com.epam.meme.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public Board create(Board entity) {
@@ -53,5 +58,14 @@ public class BoardServiceImpl implements BoardService {
     @Transactional(readOnly = true)
     public int getUserBoardCount(Long id) {
         return boardRepository.countAllByAdminId(id);
+    }
+
+    @Override
+    public void addMember(Long boardId, Long newMemberId) {
+        Optional<User> foundUser = userService.findById(newMemberId);
+        Optional<Board> foundBoard = findById(boardId);
+        foundBoard.orElseThrow(IllegalArgumentException::new)
+                .getUsers().add(
+                        foundUser.orElseThrow(IllegalArgumentException::new));
     }
 }
