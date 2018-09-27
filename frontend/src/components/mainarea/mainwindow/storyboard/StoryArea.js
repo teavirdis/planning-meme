@@ -22,7 +22,6 @@ class StoryArea extends Component {
     render() {
         return (
             <AreaContainer id="storyArea">
-                <PlayArea/>
                 <AreaColumns>
                     <AreaTitle>{ this.state.boardName }</AreaTitle>
                     <AreaRow>

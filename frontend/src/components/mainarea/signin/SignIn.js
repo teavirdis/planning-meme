@@ -42,11 +42,11 @@ class SignIn extends Component {
     render() {
         return (
             <SignDiv>
-                <SignForm onSubmit={this.addUser}>
+                <form style={SignForm} onSubmit={this.addUser}>
                     <H2>Let's start!</H2>
                     <Input required="required"  placeholder="Enter your name" onChange={this.onInputChange}/>
                     <Button>Enter</Button>
-                </SignForm>
+                </form>
             </SignDiv>
         );
     }
