@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import './style/style.css'
 import axios from "axios";
 import StoryElement from "./StoryElement";
 import {Table, TableRow} from "../style/MainWindowStyle";
-
-const $ = window.jQuery;
+import {StoryTableThStyle, StoryTableThStyleHidden, StoryTableThStyleModal} from "./style/StoryAreaStyle";
 
 class StoryTable extends Component {
     state = {
@@ -50,15 +48,15 @@ class StoryTable extends Component {
                 <Table>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th className="hidden-xs">Start time</th>
-                        <th className="hidden-xs">Finish time</th>
-                        <th className="hidden-xs">Votes</th>
-                        <th className="hidden-xs">Estimation</th>
-                        <th data-toggle="modal" data-target="#createStory">
+                        <StoryTableThStyle>Title</StoryTableThStyle>
+                        <StoryTableThStyleHidden>Start time</StoryTableThStyleHidden>
+                        <StoryTableThStyleHidden>Finish time</StoryTableThStyleHidden>
+                        <StoryTableThStyleHidden>Votes</StoryTableThStyleHidden>
+                        <StoryTableThStyleHidden>Estimation</StoryTableThStyleHidden>
+                        <StoryTableThStyleModal>
                             <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
-                        </th>
-                        <th/>
+                        </StoryTableThStyleModal>
+                        <StoryTableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
