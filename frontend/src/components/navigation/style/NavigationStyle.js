@@ -4,7 +4,7 @@ import React from "react";
 const loginDivStyle = {
     marginBottom: '0px'
 };
-
+const UserPlace = styled.b`font-weight: 400;`;
 const mainDivStyle = {
     padding: '0.25%',
     marginBottom: '-5px'
@@ -59,6 +59,6 @@ const NavigationContainer = styled.div.attrs({
 })``;
 
 export {
-    LoginNavigationBar, NavigationUl, NavigationActiveLi, HomeButton, MainNavigationUl, DropdownButton,
+    LoginNavigationBar, NavigationUl, NavigationActiveLi, HomeButton, MainNavigationUl, DropdownButton, UserPlace,
     DropdownToggle, DropdownMenu, SignOutButton, MainNavigationBarCollapse, NavigationArea, NavigationContainer
 }

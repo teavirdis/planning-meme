@@ -4,7 +4,7 @@ import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
-import {StoryStyle} from "./style/StoryAreaStyle";
+import PlayArea from "./votearea/PlayArea";
 
 
 class StoryArea extends Component {
@@ -22,6 +22,7 @@ class StoryArea extends Component {
     render() {
         return (
             <AreaContainer id="storyArea">
+                <PlayArea/>
                 <AreaColumns>
                     <AreaTitle>{ this.state.boardName }</AreaTitle>
                     <AreaRow>

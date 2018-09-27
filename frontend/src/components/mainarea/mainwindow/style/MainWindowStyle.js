@@ -9,12 +9,28 @@ const AreaColumns = styled.div.attrs({
     className: "col-md-12 col-md-12 text-left no-top-padding"
 })``;
 
-const AreaTitle = styled.div.attrs({
-    className: "title"
-})``;
+const AreaTitle = styled.div` color: #808284; font-size: 24px; margin-top: 9px; margin-bottom: 15px;`;
 
 const AreaRow = styled.div.attrs({
     className: "row"
+})``;
+
+const TableThStyle = styled.th`
+    &:hover{
+        cursor: pointer,
+        background: #b9bbbe
+    }
+    font-weight: 400;
+    border-bottom: 2px solid #ddd;
+`;
+
+const TableThStyleHidden = styled(TableThStyle).attrs({
+    className: "hidden-xs"
+})``;
+
+const TableThStyleModal = styled(TableThStyle).attrs({
+    'data-toggle': "modal",
+    'data-target': "#createStory"
 })``;
 
 const TableTrClickableTitle = styled.tr.attrs({
@@ -43,9 +59,9 @@ const TableRow = styled.div.attrs({
 
 const Table = styled.table.attrs({
     className: "table table-hover table-boards"
-})``;
+})`width: 100%; max-width: 100%; margin-top: 50px; font-weight: 400; font-family: "Open Sans",sans-serif;`;
 
 export {
     AreaContainer, AreaColumns, AreaTitle, AreaRow, TableTrClickableTitle, TableNamedTd, TableHiddenXs,
-    TableEditIcon, DeleteIAttribute, Table, TableRow
+    TableEditIcon, DeleteIAttribute, Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal
 }

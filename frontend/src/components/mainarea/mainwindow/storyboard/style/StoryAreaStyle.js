@@ -3,22 +3,6 @@ import React from "react";
 
 const StoryStyle = styled.div`margin-top: 3em;`;
 
-const StoryTableThStyle = styled.th`
-    &:hover{
-        cursor: pointer,
-        background: #b9bbbe
-    }
-`;
-
-const StoryTableThStyleHidden = styled(StoryTableThStyle).attrs({
-    className: "hidden-xs"
-})``;
-
-const StoryTableThStyleModal = styled(StoryTableThStyle).attrs({
-    'data-toggle': "modal",
-    'data-target': "#createStory"
-})``;
-
 const StoryEditIAttribute = styled.i.attrs({
     'data-toggle': "modal",
     'data-target': "#editStory",
@@ -32,6 +16,5 @@ const StoryDeleteTdAttribute = styled.td.attrs({
 })``;
 
 export {
-    StoryEditIAttribute, StoryDeleteTdAttribute, StoryStyle, StoryTableThStyle, StoryTableThStyleModal,
-    StoryTableThStyleHidden
+    StoryEditIAttribute, StoryDeleteTdAttribute, StoryStyle
 }

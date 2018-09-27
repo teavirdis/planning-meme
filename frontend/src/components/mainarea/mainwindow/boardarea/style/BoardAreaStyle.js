@@ -39,7 +39,9 @@ const ButtonAttribute = styled.a.attrs({
     className: "btn btn-primary pull-right fa btn btn-default",
     'data-target': "#createBoard",
     'data-toggle': "modal"
-})``;
+})`padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.428571429;
+    text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;
+    border: 1px solid transparent; border-radius: 4px;`;
 
 export {
     BoardAreaDiv, BoardHiddenSpan, BoardTableBindDiv, BoardTableDeleteIcon, BoardEditIAttribute, BoardTableDeleteSpan,

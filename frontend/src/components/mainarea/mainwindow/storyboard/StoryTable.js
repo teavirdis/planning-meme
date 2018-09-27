@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import axios from "axios";
 import StoryElement from "./StoryElement";
-import {Table, TableRow} from "../style/MainWindowStyle";
-import {StoryTableThStyle, StoryTableThStyleHidden, StoryTableThStyleModal} from "./style/StoryAreaStyle";
+import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
     state = {
@@ -48,15 +47,15 @@ class StoryTable extends Component {
                 <Table>
                     <thead>
                     <tr>
-                        <StoryTableThStyle>Title</StoryTableThStyle>
-                        <StoryTableThStyleHidden>Start time</StoryTableThStyleHidden>
-                        <StoryTableThStyleHidden>Finish time</StoryTableThStyleHidden>
-                        <StoryTableThStyleHidden>Votes</StoryTableThStyleHidden>
-                        <StoryTableThStyleHidden>Estimation</StoryTableThStyleHidden>
-                        <StoryTableThStyleModal>
+                        <TableThStyle>Title</TableThStyle>
+                        <TableThStyleHidden>Start time</TableThStyleHidden>
+                        <TableThStyleHidden>Finish time</TableThStyleHidden>
+                        <TableThStyleHidden>Votes</TableThStyleHidden>
+                        <TableThStyleHidden>Estimation</TableThStyleHidden>
+                        <TableThStyleModal>
                             <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
-                        </StoryTableThStyleModal>
-                        <StoryTableThStyle/>
+                        </TableThStyleModal>
+                        <TableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
