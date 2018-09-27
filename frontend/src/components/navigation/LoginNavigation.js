@@ -1,23 +1,18 @@
 import React from 'react';
-
-const divStyle = {
-    marginBottom: '0px'
-};
+import {HomeButton, LoginNavigationBar, NavigationActiveLi, NavigationUl} from "./style/NavigationStyle";
 
 class LoginNavigation extends React.Component {
 
     render() {
         return (
             <div id="loginNavBar">
-                <div className="navbar" style={divStyle}>
-                    <ul className="nav navbar-nav">
-                        <li className="activeHome active">
-                            <a className="homeButton" href="/">
-                                Home
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <LoginNavigationBar>
+                    <NavigationUl>
+                        <NavigationActiveLi>
+                            <HomeButton href="/">Home</HomeButton>
+                        </NavigationActiveLi>
+                    </NavigationUl>
+                </LoginNavigationBar>
             </div>
         );
     }

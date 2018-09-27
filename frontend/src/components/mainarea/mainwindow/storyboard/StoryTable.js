@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from "axios";
 import StoryElement from "./StoryElement";
-
+import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
     state = {
@@ -45,26 +44,26 @@ class StoryTable extends Component {
 
     render() {
         return (
-            <div className="row grayed-box-app">
-                <table className="table table-hover table-boards">
+            <TableRow>
+                <Table>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th className="hidden-xs">Start time</th>
-                        <th className="hidden-xs">Finish time</th>
-                        <th className="hidden-xs">Votes</th>
-                        <th className="hidden-xs">Estimation</th>
-                        <th data-toggle="modal" data-target="#createStory">
+                        <TableThStyle>Title</TableThStyle>
+                        <TableThStyleHidden>Start time</TableThStyleHidden>
+                        <TableThStyleHidden>Finish time</TableThStyleHidden>
+                        <TableThStyleHidden>Votes</TableThStyleHidden>
+                        <TableThStyleHidden>Estimation</TableThStyleHidden>
+                        <TableThStyleModal>
                             <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
-                        </th>
-                        <th/>
+                        </TableThStyleModal>
+                        <TableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
                         { this.state.storyList }
                     </tbody>
-                </table>
-            </div>
+                </Table>
+            </TableRow>
         );
     }
 }

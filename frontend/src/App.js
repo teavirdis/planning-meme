@@ -29,11 +29,7 @@ class App extends Component {
         super(props);
 
         let status = window.localStorage.getItem("isLoggedIn");
-        if (status === "true") {
-            this.state = {isLoggedIn: true};
-        } else {
-            this.state = {isLoggedIn: false};
-        }
+        this.state = status==="true" ? {isLoggedIn: true} : {isLoggedIn: false};
         this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
     }
 

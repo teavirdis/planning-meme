@@ -1,6 +1,5 @@
 import React, {Component} from "react";
-import './css/style.css'
-import PlayArea from "./PlayArea";
+import PlayArea from "./votearea/PlayArea";
 import JoinBoardButton from "./JoinBoardButton";
 
 class JoinOrVoteView extends Component {

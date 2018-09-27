@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import SignIn from "./signin/SignIn";
 import '../../css/style.css'
-
+import SignIn from "./signin/SignIn";
 
 class MainArea extends Component {
     constructor(props) {

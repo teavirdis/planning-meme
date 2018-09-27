@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import StoryTable from "./StoryTable";
-import './css/style.css'
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
 import {Route} from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
+import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
+
 
 class StoryArea extends Component {
 
@@ -24,10 +25,10 @@ class StoryArea extends Component {
 
     render() {
         return (
-            <div id="storyArea" className="container">
-                <div className="col-md-12 col-md-12 text-left no-top-padding">
-                    <div className="title">{ this.state.boardName }</div>
-                    <div className="row">
+            <AreaContainer id="storyArea">
+                <AreaColumns>
+                    <AreaTitle>{ this.state.boardName }</AreaTitle>
+                    <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) => <JoinOrVoteView isUserMemberOfBoard={ this.state.isUserMemberOfBoard }
                                                                   {...props} /> } />
@@ -35,9 +36,9 @@ class StoryArea extends Component {
                         <EditStory/>
                         <ConfirmStoryDelete/>
                         <CreateStory {...this.props} />
-                    </div>
-                </div>
-            </div>
+                    </AreaRow>
+                </AreaColumns>
+            </AreaContainer>
         );
     }
 }

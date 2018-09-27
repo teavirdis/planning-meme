@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
 import axios from "axios";
+import {BoardPaginationUl} from "./style/BoardAreaStyle";
 
 
 class BoardPagination extends Component {
@@ -40,9 +41,7 @@ class BoardPagination extends Component {
 
     render() {
         return (
-            <ul className="pagination pagination-lg">
-                {this.state.buttonList}
-            </ul>
+            <BoardPaginationUl>{this.state.buttonList}</BoardPaginationUl>
         );
     }
 }
