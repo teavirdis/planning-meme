@@ -74,6 +74,13 @@ public class BoardResource {
                 boardService.findById(boardId).orElseThrow(NotFoundException::new));
     }
 
+    @GET
+    @ApiOperation(value = "Find board participants")
+    @Path("/{boardId}/members")
+    public List<User> findMembers(@PathParam("boardId") Long boardId) {
+        return boardService.findById(boardId).orElseThrow(NotFoundException::new).getUsers();
+    }
+
     @PUT
     @ApiOperation(value = "Update board by id")
     @Path("/{boardId}")

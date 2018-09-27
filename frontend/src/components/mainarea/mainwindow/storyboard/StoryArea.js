@@ -6,7 +6,8 @@ import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
 import {Route} from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
-
+import axios from "axios";
+import SignIn from "../../signin/SignIn";
 
 class StoryArea extends Component {
 
@@ -20,7 +21,23 @@ class StoryArea extends Component {
         this.setState({
             boardName: window.sessionStorage.getItem("boardName")
         });
-        //TODO set boolean property
+
+        let currentUrl = window.location.href;
+        let regex = /boards\/([\d]+)\/stories/g;
+        let foundBoardId = regex.exec(currentUrl)[1];
+        console.log(foundBoardId);
+
+        axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
+            .then((response) => {
+                this.setState({
+                    isUserMemberOfBoard: response.data.some( element => {
+                        return element.id == JSON.parse(SignIn.identifyCookieByName("user")).id;
+                    })
+                })
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
     }
 
     render() {
