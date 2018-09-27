@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import CreateBoardButton from "./CreateBoardButton";
 import BoardTable from "./BoardTable";
-import './css/style.css'
+import './style/style.css'
 import EditBoard from "../../../modal/EditBoard";
 import ConfirmDelete from "../../../modal/ConfirmDelete";
 import CreateBoard from "../../../modal/CreateBoard";
 import BoardElement from "./BoardElement";
+import {BoardAreaDiv} from "./style/BoardAreaStyle";
+import {AreaColumns, AreaContainer, AreaTitle} from "../style/MainWindowStyle";
 
 class BoardArea extends Component {
 
@@ -20,7 +22,7 @@ class BoardArea extends Component {
     addChildElement(item) {
         const boards = this.state.boards;
 
-        this.setState(state => ({
+        this.setState(() => ({
             boards: boards.concat(
                 <BoardElement
                     key={item.id}
@@ -32,26 +34,25 @@ class BoardArea extends Component {
     }
 
     loadElements(elements) {
-        this.setState(state => ({
+        this.setState(() => ({
             boards: elements
         }));
     }
 
     render() {
         return (
-            <div className="container">
-                <div id="boardArea">
-                    <div className="col-md-12 col-md-12 text-left no-top-padding">
-                        <div className="title">Recent Boards</div>
+            <AreaContainer>
+                <BoardAreaDiv>
+                    <AreaColumns>
+                        <AreaTitle>Recent Boards</AreaTitle>
                         <CreateBoardButton/>
-                        <BoardTable onLoad={ this.loadElements }
-                                    boardList={ this.state.boards } {...this.props} />
+                        <BoardTable onLoad={ this.loadElements } boardList={ this.state.boards } {...this.props} />
                         <EditBoard/>
                         <CreateBoard onAdd={ this.addChildElement }/>
                         <ConfirmDelete/>
-                    </div>
-                </div>
-            </div>
+                    </AreaColumns>
+                </BoardAreaDiv>
+            </AreaContainer>
         );
     }
 }

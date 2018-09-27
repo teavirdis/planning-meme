@@ -1,19 +1,28 @@
 import React, {Component} from 'react';
-import './css/style.css';
+import './style/style.css';
+import {
+    BoardEditIAttribute, BoardHiddenSpan, BoardTableBindDiv, BoardTableDeleteIcon, BoardTableDeleteSpan
+} from "./style/BoardAreaStyle";
+import {
+    DeleteIAttribute,
+    TableEditIcon,
+    TableHiddenXs,
+    TableNamedTd,
+    TableTrClickableTitle
+} from "../style/MainWindowStyle";
 
-class BoardElement extends Component{
+class BoardElement extends Component {
 
     constructor(props) {
         super(props);
-
         this.goToStory = this.goToStory.bind(this);
     }
 
-    deleteBoard(){
+    deleteBoard() {
         sessionStorage.setItem("idOfBoardToDelete", this.props.id);
     }
-    
-    editBoard(){
+
+    editBoard() {
         sessionStorage.setItem("idOfBoardToEdit", this.props.id);
     }
 
@@ -24,37 +33,31 @@ class BoardElement extends Component{
 
     render() {
         return (
-            <tr className="clickable ng-scope">
-                <td className="name-td" onClick={ this.goToStory }>
-                    <div>{ this.props.name }</div>
-                </td>
-                <td className="hidden-xs" onClick={ this.goToStory }>
+            <TableTrClickableTitle>
+                <TableNamedTd onClick={this.goToStory}>
+                    <div>{this.props.name}</div>
+                </TableNamedTd>
+                <TableHiddenXs onClick={this.goToStory}>
                     <div>
-                        In: <span className="ng-binding ng-scope">
-                            { String(this.props.startTime).replace('T', ' / ') }
-                        </span>
+                        In: <BoardHiddenSpan>
+                        {String(this.props.startTime).replace('T', ' / ')}
+                    </BoardHiddenSpan>
                     </div>
-                </td>
-                <td className="hidden-xs" onClick={ this.goToStory }>
-                    <div className="of ng-binding ng-scope">
-                        { this.props.storiesCount }
-                    </div>
-                </td>
-                <td className="edit-icon">
-                    <i onClick={ (e) => this.editBoard(e) }
-                       data-toggle="modal"
-                       data-target="#editBoard"
-                       className="editButton fa fa-edit"/>
-                </td>
-                <td className="delete-icon">
-                    <span data-toggle="modal"
-                          data-target="#confirm-delete"
-                          className="deleteButton"
-                          onClick={ (e) => this.deleteBoard(e) }>
-                        <i className="delete-icon-trash fa fa-trash"/>
-                    </span>
-                </td>
-            </tr>
+                </TableHiddenXs>
+                <TableHiddenXs onClick={this.goToStory}>
+                    <BoardTableBindDiv>
+                        {this.props.storiesCount}
+                    </BoardTableBindDiv>
+                </TableHiddenXs>
+                <TableEditIcon>
+                    <BoardEditIAttribute onClick={(e) => this.editBoard(e)}/>
+                </TableEditIcon>
+                <BoardTableDeleteIcon>
+                    <BoardTableDeleteSpan onClick={(e) => this.deleteBoard(e)}>
+                        <DeleteIAttribute/>
+                    </BoardTableDeleteSpan>
+                </BoardTableDeleteIcon>
+            </TableTrClickableTitle>
         );
     }
 }

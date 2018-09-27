@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/style.css'
+import './style/style.css'
 
 class PlayArea extends Component {
     render() {

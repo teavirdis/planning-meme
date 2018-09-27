@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import {
+    Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
+    ModalTitle, SmallCloseButton
+} from "./style/ModalStyle";
 
 class CreateStory extends Component {
-    state = {
-    };
+    state = {};
 
     static IsoDateString(date) {
-        function pad ( n ) {
+        function pad(n) {
             return n < 10 ? "0" + n : n
         }
 
@@ -38,42 +41,24 @@ class CreateStory extends Component {
 
     render() {
         return (
-            <div id="createStory" className="modal fade">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                    aria-hidden="true">
-                                &times;
-                            </button>
-                            <h4 className="modal-title">Create New Story</h4>
-                        </div>
-                        <div className="modal-body">
-                            <textarea name="inputName"
-                                      className="form-control"
-                                      rows="6"
-                                      placeholder="Put your stories text here."
-                                      onChange={ this.onInputChange }
-                                      required=""/>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button"
-                                    className="btn btn-default"
-                                    data-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button"
-                                    className="btn btn-primary"
-                                    onClick={ this.addValue }
-                                    data-dismiss="modal">
-                                Create
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ModalDialogDiv>
+                <ModalDialog>
+                    <ModalContent>
+                        <ModalHeader>
+                            <SmallCloseButton>&times;</SmallCloseButton>
+                            <ModalTitle>Create New Story</ModalTitle>
+                        </ModalHeader>
+                        <ModalBody>
+                            <ModalInput placeholder="Put your stories text here." onChange={this.onInputChange}
+                                        required=""/>
+                        </ModalBody>
+                        <ModalFooter>
+                            <CloseButton>Close</CloseButton>
+                            <Button onClick={this.addValue}>Create</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </ModalDialog>
+            </ModalDialogDiv>
         );
     }
 }

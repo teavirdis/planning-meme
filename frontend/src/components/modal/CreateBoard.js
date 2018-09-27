@@ -3,6 +3,11 @@ import axios from "axios";
 import CreateStory from "./CreateStory";
 import SignIn from "../mainarea/signin/SignIn";
 
+import {
+    Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
+    ModalTitle, SmallCloseButton
+} from "./style/ModalStyle";
+
 class CreateBoard extends Component {
     state = {
         name: ''
@@ -10,24 +15,21 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        let boardName = "Empty";
-        if (this.state.name.length > 0 && this.state.name.length < 50) {
-            boardName = this.state.name;
-        } else if (this.state.name.length >= 50 ) {
-            boardName = this.state.name.substr(0, 49);
-        }
+        let boardName = (this.state.name.length > 0 && this.state.name.length < 50) ?
+            this.state.name :
+            this.state.name.substr(0, 49);
 
         let newBoard = {
             name: boardName,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
-            admin: { id: JSON.parse(SignIn.getCookie('user')).id }
+            admin: {id: JSON.parse(SignIn.identifyCookieByName('user')).id}
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
                 console.log(response);
                 this.props.onAdd(newBoard);
             })
-            .catch((error) =>{
+            .catch((error) => {
                 console.log(error);
             });
         return false;
@@ -37,44 +39,28 @@ class CreateBoard extends Component {
         this.setState({
             name: e.target.value
         });
-    }
+    };
 
     render() {
         return (
-            <div id="createBoard" className="modal fade">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <form>
-                        <div className="modal-header">
-                            <button type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                    aria-hidden="true">
-                                &times;
-                            </button>
-                            <h4 className="modal-title">Create New Board</h4>
-                        </div>
-                        <div className="modal-body">
-                            <input type="text"
-                                   className="form-control"
-                                   placeholder="Enter board name"
-                                   required="required"
-                                   onChange={ this.onInputChange }/>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">
-                                Close
-                            </button>
-                            <button className="btn btn-primary"
-                                    onClick={ this.addValue }
-                                    data-dismiss="modal">
-                                Create
-                            </button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <ModalDialogDiv id="createBoard">
+                <ModalDialog>
+                    <ModalContent>
+                        <ModalHeader>
+                            <SmallCloseButton>&times;</SmallCloseButton>
+                            <ModalTitle>Create New Board</ModalTitle>
+                        </ModalHeader>
+                        <ModalBody>
+                            <ModalInput placeholder="Enter board name" required="required"
+                                        onChange={this.onInputChange}/>
+                        </ModalBody>
+                        <ModalFooter>
+                            <CloseButton>Close</CloseButton>
+                            <Button onClick={this.addValue}>Create</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </ModalDialog>
+            </ModalDialogDiv>
         );
     }
 }

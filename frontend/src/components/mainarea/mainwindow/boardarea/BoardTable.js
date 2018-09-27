@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
+import {Table, TableRow} from "../style/MainWindowStyle";
 
 class BoardTable extends Component {
 
@@ -43,8 +44,8 @@ class BoardTable extends Component {
 
     render() {
         return (
-            <div className="row grayed-box-app">
-                <table className="table table-hover table-boards">
+            <TableRow>
+                <Table>
                     <thead>
                     <tr>
                         <th>Title</th>
@@ -57,9 +58,9 @@ class BoardTable extends Component {
                     <tbody className="text-left">
                     { this.props.boardList }
                     </tbody>
-                </table>
+                </Table>
                 <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={ this.onInputPageNumberChange } />
-            </div>
+            </TableRow>
         );
     }
 }
