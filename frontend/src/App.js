@@ -54,12 +54,11 @@ class App extends Component {
                 <Route path="/"
                        render={(props) => <Home onAuthStateChange={ this.handleAuthStatusChange }
                                                 isLoggedIn={ this.state.isLoggedIn } { ...props } /> } />
-                {this.state.isLoggedIn
+                { this.state.isLoggedIn
                     ?
                     <Switch>
                         <Route exact={true} path="/boards"
-                               render={(props) => <BoardArea onAuthStateChange={ this.handleAuthStatusChange }
-                                                             isLoggedIn={ this.state.isLoggedIn } { ...props } /> }/>
+                               render={(props) => <BoardArea { ...props } /> }/>
                         <Route path="/boards/:boardId/stories"
                                render={(props) => <StoryArea {...props}/>} />
                         <Redirect to="/boards" />
