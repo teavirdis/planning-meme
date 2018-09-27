@@ -41,7 +41,7 @@ class CreateStory extends Component {
 
     render() {
         return (
-            <ModalDialogDiv>
+            <ModalDialogDiv id="createStory">
                 <ModalDialog>
                     <ModalContent>
                         <ModalHeader>

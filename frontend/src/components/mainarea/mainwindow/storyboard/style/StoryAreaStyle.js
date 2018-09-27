@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React from "react";
 
+const StoryStyle = styled.div`margin-top: 3em;`;
+
 const StoryEditIAttribute = styled.i.attrs({
     'data-toggle': "modal",
     'data-target': "#editStory",
@@ -13,4 +15,6 @@ const StoryDeleteTdAttribute = styled.td.attrs({
     'data-target': "#deleteStory"
 })``;
 
-export {StoryEditIAttribute, StoryDeleteTdAttribute}
+export {
+    StoryEditIAttribute, StoryDeleteTdAttribute, StoryStyle
+}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './style/style.css'
+import {VotingDiv} from "../style/VotingAreaStyle";
 
 class VoteArea extends Component {
     render() {
         return (
-            <div className="col-md-4">
+            <VotingDiv>
                 <div className="right-block">
                     <section>
                         <div className="players">Click "Start" to begin voting</div>
@@ -40,7 +40,7 @@ class VoteArea extends Component {
                         <button id="btn-start" className="btn btn-block btn-default btn-start">Start</button>
                     </section>
                 </div>
-            </div>
+            </VotingDiv>
         );
     }
 }

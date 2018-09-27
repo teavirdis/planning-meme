@@ -18,7 +18,9 @@ const H2 = styled.h2.attrs({
     className: "text-center"
 })``;
 
-const SignForm = styled.form`marginTop: '10%'`;
+const SignForm = {
+    marginTop: '10%'
+};
 
 const SignDiv = styled.div.attrs({
     className: "col-md-8 col-md-offset-2 collapse in"

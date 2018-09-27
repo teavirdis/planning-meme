@@ -6,7 +6,7 @@ import {
     DropdownToggle,
     MainNavigationBarCollapse,
     MainNavigationUl, NavigationUl,
-    SignOutButton
+    SignOutButton, UserPlace
 } from "./style/NavigationStyle";
 
 
@@ -31,7 +31,7 @@ class MainNavigation extends React.Component {
                 <MainNavigationUl>
                     <DropdownButton>
                         <DropdownToggle>
-                            <b id="userPlace">{this.state.username}</b><b className="caret"/>
+                            <UserPlace id="userPlace">{this.state.username}</UserPlace><b className="caret"/>
                         </DropdownToggle>
                         <DropdownMenu>
                             <li><a href="/#/boards">My boards</a></li>

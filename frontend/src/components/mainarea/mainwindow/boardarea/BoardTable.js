@@ -3,7 +3,7 @@ import './style/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
-import {Table, TableRow} from "../style/MainWindowStyle";
+import {Table, TableRow, TableThStyle, TableThStyleHidden} from "../style/MainWindowStyle";
 
 class BoardTable extends Component {
 
@@ -48,11 +48,11 @@ class BoardTable extends Component {
                 <Table>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th className="hidden-xs">Time</th>
-                        <th className="hidden-xs">Stories</th>
-                        <th/>
-                        <th/>
+                        <TableThStyle>Title</TableThStyle>
+                        <TableThStyleHidden>Time</TableThStyleHidden>
+                        <TableThStyleHidden>Stories</TableThStyleHidden>
+                        <TableThStyle/>
+                        <TableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
