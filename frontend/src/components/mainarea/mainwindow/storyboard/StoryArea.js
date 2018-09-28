@@ -8,13 +8,17 @@ import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
 import axios from "axios";
 import SignIn from "../../signin/SignIn";
+import StoryElement from "./StoryElement";
 
 class StoryArea extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = { boardName: "", isUserMemberOfBoard: false };
+        this.state = { boardName: "", isUserMemberOfBoard: false, stories: [] };
+        this.becomeMember = this.becomeMember.bind(this);
+        this.loadElements = this.loadElements.bind(this);
+        this.addChildElement = this.addChildElement.bind(this);
     }
 
     componentDidMount() {
@@ -40,6 +44,35 @@ class StoryArea extends Component {
             });
     }
 
+    becomeMember() {
+        this.setState({
+            isUserMemberOfBoard: true
+        })
+    }
+
+    addChildElement(story) {
+        const stories = this.state.stories;
+
+        this.setState(() => ({
+            stories: stories.concat(
+                <StoryElement
+                    key={story.id}
+                    id={story.id}
+                    description={story.description}
+                    startTime={story.startTime}
+                    finishTime={story.finishTime}
+                    estimation={story.estimation}
+                    {...this.props} />
+                )
+        }));
+    }
+
+    loadElements(elements) {
+        this.setState(() => ({
+            stories: elements
+        }));
+    }
+
     render() {
         return (
             <AreaContainer id="storyArea">
@@ -48,11 +81,13 @@ class StoryArea extends Component {
                     <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) => <JoinOrVoteView isUserMemberOfBoard={ this.state.isUserMemberOfBoard }
+                                                                  becomeMember={ this.becomeMember }
                                                                   {...props} /> } />
-                        <StoryTable {...this.props} />
+                        <StoryTable storyList={ this.state.stories }
+                                    onStoriesLoad={ this.loadElements } {...this.props} />
                         <EditStory/>
                         <ConfirmStoryDelete/>
-                        <CreateStory {...this.props} />
+                        <CreateStory onStoryAdd={ this.addChildElement } {...this.props} />
                     </AreaRow>
                 </AreaColumns>
             </AreaContainer>

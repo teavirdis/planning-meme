@@ -9,19 +9,20 @@ const AreaColumns = styled.div.attrs({
     className: "col-md-12 col-md-12 text-left no-top-padding"
 })``;
 
-const AreaTitle = styled.div` color: #808284; font-size: 24px; margin-top: 9px; margin-bottom: 15px;`;
+const AreaTitle = styled.div` color: #808284; font-size: 24px; margin-top: 3em; margin-bottom: 15px;`;
 
 const AreaRow = styled.div.attrs({
     className: "row"
 })``;
 
 const TableThStyle = styled.th`
-    &:hover{
+    font-weight: 400;
+    border-bottom: 2px solid #ddd;
+    
+    &:hover {
         cursor: pointer,
         background: #b9bbbe
     }
-    font-weight: 400;
-    border-bottom: 2px solid #ddd;
 `;
 
 const TableThStyleHidden = styled(TableThStyle).attrs({

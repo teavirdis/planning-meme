@@ -19,14 +19,18 @@ class CreateStory extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories',
-            {
-                description: this.state.description,
-                startTime: CreateStory.IsoDateString(new Date())
-            })
+        let newStory = {
+            description: this.state.description,
+            startTime: CreateStory.IsoDateString(new Date())
+        }
+        axios.post('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories', newStory)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                this.props.onStoryAdd(newStory);
+                this.setState({
+                    description: ""
+                })
             })
             .catch(err => {
                 console.log(err);
@@ -49,12 +53,16 @@ class CreateStory extends Component {
                             <ModalTitle>Create New Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Put your stories text here." onChange={this.onInputChange}
-                                        required=""/>
+                            <ModalInput placeholder="Put your stories text here."
+                                        onChange={ this.onInputChange }
+                                        required=""
+                                        value={ this.state.description }/>
                         </ModalBody>
                         <ModalFooter>
                             <CloseButton>Close</CloseButton>
-                            <Button onClick={this.addValue}>Create</Button>
+                            <Button onClick={ this.addValue }>
+                                Create
+                            </Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>
