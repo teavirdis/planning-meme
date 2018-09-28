@@ -4,13 +4,16 @@ import StoryElement from "./StoryElement";
 import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
-    state = {
-        storyList: [],
-        boardId: ''
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.tick();
+    }
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 500);
+        //this.timerID = setInterval(() => this.tick(), 500);
+
     }
 
     componentWillUnmount() {
@@ -18,23 +21,20 @@ class StoryTable extends Component {
     }
 
     tick() {
-        this.setState({
-                boardId: this.props.match.params.boardId
-            }
-        );
-        if (this.state.boardId != null) {
-            axios.get('/meme/users/current-user/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+        console.log(this.props.match.params.boardId);
+        console.log(this.props.match.params);
+        if (this.props.match.params.boardId != null) {
+            axios.get('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
                 .then((response) => {
-                    this.setState({
-                        storyList: response.data.map(story => <StoryElement
+                    this.props.onStoriesLoad(response.data.map(story =>
+                        <StoryElement
                             key={story.id}
                             id={story.id}
                             description={story.description}
                             startTime={story.startTime}
                             finishTime={story.finishTime}
                             estimation={story.estimation}
-                            {...this.props} />)
-                    })
+                            {...this.props} />))
                 })
                 .catch(error => {
                     alert(error);
@@ -60,7 +60,7 @@ class StoryTable extends Component {
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                        { this.state.storyList }
+                        { this.props.storyList }
                     </tbody>
                 </Table>
             </TableRow>

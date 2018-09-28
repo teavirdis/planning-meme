@@ -22,12 +22,15 @@ class CreateBoard extends Component {
         let newBoard = {
             name: boardName,
             startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
-            admin: {id: JSON.parse(SignIn.identifyCookieByName('user')).id}
+            admin: {id: JSON.parse(SignIn.identifyCookieByName('user')).id} //TODO
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
                 console.log(response);
                 this.props.onAdd(newBoard);
+                this.setState({
+                    name: ""
+                })
             })
             .catch((error) => {
                 console.log(error);
@@ -51,12 +54,16 @@ class CreateBoard extends Component {
                             <ModalTitle>Create New Board</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Enter board name" required="required"
-                                        onChange={this.onInputChange}/>
+                            <ModalInput placeholder="Enter board name"
+                                        required="required"
+                                        onChange={ this.onInputChange }
+                                        value={ this.state.name } />
                         </ModalBody>
                         <ModalFooter>
                             <CloseButton>Close</CloseButton>
-                            <Button onClick={this.addValue}>Create</Button>
+                            <Button onClick={ this.addValue }>
+                                Create
+                            </Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

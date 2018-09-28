@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React from "react";
 
-const BoardAreaDiv = styled.div`margin-top: 3em;`;
+const BoardAreaDiv = styled.div``;
 
 const BoardHiddenSpan = styled.span.attrs({
     className: "ng-binding ng-scope"
