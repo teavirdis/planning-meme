@@ -35,7 +35,7 @@ class StoryArea extends Component {
             .then((response) => {
                 this.setState({
                     isUserMemberOfBoard: response.data.some( element => {
-                        return element.id == JSON.parse(SignIn.identifyCookieByName("user")).id;
+                        return element.id === JSON.parse(SignIn.identifyCookieByName("user")).id;
                     })
                 })
             })

@@ -56,7 +56,7 @@ const DeleteIAttribute = styled.i.attrs({
 
 const TableRow = styled.div.attrs({
     className: "row grayed-box-app"
-})``;
+})` padding-bottom: 50px`;
 
 const Table = styled.table.attrs({
     className: "table table-hover table-boards"
