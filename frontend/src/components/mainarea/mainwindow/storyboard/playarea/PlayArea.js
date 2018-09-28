@@ -16,6 +16,7 @@ class PlayArea extends Component {
     };
 
     componentDidMount() {
+        //todo: rewrite
         for (let i=0; i<this.state.data.length; i++){
             this.state.cards.push(<Card source={this.state.data[i]}/>)
         }
