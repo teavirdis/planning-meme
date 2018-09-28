@@ -6,8 +6,18 @@ body {
     font-family: "Open Sans",sans-serif;
 }
 
-a {
+a, img {
     cursor: pointer;
+}
+
+img:hover{
+    -moz-box-shadow: 0 0 10px #b1b1b1;
+    padding: 0;
+    box-shadow: 0 0 10px #b1b1b1;
+}
+
+img:active{
+    filter: hue-rotate(-55deg);
 }
 
 .starter-template {
@@ -53,6 +63,12 @@ a {
 .btn {
     font-size: 15px;
     font-weight: bold;
+}
+
+.list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 0;
 }
 
 li.dropdown:hover > .dropdown-menu {
