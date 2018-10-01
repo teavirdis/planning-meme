@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 
-class MemberList extends Component {
+const liElementStyle = {
+    backgroundColor: '#fff0'
+};
+
+class MemberElement extends Component {
     render () {
         return (
-            <div className="col-md-1 text-center">
-                <ui>
-                    <li>a</li>
-                </ui>
-            </div>
+            <li className="list-group-item" style={liElementStyle}>{this.props.name}</li>
         );
     }
 }
 
-export default MemberList;
+export default MemberElement;

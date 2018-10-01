@@ -10,19 +10,27 @@ import axios from "axios";
 import SignIn from "../../signin/SignIn";
 import StoryElement from "./StoryElement";
 import {BoardAreaDiv} from "../boardarea/style/BoardAreaStyle";
+import MemberElement from "./MemberElement";
+import BoardElement from "../boardarea/BoardElement";
+
+const styleUserList = {
+    marginTop: '60px'
+};
 
 class StoryArea extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {boardName: "", isUserMemberOfBoard: false, stories: []};
+        this.state = {boardName: "", boardUsers: [], isUserMemberOfBoard: false, stories: []};
         this.becomeMember = this.becomeMember.bind(this);
         this.loadElements = this.loadElements.bind(this);
-        this.addChildElement = this.addChildElement.bind(this);
+        this.addChildStoryElement = this.addChildStoryElement.bind(this);
     }
 
     componentDidMount() {
+        this.timerID = setInterval(() => this.tick(), 2000);
+
         this.setState({
             boardName: window.sessionStorage.getItem("boardName")
         });
@@ -35,9 +43,33 @@ class StoryArea extends Component {
         axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
             .then((response) => {
                 this.setState({
+                    boardUsers: response.data.map(item =>
+                        <MemberElement key={item.id}
+                                       id={item.id}
+                                       name={item.username}/>),
+
                     isUserMemberOfBoard: response.data.some(element => {
                         return element.id === JSON.parse(SignIn.identifyCookieByName("user")).id;
                     })
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    tick() {
+        let currentUrl = window.location.href;
+        let regex = /boards\/([\d]+)\/stories/g;
+        let foundBoardId = regex.exec(currentUrl)[1];
+
+        axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
+            .then((response) => {
+                this.setState({
+                    boardUsers: response.data.map(item =>
+                        <MemberElement key={item.id}
+                                       id={item.id}
+                                       name={item.username}/>)
                 })
             })
             .catch((error) => {
@@ -51,7 +83,8 @@ class StoryArea extends Component {
         })
     }
 
-    addChildElement(story) {
+
+    addChildStoryElement(story) {
         const stories = this.state.stories;
 
         this.setState(() => ({
@@ -86,30 +119,21 @@ class StoryArea extends Component {
                                                                   {...props} />}/>
                         <div className="row">
                             <div className="col-md-9">
-                                <CreateStory onStoryAdd={this.addChildElement} {...this.props} />
+                                <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
                                 <StoryTable storyList={this.state.stories}
                                             onStoriesLoad={this.loadElements} {...this.props} />
                             </div>
-                            <div className="col-md-3 text-center">
-                                <ui>
-                                    <li>a</li>
-                                </ui>
+                            <div className="col-md-2 col-md-offset-1 text-center" style={styleUserList}>
+                                Member List
+                                <ul className="list-group">
+                                    {this.state.boardUsers}
+                                </ul>
                             </div>
                         </div>
                         <EditStory/>
                         <ConfirmStoryDelete/>
                     </AreaRow>
                 </AreaColumns>
-                <div className="col-md-1">
-                    <div className="starter-template">
-                        <div className="login-form">
-                            <div className="sc-jzJRlG col-md-8 col-md-offset-2 collapse in enxKql">
-                                <form style="margin-top: 10%;">
-                                    Hello
-                                  </form>
-                            </div>
-                        </div>
-                    </div></div>
             </AreaContainer>
         );
     }
