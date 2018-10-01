@@ -14,12 +14,12 @@ class BoardArea extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { boards: [] };
-        this.addChildElement = this.addChildElement.bind(this);
+        this.state = {boards: []};
+        this.addChildBoardElement = this.addChildBoardElement.bind(this);
         this.loadElements = this.loadElements.bind(this);
     }
 
-    addChildElement(item) {
+    addChildBoardElement(item) {
         const boards = this.state.boards;
 
         this.setState(() => ({
@@ -46,9 +46,9 @@ class BoardArea extends Component {
                     <AreaColumns>
                         <AreaTitle>Recent Boards</AreaTitle>
                         <CreateBoardButton/>
-                        <BoardTable onLoad={ this.loadElements } boardList={ this.state.boards } {...this.props} />
+                        <BoardTable onLoad={this.loadElements} boardList={this.state.boards} {...this.props} />
                         <EditBoard/>
-                        <CreateBoard onAdd={ this.addChildElement }/>
+                        <CreateBoard onAdd={this.addChildBoardElement}/>
                         <ConfirmDelete/>
                     </AreaColumns>
                 </BoardAreaDiv>
