@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-
-const liElementStyle = {
-    backgroundColor: '#fff0'
-};
+import {LiElement} from "../style/MemberStyle";
 
 class MemberElement extends Component {
     render () {
         return (
-            <li className="list-group-item" style={liElementStyle}>{this.props.name}</li>
+            <LiElement>{this.props.name}</LiElement>
         );
     }
 }

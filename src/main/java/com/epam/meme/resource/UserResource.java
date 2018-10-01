@@ -28,8 +28,9 @@ public class UserResource {
 
     private static final String COOKIE_NAME = "user";
     private static final String COOKIE_PATH = "/";
-    private static final String COOKIE_DOMAIN = "127.0.0.1";//".hanatrial.ondemand.com";
-    private static final short COOKIE_EXPIRES_TIME = 3600;
+    private static final String COOKIE_DOMAIN = ".hanatrial.ondemand.com";
+    //private static final String COOKIE_DOMAIN = "127.0.0.1";
+    private static final short COOKIE_EXPIRES_TIME = -1;
     private static final boolean COOKIE_SECURE = false;
 
     @Autowired
