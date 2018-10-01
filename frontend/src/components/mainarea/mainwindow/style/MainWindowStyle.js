@@ -6,7 +6,7 @@ const AreaContainer = styled.div.attrs({
 })``;
 
 const AreaColumns = styled.div.attrs({
-    className: "col-md-12 col-md-12 text-left no-top-padding"
+    className: "col-md-11 col-md-11 text-left no-top-padding"
 })``;
 
 const AreaTitle = styled.div` color: #808284; font-size: 24px; margin-top: 3em; margin-bottom: 15px;`;

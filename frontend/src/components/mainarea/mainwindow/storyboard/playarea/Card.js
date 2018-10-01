@@ -8,7 +8,7 @@ class Card extends Component {
     render(){
         return (
             <CardBlock>
-                <CardImg src={this.props.source}/>
+                <CardImg src={this.props.source} draggable="false"/>
             </CardBlock>
         );
     }

@@ -33,7 +33,8 @@ frontend/build
 node_modules
 package-lock.json
 package-lock.json*
-src/main/webapp/resources
+src/main/webapp/resources/css
+src/main/webapp/resources/static
 
 # Individual properties
 cloud/*.properties
