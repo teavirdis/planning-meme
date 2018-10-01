@@ -4,6 +4,7 @@ import com.epam.meme.converter.StoryConverter;
 import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
+import com.epam.meme.repository.StoryRepository;
 import com.epam.meme.service.BoardService;
 import com.epam.meme.service.StoryService;
 import io.swagger.annotations.Api;
@@ -15,6 +16,10 @@ import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,10 +37,22 @@ public class StoryResource {
 
     @POST
     @ApiOperation(value = "Save story")
-    public void create(@PathParam("boardId") Long boardId, @Valid StoryDto storyDto) {
+    public Response create(@PathParam("boardId") Long boardId,
+                           @Valid StoryDto storyDto,
+                           @Context UriInfo uriInfo) {
         Story story = storyConverter.convertToEntity(storyDto);
         story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
         storyService.create(story);
+
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(UserResource.class)
+                .path(UserResource.class, "boardResource")
+                .path(BoardResource.class, "storyResource")
+                .resolveTemplate("boardId", story.getBoard().getId())
+                .path(Long.toString(story.getId()))
+                .build();
+
+        return Response.created(uri).build();
     }
 
     @GET

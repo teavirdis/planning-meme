@@ -31,7 +31,10 @@ const CardsUl = styled.ul.attrs({
 
 const CardBlock = styled.li`padding-left: 0`;
 
-const CardImg = styled.img`padding: 5px; width: 157px; height: 230px;`;
+const CardImg = styled.img`
+padding: 5px; 
+width: 157px; 
+height: 230px;`;
 
 export {
     VotingDiv, PlayingArea, PlayBoard, PlayGround, CardsBlock, CardsUl, CardBlock, CardImg
