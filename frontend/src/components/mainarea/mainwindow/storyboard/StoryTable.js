@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import './css/style.css'
 import axios from "axios";
 import StoryElement from "./StoryElement";
-
-const $ = window.jQuery;
+import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
-    state = {
-        storyList: [],
-        boardId: ''
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.tick();
+    }
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 1000);
+        //this.timerID = setInterval(() => this.tick(), 500);
+
     }
 
     componentWillUnmount() {
@@ -20,22 +21,20 @@ class StoryTable extends Component {
     }
 
     tick() {
-        this.setState({
-                boardId: this.props.match.params.boardId
-            }
-        );
-        if (this.state.boardId!=null) {
-            axios.get('/meme/users/current-user/boards/' + this.state.boardId + '/stories?page=0&pageSize=5')
+        console.log(this.props.match.params.boardId);
+        console.log(this.props.match.params);
+        if (this.props.match.params.boardId != null) {
+            axios.get('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
                 .then((response) => {
-                    this.setState({
-                        storyList: response.data.map(story => <StoryElement
+                    this.props.onStoriesLoad(response.data.map(story =>
+                        <StoryElement
                             key={story.id}
                             id={story.id}
                             description={story.description}
                             startTime={story.startTime}
                             finishTime={story.finishTime}
-                            estimation={story.estimation}/>)
-                    })
+                            estimation={story.estimation}
+                            {...this.props} />))
                 })
                 .catch(error => {
                     alert(error);
@@ -45,26 +44,26 @@ class StoryTable extends Component {
 
     render() {
         return (
-            <div className="row grayed-box-app">
-                <table className="table table-hover table-boards">
+            <TableRow>
+                <Table>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th className="hidden-xs">Start time</th>
-                        <th className="hidden-xs">Finish time</th>
-                        <th className="hidden-xs">Votes</th>
-                        <th className="hidden-xs">Estimation</th>
-                        <th data-toggle="modal" data-target="#createStory">
+                        <TableThStyle>Title</TableThStyle>
+                        <TableThStyleHidden>Start time</TableThStyleHidden>
+                        <TableThStyleHidden>Finish time</TableThStyleHidden>
+                        <TableThStyleHidden>Votes</TableThStyleHidden>
+                        <TableThStyleHidden>Estimation</TableThStyleHidden>
+                        <TableThStyleModal>
                             <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
-                        </th>
-                        <th/>
+                        </TableThStyleModal>
+                        <TableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                        { this.state.storyList }
+                        { this.props.storyList }
                     </tbody>
-                </table>
-            </div>
+                </Table>
+            </TableRow>
         );
     }
 }

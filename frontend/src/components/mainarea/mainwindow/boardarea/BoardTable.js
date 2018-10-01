@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
 import BoardElement from "./BoardElement";
 import BoardPagination from "./BoardPagination";
 import axios from "axios";
-import SignIn from "../../signin/SignIn";
+import {Table, TableRow, TableThStyle, TableThStyleHidden} from "../style/MainWindowStyle";
 
 class BoardTable extends Component {
 
@@ -13,7 +13,7 @@ class BoardTable extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 1000);
+        this.timerID = setInterval(() => this.tick(), 500);
         this.tick();
     }
 
@@ -22,7 +22,6 @@ class BoardTable extends Component {
     });
 
     tick() {
-        console.log(this.state.pageNumber);
         axios.get(
             "/meme/users/current-user/boards?page="
             + this.state.pageNumber
@@ -45,23 +44,23 @@ class BoardTable extends Component {
 
     render() {
         return (
-            <div className="grayed-box-app">
-                <table className="table table-hover table-boards">
+            <TableRow>
+                <Table>
                     <thead>
                     <tr>
-                        <th>Title</th>
-                        <th className="hidden-xs">Time</th>
-                        <th className="hidden-xs">Stories</th>
-                        <th/>
-                        <th/>
+                        <TableThStyle>Title</TableThStyle>
+                        <TableThStyleHidden>Time</TableThStyleHidden>
+                        <TableThStyleHidden>Stories</TableThStyleHidden>
+                        <TableThStyle/>
+                        <TableThStyle/>
                     </tr>
                     </thead>
                     <tbody className="text-left">
                     { this.props.boardList }
                     </tbody>
-                </table>
+                </Table>
                 <BoardPagination pageSize={this.state.pageSize} pageNumberHandler={ this.onInputPageNumberChange } />
-            </div>
+            </TableRow>
         );
     }
 }

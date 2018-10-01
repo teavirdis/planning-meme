@@ -8,8 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BoardConverter {
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+
+    public BoardConverter(@Autowired ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public BoardDto convertToDto(Board board) {
         return modelMapper.map(board, BoardDto.class);

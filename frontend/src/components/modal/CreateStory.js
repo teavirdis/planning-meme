@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import {
+    Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
+    ModalTitle, SmallCloseButton
+} from "./style/ModalStyle";
 
 class CreateStory extends Component {
-    state = {
-    };
+    state = {};
 
     static IsoDateString(date) {
-        function pad ( n ) {
+        function pad(n) {
             return n < 10 ? "0" + n : n
         }
 
@@ -16,14 +19,18 @@ class CreateStory extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        axios.post('/meme/users/current-user/boards/'+this.props.match.params.boardId+'/stories',
-            {
-                description: this.state.description,
-                startTime: CreateStory.IsoDateString(new Date())
-            })
+        let newStory = {
+            description: this.state.description,
+            startTime: CreateStory.IsoDateString(new Date())
+        }
+        axios.post('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories', newStory)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                this.props.onStoryAdd(newStory);
+                this.setState({
+                    description: ""
+                })
             })
             .catch(err => {
                 console.log(err);
@@ -38,42 +45,28 @@ class CreateStory extends Component {
 
     render() {
         return (
-            <div id="createStory" className="modal fade">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                    aria-hidden="true">
-                                &times;
-                            </button>
-                            <h4 className="modal-title">Create New Story</h4>
-                        </div>
-                        <div className="modal-body">
-                            <textarea name="inputName"
-                                      className="form-control"
-                                      rows="6"
-                                      placeholder="Put your stories text here."
-                                      onChange={ this.onInputChange }
-                                      required=""/>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button"
-                                    className="btn btn-default"
-                                    data-dismiss="modal">
-                                Close
-                            </button>
-                            <button type="button"
-                                    className="btn btn-primary"
-                                    onClick={ this.addValue }
-                                    data-dismiss="modal">
+            <ModalDialogDiv id="createStory">
+                <ModalDialog>
+                    <ModalContent>
+                        <ModalHeader>
+                            <SmallCloseButton>&times;</SmallCloseButton>
+                            <ModalTitle>Create New Story</ModalTitle>
+                        </ModalHeader>
+                        <ModalBody>
+                            <ModalInput placeholder="Put your stories text here."
+                                        onChange={ this.onInputChange }
+                                        required=""
+                                        value={ this.state.description }/>
+                        </ModalBody>
+                        <ModalFooter>
+                            <CloseButton>Close</CloseButton>
+                            <Button onClick={ this.addValue }>
                                 Create
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </ModalDialog>
+            </ModalDialogDiv>
         );
     }
 }

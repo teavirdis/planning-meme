@@ -1,58 +1,52 @@
 import React from 'react';
 import SignIn from "../mainarea/signin/SignIn";
+import {
+    DropdownButton,
+    DropdownMenu,
+    DropdownToggle,
+    MainNavigationBarCollapse,
+    MainNavigationUl, NavigationUl,
+    SignOutButton, UserPlace
+} from "./style/NavigationStyle";
 
-const divStyle = {
-    padding: '0.25%',
-    marginBottom: '-5px'
-};
 
 class MainNavigation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { username: "" };
+        this.state = {username: ""};
     }
 
     componentDidMount() {
-        this.setState({username: JSON.parse(SignIn.getCookie('user')).username});
+        this.setState({username: JSON.parse(SignIn.identifyCookieByName('user')).username});
     }
 
-    handleSignOut() {
-        SignIn.deleteCookie('user');
+    static handleSignOut() {
+        SignIn.deleteCookieByName('user');
         window.localStorage.removeItem("isLoggedIn");
     }
 
     render() {
         return (
             <div id="mainNavBar">
-                <ul className="nav navbar-nav navbar-right " style={divStyle}>
-                    <li className="dropdown">
-                        <a className="dropdown-toggle" data-toggle="dropdown">
-                            <b id="userPlace">{this.state.username}</b><b className="caret"/>
-                        </a>
-                        <ul className="dropdown-menu">
-                            <li>
-                                <a href="/#/boards">
-                                    My boards
-                                </a>
-                            </li>
+                <MainNavigationUl>
+                    <DropdownButton>
+                        <DropdownToggle>
+                            <UserPlace id="userPlace">{this.state.username}</UserPlace><b className="caret"/>
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <li><a href="/#/boards">My boards</a></li>
                             <li className="divider"/>
                             <li>
-                                <a className="sign-out" href="/" onClick={ this.handleSignOut }>
-                                    Sign Out
-                                </a>
+                                <SignOutButton href="/" onClick={MainNavigation.handleSignOut}>Sign Out</SignOutButton>
                             </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div className="collapse navbar-collapse">
-                    <ul className="nav navbar-nav">
-                        <li className="active">
-                            <a href="/">
-                                Home
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                        </DropdownMenu>
+                    </DropdownButton>
+                </MainNavigationUl>
+                <MainNavigationBarCollapse>
+                    <NavigationUl>
+                        <li className="active"><a href="/">Home</a></li>
+                    </NavigationUl>
+                </MainNavigationBarCollapse>
             </div>
         );
     }

@@ -29,11 +29,7 @@ class App extends Component {
         super(props);
 
         let status = window.localStorage.getItem("isLoggedIn");
-        if (status === "true") {
-            this.state = {isLoggedIn: true};
-        } else {
-            this.state = {isLoggedIn: false};
-        }
+        this.state = status==="true" ? {isLoggedIn: true} : {isLoggedIn: false};
         this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
     }
 
@@ -54,12 +50,11 @@ class App extends Component {
                 <Route path="/"
                        render={(props) => <Home onAuthStateChange={ this.handleAuthStatusChange }
                                                 isLoggedIn={ this.state.isLoggedIn } { ...props } /> } />
-                {this.state.isLoggedIn
+                { this.state.isLoggedIn
                     ?
                     <Switch>
                         <Route exact={true} path="/boards"
-                               render={(props) => <BoardArea onAuthStateChange={ this.handleAuthStatusChange }
-                                                             isLoggedIn={ this.state.isLoggedIn } { ...props } /> }/>
+                               render={(props) => <BoardArea { ...props } /> }/>
                         <Route path="/boards/:boardId/stories"
                                render={(props) => <StoryArea {...props}/>} />
                         <Redirect to="/boards" />

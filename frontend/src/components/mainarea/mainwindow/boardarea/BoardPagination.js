@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import './css/style.css'
+import './style/style.css'
 import axios from "axios";
+import {BoardPaginationUl} from "./style/BoardAreaStyle";
 
-
-const $ = window.jQuery;
 
 class BoardPagination extends Component {
 
@@ -12,19 +11,22 @@ class BoardPagination extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 1000);
+        this.timerID = setInterval(() => this.tick(), 500);
         this.tick();
     }
 
     initializePagination(size){
-        this.state.buttonList = [];
-        for(let i=1; i <= Math.ceil(size/this.props.pageSize); i++){
-            this.state.buttonList.push(
+        let buttons = [];
+        for(let i = 1; i <= Math.ceil(size/this.props.pageSize); i++){
+            buttons.push(
                 <li className="page-item">
                     <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
                 </li>
             );
         }
+        this.setState({
+            buttonList: buttons.slice()
+        })
     }
 
     tick() {
@@ -36,11 +38,10 @@ class BoardPagination extends Component {
                 console.log(error);
             });
     }
+
     render() {
         return (
-            <ul className="pagination pagination-lg">
-                {this.state.buttonList}
-            </ul>
+            <BoardPaginationUl>{this.state.buttonList}</BoardPaginationUl>
         );
     }
 }

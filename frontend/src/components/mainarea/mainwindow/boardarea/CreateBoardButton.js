@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import './css/style.css'
+import './style/style.css'
+import {ButtonAttribute, CreateButton} from "./style/BoardAreaStyle";
 
 class CreateBoardButton extends Component {
     render() {
         return (
-            <div className="no-left-padding">
-                <a className="btn btn-primary pull-right fa btn btn-default" href="#createBoard" data-toggle="modal">
+            <CreateButton>
+                <ButtonAttribute>
                     <i className="fa fa-plus"/> Create Board
-                </a>
-            </div>
+                </ButtonAttribute>
+            </CreateButton>
         );
     }
 }
