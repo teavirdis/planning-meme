@@ -27,7 +27,15 @@ class CreateStory extends Component {
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                this.props.onStoryAdd(newStory);
+                console.log(res.headers.location);
+                axios.get(res.headers.location)
+                    .then(result => {
+                        this.props.onStoryAdd(result.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                //this.props.onStoryAdd(newStory);
                 this.setState({
                     description: ""
                 })

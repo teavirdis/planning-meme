@@ -39,7 +39,6 @@ public class BoardResource {
         boardService.create(boardConverter.convertToEntity(boardDto));
     }
 
-
     @POST
     @Path("/{boardId}/members")
     public void addMember(@PathParam("boardId") Long boardId) {

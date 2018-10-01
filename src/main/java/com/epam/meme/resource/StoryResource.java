@@ -37,24 +37,22 @@ public class StoryResource {
 
     @POST
     @ApiOperation(value = "Save story")
-    public void create(@PathParam("boardId") Long boardId,
+    public Response create(@PathParam("boardId") Long boardId,
                            @Valid StoryDto storyDto,
                            @Context UriInfo uriInfo) {
         Story story = storyConverter.convertToEntity(storyDto);
         story.setBoard(boardService.findById(boardId).orElseThrow(NotFoundException::new));
         storyService.create(story);
 
-//        URI uri = uriInfo.getBaseUriBuilder()
-//                .path(UserResource.class)
-//                .path(UserResource.class, "boardResource")
-//                .path(BoardResource.class)
-//                .path(BoardResource.class, "storyResource")
-//                .path(StoryResource.class)
-//                .resolveTemplate("boardId", story.getBoard().getId())
-//                .path(Long.toString(story.getId()))
-//                .build();
-//
-//        return Response.created(uri).build();
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(UserResource.class)
+                .path(UserResource.class, "boardResource")
+                .path(BoardResource.class, "storyResource")
+                .resolveTemplate("boardId", story.getBoard().getId())
+                .path(Long.toString(story.getId()))
+                .build();
+
+        return Response.created(uri).build();
     }
 
     @GET
