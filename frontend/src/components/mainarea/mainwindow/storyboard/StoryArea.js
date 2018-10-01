@@ -9,13 +9,8 @@ import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindo
 import axios from "axios";
 import SignIn from "../../signin/SignIn";
 import StoryElement from "./StoryElement";
-import {BoardAreaDiv} from "../boardarea/style/BoardAreaStyle";
-import MemberElement from "./MemberElement";
-import BoardElement from "../boardarea/BoardElement";
+import MemberList from "./memberarea/MemberList";
 
-const styleUserList = {
-    marginTop: '60px'
-};
 
 class StoryArea extends Component {
 
@@ -29,7 +24,6 @@ class StoryArea extends Component {
     }
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 2000);
 
         this.setState({
             boardName: window.sessionStorage.getItem("boardName")
@@ -43,11 +37,6 @@ class StoryArea extends Component {
         axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
             .then((response) => {
                 this.setState({
-                    boardUsers: response.data.map(item =>
-                        <MemberElement key={item.id}
-                                       id={item.id}
-                                       name={item.username}/>),
-
                     isUserMemberOfBoard: response.data.some(element => {
                         return element.id === JSON.parse(SignIn.identifyCookieByName("user")).id;
                     })
@@ -58,24 +47,7 @@ class StoryArea extends Component {
             });
     }
 
-    tick() {
-        let currentUrl = window.location.href;
-        let regex = /boards\/([\d]+)\/stories/g;
-        let foundBoardId = regex.exec(currentUrl)[1];
 
-        axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
-            .then((response) => {
-                this.setState({
-                    boardUsers: response.data.map(item =>
-                        <MemberElement key={item.id}
-                                       id={item.id}
-                                       name={item.username}/>)
-                })
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
 
     becomeMember() {
         this.setState({
@@ -117,19 +89,14 @@ class StoryArea extends Component {
                                render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
                                                                   becomeMember={this.becomeMember}
                                                                   {...props} />}/>
-                        <div className="row">
+                        <AreaRow>
                             <div className="col-md-9">
                                 <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
                                 <StoryTable storyList={this.state.stories}
                                             onStoriesLoad={this.loadElements} {...this.props} />
                             </div>
-                            <div className="col-md-2 col-md-offset-1 text-center" style={styleUserList}>
-                                Member List
-                                <ul className="list-group">
-                                    {this.state.boardUsers}
-                                </ul>
-                            </div>
-                        </div>
+                            <MemberList/>
+                        </AreaRow>
                         <EditStory/>
                         <ConfirmStoryDelete/>
                     </AreaRow>
