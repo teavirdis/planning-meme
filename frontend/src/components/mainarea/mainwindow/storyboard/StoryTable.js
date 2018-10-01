@@ -7,13 +7,10 @@ class StoryTable extends Component {
 
     constructor(props) {
         super(props);
-
         this.tick();
     }
 
     componentDidMount() {
-        //this.timerID = setInterval(() => this.tick(), 500);
-
     }
 
     componentWillUnmount() {

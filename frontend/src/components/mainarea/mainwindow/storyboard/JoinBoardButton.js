@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import axios from "axios";
+import MemeUtil from "../../../../util/MemeUtil";
+import {BOARD_URL_REGEX} from "../../../../util/TextConstant";
 
 class JoinBoardButton extends Component {
     constructor(props) {
@@ -9,12 +11,7 @@ class JoinBoardButton extends Component {
     }
 
     joinBoard() {
-        let currentUrl = window.location.href;
-        let regex = /boards\/([\d]+)\/stories/g;
-        let foundBoardId = regex.exec(currentUrl)[1];
-        console.log(foundBoardId);
-
-        axios.post("/meme/users/current-user/boards/" + foundBoardId + "/members")
+        axios.post("/meme/users/current-user/boards/" + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href) + "/members")
             .then((response) => {
                 console.log(response);
                 this.props.becomeMember;

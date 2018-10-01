@@ -11,17 +11,6 @@ class SignIn extends Component {
         username: ''
     };
 
-    static identifyCookieByName(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([.$?*|()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
-        ));
-       return matches ? decodeURIComponent(matches[1]).replace('|', ',') : undefined;
-    }
-
-    static deleteCookieByName(name) {
-        document.cookie = name+"=; path=/; domain=.hanatrial.ondemand.com; expires=Session";
-    }
-
     addUser = (e) => {
         e.preventDefault();
         axios.post('/meme/users/', {
