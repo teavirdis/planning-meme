@@ -4,25 +4,17 @@ import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
+import MemeUtil from "../../util/MemeUtil";
 
 class CreateStory extends Component {
     state = {};
-
-    static IsoDateString(date) {
-        function pad(n) {
-            return n < 10 ? "0" + n : n
-        }
-
-        return date.getUTCFullYear() + "-" + pad(date.getUTCMonth() + 1) + "-" + pad(date.getUTCDate()) + "T"
-            + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds())
-    }
 
     addValue = (e) => {
         e.preventDefault();
         let newStory = {
             description: this.state.description,
-            startTime: CreateStory.IsoDateString(new Date())
-        }
+            startTime: MemeUtil.IsoDateString(new Date())
+        };
         axios.post('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories', newStory)
             .then(res => {
                 console.log(res);
@@ -34,8 +26,7 @@ class CreateStory extends Component {
                     })
                     .catch(error => {
                         console.log(error);
-                    })
-                //this.props.onStoryAdd(newStory);
+                    });
                 this.setState({
                     description: ""
                 })
