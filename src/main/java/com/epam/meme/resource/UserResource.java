@@ -28,7 +28,7 @@ public class UserResource {
 
     private static final String COOKIE_NAME = "user";
     private static final String COOKIE_PATH = "/";
-    private static final String COOKIE_DOMAIN = ".hanatrial.ondemand.com";
+    private static final String COOKIE_DOMAIN = "127.0.0.1";//".hanatrial.ondemand.com";
     private static final short COOKIE_EXPIRES_TIME = 3600;
     private static final boolean COOKIE_SECURE = false;
 
@@ -63,7 +63,8 @@ public class UserResource {
 
         return Response
                 .ok(userCookieDto)
-                .cookie(new NewCookie(COOKIE_NAME,
+                .cookie(new NewCookie(
+                        COOKIE_NAME,
                         encodedUserJson,
                         COOKIE_PATH,
                         COOKIE_DOMAIN,

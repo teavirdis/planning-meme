@@ -45,6 +45,4 @@ public class MemeFilter implements ContainerRequestFilter {
             currentUser.setUsername(user.getUsername());
         }
     }
-
-
 }

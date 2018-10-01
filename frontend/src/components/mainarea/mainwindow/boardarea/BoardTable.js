@@ -45,7 +45,7 @@ class BoardTable extends Component {
 
     render() {
         return (
-            <div className="row grayed-box-app">
+            <div className="grayed-box-app">
                 <table className="table table-hover table-boards">
                     <thead>
                     <tr>
