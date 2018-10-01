@@ -90,6 +90,16 @@ class StoryArea extends Component {
                         <CreateStory onStoryAdd={ this.addChildElement } {...this.props} />
                     </AreaRow>
                 </AreaColumns>
+                <div className="col-md-1">
+                    <div className="starter-template">
+                        <div className="login-form">
+                            <div className="sc-jzJRlG col-md-8 col-md-offset-2 collapse in enxKql">
+                                <form style="margin-top: 10%;">
+                                    Hello
+                                  </form>
+                            </div>
+                        </div>
+                    </div></div>
             </AreaContainer>
         );
     }
