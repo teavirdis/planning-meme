@@ -5,7 +5,7 @@ const VotingDiv = styled.div.attrs({
 })``;
 
 const PlayingArea = styled.div.attrs({
-    className: "col-md-12"
+    className: "col-md-9"
 })``;
 
 const PlayBoard = styled.div.attrs({

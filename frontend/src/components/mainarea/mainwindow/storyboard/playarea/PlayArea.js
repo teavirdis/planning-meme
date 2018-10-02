@@ -4,6 +4,22 @@ import {
     PlayingArea
 } from "../style/VotingAreaStyle";
 import Card from "./Card";
+import StartButton from "./StartButton";
+import MemberList from "../memberarea/MemberList";
+
+const StartPlayStyle = {
+    width: '100%',
+    height: '50px',
+    backgroundColor: 'transparent',
+    boxShadow: 'rgba(1, 1, 1, 0.05) 0px 0px 5px 0px',
+    margin: '8px',
+    padding: '5px',
+    borderWidth: 'initial',
+    borderStyle: 'none',
+    borderColor: 'initial',
+    borderImage: 'initial',
+    borderRadius: '8px;'
+};
 
 class PlayArea extends Component {
     state = {
@@ -24,11 +40,19 @@ class PlayArea extends Component {
 
     render() {
         return (
-            <PlayingArea>
-                <CardsUl>
-                    { this.state.cards }
-                </CardsUl>
-            </PlayingArea>
+            <div className="col-md-12">
+                <PlayingArea>
+                    <CardsUl>
+                        {this.state.cards}
+                    </CardsUl>
+                </PlayingArea>
+                <div className="col-md-2 col-md-offset-1">
+                    <div style={StartPlayStyle}>
+                        <StartButton/>
+                    </div>
+                    <MemberList/>
+                </div>
+            </div>
         );
     }
 }
