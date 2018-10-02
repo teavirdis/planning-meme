@@ -65,7 +65,16 @@ const Table = styled.table.attrs({
     className: "table table-hover table-boards"
 })`width: 100%; max-width: 100%; margin-top: 50px; font-weight: 400; font-family: "Open Sans",sans-serif;`;
 
+const Divider = styled.hr`
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #808284;
+    margin: 1em 0;
+    padding: 0;
+`;
+
 export {
     AreaContainer, AreaColumns, BoardAreaColumns, AreaTitle, AreaRow, TableTrClickableTitle, TableNamedTd, TableHiddenXs,
-    TableEditIcon, DeleteIAttribute, Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal
+    TableEditIcon, DeleteIAttribute, Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal, Divider
 }
