@@ -26,7 +26,7 @@ class PlayArea extends Component {
         return (
             <PlayingArea>
                 <CardsUl>
-                    {this.state.cards}
+                    { this.state.cards }
                 </CardsUl>
             </PlayingArea>
         );
