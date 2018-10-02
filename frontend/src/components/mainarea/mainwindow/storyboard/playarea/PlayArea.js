@@ -6,10 +6,11 @@ import {
 import Card from "./Card";
 import StartButton from "./StartButton";
 import MemberList from "../memberarea/MemberList";
+import Timer from "./Timer";
 
 const StartPlayStyle = {
     width: '100%',
-    height: '50px',
+    height: '100%',
     backgroundColor: 'transparent',
     boxShadow: 'rgba(1, 1, 1, 0.05) 0px 0px 5px 0px',
     margin: '8px',
@@ -48,7 +49,7 @@ class PlayArea extends Component {
                 </PlayingArea>
                 <div className="col-md-2 col-md-offset-1">
                     <div style={StartPlayStyle}>
-                        <StartButton/>
+                    <Timer/>
                     </div>
                     <MemberList/>
                 </div>
