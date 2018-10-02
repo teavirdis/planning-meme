@@ -4,17 +4,16 @@ import {
     PlayingArea
 } from "../style/VotingAreaStyle";
 import Card from "./Card";
-import StartButton from "./StartButton";
 import MemberList from "../memberarea/MemberList";
 import Timer from "./Timer";
 
 const StartPlayStyle = {
     width: '100%',
-    height: '100%',
+    height: '7.5em',
     backgroundColor: 'transparent',
     boxShadow: 'rgba(1, 1, 1, 0.05) 0px 0px 5px 0px',
     margin: '8px',
-    padding: '5px',
+    padding: '0.5em 1.5em 0.5em 1.5em',
     borderWidth: 'initial',
     borderStyle: 'none',
     borderColor: 'initial',
@@ -47,11 +46,11 @@ class PlayArea extends Component {
                         {this.state.cards}
                     </CardsUl>
                 </PlayingArea>
-                <div className="col-md-2 col-md-offset-1">
+                <div className="col-md-2 col-md-offset-1 text-center">
                     <div style={StartPlayStyle}>
                     <Timer/>
-                    </div>
                     <MemberList/>
+                    </div>
                 </div>
             </div>
         );

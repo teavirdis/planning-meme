@@ -7,15 +7,16 @@ class Timer extends Component {
         super(props);
         this.state = {
             time: 0,
+            isFinish: false,
             isOn: false,
             start: 0
         };
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
-        this.resetTimer = this.resetTimer.bind(this);
     }
 
     startTimer() {
+        window.scrollTo(0,document.body.scrollHeight);
         this.setState({
             isOn: true,
             time: this.state.time,
@@ -29,12 +30,10 @@ class Timer extends Component {
     }
 
     stopTimer() {
-        this.setState({isOn: false});
-        clearInterval(this.timer)
-    }
-
-    resetTimer() {
-        this.setState({time: 0, isOn: false});
+        this.setState({
+            isOn: false,
+            isFinish: true
+        });
         clearInterval(this.timer)
     }
 
@@ -45,16 +44,15 @@ class Timer extends Component {
         let stop = (this.state.time === 0 || !this.state.isOn)
             ? null
             : <div onClick={this.stopTimer}><StartButton name={"Finish voting"}/></div>;
-        let reset = (this.state.time === 0 || !this.state.isOn)
-            ? null
-            : <div onClick={this.resetTimer}><StartButton name={"Reset"}/></div>;
-
+        let result = (this.state.isFinish)
+            ? <div><i>Your vote: </i><b>8</b></div>
+            : null;
         return (
             <div>
                 <h3>Time: {MemeUtil.formatTime(this.state.time/1000)}</h3>
                 {start}
                 {stop}
-                {reset}
+                {result}
             </div>
         )
     }

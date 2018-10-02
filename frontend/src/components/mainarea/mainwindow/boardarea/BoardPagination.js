@@ -14,7 +14,7 @@ class BoardPagination extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.boardCount != this.props.boardCount) {
+        if (prevProps.boardCount !== this.props.boardCount) {
             this.initializePagination();
         }
     }
