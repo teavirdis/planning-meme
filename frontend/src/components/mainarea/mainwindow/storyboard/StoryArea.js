@@ -8,10 +8,8 @@ import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle, Divider} from "../style/MainWindowStyle";
 import axios from "axios";
 import StoryElement from "./StoryElement";
-import MemberList from "./memberarea/MemberList";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
-import StartButton from "./playarea/StartButton";
 
 
 class StoryArea extends Component {

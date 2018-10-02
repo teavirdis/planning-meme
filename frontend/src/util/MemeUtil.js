@@ -21,6 +21,16 @@ class MemeUtil {
             + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes()) + ":" + pad(date.getUTCSeconds())
     }
 
+    static formatTime(seconds) {
+        return [
+            parseInt(seconds / 60 / 60, 10),
+            parseInt(seconds / 60 % 60, 10),
+            parseInt(seconds % 60, 10)
+        ]
+            .join(":")
+            .replace(/\b(\d)\b/g, "0$1")
+    }
+
     static findIdByUrl(regex, currentUrl){
         return  regex.exec(currentUrl)[1];
     }

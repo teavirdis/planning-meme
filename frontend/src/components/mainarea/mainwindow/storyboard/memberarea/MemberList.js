@@ -6,9 +6,15 @@ import {BOARD_URL_REGEX} from "../../../../../util/TextConstant";
 import $ from 'jquery';
 
 const styleUserList = {
-    marginTop: '60px',
+    marginTop: '50px',
     paddingBottom: '20px',
     paddingTop: '50px'
+};
+
+const uListStyle = {
+    maxHeight: '24em',
+    overflowY: 'auto',
+    minHeight: '3em'
 };
 
 class MemberList extends Component {
@@ -53,7 +59,7 @@ class MemberList extends Component {
                     <div></div>
                 </div>
 
-                <ul className="list-group">
+                <ul className="list-group" style={uListStyle}>
                     {this.state.boardUsers}
                 </ul>
             </div>
