@@ -1,11 +1,15 @@
 import styled from "styled-components";
 
 const AreaContainer = styled.div.attrs({
-    className: "container"
+    className: "container "
 })``;
 
 const AreaColumns = styled.div.attrs({
-    className: "col-md-11 col-md-11 text-left no-top-padding"
+    className: "col-md-9 text-left no-top-padding"
+})``;
+
+const BoardAreaColumns = styled.div.attrs({
+    className: "col-md-12 text-left no-top-padding"
 })``;
 
 const AreaTitle = styled.div` color: #808284; font-size: 24px; margin-top: 3em; margin-bottom: 15px;`;
@@ -62,6 +66,6 @@ const Table = styled.table.attrs({
 })`width: 100%; max-width: 100%; margin-top: 50px; font-weight: 400; font-family: "Open Sans",sans-serif;`;
 
 export {
-    AreaContainer, AreaColumns, AreaTitle, AreaRow, TableTrClickableTitle, TableNamedTd, TableHiddenXs,
+    AreaContainer, AreaColumns, BoardAreaColumns, AreaTitle, AreaRow, TableTrClickableTitle, TableNamedTd, TableHiddenXs,
     TableEditIcon, DeleteIAttribute, Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal
 }

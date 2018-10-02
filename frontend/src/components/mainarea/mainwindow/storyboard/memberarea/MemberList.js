@@ -5,7 +5,9 @@ import MemeUtil from "../../../../../util/MemeUtil";
 import {BOARD_URL_REGEX} from "../../../../../util/TextConstant";
 
 const styleUserList = {
-    marginTop: '60px'
+    marginTop: '60px',
+    paddingBottom: '20px',
+    paddingTop: '50px'
 };
 
 class MemberList extends Component {
@@ -16,6 +18,7 @@ class MemberList extends Component {
     }
 
     componentDidMount() {
+        this.tick();
         this.timerID = setInterval(() => this.tick(), 2000);
     }
 
@@ -36,7 +39,7 @@ class MemberList extends Component {
 
     render() {
         return (
-            <div className="col-md-2 col-md-offset-1 text-center" style={styleUserList}>
+            <div className="text-center" style={styleUserList}>
                 Member List
                 <ul className="list-group">
                     {this.state.boardUsers}

@@ -7,7 +7,7 @@ import ConfirmDelete from "../../../modal/ConfirmDelete";
 import CreateBoard from "../../../modal/CreateBoard";
 import BoardElement from "./BoardElement";
 import {BoardAreaDiv} from "./style/BoardAreaStyle";
-import {AreaColumns, AreaContainer, AreaTitle} from "../style/MainWindowStyle";
+import {AreaContainer, AreaTitle, BoardAreaColumns} from "../style/MainWindowStyle";
 
 class BoardArea extends Component {
 
@@ -43,14 +43,14 @@ class BoardArea extends Component {
         return (
             <AreaContainer>
                 <BoardAreaDiv>
-                    <AreaColumns>
+                    <BoardAreaColumns>
                         <AreaTitle>Recent Boards</AreaTitle>
                         <CreateBoardButton/>
                         <BoardTable onLoad={this.loadElements} boardList={this.state.boards} {...this.props} />
                         <EditBoard/>
                         <CreateBoard onAdd={this.addChildBoardElement}/>
                         <ConfirmDelete/>
-                    </AreaColumns>
+                    </BoardAreaColumns>
                 </BoardAreaDiv>
             </AreaContainer>
         );
