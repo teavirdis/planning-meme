@@ -12,6 +12,6 @@
 - `type` _testCompile 'group:name:version'_ for testing.
 
 ## Demo
-- R: https://planningmemep2000526672trial.hanatrial.ondemand.com/
-- A: https://planningmemep2000530077trial.hanatrial.ondemand.com/
-- M: https://memeplanning1p2000592105trial.hanatrial.ondemand.com/
+- Raman: https://planningmemep2000526672trial.hanatrial.ondemand.com/
+- Andrei: https://planningmemep2000530077trial.hanatrial.ondemand.com/
+- Maksim: https://memeplanning1p2000592105trial.hanatrial.ondemand.com/
