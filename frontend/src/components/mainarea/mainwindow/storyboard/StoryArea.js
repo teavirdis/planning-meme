@@ -3,7 +3,7 @@ import StoryTable from "./StoryTable";
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
-import {Route} from "react-router-dom";
+import { Route } from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
 import axios from "axios";
@@ -75,7 +75,7 @@ class StoryArea extends Component {
 
     loadElements(elements) {
         this.setState(() => ({
-            stories: elements
+            stories: elements.slice()
         }));
     }
 

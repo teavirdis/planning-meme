@@ -15,9 +15,9 @@ class CreateBoard extends Component {
 
     addValue = (e) => {
         e.preventDefault();
-        let boardName = (this.state.name.length > 0 && this.state.name.length < 50) ?
-            this.state.name :
-            this.state.name.substr(0, 49);
+        let boardName = (this.state.name.length > 0 && this.state.name.length < 50)
+            ? this.state.name
+            : this.state.name.substr(0, 49);
 
         let newBoard = {
             name: boardName,
@@ -26,8 +26,7 @@ class CreateBoard extends Component {
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
-                console.log(response);
-                this.props.onAdd(newBoard);
+                this.props.onAdd();
                 this.setState({
                     name: ""
                 })

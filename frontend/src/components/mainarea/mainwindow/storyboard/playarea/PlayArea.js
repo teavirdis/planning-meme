@@ -6,26 +6,35 @@ import {
 import Card from "./Card";
 
 class PlayArea extends Component {
-    state = {
-        data: ["resources/images/0_card.png", "resources/images/half_card.png", "resources/images/1_card.png",
-            "resources/images/2_card.png", "resources/images/3_card.png", "resources/images/5_card.png",
-            "resources/images/8_card.png", "resources/images/13_card.png",
-            "resources/images/20_card.png", "resources/images/40_card.png", "resources/images/100_card.png",
-            "resources/images/coffee_card.png", "resources/images/question_card.png"],
-        cards: []
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: ["resources/images/0_card.png", "resources/images/half_card.png", "resources/images/1_card.png",
+                "resources/images/2_card.png", "resources/images/3_card.png", "resources/images/5_card.png",
+                "resources/images/8_card.png", "resources/images/13_card.png",
+                "resources/images/20_card.png", "resources/images/40_card.png", "resources/images/100_card.png",
+                "resources/images/coffee_card.png", "resources/images/question_card.png"],
+            cards: []
+        };
+    }
 
     componentDidMount() {
-        for (let i=0; i<this.state.data.length; i++){
-            this.state.cards.push(<Card source={this.state.data[i]}/>)
+        let initCards = [];
+        for (let i = 0; i < this.state.data.length; i++) {
+            initCards.push( <Card source={this.state.data[i]}/> )
         }
+        this.setState({
+            cards: initCards.slice()
+        });
     }
 
     render() {
         return (
             <PlayingArea>
                 <CardsUl>
-                    {this.state.cards}
+                    { this.state.cards }
                 </CardsUl>
             </PlayingArea>
         );

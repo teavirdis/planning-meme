@@ -35,7 +35,6 @@ class CreateStory extends Component {
                     .catch(error => {
                         console.log(error);
                     })
-                //this.props.onStoryAdd(newStory);
                 this.setState({
                     description: ""
                 })
