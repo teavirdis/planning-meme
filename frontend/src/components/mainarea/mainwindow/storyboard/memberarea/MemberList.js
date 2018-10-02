@@ -3,6 +3,7 @@ import axios from "axios";
 import MemberElement from "./MemberElement";
 import MemeUtil from "../../../../../util/MemeUtil";
 import {BOARD_URL_REGEX} from "../../../../../util/TextConstant";
+import $ from 'jquery';
 
 const styleUserList = {
     marginTop: '60px',
@@ -18,13 +19,13 @@ class MemberList extends Component {
     }
 
     componentDidMount() {
-        this.tick();
-        this.timerID = setInterval(() => this.tick(), 2000);
+        this.timerID = setInterval(() => this.tick(), 500);
     }
 
     tick() {
         axios.get("/meme/users/current-user/boards/" + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href) + "/members")
             .then((response) => {
+                $('.spinner').remove();
                 this.setState({
                     boardUsers: response.data.map(item =>
                         <MemberElement key={item.id}
@@ -41,6 +42,17 @@ class MemberList extends Component {
         return (
             <div className="text-center" style={styleUserList}>
                 Member List
+                <div className="spinner circles">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
                 <ul className="list-group">
                     {this.state.boardUsers}
                 </ul>
