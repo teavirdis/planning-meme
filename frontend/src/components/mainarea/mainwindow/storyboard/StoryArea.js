@@ -73,27 +73,27 @@ class StoryArea extends Component {
 
     render() {
         return (
-            <AreaContainer id="storyArea">
-                <AreaColumns>
-                    <AreaTitle>{this.state.boardName}</AreaTitle>
-                    <AreaRow>
-                        <Route path={`${this.props.match.url}/:storyId`}
-                               render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
-                                                                  becomeMember={this.becomeMember}
-                                                                  {...props} />}/>
+                <AreaContainer id="storyArea">
+                    <AreaColumns>
+                        <AreaTitle>{this.state.boardName}</AreaTitle>
                         <AreaRow>
-                            <div className="col-md-9">
+                            <Route path={`${this.props.match.url}/:storyId`}
+                                   render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
+                                                                      becomeMember={this.becomeMember}
+                                                                      {...props} />}/>
+                            <div>
                                 <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
                                 <StoryTable storyList={this.state.stories}
                                             onStoriesLoad={this.loadElements} {...this.props} />
                             </div>
-                            <MemberList/>
+                            <EditStory/>
+                            <ConfirmStoryDelete/>
                         </AreaRow>
-                        <EditStory/>
-                        <ConfirmStoryDelete/>
-                    </AreaRow>
-                </AreaColumns>
-            </AreaContainer>
+                    </AreaColumns>
+                    <div className="col-md-2 col-md-offset-1">
+                        <MemberList/>
+                    </div>
+                </AreaContainer>
         );
     }
 }
