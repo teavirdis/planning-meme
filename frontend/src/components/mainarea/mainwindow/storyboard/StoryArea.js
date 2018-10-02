@@ -11,6 +11,7 @@ import StoryElement from "./StoryElement";
 import MemberList from "./memberarea/MemberList";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
+import StartButton from "./playarea/StartButton";
 
 
 class StoryArea extends Component {
@@ -108,9 +109,6 @@ class StoryArea extends Component {
                             <ConfirmStoryDelete/>
                         </AreaRow>
                     </AreaColumns>
-                    <div className="col-md-2 col-md-offset-1">
-                        <MemberList/>
-                    </div>
                 </AreaContainer>
         );
     }

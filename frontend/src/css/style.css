@@ -10,6 +10,14 @@ a, img {
     cursor: pointer;
 }
 
+.create-story{
+    cursor: pointer;
+}
+
+.create-story:hover{
+    background: #adb5b52e;
+    cursor: pointer;
+}
 img:hover{
     -moz-box-shadow: 0 0 10px #b1b1b1;
     box-shadow: 0 0 10px #b1b1b1;

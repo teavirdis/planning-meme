@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style/style.css'
-import {ButtonAttribute, CreateButton} from "./style/BoardAreaStyle";
+import {ButtonAttribute, CreateButton} from "../style/MainWindowStyle";
 
 class CreateBoardButton extends Component {
     render() {
