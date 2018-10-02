@@ -11,11 +11,12 @@ class JoinBoardButton extends Component {
     }
 
     joinBoard() {
-        axios.post("/meme/users/current-user/boards/" + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href) + "/members")
+        axios.post("/meme/users/current-user/boards/"
+            + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href)
+            + "/members")
             .then((response) => {
                 console.log(response);
-                this.props.becomeMember;
-                //TODO create and call this.props.onMemberAdd()
+                this.props.becomeMember();
             })
             .catch((error) =>{
                 console.log(error);
