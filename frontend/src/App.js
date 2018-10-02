@@ -33,10 +33,6 @@ class App extends Component {
         this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
     }
 
-    componentDidMount() {
-
-    }
-
     handleAuthStatusChange() {
         this.setState(state => ({
             isLoggedIn: !state.isLoggedIn

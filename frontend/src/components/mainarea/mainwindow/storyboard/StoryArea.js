@@ -7,9 +7,10 @@ import { Route } from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
 import axios from "axios";
-import SignIn from "../../signin/SignIn";
 import StoryElement from "./StoryElement";
 import MemberList from "./memberarea/MemberList";
+import MemeUtil from "../../../../util/MemeUtil";
+import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
 
 
 class StoryArea extends Component {
@@ -24,21 +25,15 @@ class StoryArea extends Component {
     }
 
     componentDidMount() {
-
         this.setState({
             boardName: window.sessionStorage.getItem("boardName")
         });
 
-        let currentUrl = window.location.href;
-        let regex = /boards\/([\d]+)\/stories/g;
-        let foundBoardId = regex.exec(currentUrl)[1];
-        console.log(foundBoardId);
-
-        axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
+        axios.get("/meme/users/current-user/boards/" + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href) + "/members")
             .then((response) => {
                 this.setState({
                     isUserMemberOfBoard: response.data.some(element => {
-                        return element.id === JSON.parse(SignIn.identifyCookieByName("user")).id;
+                        return element.id === JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id;
                     })
                 })
             })
@@ -47,14 +42,11 @@ class StoryArea extends Component {
             });
     }
 
-
-
     becomeMember() {
         this.setState({
             isUserMemberOfBoard: true
         })
     }
-
 
     addChildStoryElement(story) {
         const stories = this.state.stories;
@@ -81,27 +73,27 @@ class StoryArea extends Component {
 
     render() {
         return (
-            <AreaContainer id="storyArea">
-                <AreaColumns>
-                    <AreaTitle>{this.state.boardName}</AreaTitle>
-                    <AreaRow>
-                        <Route path={`${this.props.match.url}/:storyId`}
-                               render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
-                                                                  becomeMember={this.becomeMember}
-                                                                  {...props} />}/>
+                <AreaContainer id="storyArea">
+                    <AreaColumns>
+                        <AreaTitle>{this.state.boardName}</AreaTitle>
                         <AreaRow>
-                            <div className="col-md-9">
+                            <Route path={`${this.props.match.url}/:storyId`}
+                                   render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
+                                                                      becomeMember={this.becomeMember}
+                                                                      {...props} />}/>
+                            <div>
                                 <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
                                 <StoryTable storyList={this.state.stories}
                                             onStoriesLoad={this.loadElements} {...this.props} />
                             </div>
-                            <MemberList/>
+                            <EditStory/>
+                            <ConfirmStoryDelete/>
                         </AreaRow>
-                        <EditStory/>
-                        <ConfirmStoryDelete/>
-                    </AreaRow>
-                </AreaColumns>
-            </AreaContainer>
+                    </AreaColumns>
+                    <div className="col-md-2 col-md-offset-1">
+                        <MemberList/>
+                    </div>
+                </AreaContainer>
         );
     }
 }

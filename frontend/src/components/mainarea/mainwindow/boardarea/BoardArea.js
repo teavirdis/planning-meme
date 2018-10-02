@@ -7,7 +7,7 @@ import ConfirmDelete from "../../../modal/ConfirmDelete";
 import CreateBoard from "../../../modal/CreateBoard";
 import BoardElement from "./BoardElement";
 import {BoardAreaDiv} from "./style/BoardAreaStyle";
-import {AreaColumns, AreaContainer, AreaTitle} from "../style/MainWindowStyle";
+import {AreaContainer, AreaTitle, BoardAreaColumns} from "../style/MainWindowStyle";
 import axios from "axios";
 
 class BoardArea extends Component {
@@ -83,7 +83,7 @@ class BoardArea extends Component {
         return (
             <AreaContainer>
                 <BoardAreaDiv>
-                    <AreaColumns>
+                    <BoardAreaColumns>
                         <AreaTitle>Recent Boards</AreaTitle>
                         <CreateBoardButton/>
                         <BoardTable boardList={this.state.boards}
@@ -93,7 +93,7 @@ class BoardArea extends Component {
                         <EditBoard/>
                         <CreateBoard onAdd={ this.reloadPage }/>
                         <ConfirmDelete/>
-                    </AreaColumns>
+                    </BoardAreaColumns>
                 </BoardAreaDiv>
             </AreaContainer>
         );

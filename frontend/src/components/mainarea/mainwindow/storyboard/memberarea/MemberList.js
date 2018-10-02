@@ -1,10 +1,14 @@
-import {AreaRow} from "../../style/MainWindowStyle";
 import React, {Component} from "react";
 import axios from "axios";
 import MemberElement from "./MemberElement";
+import MemeUtil from "../../../../../util/MemeUtil";
+import {BOARD_URL_REGEX} from "../../../../../util/TextConstant";
+import $ from 'jquery';
 
 const styleUserList = {
-    marginTop: '60px'
+    marginTop: '60px',
+    paddingBottom: '20px',
+    paddingTop: '50px'
 };
 
 class MemberList extends Component {
@@ -15,16 +19,13 @@ class MemberList extends Component {
     }
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 2000);
+        this.timerID = setInterval(() => this.tick(), 500);
     }
 
     tick() {
-        let currentUrl = window.location.href;
-        let regex = /boards\/([\d]+)\/stories/g;
-        let foundBoardId = regex.exec(currentUrl)[1];
-
-        axios.get("/meme/users/current-user/boards/" + foundBoardId + "/members")
+        axios.get("/meme/users/current-user/boards/" + MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href) + "/members")
             .then((response) => {
+                $('.spinner').remove();
                 this.setState({
                     boardUsers: response.data.map(item =>
                         <MemberElement key={item.id}
@@ -39,12 +40,23 @@ class MemberList extends Component {
 
     render() {
         return (
-        <div className="col-md-2 col-md-offset-1 text-center" style={styleUserList}>
-            Member List
-            <ul className="list-group">
-                {this.state.boardUsers}
-            </ul>
-        </div>
+            <div className="text-center" style={styleUserList}>
+                Member List
+                <div className="spinner circles">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+                <ul className="list-group">
+                    {this.state.boardUsers}
+                </ul>
+            </div>
         );
     }
 }

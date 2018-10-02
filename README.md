@@ -10,3 +10,8 @@
 - `click` to _Tasks -> build -> war_ in order to build **war**;
 - `type` _compile 'group:name:version'_ or `insert` dependency from **maven** (gradle automatically converts dependency to the appropriate format) in order to load dependency;
 - `type` _testCompile 'group:name:version'_ for testing.
+
+## Demo
+- Raman: https://planningmemep2000526672trial.hanatrial.ondemand.com/
+- Andrei: https://planningmemep2000530077trial.hanatrial.ondemand.com/
+- Maksim: https://memeplanning1p2000592105trial.hanatrial.ondemand.com/

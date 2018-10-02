@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 
 const divStyle = {
     background: '#920d0d80',

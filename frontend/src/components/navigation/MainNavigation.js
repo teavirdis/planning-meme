@@ -1,5 +1,4 @@
 import React from 'react';
-import SignIn from "../mainarea/signin/SignIn";
 import {
     DropdownButton,
     DropdownMenu,
@@ -8,7 +7,8 @@ import {
     MainNavigationUl, NavigationUl,
     SignOutButton, UserPlace
 } from "./style/NavigationStyle";
-
+import MemeUtil from "../../util/MemeUtil";
+import {USER_COOKIE_NAME} from "../../util/TextConstant";
 
 class MainNavigation extends React.Component {
     constructor(props) {
@@ -17,11 +17,11 @@ class MainNavigation extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({username: JSON.parse(SignIn.identifyCookieByName('user')).username});
+        this.setState({username: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).username});
     }
 
     static handleSignOut() {
-        SignIn.deleteCookieByName('user');
+        MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
         window.localStorage.removeItem("isLoggedIn");
     }
 
@@ -34,7 +34,7 @@ class MainNavigation extends React.Component {
                             <UserPlace id="userPlace">{this.state.username}</UserPlace><b className="caret"/>
                         </DropdownToggle>
                         <DropdownMenu>
-                            <li><a href="/#/boards">My boards</a></li>
+                            <li><a href={"/#/boards"}>My boards</a></li>
                             <li className="divider"/>
                             <li>
                                 <SignOutButton href="/" onClick={MainNavigation.handleSignOut}>Sign Out</SignOutButton>

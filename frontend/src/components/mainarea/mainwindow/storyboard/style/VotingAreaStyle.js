@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import React from "react";
 
 const VotingDiv = styled.div.attrs({
     className: "col-md-4"
 })``;
 
 const PlayingArea = styled.div.attrs({
-    className: "col-md-10"
+    className: "col-md-12"
 })``;
 
 const PlayBoard = styled.div.attrs({
@@ -33,9 +32,9 @@ const CardBlock = styled.li`padding-left: 0`;
 
 const CardImg = styled.img`
 padding: 5px; 
-width: 157px; 
-height: 230px;`;
+width: 9.813em; 
+height: 14.375em;`;
 
 export {
-    VotingDiv, PlayingArea, PlayBoard, PlayGround, CardsBlock, CardsUl, CardBlock, CardImg
+    PlayingArea, CardsUl, CardBlock, CardImg
 }

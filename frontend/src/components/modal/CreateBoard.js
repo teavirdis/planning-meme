@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import CreateStory from "./CreateStory";
-import SignIn from "../mainarea/signin/SignIn";
 
 import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
+import MemeUtil from "../../util/MemeUtil";
+import {USER_COOKIE_NAME} from "../../util/TextConstant";
 
 class CreateBoard extends Component {
     state = {
@@ -21,8 +21,8 @@ class CreateBoard extends Component {
 
         let newBoard = {
             name: boardName,
-            startTime: CreateStory.IsoDateString(new Date()), //TODO Should be done on server
-            admin: {id: JSON.parse(SignIn.identifyCookieByName('user')).id} //TODO
+            startTime: MemeUtil.IsoDateString(new Date()), //TODO Should be done on server
+            admin: {id: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id} //TODO
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
