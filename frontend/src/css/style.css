@@ -28,10 +28,9 @@ img:hover{
     box-shadow: 0 0 10px #b1b1b1;
 }
 
-img:active{
+.filterImg{
     filter: hue-rotate(-55deg);
 }
-
 .starter-template {
     padding: 2% 15px;
     text-align: center;
