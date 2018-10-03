@@ -5,7 +5,7 @@ const AreaContainer = styled.div.attrs({
 })``;
 
 const AreaColumns = styled.div.attrs({
-    className: "col-md-9 text-left no-top-padding"
+    className: "col-md-12 text-left no-top-padding"
 })``;
 
 const BoardAreaColumns = styled.div.attrs({
@@ -21,11 +21,6 @@ const AreaRow = styled.div.attrs({
 const TableThStyle = styled.th`
     font-weight: 400;
     border-bottom: 2px solid #ddd;
-    
-    &:hover {
-        cursor: pointer,
-        background: #b9bbbe
-    }
 `;
 
 const TableThStyleHidden = styled(TableThStyle).attrs({
@@ -39,6 +34,20 @@ const TableThStyleModal = styled(TableThStyle).attrs({
 
 const TableTrClickableTitle = styled.tr.attrs({
     className: "clickable ng-scope"
+})`
+cursor: pointer;
+`;
+
+const ButtonAttribute = styled.a.attrs({
+    className: "btn btn-primary pull-right fa btn btn-default",
+    'data-target': "#createBoard",
+    'data-toggle': "modal"
+})`padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.428571429;
+    text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;
+    border: 1px solid transparent; border-radius: 4px;`;
+
+const CreateButton = styled.div.attrs({
+    className: "no-left-padding"
 })``;
 
 const TableNamedTd = styled.td.attrs({
@@ -65,7 +74,32 @@ const Table = styled.table.attrs({
     className: "table table-hover table-boards"
 })`width: 100%; max-width: 100%; margin-top: 50px; font-weight: 400; font-family: "Open Sans",sans-serif;`;
 
+const Divider = styled.hr`
+    display: block;
+    height: 2px;
+    border: 0;
+    border-top: 2px solid #808284;
+    margin: 1em 0;
+    padding: 0;
+`;
+
 export {
-    AreaContainer, AreaColumns, BoardAreaColumns, AreaTitle, AreaRow, TableTrClickableTitle, TableNamedTd, TableHiddenXs,
-    TableEditIcon, DeleteIAttribute, Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal
+    AreaContainer,
+    AreaColumns,
+    BoardAreaColumns,
+    AreaTitle,
+    AreaRow,
+    TableTrClickableTitle,
+    TableNamedTd,
+    TableHiddenXs,
+    TableEditIcon,
+    DeleteIAttribute,
+    Table,
+    TableRow,
+    TableThStyle,
+    TableThStyleHidden,
+    TableThStyleModal,
+    ButtonAttribute,
+    CreateButton,
+    Divider
 }

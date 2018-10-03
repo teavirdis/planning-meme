@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './style/style.css'
-import axios from "axios";
 import {BoardPaginationUl} from "./style/BoardAreaStyle";
 
 
@@ -11,16 +10,21 @@ class BoardPagination extends Component {
     };
 
     componentDidMount() {
-        this.timerID = setInterval(() => this.tick(), 500);
-        this.tick();
+        this.initializePagination();
     }
 
-    initializePagination(size){
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.boardCount !== this.props.boardCount) {
+            this.initializePagination();
+        }
+    }
+
+    initializePagination(){
         let buttons = [];
-        for(let i = 1; i <= Math.ceil(size/this.props.pageSize); i++){
+        for (let i = 1; i <= Math.ceil(this.props.boardCount / this.props.pageSize); i++){
             buttons.push(
                 <li className="page-item">
-                    <a className="page-link" onClick={this.props.pageNumberHandler}>{i}</a>
+                    <a className="page-link" onClick={ this.props.pageNumberHandler }>{i}</a>
                 </li>
             );
         }
@@ -29,19 +33,9 @@ class BoardPagination extends Component {
         })
     }
 
-    tick() {
-        axios.get('/meme/users/current-user/')
-            .then((response) => {
-                this.initializePagination(response.data.countOfBoards)
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
     render() {
         return (
-            <BoardPaginationUl>{this.state.buttonList}</BoardPaginationUl>
+            <BoardPaginationUl>{ this.state.buttonList }</BoardPaginationUl>
         );
     }
 }

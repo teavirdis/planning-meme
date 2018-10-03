@@ -7,21 +7,17 @@ class StoryTable extends Component {
 
     constructor(props) {
         super(props);
-        this.tick();
     }
 
     componentDidMount() {
+        this.loadStories();
     }
 
-    componentWillUnmount() {
-        clearInterval(this.timerID);
-    }
-
-    tick() {
-        console.log(this.props.match.params.boardId);
-        console.log(this.props.match.params);
+    loadStories() {
         if (this.props.match.params.boardId != null) {
-            axios.get('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories?page=0&pageSize=5')
+            axios.get('/meme/users/current-user/boards/'
+                + this.props.match.params.boardId
+                + '/stories?page=0&pageSize=5')
                 .then((response) => {
                     this.props.onStoriesLoad(response.data.map(story =>
                         <StoryElement

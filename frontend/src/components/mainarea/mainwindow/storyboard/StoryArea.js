@@ -3,12 +3,11 @@ import StoryTable from "./StoryTable";
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
-import {Route} from "react-router-dom";
+import { Route } from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
-import {AreaColumns, AreaContainer, AreaRow, AreaTitle} from "../style/MainWindowStyle";
+import {AreaColumns, AreaContainer, AreaRow, AreaTitle, Divider} from "../style/MainWindowStyle";
 import axios from "axios";
 import StoryElement from "./StoryElement";
-import MemberList from "./memberarea/MemberList";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
 
@@ -18,10 +17,16 @@ class StoryArea extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {boardName: "", boardUsers: [], isUserMemberOfBoard: false, stories: []};
+        this.state = {
+            boardName: "",
+            boardUsers: [],
+            isUserMemberOfBoard: false,
+            stories: []
+        };
         this.becomeMember = this.becomeMember.bind(this);
         this.loadElements = this.loadElements.bind(this);
         this.addChildStoryElement = this.addChildStoryElement.bind(this);
+        this.specifyStoryName = this.specifyStoryName.bind(this);
     }
 
     componentDidMount() {
@@ -67,32 +72,41 @@ class StoryArea extends Component {
 
     loadElements(elements) {
         this.setState(() => ({
-            stories: elements
+            stories: elements.slice()
         }));
+    }
+
+    specifyStoryName(storyName) {
+        this.setState({
+            storyName: storyName
+        });
     }
 
     render() {
         return (
                 <AreaContainer id="storyArea">
                     <AreaColumns>
-                        <AreaTitle>{this.state.boardName}</AreaTitle>
+                        <AreaTitle>
+                            Board: { this.state.boardName }
+                        </AreaTitle>
+                        <Divider/>
                         <AreaRow>
                             <Route path={`${this.props.match.url}/:storyId`}
                                    render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
                                                                       becomeMember={this.becomeMember}
+                                                                      storyName={this.state.storyName}
                                                                       {...props} />}/>
                             <div>
                                 <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
                                 <StoryTable storyList={this.state.stories}
-                                            onStoriesLoad={this.loadElements} {...this.props} />
+                                            onStoriesLoad={this.loadElements}
+                                            specifyStoryName={this.specifyStoryName}
+                                            {...this.props} />
                             </div>
                             <EditStory/>
                             <ConfirmStoryDelete/>
                         </AreaRow>
                     </AreaColumns>
-                    <div className="col-md-2 col-md-offset-1">
-                        <MemberList/>
-                    </div>
                 </AreaContainer>
         );
     }
