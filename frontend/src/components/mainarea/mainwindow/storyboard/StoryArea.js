@@ -3,7 +3,7 @@ import StoryTable from "./StoryTable";
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import JoinOrVoteView from "./JoinOrVoteView";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle, Divider} from "../style/MainWindowStyle";
 import axios from "axios";
@@ -84,30 +84,30 @@ class StoryArea extends Component {
 
     render() {
         return (
-                <AreaContainer id="storyArea">
-                    <AreaColumns>
-                        <AreaTitle>
-                            Board: { this.state.boardName }
-                        </AreaTitle>
-                        <Divider/>
-                        <AreaRow>
-                            <Route path={`${this.props.match.url}/:storyId`}
-                                   render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
-                                                                      becomeMember={this.becomeMember}
-                                                                      storyName={this.state.storyName}
-                                                                      {...props} />}/>
-                            <div>
-                                <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
-                                <StoryTable storyList={this.state.stories}
-                                            onStoriesLoad={this.loadElements}
-                                            specifyStoryName={this.specifyStoryName}
-                                            {...this.props} />
-                            </div>
-                            <EditStory/>
-                            <ConfirmStoryDelete/>
-                        </AreaRow>
-                    </AreaColumns>
-                </AreaContainer>
+            <AreaContainer id="storyArea">
+                <AreaColumns>
+                    <AreaTitle>
+                        Board: {this.state.boardName}
+                    </AreaTitle>
+                    <Divider/>
+                    <AreaRow>
+                        <Route path={`${this.props.match.url}/:storyId`}
+                               render={(props) => <JoinOrVoteView isUserMemberOfBoard={this.state.isUserMemberOfBoard}
+                                                                  becomeMember={this.becomeMember}
+                                                                  storyName={this.state.storyName}
+                                                                  {...props} />}/>
+                        <div>
+                            <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props} />
+                            <StoryTable storyList={this.state.stories}
+                                        onStoriesLoad={this.loadElements}
+                                        specifyStoryName={this.specifyStoryName}
+                                        {...this.props} />
+                        </div>
+                        <EditStory/>
+                        <ConfirmStoryDelete/>
+                    </AreaRow>
+                </AreaColumns>
+            </AreaContainer>
         );
     }
 }
