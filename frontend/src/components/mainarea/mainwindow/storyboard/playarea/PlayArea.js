@@ -32,8 +32,8 @@ class PlayArea extends Component {
 
     componentDidMount() {
         this.setState({
-            cards: this.state.data.map(function (sourcePath) {
-                return <Card source={sourcePath}/>
+            cards: this.state.data.map(function (sourcePath, index) {
+                return <Card id={index} source={sourcePath}/>
             })
         });
     }
@@ -42,7 +42,7 @@ class PlayArea extends Component {
         return (
             <div className="col-md-12">
                 <PlayingArea>
-                    <CardsUl>
+                    <CardsUl id="all_cards">
                         {this.state.cards}
                     </CardsUl>
                 </PlayingArea>

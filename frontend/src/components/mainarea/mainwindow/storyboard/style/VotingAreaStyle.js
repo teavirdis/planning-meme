@@ -10,7 +10,9 @@ const CardsUl = styled.ul.attrs({
     transform: rotate(0deg); list-style-type: none; margin: 8px; padding: 5px; border-width: initial;
     border-style: none; border-color: initial; border-image: initial;  border-radius: 4px;`;
 
-const CardBlock = styled.li`padding-left: 0`;
+const CardBlock = styled.li.attrs({
+    className: "cardImg"
+})`padding-left: 0`;
 
 const CardImg = styled.img`
 padding: 5px; 

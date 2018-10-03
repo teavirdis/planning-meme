@@ -5,10 +5,25 @@ import {
 
 class Card extends Component {
 
-    render(){
+    constructor(props) {
+        super(props);
+    }
+
+    changeActiveState = (e) => {
+        let element = e.target;
+        let header = document.getElementById("all_cards");
+        let liImages = header.getElementsByClassName("cardImg");
+        for (let i = 0; i < liImages.length; i++) {
+            let currentImage = liImages[i].firstChild;
+            currentImage.className = currentImage.className.replace("filterImg", "");
+        }
+        element.className += " filterImg";
+    };
+
+    render() {
         return (
             <CardBlock>
-                <CardImg src={this.props.source} draggable="false"/>
+                <CardImg id={this.props.id} src={this.props.source} onClick={this.changeActiveState} draggable="false"/>
             </CardBlock>
         );
     }
