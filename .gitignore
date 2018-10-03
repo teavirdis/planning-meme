@@ -39,3 +39,7 @@ src/main/webapp/resources/static
 # Individual properties
 cloud/*.properties
 src/main/webapp/index.html
+.classpath
+.project
+.settings
+WebContent
