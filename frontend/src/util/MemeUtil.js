@@ -32,7 +32,9 @@ class MemeUtil {
     }
 
     static findIdByUrl(regex, currentUrl){
-        return  regex.exec(currentUrl)[1];
+        let resultGroupMatch = regex.exec(currentUrl)[1];
+        regex.lastIndex = 0;
+        return resultGroupMatch;
     }
 }
 

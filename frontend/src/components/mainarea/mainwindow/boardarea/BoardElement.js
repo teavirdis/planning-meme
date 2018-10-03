@@ -15,7 +15,7 @@ class BoardElement extends Component {
 
     constructor(props) {
         super(props);
-        this.goToStory = this.goToStory.bind(this);
+        this.goToStoryList = this.goToStoryList.bind(this);
     }
 
     deleteBoard() {
@@ -26,25 +26,24 @@ class BoardElement extends Component {
         sessionStorage.setItem("idOfBoardToEdit", this.props.id);
     }
 
-    goToStory() {
+    goToStoryList() {
         this.props.history.push(`${this.props.match.url}/` + this.props.id + `/stories`);
-        window.sessionStorage.setItem("boardName", this.props.name);
     }
 
     render() {
         return (
             <TableTrClickableTitle>
-                <TableNamedTd onClick={this.goToStory}>
+                <TableNamedTd onClick={this.goToStoryList}>
                     <div>{this.props.name}</div>
                 </TableNamedTd>
-                <TableHiddenXs onClick={this.goToStory}>
+                <TableHiddenXs onClick={this.goToStoryList}>
                     <div>
                         In: <BoardHiddenSpan>
                         {String(this.props.startTime).replace('T', ' / ')}
                     </BoardHiddenSpan>
                     </div>
                 </TableHiddenXs>
-                <TableHiddenXs onClick={this.goToStory}>
+                <TableHiddenXs onClick={this.goToStoryList}>
                     <BoardTableBindDiv>
                         {this.props.storiesCount}
                     </BoardTableBindDiv>
