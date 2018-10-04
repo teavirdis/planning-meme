@@ -13,6 +13,12 @@ class StoryTable extends Component {
         this.loadStories();
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.location !== this.props.location) {
+            this.loadStories();
+        }
+    }
+
     loadStories() {
         if (this.props.match.params.boardId != null) {
             axios.get('/meme/users/current-user/boards/'
