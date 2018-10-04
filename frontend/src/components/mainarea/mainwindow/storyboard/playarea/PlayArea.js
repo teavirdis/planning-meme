@@ -27,13 +27,23 @@ class PlayArea extends Component {
             "resources/images/2_card.png", "resources/images/3_card.png", "resources/images/5_card.png",
             "resources/images/8_card.png", "resources/images/13_card.png",
             "resources/images/20_card.png", "resources/images/40_card.png", "resources/images/100_card.png",
-            "resources/images/coffee_card.png", "resources/images/question_card.png"]
+            "resources/images/coffee_card.png", "resources/images/question_card.png"],
+        values: ["0","1/2","1","2","3","5","8","13","20","40","100","break","no idea"]
     };
 
+    initializeDataMap() {
+        let map = new Map();
+        for( let i=0; i<this.state.data.length; i++){
+            map.set(this.state.values[i], this.state.data[i]);
+        }
+        this.state.dataMap = map;
+    }
+
     componentDidMount() {
+        this.initializeDataMap();
         this.setState({
-            cards: this.state.data.map(function (sourcePath, index) {
-                return <Card id={index} source={sourcePath}/>
+            cards: Array.from(this.state.dataMap.entries()).map((currentImgData, index) => {
+                return <Card id={index} source={currentImgData[1]} desc={currentImgData[0]}/>
             })
         });
     }

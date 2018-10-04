@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import StartButton from "./StartButton";
 import MemeUtil from "../../../../../util/MemeUtil";
+import $ from 'jquery';
+
 
 class Timer extends Component {
     constructor(props) {
@@ -9,7 +11,8 @@ class Timer extends Component {
             time: 0,
             isFinish: false,
             isOn: false,
-            start: 0
+            start: 0,
+            result: null
         };
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
@@ -32,9 +35,10 @@ class Timer extends Component {
     stopTimer() {
         this.setState({
             isOn: false,
-            isFinish: true
+            isFinish: true,
+            result: $('.filterImg').attr('alt')
         });
-        clearInterval(this.timer)
+        clearInterval(this.timer);
     }
 
     render() {
@@ -45,7 +49,7 @@ class Timer extends Component {
             ? null
             : <div onClick={this.stopTimer}><StartButton name={"Finish voting"}/></div>;
         let result = (this.state.isFinish)
-            ? <div><i>Your vote: </i><b>8</b></div>
+            ? <div><i>Your vote: </i><b>{this.state.result}</b></div>
             : null;
         return (
             <div>
