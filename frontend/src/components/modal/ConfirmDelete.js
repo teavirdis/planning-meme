@@ -8,10 +8,9 @@ import {
 class ConfirmDelete extends Component {
 
     deleteBoard() {
-        axios.delete('/meme/users/current-user/boards/' + sessionStorage.getItem("idOfBoardToDelete"))
+        axios.delete('/meme/users/current-user/boards/' + this.props.boardIdToDelete)
             .then((response) => {
-                console.log(response);
-                sessionStorage.removeItem("idOfBoardToDelete");
+                this.props.onReloadPage();
             })
             .catch((error) => {
                 console.log(error);
