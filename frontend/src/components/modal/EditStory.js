@@ -43,12 +43,12 @@ class EditStory extends Component {
                             <ModalTitle>Edit Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Put your stories text here." onChange={this.onInputChange}
+                            <ModalInput placeholder={} onChange={this.onInputChange}
                                         required=""/>
                         </ModalBody>
                         <ModalFooter>
-                            <CloseButton>Close</CloseButton>
                             <Button onClick={this.editValue}>Edit</Button>
+                             <CloseButton>Close</CloseButton>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

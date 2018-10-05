@@ -128,7 +128,7 @@ class StoryArea extends Component {
                                         specifyStoryName={this.specifyStoryName}
                                         {...this.props}/>
                         </div>
-                        <EditStory/>
+                        <EditStory name=/>
                         <ConfirmStoryDelete/>
                     </AreaRow>
                 </AreaColumns>

@@ -58,10 +58,8 @@ class CreateStory extends Component {
                                         value={ this.state.description }/>
                         </ModalBody>
                         <ModalFooter>
+                            <Button onClick={this.addValue}>Create</Button>
                             <CloseButton>Close</CloseButton>
-                            <Button onClick={ this.addValue }>
-                                Create
-                            </Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

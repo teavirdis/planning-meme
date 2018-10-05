@@ -48,8 +48,8 @@ class EditBoard extends Component {
                                         required="required" value={this.state.name}/>
                         </ModalBody>
                         <ModalFooter>
-                            <CloseButton>Close</CloseButton>
                             <Button onClick={(e) => this.editBoard(e)}>Edit</Button>
+                            <CloseButton>Close</CloseButton>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>
