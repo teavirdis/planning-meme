@@ -8,21 +8,22 @@ import {
 import MemeUtil from "../../util/MemeUtil";
 import {USER_COOKIE_NAME} from "../../util/TextConstant";
 
+const BOARD_NAME_LENGTH = 47;
+
 class CreateBoard extends Component {
+
     state = {
         name: ''
     };
 
     addValue = (e) => {
         e.preventDefault();
-        let boardName = (this.state.name.length > 0 && this.state.name.length < 50)
-            ? this.state.name
-            : this.state.name.substr(0, 49);
+        let boardName = this.validateBoardName();
 
         let newBoard = {
             name: boardName,
             startTime: MemeUtil.IsoDateString(new Date()), //TODO Should be done on server
-            admin: {id: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id} //TODO
+            admin: {id: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id}
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
@@ -36,6 +37,16 @@ class CreateBoard extends Component {
             });
         return false;
     };
+
+    validateBoardName() {
+        let name = "Empty";
+        if (this.state.name.length > 0 && this.state.name.length < BOARD_NAME_LENGTH) {
+            name = this.state.name;
+        } else if (this.state.name.length >= BOARD_NAME_LENGTH) {
+            name = this.state.name.substring(0, BOARD_NAME_LENGTH) + "...";
+        }
+        return name;
+    }
 
     onInputChange = (e) => {
         this.setState({
