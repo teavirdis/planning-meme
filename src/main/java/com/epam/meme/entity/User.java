@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -22,6 +24,13 @@ public class User {
             allocationSize = 1
     )
     private Long id;
+
+    @NotNull(message = "{user.username.notnull}")
+    @Pattern(
+            regexp = "^(?=.{3,20}$)(?![_])(?!.*[_]{2,})[a-zA-Z0-9_]+(?<![_])$",
+            message = "{user.username.pattern}"
+    )
+    @Column(nullable = false, length = 20)
     private String username;
     private String email;
     private String password;

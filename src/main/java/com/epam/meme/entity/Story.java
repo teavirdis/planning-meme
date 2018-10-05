@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class Story {
             allocationSize = 1
     )
     private Long id;
+
+    @NotNull(message = "{story.description.notnull}")
+    @Size(min = 1, max = 50, message = "{story.description.size}")
     private String description;
 
     @OneToMany
