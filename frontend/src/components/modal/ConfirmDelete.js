@@ -25,8 +25,8 @@ class ConfirmDelete extends Component {
                         <ModalHeader style={divStyle}>Wait!</ModalHeader>
                         <ModalBody>Are you sure to delete this?</ModalBody>
                         <ModalFooter>
-                            <Button>Cancel</Button>
                             <CloseButton onClick={(e) => this.deleteBoard(e)}>Delete anyway</CloseButton>
+                            <Button>Cancel</Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

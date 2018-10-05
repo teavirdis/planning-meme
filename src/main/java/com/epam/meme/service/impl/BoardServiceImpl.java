@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board create(Board entity) {
         entity.getUsers().add(entity.getAdmin());
+        entity.setId(null);
+        entity.setStartTime(LocalDateTime.now());
         return boardRepository.saveAndFlush(entity);
     }
 

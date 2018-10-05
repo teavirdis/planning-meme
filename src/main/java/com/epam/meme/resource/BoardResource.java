@@ -1,6 +1,6 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.BoardConverter;
+import com.epam.meme.dtoconverter.BoardConverter;
 import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.User;
@@ -36,7 +36,8 @@ public class BoardResource {
     @POST
     @ApiOperation(value = "Save board")
     public void create(@Valid BoardDto boardDto) {
-        boardService.create(boardConverter.convertToEntity(boardDto));
+        Board board = boardConverter.convertToEntity(boardDto);
+        boardService.create(board);
     }
 
     @POST

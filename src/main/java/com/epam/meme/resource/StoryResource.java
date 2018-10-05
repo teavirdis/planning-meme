@@ -1,15 +1,12 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.StoryConverter;
+import com.epam.meme.dtoconverter.StoryConverter;
 import com.epam.meme.dto.StoryDto;
-import com.epam.meme.entity.Board;
 import com.epam.meme.entity.Story;
-import com.epam.meme.repository.StoryRepository;
 import com.epam.meme.service.BoardService;
 import com.epam.meme.service.StoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
