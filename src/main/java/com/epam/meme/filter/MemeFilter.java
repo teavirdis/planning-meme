@@ -1,6 +1,6 @@
 package com.epam.meme.filter;
 
-import com.epam.meme.converter.UserConverter;
+import com.epam.meme.dtoconverter.UserConverter;
 import com.epam.meme.dto.UserCookieDto;
 import com.epam.meme.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;

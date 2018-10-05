@@ -1,6 +1,6 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.VoteConverter;
+import com.epam.meme.dtoconverter.VoteConverter;
 import com.epam.meme.dto.VoteDto;
 import com.epam.meme.entity.Vote;
 import com.epam.meme.service.VoteService;

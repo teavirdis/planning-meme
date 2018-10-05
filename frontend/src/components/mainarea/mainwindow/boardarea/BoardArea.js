@@ -15,7 +15,14 @@ class BoardArea extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { boards: [], pageNumber : 0, pageSize : 5, boardCount: 25, boardIdToDelete: 0, boardIdToEdit: 0 };
+        this.state = {
+            boards: [],
+            pageNumber: 0,
+            pageSize: 5,
+            boardCount: 5,
+            boardIdToDelete: 0,
+            boardIdToEdit: 0
+        };
         this.reloadPage = this.reloadPage.bind(this);
         this.loadElements = this.loadElements.bind(this);
         this.onInputPageNumberChange = this.onInputPageNumberChange.bind(this);
@@ -35,10 +42,10 @@ class BoardArea extends Component {
     }
 
     changeBoardIdToEditStateChange = (e) => {
-            this.setState(state => ({
-                 boardIdToEdit: e
-            }));
-        }
+        this.setState(state => ({
+             boardIdToEdit: e
+        }));
+    }
 
     checkBoardCount() {
         axios.get('/meme/users/current-user/')

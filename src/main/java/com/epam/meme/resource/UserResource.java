@@ -1,6 +1,6 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.UserConverter;
+import com.epam.meme.dtoconverter.UserConverter;
 import com.epam.meme.dto.UserCookieDto;
 import com.epam.meme.dto.UserDto;
 import com.epam.meme.entity.User;
