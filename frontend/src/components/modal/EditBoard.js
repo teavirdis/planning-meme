@@ -15,15 +15,15 @@ class EditBoard extends Component {
     }
 
     editBoard() {
-        axios.put('/meme/users/current-user/boards/' + sessionStorage.getItem("idOfBoardToEdit"), {
+        axios.put('/meme/users/current-user/boards/' + this.props.boardIdToEdit, {
             name: this.state.name
         })
             .then((response) => {
                 console.log(response);
-                sessionStorage.removeItem("idOfBoardToEdit");
+                this.props.onReloadPage();
                 this.setState({
                     name: ""
-                })
+                });
             })
             .catch((error) => {
                 console.log(error);
