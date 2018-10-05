@@ -53,7 +53,7 @@ class StoryArea extends Component {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response.data);
             });
     }
 
@@ -67,7 +67,7 @@ class StoryArea extends Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response.data);
             });
     }
 
