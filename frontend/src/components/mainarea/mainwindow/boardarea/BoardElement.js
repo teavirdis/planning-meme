@@ -19,7 +19,8 @@ class BoardElement extends Component {
     }
 
     deleteBoard() {
-        sessionStorage.setItem("idOfBoardToDelete", this.props.id);
+        this.props.onChangeBoardIdToDelete(this.props.id);
+        //sessionStorage.setItem("idOfBoardToDelete", this.props.id);
     }
 
     editBoard() {
