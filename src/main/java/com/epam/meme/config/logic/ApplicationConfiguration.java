@@ -22,7 +22,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan({"com.epam.meme.service",
         "com.epam.meme.repository",
-        "com.epam.meme.converter",
+        "com.epam.meme.dtoconverter",
         "com.epam.meme.filter",
         "com.epam.meme.resource"})
 @PropertySource("classpath:database.properties")

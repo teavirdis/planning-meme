@@ -1,4 +1,4 @@
-package com.epam.meme.converter;
+package com.epam.meme.dtoconverter;
 
 import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Story;

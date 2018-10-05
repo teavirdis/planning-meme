@@ -1,6 +1,6 @@
 package com.epam.meme.resource;
 
-import com.epam.meme.converter.BoardConverter;
+import com.epam.meme.dtoconverter.BoardConverter;
 import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.User;
@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

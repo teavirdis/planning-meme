@@ -114,7 +114,7 @@ class StoryArea extends Component {
                         Board: {this.state.boardName}
                     </AreaTitle>
                     <Divider/>
-                    {this.state.isUserMemberOfBoard == false && <JoinBoardButton becomeMember={this.state.becomeMember}/>}
+                    {this.state.isUserMemberOfBoard == false && <JoinBoardButton becomeMember={this.becomeMember}/>}
                     <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) =>

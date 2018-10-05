@@ -1,4 +1,4 @@
-package com.epam.meme.converter;
+package com.epam.meme.dtoconverter;
 
 import com.epam.meme.dto.VoteDto;
 import com.epam.meme.entity.Vote;
