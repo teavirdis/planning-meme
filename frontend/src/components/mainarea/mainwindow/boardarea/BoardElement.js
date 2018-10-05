@@ -19,11 +19,11 @@ class BoardElement extends Component {
     }
 
     deleteBoard() {
-        sessionStorage.setItem("idOfBoardToDelete", this.props.id);
+        this.props.onChangeBoardIdToDelete(this.props.id);
     }
 
     editBoard() {
-        sessionStorage.setItem("idOfBoardToEdit", this.props.id);
+        this.props.onChangeBoardIdToEdit(this.props.id);
     }
 
     goToStoryList() {

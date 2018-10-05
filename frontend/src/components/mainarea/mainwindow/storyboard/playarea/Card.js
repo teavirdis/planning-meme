@@ -23,7 +23,7 @@ class Card extends Component {
     render() {
         return (
             <CardBlock>
-                <CardImg id={this.props.id} src={this.props.source} onClick={this.changeActiveState} draggable="false"/>
+                <CardImg id={this.props.id} src={this.props.source} onClick={this.changeActiveState} alt={this.props.desc} draggable="false"/>
             </CardBlock>
         );
     }
