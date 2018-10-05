@@ -19,11 +19,11 @@ class CreateBoard extends Component {
     addValue = (e) => {
         e.preventDefault();
         let boardName = this.validateBoardName();
+        let admin = JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME));
 
         let newBoard = {
             name: boardName,
-            startTime: MemeUtil.IsoDateString(new Date()), //TODO Should be done on server
-            admin: {id: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id}
+            admin: {id: admin.id}
         };
         axios.post('/meme/users/current-user/boards/', newBoard)
             .then((response) => {
@@ -33,7 +33,10 @@ class CreateBoard extends Component {
                 })
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response.data);
+                this.setState({
+                    name: ""
+                })
             });
         return false;
     };

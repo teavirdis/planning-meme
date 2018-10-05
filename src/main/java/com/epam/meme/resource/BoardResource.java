@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +37,8 @@ public class BoardResource {
     @POST
     @ApiOperation(value = "Save board")
     public void create(@Valid BoardDto boardDto) {
-        boardService.create(boardConverter.convertToEntity(boardDto));
+        Board board = boardConverter.convertToEntity(boardDto);
+        boardService.create(board);
     }
 
     @POST

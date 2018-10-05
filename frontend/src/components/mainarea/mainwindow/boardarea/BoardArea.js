@@ -16,12 +16,12 @@ class BoardArea extends Component {
         super(props);
 
         this.state = {
-            boards : [],
-            pageNumber : 0,
-            pageSize : 5,
-            boardCount : 5,
-            boardIdToDelete : 0,
-            boardIdToEdit : 0
+            boards: [],
+            pageNumber: 0,
+            pageSize: 5,
+            boardCount: 5,
+            boardIdToDelete: 0,
+            boardIdToEdit: 0
         };
         this.reloadPage = this.reloadPage.bind(this);
         this.loadElements = this.loadElements.bind(this);
