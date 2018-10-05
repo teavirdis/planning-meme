@@ -31,7 +31,6 @@ class App extends Component {
         let status = window.localStorage.getItem("isLoggedIn");
         this.state = {
             isLoggedIn: status === "true" ? true : false,
-            boardIdToDelete: null
         }
         this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
     }
