@@ -15,15 +15,22 @@ class BoardArea extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { boards: [], pageNumber : 0, pageSize : 5, boardCount: 25 };
+        this.state = { boards: [], pageNumber : 0, pageSize : 5, boardCount: 25, boardIdToDelete: 0 };
         this.reloadPage = this.reloadPage.bind(this);
         this.loadElements = this.loadElements.bind(this);
         this.onInputPageNumberChange = this.onInputPageNumberChange.bind(this);
         this.checkBoardCount = this.checkBoardCount.bind(this);
+        this.changeBoardIdToDeleteStateChange = this.changeBoardIdToDeleteStateChange.bind(this);
     }
 
     componentDidMount() {
         this.loadBoards(this.state.pageNumber);
+    }
+
+    changeBoardIdToDeleteStateChange = (e) => {
+        this.setState(state => ({
+             boardIdToDelete: e
+        }));
     }
 
     checkBoardCount() {
@@ -60,7 +67,8 @@ class BoardArea extends Component {
                         id={item.id}
                         name={item.name}
                         startTime={item.startTime}
-                        storiesCount={item.storiesCount} {...this.props} />
+                        storiesCount={item.storiesCount}
+                        onChangeBoardIdToDelete={this.changeBoardIdToDeleteStateChange} {...this.props} />
                 );
                 this.loadElements(boardElements);
             })
@@ -92,7 +100,8 @@ class BoardArea extends Component {
                                     boardCount={this.state.boardCount} {...this.props} />
                         <EditBoard/>
                         <CreateBoard onAdd={ this.reloadPage }/>
-                        <ConfirmDelete/>
+                        <ConfirmDelete boardIdToDelete={this.state.boardIdToDelete}
+                                       onReloadPage={this.reloadPage}/>
                     </BoardAreaColumns>
                 </BoardAreaDiv>
             </AreaContainer>
