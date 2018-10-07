@@ -12,7 +12,6 @@ class StoryElement extends Component {
 
     constructor(props) {
         super(props);
-
         this.goToStory = this.goToStory.bind(this);
     }
 
@@ -25,6 +24,14 @@ class StoryElement extends Component {
         this.props.specifyStoryName(this.props.description);
     }
 
+    deleteStory() {
+        this.props.onChangeStoryIdToDelete(this.props.id);
+    }
+
+    editStory() {
+        this.props.onChangeStoryIdToEdit(this.props.id);
+    }
+
     render() {
         return (
             <TableTrClickableTitle>
@@ -33,10 +40,10 @@ class StoryElement extends Component {
                 <TableHiddenXs onClick={ this.goToStory }>{String(this.props.finishTime).replace('T', ' / ')}</TableHiddenXs>
                 <TableHiddenXs onClick={ this.goToStory }>stub</TableHiddenXs>
                 <TableHiddenXs onClick={ this.goToStory }>{this.props.estimation}</TableHiddenXs>
-                <TableEditIcon onClick={() => this.setStoryProps()}>
+                <TableEditIcon onClick={(e) => this.editStory(e)}>
                     <StoryEditIAttribute/>
                 </TableEditIcon>
-                <StoryDeleteTdAttribute onClick={() => this.setStoryProps()}>
+                <StoryDeleteTdAttribute onClick={(e) => this.deleteStory(e)}>
                     <DeleteIAttribute/>
                 </StoryDeleteTdAttribute>
             </TableTrClickableTitle>

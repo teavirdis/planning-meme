@@ -73,10 +73,8 @@ class CreateBoard extends Component {
                                         value={ this.state.name } />
                         </ModalBody>
                         <ModalFooter>
+                            <Button onClick={this.addValue}>Create</Button>
                             <CloseButton>Close</CloseButton>
-                            <Button onClick={ this.addValue }>
-                                Create
-                            </Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

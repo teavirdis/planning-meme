@@ -1,45 +1,7 @@
 import React, {Component} from 'react';
-import axios from "axios";
-import StoryElement from "./StoryElement";
 import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        this.loadStories();
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.location !== this.props.location) {
-            this.loadStories();
-        }
-    }
-
-    loadStories() {
-        if (this.props.match.params.boardId != null) {
-            axios.get('/meme/users/current-user/boards/'
-                + this.props.match.params.boardId
-                + '/stories?page=0&pageSize=5')
-                .then((response) => {
-                    this.props.onStoriesLoad(response.data.map(story =>
-                        <StoryElement
-                            key={story.id}
-                            id={story.id}
-                            description={story.description}
-                            startTime={story.startTime}
-                            finishTime={story.finishTime}
-                            estimation={story.estimation}
-                            {...this.props} />))
-                })
-                .catch(error => {
-                    alert(error);
-                });
-        }
-    }
 
     render() {
         return (
@@ -59,7 +21,7 @@ class StoryTable extends Component {
                     </tr>
                     </thead>
                     <tbody className="text-left">
-                        { this.props.storyList }
+                    {this.props.storyList}
                     </tbody>
                 </Table>
             </TableRow>

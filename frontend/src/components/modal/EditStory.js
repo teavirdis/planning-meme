@@ -7,26 +7,26 @@ import {
 
 class EditStory extends Component {
 
-    state = {
-        description: ''
-    };
+    constructor(props) {
+        super(props);
 
-    editValue = (e) => {
-        e.preventDefault();
-        axios.put(
-            '/meme/users/current-user/boards/'
-            + sessionStorage.getItem('boardId')
-            + '/stories/'
-            + sessionStorage.getItem('storyId'), {
-                description: this.state.description
-            })
-            .then((response) => {
-                console.log(response);
+        this.state = {description: ""};
+    }
+
+    editStory() {
+        axios.put('/meme/users/current-user/boards/'+ this.props.boardId
+            + '/stories/' + this.props.storyIdToEdit, {
+            description: this.state.description
+        })
+            .then(() => {
+                this.props.onReloadPage();
+                this.setState({
+                    description: ""
+                });
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.data);
             });
-        return false;
     };
 
     onInputChange = (e) => this.setState({
@@ -47,8 +47,8 @@ class EditStory extends Component {
                                         required=""/>
                         </ModalBody>
                         <ModalFooter>
+                            <Button onClick={(e) => this.editStory(e)}>Edit</Button>
                             <CloseButton>Close</CloseButton>
-                            <Button onClick={this.editValue}>Edit</Button>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>
