@@ -9,11 +9,11 @@ class ConfirmDelete extends Component {
 
     deleteBoard() {
         axios.delete('/meme/users/current-user/boards/' + this.props.boardIdToDelete)
-            .then((response) => {
+            .then(() => {
                 this.props.onReloadPage();
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.data);
             });
     };
 

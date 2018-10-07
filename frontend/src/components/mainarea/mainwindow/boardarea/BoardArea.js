@@ -36,16 +36,16 @@ class BoardArea extends Component {
     }
 
     changeBoardIdToDeleteStateChange = (e) => {
-        this.setState(state => ({
-             boardIdToDelete: e
+        this.setState(() => ({
+            boardIdToDelete: e
         }));
-    }
+    };
 
     changeBoardIdToEditStateChange = (e) => {
-        this.setState(state => ({
-             boardIdToEdit: e
+        this.setState(() => ({
+            boardIdToEdit: e
         }));
-    }
+    };
 
     checkBoardCount() {
         axios.get('/meme/users/current-user/')
@@ -55,7 +55,7 @@ class BoardArea extends Component {
                 });
             })
             .catch(error => {
-                console.log(error);
+                console.log(error.data);
             });
     }
 
