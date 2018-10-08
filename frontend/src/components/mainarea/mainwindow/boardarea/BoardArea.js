@@ -21,7 +21,8 @@ class BoardArea extends Component {
             pageSize: 5,
             boardCount: 5,
             boardIdToDelete: 0,
-            boardIdToEdit: 0
+            boardIdToEdit: 0,
+            boardNameToEdit: null
         };
         this.reloadPage = this.reloadPage.bind(this);
         this.loadElements = this.loadElements.bind(this);
@@ -29,6 +30,7 @@ class BoardArea extends Component {
         this.checkBoardCount = this.checkBoardCount.bind(this);
         this.changeBoardIdToDeleteStateChange = this.changeBoardIdToDeleteStateChange.bind(this);
         this.changeBoardIdToEditStateChange = this.changeBoardIdToEditStateChange.bind(this);
+        this.changeBoardNameToEditStateChange = this.changeBoardNameToEditStateChange.bind(this);
     }
 
     componentDidMount() {
@@ -46,6 +48,12 @@ class BoardArea extends Component {
             boardIdToEdit: e
         }));
     };
+
+    changeBoardNameToEditStateChange = (e) => {
+        this.setState(() => ({
+            boardNameToEdit: e
+        }));
+    }
 
     checkBoardCount() {
         axios.get('/meme/users/current-user/')
@@ -83,7 +91,8 @@ class BoardArea extends Component {
                         startTime={item.startTime}
                         storiesCount={item.storiesCount}
                         onChangeBoardIdToDelete={this.changeBoardIdToDeleteStateChange}
-                        onChangeBoardIdToEdit={this.changeBoardIdToEditStateChange} {...this.props} />
+                        onChangeBoardIdToEdit={this.changeBoardIdToEditStateChange}
+                        onChangeBoardNameToEdit={this.changeBoardNameToEditStateChange} {...this.props} />
                 );
                 this.loadElements(boardElements);
             })
@@ -114,6 +123,7 @@ class BoardArea extends Component {
                                     pageSize={this.state.pageSize}
                                     boardCount={this.state.boardCount} {...this.props} />
                         <EditBoard boardIdToEdit={this.state.boardIdToEdit}
+                                   boardNameToEdit={this.state.boardNameToEdit}
                                    onReloadPage={this.reloadPage}/>
                         <CreateBoard onAdd={ this.reloadPage }/>
                         <ConfirmDelete boardIdToDelete={this.state.boardIdToDelete}

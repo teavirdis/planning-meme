@@ -23,6 +23,7 @@ class BoardElement extends Component {
     }
 
     editBoard() {
+        this.props.onChangeBoardNameToEdit(this.props.name);
         this.props.onChangeBoardIdToEdit(this.props.id);
     }
 
