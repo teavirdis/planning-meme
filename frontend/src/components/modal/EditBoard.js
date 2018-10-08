@@ -10,7 +10,7 @@ class EditBoard extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {name: ""};
+        this.state = {name: this.props.boardNameToEdit};
     }
 
     editBoard() {
@@ -20,7 +20,7 @@ class EditBoard extends Component {
             .then(() => {
                 this.props.onReloadPage();
                 this.setState({
-                    name: ""
+                    name: this.props.boardNameToEdit
                 });
             })
             .catch((error) => {
@@ -43,7 +43,7 @@ class EditBoard extends Component {
                         </ModalHeader>
                         <ModalBody>
                             <ModalInput placeholder="Enter board name" onChange={this.onInputChange}
-                                        required="required" value={this.state.name}/>
+                                        required="required" value={this.props.boardNameToEdit}/>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={(e) => this.editBoard(e)}>Edit</Button>
