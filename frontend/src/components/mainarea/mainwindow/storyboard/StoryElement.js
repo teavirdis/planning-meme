@@ -30,6 +30,7 @@ class StoryElement extends Component {
 
     editStory() {
         this.props.onChangeStoryIdToEdit(this.props.id);
+        this.props.onChangeStoryNameToEdit(this.props.description);
     }
 
     render() {
