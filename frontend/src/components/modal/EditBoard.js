@@ -5,7 +5,6 @@ import {
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
 
-
 class EditBoard extends Component {
 
     constructor(props) {
@@ -18,15 +17,14 @@ class EditBoard extends Component {
         axios.put('/meme/users/current-user/boards/' + this.props.boardIdToEdit, {
             name: this.state.name
         })
-            .then((response) => {
-                console.log(response);
+            .then(() => {
                 this.props.onReloadPage();
                 this.setState({
                     name: ""
                 });
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.data);
             });
     };
 

@@ -3,7 +3,7 @@ import StoryTable from "./StoryTable";
 import EditStory from "../../../modal/EditStory";
 import CreateStory from "../../../modal/CreateStory";
 import ConfirmStoryDelete from "../../../modal/ConfirmStoryDelete";
-import { Route } from "react-router-dom";
+import {Route} from "react-router-dom";
 import PlayAreaWrapper from "./PlayAreaWrapper";
 import {AreaColumns, AreaContainer, AreaRow, AreaTitle, Divider} from "../style/MainWindowStyle";
 import axios from "axios";
@@ -11,7 +11,6 @@ import StoryElement from "./StoryElement";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
 import JoinBoardButton from "./JoinBoardButton";
-
 
 class StoryArea extends Component {
 
@@ -22,18 +21,28 @@ class StoryArea extends Component {
             boardName: "",
             boardUsers: [],
             isUserMemberOfBoard: undefined,
+            boardId: 0,
+            storyIdToDelete: 0,
+            storyIdToEdit: 0,
             stories: []
         };
+        this.reloadPage = this.reloadPage.bind(this);
         this.becomeMember = this.becomeMember.bind(this);
         this.loadElements = this.loadElements.bind(this);
         this.addChildStoryElement = this.addChildStoryElement.bind(this);
         this.specifyStoryName = this.specifyStoryName.bind(this);
         this.loadBoardName = this.loadBoardName.bind(this);
         this.checkUserMembership = this.checkUserMembership.bind(this);
+        this.changeStoryIdToDeleteStateChange = this.changeStoryIdToDeleteStateChange.bind(this);
+        this.changeStoryIdToEditStateChange = this.changeStoryIdToEditStateChange.bind(this);
     }
 
     componentDidMount() {
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+        this.setState(()=>({
+            boardId: boardId
+        }));
+        this.loadStories(boardId);
         this.loadBoardName(boardId);
         this.checkUserMembership(boardId);
     }
@@ -43,6 +52,47 @@ class StoryArea extends Component {
             let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
             this.loadBoardName(boardId);
         }
+    }
+
+    changeStoryIdToDeleteStateChange = (e) => {
+        this.setState(() => ({
+            storyIdToDelete: e
+        }));
+    };
+
+    changeStoryIdToEditStateChange = (e) => {
+        this.setState(() => ({
+            storyIdToEdit: e
+        }));
+    };
+
+    loadStories(boardId) {
+        if (boardId != null) {
+            axios.get('/meme/users/current-user/boards/'
+                + boardId
+                + '/stories?page=0&pageSize=5')
+                .then((response) => {
+                    let storyElements = response.data.map(story =>
+                        <StoryElement
+                            key={story.id}
+                            id={story.id}
+                            description={story.description}
+                            startTime={story.startTime}
+                            finishTime={story.finishTime}
+                            estimation={story.estimation}
+                            onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
+                            onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
+                            {...this.props} />);
+                    this.loadElements(storyElements);
+                })
+                .catch(error => {
+                    alert(error.data);
+                });
+        }
+    }
+
+    reloadPage() {
+        this.loadStories(this.state.boardId);
     }
 
     loadBoardName(boardId) {
@@ -89,6 +139,8 @@ class StoryArea extends Component {
                     startTime={story.startTime}
                     finishTime={story.finishTime}
                     estimation={story.estimation}
+                    onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
+                    onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
                     {...this.props} />
             )
         }));
@@ -114,7 +166,7 @@ class StoryArea extends Component {
                         Board: {this.state.boardName}
                     </AreaTitle>
                     <Divider/>
-                    {this.state.isUserMemberOfBoard == false && <JoinBoardButton becomeMember={this.becomeMember}/>}
+                    {this.state.isUserMemberOfBoard === false && <JoinBoardButton becomeMember={this.becomeMember}/>}
                     <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) =>
@@ -128,8 +180,12 @@ class StoryArea extends Component {
                                         specifyStoryName={this.specifyStoryName}
                                         {...this.props}/>
                         </div>
-                        <EditStory name=/>
-                        <ConfirmStoryDelete/>
+                        <EditStory storyIdToEdit={this.state.storyIdToEdit}
+                                   boardId={this.state.boardId}
+                                   onReloadPage={this.reloadPage}/>
+                        <ConfirmStoryDelete storyIdToDelete={this.state.storyIdToDelete}
+                                            boardId={this.state.boardId}
+                                            onReloadPage={this.reloadPage}/>
                     </AreaRow>
                 </AreaColumns>
             </AreaContainer>
