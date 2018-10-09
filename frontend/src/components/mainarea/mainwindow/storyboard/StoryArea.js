@@ -24,6 +24,7 @@ class StoryArea extends Component {
             boardId: 0,
             storyIdToDelete: 0,
             storyIdToEdit: 0,
+            storyNameToEdit: "",
             stories: []
         };
         this.reloadPage = this.reloadPage.bind(this);
@@ -35,6 +36,7 @@ class StoryArea extends Component {
         this.checkUserMembership = this.checkUserMembership.bind(this);
         this.changeStoryIdToDeleteStateChange = this.changeStoryIdToDeleteStateChange.bind(this);
         this.changeStoryIdToEditStateChange = this.changeStoryIdToEditStateChange.bind(this);
+        this.changeStoryNameToEditStateChange = this.changeStoryNameToEditStateChange.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +68,12 @@ class StoryArea extends Component {
         }));
     };
 
+    changeStoryNameToEditStateChange = (e) => {
+        this.setState(() => ({
+           storyNameToEdit: e
+        }));
+    }
+
     loadStories(boardId) {
         if (boardId != null) {
             axios.get('/meme/users/current-user/boards/'
@@ -80,8 +88,9 @@ class StoryArea extends Component {
                             startTime={story.startTime}
                             finishTime={story.finishTime}
                             estimation={story.estimation}
-                            onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
-                            onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
+                            onChangeStoryIdToDelete = {this.changeStoryIdToDeleteStateChange}
+                            onChangeStoryIdToEdit = {this.changeStoryIdToEditStateChange}
+                            onChangeStoryNameToEdit = {this.changeStoryNameToEditStateChange}
                             {...this.props} />);
                     this.loadElements(storyElements);
                 })
@@ -141,6 +150,7 @@ class StoryArea extends Component {
                     estimation={story.estimation}
                     onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
                     onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
+                    onChangeStoryNameToEdit={this.changeStoryNameToEditStateChange}
                     {...this.props} />
             )
         }));
@@ -181,6 +191,7 @@ class StoryArea extends Component {
                                         {...this.props}/>
                         </div>
                         <EditStory storyIdToEdit={this.state.storyIdToEdit}
+                                   storyNameToEdit={this.state.storyNameToEdit}
                                    boardId={this.state.boardId}
                                    onReloadPage={this.reloadPage}/>
                         <ConfirmStoryDelete storyIdToDelete={this.state.storyIdToDelete}
