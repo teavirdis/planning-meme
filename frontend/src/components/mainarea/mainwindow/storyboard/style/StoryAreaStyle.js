@@ -14,6 +14,10 @@ const StoryDeleteTdAttribute = styled.td.attrs({
     'data-target': "#deleteStory"
 })``;
 
+const StoryPaginationUl = styled.ul.attrs({
+    className: "pagination pagination-lg"
+})``;
+
 export {
-    StoryEditIAttribute, StoryDeleteTdAttribute, StoryStyle
+    StoryEditIAttribute, StoryDeleteTdAttribute, StoryStyle, StoryPaginationUl
 }

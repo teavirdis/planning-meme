@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StoryRepository extends JpaRepository<Story, Long> {
     Page<Story> findAllByBoardId(long boardId, Pageable pageable);
+    int countAllByBoardId(Long boardId);
 }

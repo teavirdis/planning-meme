@@ -81,7 +81,7 @@ class BoardArea extends Component {
             "/meme/users/current-user/boards?page="
             + pageNumber
             + "&pageSize="
-            + this.state.pageSize )
+            + this.state.pageSize)
             .then((response) => {
                 let boardElements = response.data.map(item =>
                     <BoardElement

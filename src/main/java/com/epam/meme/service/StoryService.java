@@ -7,4 +7,5 @@ import org.springframework.data.domain.Pageable;
 public interface StoryService extends BaseService<Story> {
     Page<Story> findAll(Pageable pageable);
     Page<Story> findAllByBoardId(long boardId, Pageable pageable);
+    int getBoardStoriesCount(Long id);
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import StoryPagination from "./StoryPagination";
 import {Table, TableRow, TableThStyle, TableThStyleHidden, TableThStyleModal} from "../style/MainWindowStyle";
 
 class StoryTable extends Component {
@@ -24,6 +25,9 @@ class StoryTable extends Component {
                     {this.props.storyList}
                     </tbody>
                 </Table>
+                 <StoryPagination pageSize={ this.props.pageSize }
+                                                 storyCount={ this.props.storyCount }
+                                                 pageNumberHandler={ this.props.onInputPageNumberChange } />
             </TableRow>
         );
     }

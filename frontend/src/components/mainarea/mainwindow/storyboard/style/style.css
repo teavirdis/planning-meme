@@ -1,0 +1,23 @@
+
+tr td a:hover {
+    text-decoration: none;
+}
+
+.delete-icon-trash {
+    font-size: 24px
+}
+
+.edit-icon, .delete-icon {
+    cursor: pointer;
+    color: #b9bbbe;
+    font-size: 24px;
+}
+
+.edit-icon:hover, .delete-icon:hover {
+    color: black;
+}
+
+.no-left-padding a {
+    font-family: Verdana, Geneva, sans-serif;
+    padding-top: 11px;
+}
