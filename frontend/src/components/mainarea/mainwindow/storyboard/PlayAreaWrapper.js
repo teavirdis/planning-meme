@@ -48,7 +48,7 @@ class PlayAreaWrapper extends Component {
             <div>
                 <AreaTitle>Story: {this.state.storyName}</AreaTitle>
                 <Divider/>
-                {this.props.isUserMemberOfBoard && <PlayArea/>}
+                {this.props.isUserMemberOfBoard && <PlayArea {...this.props}/>}
             </div>
         );
     }

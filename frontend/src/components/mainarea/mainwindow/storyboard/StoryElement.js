@@ -21,7 +21,7 @@ class StoryElement extends Component {
 
     goToStory() {
         this.props.history.push(`${this.props.match.url}/` + this.props.id);
-        this.props.specifyStoryName(this.props.description);
+        //this.props.specifyStoryName(this.props.description);
     }
 
     deleteStory() {

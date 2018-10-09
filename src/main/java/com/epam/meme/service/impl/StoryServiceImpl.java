@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.ws.rs.NotFoundException;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,22 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public void update(Story entity) {
-        repository.saveAndFlush(entity);
+        // Checked for presence in resource level
+        Story story = findById(entity.getId()).get();
+
+        if (entity.getDescription() != null) {
+            story.setDescription(entity.getDescription());
+        }
+        if (entity.getEstimation() != null) {
+            story.setEstimation(entity.getEstimation());
+        }
+        if (entity.getStartTime() != null) {
+            story.setStartTime(entity.getStartTime());
+        }
+        if (entity.getFinishTime() != null) {
+            story.setFinishTime(entity.getFinishTime());
+        }
+        repository.saveAndFlush(story);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.epam.meme.dtoconverter;
 
 import com.epam.meme.dto.StoryDto;
+import com.epam.meme.dto.StoryUpdateDto;
 import com.epam.meme.entity.Story;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class StoryConverter {
 
     public Story convertToEntity(StoryDto storyDto) {
         return modelMapper.map(storyDto, Story.class);
+    }
+
+    public Story convertToEntityForUpdate(StoryUpdateDto storyUpdateDto) {
+        return modelMapper.map(storyUpdateDto, Story.class);
     }
 
     public StoryDto convertToDto(Story story){

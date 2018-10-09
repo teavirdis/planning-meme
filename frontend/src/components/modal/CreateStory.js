@@ -4,7 +4,6 @@ import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
-import MemeUtil from "../../util/MemeUtil";
 
 class CreateStory extends Component {
     state = {};
@@ -13,7 +12,6 @@ class CreateStory extends Component {
         e.preventDefault();
         let newStory = {
             description: this.state.description,
-            startTime: MemeUtil.IsoDateString(new Date())
         };
         axios.post('/meme/users/current-user/boards/' + this.props.match.params.boardId + '/stories', newStory)
             .then(res => {

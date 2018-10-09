@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import StartButton from "./StartButton";
 import MemeUtil from "../../../../../util/MemeUtil";
+import {BOARD_URL_REGEX} from "../../../../../util/TextConstant";
+import axios from "axios";
 import $ from 'jquery';
 
 
@@ -9,7 +11,6 @@ class Timer extends Component {
         super(props);
         this.state = {
             time: 0,
-            isFinish: false,
             isOn: false,
             start: 0,
             result: null
@@ -19,26 +20,52 @@ class Timer extends Component {
     }
 
     startTimer() {
-        window.scrollTo(0,document.body.scrollHeight);
         this.setState({
             isOn: true,
             time: this.state.time,
-            start: Date.now() - this.state.time
+            start: Date.now()
         });
 
+        let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+        let updStory = { setStartTime: true };
+        axios.put("/meme/users/current-user/boards/"
+            + boardId
+            + "/stories/"
+            + this.props.match.params.storyId, updStory)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            });
 
         this.timer = setInterval(() => this.setState({
             time: Date.now() - this.state.start
-        }), 1);
+        }), 1000);
     }
 
     stopTimer() {
         this.setState({
             isOn: false,
-            isFinish: true,
             result: $('.filterImg').attr('alt')
         });
         clearInterval(this.timer);
+
+        let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+        let updStory = {
+            setFinishTime: true,
+            estimation: $('.filterImg').attr('alt')
+        };
+        axios.put("/meme/users/current-user/boards/"
+            + boardId
+            + "/stories/"
+            + this.props.match.params.storyId, updStory)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            });
     }
 
     render() {
@@ -48,7 +75,7 @@ class Timer extends Component {
         let stop = (this.state.time === 0 || !this.state.isOn)
             ? null
             : <div onClick={this.stopTimer}><StartButton name={"Finish voting"}/></div>;
-        let result = (this.state.isFinish)
+        let result = (!this.state.isOn && this.state.start > 0)
             ? <div><i>Your vote: </i><b>{this.state.result}</b></div>
             : null;
         return (

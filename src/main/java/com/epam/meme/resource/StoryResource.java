@@ -1,5 +1,6 @@
 package com.epam.meme.resource;
 
+import com.epam.meme.dto.StoryUpdateDto;
 import com.epam.meme.dtoconverter.StoryConverter;
 import com.epam.meme.dto.StoryDto;
 import com.epam.meme.entity.Story;
@@ -7,6 +8,7 @@ import com.epam.meme.service.BoardService;
 import com.epam.meme.service.StoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +19,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Api(value = "/stories", description = "Manage stories")
 public class StoryResource {
 
@@ -75,19 +79,18 @@ public class StoryResource {
     @PUT
     @ApiOperation(value = "Update story by id")
     @Path("/{storyId}")
-    public void update(@PathParam("storyId") Long storyId, StoryDto storyDto) {
-        Story story = storyService.findById(storyId).orElseThrow(NotFoundException::new);
+    public void update(@PathParam("storyId") Long storyId, StoryUpdateDto storyDto) {
+        // Check for presence in data store
+        storyService.findById(storyId).orElseThrow(NotFoundException::new);
 
-        if (storyDto.getDescription() != null) {
-            story.setDescription(storyDto.getDescription());
+        Story story = storyConverter.convertToEntityForUpdate(storyDto);
+        story.setId(storyId);
+        if (storyDto.isSetStartTime()) {
+            story.setStartTime(LocalDateTime.now());
+        } else if (storyDto.isSetFinishTime()) {
+            story.setFinishTime(LocalDateTime.now());
         }
-        if (storyDto.getEstimation() != null) {
-            story.setEstimation(storyDto.getEstimation());
-        }
-        if (storyDto.getFinishTime() != null) {
-            story.setFinishTime(storyDto.getFinishTime());
-        }
-
+        log.info("Estimation = {}", story.getEstimation());
         storyService.update(story);
     }
 
