@@ -5,6 +5,7 @@ import com.epam.meme.dto.BoardDto;
 import com.epam.meme.entity.Board;
 import com.epam.meme.entity.User;
 import com.epam.meme.service.BoardService;
+import com.epam.meme.service.StoryService;
 import com.epam.meme.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,9 @@ public class BoardResource {
 
     @Autowired
     private BoardConverter boardConverter;
+
+    @Autowired
+    private StoryService storyService;
 
     @Autowired
     private UserService userService;
@@ -70,8 +74,10 @@ public class BoardResource {
     @ApiOperation(value = "Find board by id")
     @Path("/{boardId}")
     public BoardDto findById(@PathParam("boardId") Long boardId) {
-        return boardConverter.convertToDto(
+        BoardDto boardDto = boardConverter.convertToDto(
                 boardService.findById(boardId).orElseThrow(NotFoundException::new));
+        boardDto.setCountOfStories(storyService.getBoardStoriesCount(boardId));
+        return boardDto;
     }
 
     @GET
@@ -86,10 +92,8 @@ public class BoardResource {
     @Path("/{boardId}")
     public void update(@PathParam("boardId") Long boardId, BoardDto boardDto) {
         Board board = boardService.findById(boardId).orElseThrow(NotFoundException::new);
-        if (boardDto.getName() != null) {
-            board.setName(boardDto.getName());
-            boardService.update(board);
-        }
+        board.setName(boardDto.getName());
+        boardService.update(board);
     }
 
     @DELETE

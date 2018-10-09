@@ -17,4 +17,5 @@ public class BoardDto {
     private String name;
     private LocalDateTime startTime;
     private UserDto admin;
+    private int countOfStories;
 }

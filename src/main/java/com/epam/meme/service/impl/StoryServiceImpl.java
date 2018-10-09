@@ -73,4 +73,9 @@ public class StoryServiceImpl implements StoryService {
     public Page<Story> findAllByBoardId(long boardId, Pageable pageable){
         return repository.findAllByBoardId(boardId, pageable);
     }
+
+    @Override
+    public int getBoardStoriesCount(Long id) {
+        return repository.countAllByBoardId(id);
+    }
 }

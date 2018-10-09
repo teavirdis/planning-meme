@@ -22,6 +22,9 @@ class StoryArea extends Component {
             boardUsers: [],
             isUserMemberOfBoard: undefined,
             boardId: 0,
+            pageNumber: 0,
+            pageSize: 5,
+            storyCount: 5,
             storyIdToDelete: 0,
             storyIdToEdit: 0,
             storyNameToEdit: "",
@@ -30,6 +33,8 @@ class StoryArea extends Component {
         this.reloadPage = this.reloadPage.bind(this);
         this.becomeMember = this.becomeMember.bind(this);
         this.loadElements = this.loadElements.bind(this);
+        this.onInputPageNumberChange = this.onInputPageNumberChange.bind(this);
+        this.checkStoryCount = this.checkStoryCount.bind(this);
         this.addChildStoryElement = this.addChildStoryElement.bind(this);
         this.specifyStoryName = this.specifyStoryName.bind(this);
         this.loadBoardName = this.loadBoardName.bind(this);
@@ -44,7 +49,7 @@ class StoryArea extends Component {
         this.setState(()=>({
             boardId: boardId
         }));
-        this.loadStories(boardId);
+        this.loadStories(this.state.pageNumber, boardId);
         this.loadBoardName(boardId);
         this.checkUserMembership(boardId);
     }
@@ -74,11 +79,27 @@ class StoryArea extends Component {
         }));
     }
 
-    loadStories(boardId) {
+    checkStoryCount(boardId) {
+            axios.get('/meme/users/current-user/boards/'+ boardId)
+                .then((response) => {
+                    this.setState({
+                        storyCount: response.data.countOfStories
+                    });
+                })
+                .catch(error => {
+                    console.log(error.data);
+                });
+        }
+
+    loadStories(pageNumber, boardId) {
         if (boardId != null) {
+            this.checkStoryCount(boardId);
             axios.get('/meme/users/current-user/boards/'
                 + boardId
-                + '/stories?page=0&pageSize=5')
+                + '/stories?page='
+                + pageNumber
+                + '&pageSize='
+                + this.state.pageSize)
                 .then((response) => {
                     let storyElements = response.data.map(story =>
                         <StoryElement
@@ -101,7 +122,15 @@ class StoryArea extends Component {
     }
 
     reloadPage() {
-        this.loadStories(this.state.boardId);
+        this.loadStories(this.state.pageNumber, this.state.boardId);
+    }
+
+    onInputPageNumberChange(e) {
+            let newPageNumber = Number(e.target.text) - 1;
+            this.setState({
+                pageNumber: newPageNumber
+            });
+            this.loadStories(newPageNumber, this.state.boardId);
     }
 
     loadBoardName(boardId) {
@@ -188,6 +217,9 @@ class StoryArea extends Component {
                             <StoryTable storyList={this.state.stories}
                                         onStoriesLoad={this.loadElements}
                                         specifyStoryName={this.specifyStoryName}
+                                        onInputPageNumberChange={this.onInputPageNumberChange}
+                                        pageSize={this.state.pageSize}
+                                        storyCount={this.state.storyCount}
                                         {...this.props}/>
                         </div>
                         <EditStory storyIdToEdit={this.state.storyIdToEdit}
