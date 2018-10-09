@@ -35,7 +35,7 @@ class StoryArea extends Component {
         this.loadElements = this.loadElements.bind(this);
         this.onInputPageNumberChange = this.onInputPageNumberChange.bind(this);
         this.checkStoryCount = this.checkStoryCount.bind(this);
-        this.addChildStoryElement = this.addChildStoryElement.bind(this);
+        //this.addChildStoryElement = this.addChildStoryElement.bind(this);
         this.specifyStoryName = this.specifyStoryName.bind(this);
         this.loadBoardName = this.loadBoardName.bind(this);
         this.checkUserMembership = this.checkUserMembership.bind(this);
@@ -165,7 +165,7 @@ class StoryArea extends Component {
         })
     }
 
-    addChildStoryElement(story) {
+    /*addChildStoryElement(story) {
         const stories = this.state.stories;
 
         this.setState(() => ({
@@ -183,7 +183,7 @@ class StoryArea extends Component {
                     {...this.props} />
             )
         }));
-    }
+    }*/
 
     loadElements(elements) {
         this.setState(() => ({
@@ -213,7 +213,7 @@ class StoryArea extends Component {
                                                     storyName={this.state.storyName}
                                                     {...props}/>}/>
                         <div>
-                            <CreateStory onStoryAdd={this.addChildStoryElement} {...this.props}/>
+                            <CreateStory onAdd={ this.reloadPage } {...this.props}/>
                             <StoryTable storyList={this.state.stories}
                                         onStoriesLoad={this.loadElements}
                                         specifyStoryName={this.specifyStoryName}
