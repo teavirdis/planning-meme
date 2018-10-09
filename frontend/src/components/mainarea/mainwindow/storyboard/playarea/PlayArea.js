@@ -58,7 +58,7 @@ class PlayArea extends Component {
                 </PlayingArea>
                 <div className="col-md-2 col-md-offset-1 text-center">
                     <div style={StartPlayStyle}>
-                    <Timer/>
+                    <Timer {...this.props}/>
                     <MemberList/>
                     </div>
                 </div>
