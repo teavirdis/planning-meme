@@ -9,14 +9,67 @@ import $ from 'jquery';
 class Timer extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            time: 0,
-            isOn: false,
             start: 0,
+            isOn: false,
+            time: 0,
             result: null
         };
+
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
+        this.loadStory = this.loadStory.bind(this);
+        this.refreshTimer = this.refreshTimer.bind(this);
+
+        this.loadStory();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.location != prevProps.location) {
+            this.loadStory();
+            this.refreshTimer();
+            console.log("load stypty");
+        } else {
+            if (this.state.start != 0 && this.timer == undefined) {
+                console.log("else inner");
+                this.timer = setInterval(() => this.setState({
+                    time: Date.now() - this.state.start
+                }), 1000);
+            }
+        }
+    }
+
+    refreshTimer() {
+        clearInterval(this.timer);
+        this.setState({
+            start: 0,
+            isOn: false
+        });
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
+    loadStory() {
+        let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+        axios.get(
+            "/meme/users/current-user/boards/"
+            + boardId
+            + "/stories/"
+            + this.props.match.params.storyId)
+            .then(response => {
+                if (response.data.finishTime === undefined) {
+                    this.setState({
+                        start: new Date(response.data.startTime),
+                        isOn: true
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.response.data);
+            });
     }
 
     startTimer() {
