@@ -4,6 +4,7 @@ import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
+import $ from 'jquery';
 
 class EditStory extends Component {
 
@@ -20,9 +21,7 @@ class EditStory extends Component {
         })
             .then(() => {
                 this.props.onReloadPage();
-                this.setState({
-                    description: ""
-                });
+                $("#editStoryModalInput").val("");
             })
             .catch((error) => {
                 console.log(error.data);
@@ -43,8 +42,8 @@ class EditStory extends Component {
                             <ModalTitle>Edit Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Put your stories text here." onChange={this.onInputChange}
-                                        required=""/>
+                            <ModalInput id="editStoryModalInput" placeholder={this.props.storyNameToEdit} onChange={this.onInputChange}
+                                        required="required"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={(e) => this.editStory(e)}>Edit</Button>

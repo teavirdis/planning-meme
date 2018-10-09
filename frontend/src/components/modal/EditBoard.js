@@ -4,6 +4,7 @@ import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
 } from "./style/ModalStyle";
+import $ from 'jquery';
 
 class EditBoard extends Component {
 
@@ -19,9 +20,7 @@ class EditBoard extends Component {
         })
             .then(() => {
                 this.props.onReloadPage();
-                this.setState({
-                    name: this.props.boardNameToEdit
-                });
+                $("#editBoardModalInput").val("");
             })
             .catch((error) => {
                 console.log(error.data);
@@ -42,8 +41,8 @@ class EditBoard extends Component {
                             <ModalTitle>Update Board</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Enter board name" onChange={this.onInputChange}
-                                        required="required" value={this.props.boardNameToEdit}/>
+                            <ModalInput id="editBoardModalInput" placeholder={this.props.boardNameToEdit} onChange={this.onInputChange}
+                                        required="required"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={(e) => this.editBoard(e)}>Edit</Button>
