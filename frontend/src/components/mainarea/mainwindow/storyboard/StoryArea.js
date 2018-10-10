@@ -11,6 +11,7 @@ import StoryElement from "./StoryElement";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
 import JoinBoardButton from "./JoinBoardButton";
+import CreateStoryButton from "./CreateStoryButton"
 
 class StoryArea extends Component {
 
@@ -165,26 +166,6 @@ class StoryArea extends Component {
         })
     }
 
-    /*addChildStoryElement(story) {
-        const stories = this.state.stories;
-
-        this.setState(() => ({
-            stories: stories.concat(
-                <StoryElement
-                    key={story.id}
-                    id={story.id}
-                    description={story.description}
-                    startTime={story.startTime}
-                    finishTime={story.finishTime}
-                    estimation={story.estimation}
-                    onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
-                    onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
-                    onChangeStoryNameToEdit={this.changeStoryNameToEditStateChange}
-                    {...this.props} />
-            )
-        }));
-    }*/
-
     loadElements(elements) {
         this.setState(() => ({
             stories: elements.slice()
@@ -205,6 +186,7 @@ class StoryArea extends Component {
                         Board: {this.state.boardName}
                     </AreaTitle>
                     <Divider/>
+                    <CreateStoryButton/>
                     {this.state.isUserMemberOfBoard === false && <JoinBoardButton becomeMember={this.becomeMember}/>}
                     <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}

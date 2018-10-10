@@ -15,9 +15,7 @@ class StoryTable extends Component {
                         <TableThStyleHidden>Finish time</TableThStyleHidden>
                         <TableThStyleHidden>Votes</TableThStyleHidden>
                         <TableThStyleHidden>Estimation</TableThStyleHidden>
-                        <TableThStyleModal>
-                            <div className="create-story"><i className="createStory fa fa-plus"/> New</div>
-                        </TableThStyleModal>
+                        <TableThStyleModal/>
                         <TableThStyle/>
                     </tr>
                     </thead>
