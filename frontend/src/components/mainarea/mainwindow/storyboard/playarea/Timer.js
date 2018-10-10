@@ -60,7 +60,7 @@ class Timer extends Component {
             + "/stories/"
             + this.props.match.params.storyId)
             .then(response => {
-                if (response.data.finishTime === undefined) {
+                if (!response.data.finishTime && response.data.startTime) {
                     this.setState({
                         start: new Date(response.data.startTime),
                         isOn: true
