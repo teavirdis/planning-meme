@@ -33,6 +33,7 @@ class StoryElement extends Component {
     }
 
     render() {
+        console.log(this.props.isUserAdminOfBoard);
         return (
             <TableTrClickableTitle>
                 <TableNamedTd onClick={ this.goToStory }>{this.props.description}</TableNamedTd>
@@ -40,12 +41,12 @@ class StoryElement extends Component {
                 <TableHiddenXs onClick={ this.goToStory }>{String(this.props.finishTime).replace('T', ' / ')}</TableHiddenXs>
                 <TableHiddenXs onClick={ this.goToStory }>stub</TableHiddenXs>
                 <TableHiddenXs onClick={ this.goToStory }>{this.props.estimation}</TableHiddenXs>
-                <TableEditIcon onClick={(e) => this.editStory(e)}>
+                { this.props.isUserAdminOfBoard === true && <TableEditIcon onClick={(e) => this.editStory(e)}>
                     <StoryEditIAttribute/>
-                </TableEditIcon>
-                <StoryDeleteTdAttribute onClick={(e) => this.deleteStory(e)}>
+                </TableEditIcon> }
+                { this.props.isUserAdminOfBoard === true && <StoryDeleteTdAttribute onClick={(e) => this.deleteStory(e)}>
                     <DeleteIAttribute/>
-                </StoryDeleteTdAttribute>
+                </StoryDeleteTdAttribute> }
             </TableTrClickableTitle>
         );
     }
