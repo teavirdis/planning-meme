@@ -116,6 +116,7 @@ class StoryArea extends Component {
                             onChangeStoryIdToDelete = {this.changeStoryIdToDeleteStateChange}
                             onChangeStoryIdToEdit = {this.changeStoryIdToEditStateChange}
                             onChangeStoryNameToEdit = {this.changeStoryNameToEditStateChange}
+                            checkUserAdmin = {this.checkUserAdmin}
                             isUserAdminOfBoard = { this.state.isUserAdminOfBoard }
                             {...this.props} />);
                     this.loadElements(storyElements);
