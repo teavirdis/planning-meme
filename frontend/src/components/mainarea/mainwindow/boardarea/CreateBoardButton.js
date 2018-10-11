@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './style/style.css'
-import {ButtonAttribute, CreateButton} from "../style/MainWindowStyle";
+import {CreateBoardButtonAttribute, CreateButton} from "../style/MainWindowStyle";
 
 class CreateBoardButton extends Component {
     render() {
         return (
             <CreateButton>
-                <ButtonAttribute>
+                <CreateBoardButtonAttribute>
                     <i className="fa fa-plus"/> Create Board
-                </ButtonAttribute>
+                </CreateBoardButtonAttribute>
             </CreateButton>
         );
     }

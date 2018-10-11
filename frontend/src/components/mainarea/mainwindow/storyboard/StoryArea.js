@@ -11,6 +11,7 @@ import StoryElement from "./StoryElement";
 import MemeUtil from "../../../../util/MemeUtil";
 import {BOARD_URL_REGEX, USER_COOKIE_NAME} from "../../../../util/TextConstant";
 import JoinBoardButton from "./JoinBoardButton";
+import CreateStoryButton from "./CreateStoryButton"
 
 class StoryArea extends Component {
 
@@ -21,6 +22,7 @@ class StoryArea extends Component {
             boardName: "",
             boardUsers: [],
             isUserMemberOfBoard: undefined,
+            isUserAdminOfBoard: undefined,
             boardId: 0,
             pageNumber: 0,
             pageSize: 5,
@@ -35,10 +37,10 @@ class StoryArea extends Component {
         this.loadElements = this.loadElements.bind(this);
         this.onInputPageNumberChange = this.onInputPageNumberChange.bind(this);
         this.checkStoryCount = this.checkStoryCount.bind(this);
-        //this.addChildStoryElement = this.addChildStoryElement.bind(this);
         this.specifyStoryName = this.specifyStoryName.bind(this);
         this.loadBoardName = this.loadBoardName.bind(this);
         this.checkUserMembership = this.checkUserMembership.bind(this);
+        this.checkUserAdmin = this.checkUserAdmin.bind(this);
         this.changeStoryIdToDeleteStateChange = this.changeStoryIdToDeleteStateChange.bind(this);
         this.changeStoryIdToEditStateChange = this.changeStoryIdToEditStateChange.bind(this);
         this.changeStoryNameToEditStateChange = this.changeStoryNameToEditStateChange.bind(this);
@@ -49,9 +51,11 @@ class StoryArea extends Component {
         this.setState(()=>({
             boardId: boardId
         }));
-        this.loadStories(this.state.pageNumber, boardId);
         this.loadBoardName(boardId);
         this.checkUserMembership(boardId);
+        this.checkUserAdmin(boardId);
+
+        this.loadStories(this.state.pageNumber, boardId);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -112,6 +116,7 @@ class StoryArea extends Component {
                             onChangeStoryIdToDelete = {this.changeStoryIdToDeleteStateChange}
                             onChangeStoryIdToEdit = {this.changeStoryIdToEditStateChange}
                             onChangeStoryNameToEdit = {this.changeStoryNameToEditStateChange}
+                            isUserAdminOfBoard = { this.state.isUserAdminOfBoard }
                             {...this.props} />);
                     this.loadElements(storyElements);
                 })
@@ -159,31 +164,23 @@ class StoryArea extends Component {
             });
     }
 
+    checkUserAdmin(boardId) {
+        axios.get("/meme/users/current-user/boards/" + boardId)
+            .then((response) => {
+                this.setState({
+                    isUserAdminOfBoard: response.data.admin.id === JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).id
+                })
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
+       }
+
     becomeMember() {
         this.setState({
             isUserMemberOfBoard: true
         })
     }
-
-    /*addChildStoryElement(story) {
-        const stories = this.state.stories;
-
-        this.setState(() => ({
-            stories: stories.concat(
-                <StoryElement
-                    key={story.id}
-                    id={story.id}
-                    description={story.description}
-                    startTime={story.startTime}
-                    finishTime={story.finishTime}
-                    estimation={story.estimation}
-                    onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
-                    onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
-                    onChangeStoryNameToEdit={this.changeStoryNameToEditStateChange}
-                    {...this.props} />
-            )
-        }));
-    }*/
 
     loadElements(elements) {
         this.setState(() => ({
@@ -205,7 +202,8 @@ class StoryArea extends Component {
                         Board: {this.state.boardName}
                     </AreaTitle>
                     <Divider/>
-                    {this.state.isUserMemberOfBoard === false && <JoinBoardButton becomeMember={this.becomeMember}/>}
+                    { this.state.isUserAdminOfBoard && <CreateStoryButton/> }
+                    {!this.state.isUserMemberOfBoard && <JoinBoardButton becomeMember={this.becomeMember}/>}
                     <AreaRow>
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) =>
@@ -222,7 +220,7 @@ class StoryArea extends Component {
                                         storyCount={this.state.storyCount}
                                         {...this.props}/>
                         </div>
-                        <EditStory storyIdToEdit={this.state.storyIdToEdit}
+                         <EditStory storyIdToEdit={this.state.storyIdToEdit}
                                    storyNameToEdit={this.state.storyNameToEdit}
                                    boardId={this.state.boardId}
                                    onReloadPage={this.reloadPage}/>
