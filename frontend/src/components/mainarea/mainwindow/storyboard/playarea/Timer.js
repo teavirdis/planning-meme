@@ -14,6 +14,7 @@ class Timer extends Component {
             start: 0,
             isOn: false,
             time: 0,
+            chosenCardId: 0,
             result: null
         };
 
@@ -100,7 +101,8 @@ class Timer extends Component {
     stopTimer() {
         this.setState({
             isOn: false,
-            result: $('.filterImg').attr('alt')
+            result: $('.filterImg').attr('alt'),
+            chosenCardId: $('.filterImg').attr('id')
         });
         clearInterval(this.timer);
 
@@ -121,6 +123,16 @@ class Timer extends Component {
             });
     }
 
+    changeImg(id){
+        $('#'+id).attr('src', 'resources/images/34.png');
+        let header = document.getElementById("all_cards");
+        let liImages = header.getElementsByClassName("cardImg");
+                for (let i = 0; i < liImages.length; i++) {
+                    let currentImage = liImages[i].firstChild;
+                    currentImage.className = currentImage.className.replace("filterImg", "");
+                }
+    }
+
     render() {
         let start = (this.state.time === 0)
             ? <div onClick={this.startTimer}><StartButton name={"Start voting"}/></div>
@@ -128,9 +140,11 @@ class Timer extends Component {
         let stop = (this.state.time === 0 || !this.state.isOn)
             ? null
             : <div onClick={this.stopTimer}><StartButton name={"Finish voting"}/></div>;
-        let result = (!this.state.isOn && this.state.start > 0)
-            ? <div><i>Your vote: </i><b>{this.state.result}</b></div>
-            : null;
+        let result = null;
+        if (!this.state.isOn && this.state.start > 0 && this.state.chosenCardId!=0){
+            this.changeImg(this.state.chosenCardId);
+            result = <div><i>Your vote: </i><b>{this.state.result}</b></div>
+        }
         return (
             <div>
                 <h3>Time: {MemeUtil.formatTime(this.state.time/1000)}</h3>
