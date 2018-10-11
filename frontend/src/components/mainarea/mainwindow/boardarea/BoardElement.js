@@ -10,6 +10,8 @@ import {
     TableNamedTd,
     TableTrClickableTitle
 } from "../style/MainWindowStyle";
+import MemeUtil from "../../../../util/MemeUtil";
+import $ from "jquery"
 
 class BoardElement extends Component {
 
@@ -25,6 +27,7 @@ class BoardElement extends Component {
     editBoard() {
         this.props.onChangeBoardNameToEdit(this.props.name);
         this.props.onChangeBoardIdToEdit(this.props.id);
+        MemeUtil.focusBoardNameInput("#editBoardModalInput");
     }
 
     goToStoryList() {

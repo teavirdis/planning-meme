@@ -1,5 +1,5 @@
 import {DEFAULT_COOKIE_REGEX, DEFAULT_COOKIE_VALUE} from "./TextConstant";
-import $ from 'jquery';
+import $ from "jquery"
 
 class MemeUtil {
     static identifyCookieByName(name) {
@@ -7,18 +7,6 @@ class MemeUtil {
             `(?:^|; )${name.replace(DEFAULT_COOKIE_REGEX, '\\$1')}=([^;]*)`
         ));
         return matches ? decodeURIComponent(matches[1]).replace('|', ',') : undefined;
-    }
-
-    static setFocus(modalId, componentId){
-            $(function(){
-            $('#'+modalId).on('shown.bs.modal', function () {
-            alert("hi");
-                $('#'+componentId).focus()
-            });
-            });
-            $(window).focus(function () {
-               var input = document.getElementById('#'+componentId).focus();
-            });
     }
 
     static deleteCookieByName(name) {
@@ -48,6 +36,10 @@ class MemeUtil {
         let resultGroupMatch = regex.exec(currentUrl)[1];
         regex.lastIndex = 0;
         return resultGroupMatch;
+    }
+
+    static focusBoardNameInput(selector){
+            $(selector).focus();
     }
 }
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import MemeUtil from "../../util/MemeUtil";
 import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
@@ -8,10 +7,6 @@ import {
 
 class CreateStory extends Component {
     state = {};
-
-    componentDidMount() {
-        MemeUtil.setFocus("createStory", "createStoryInputField");
-    }
 
     addValue = (e) => {
         e.preventDefault();
@@ -55,10 +50,10 @@ class CreateStory extends Component {
                             <ModalTitle>Create New Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput id="createStoryInputField"
+                            <ModalInput id="createStoryInputText"
                                         placeholder="Put your stories text here."
                                         onChange={ this.onInputChange }
-                                        autoFocus = {true}
+                                        required=""
                                         value={ this.state.description }/>
                         </ModalBody>
                         <ModalFooter>

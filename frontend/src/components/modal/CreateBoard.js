@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from "axios";
-import $ from 'jquery';
 
 import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
@@ -16,18 +15,6 @@ class CreateBoard extends Component {
     state = {
         name: ''
     };
-
-     componentDidMount() {
-      $(function(){
-                 $("#createBoard").on('shown.bs.modal', function () {
-                 alert("hi");
-                     $("#createBoardInputField").focus()
-                 });
-                 });
-                 $(window).focus(function () {
-                    var input = document.getElementById("#createBoardInputField").focus();
-                 });
-     }
 
     addValue = (e) => {
         e.preventDefault();
@@ -80,7 +67,7 @@ class CreateBoard extends Component {
                             <ModalTitle>Create New Board</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput id="createBoardInputField"
+                            <ModalInput id="createBoardInputText"
                                         placeholder="Enter board name"
                                         required="required"
                                         onChange={ this.onInputChange }
