@@ -67,7 +67,8 @@ class CreateBoard extends Component {
                             <ModalTitle>Create New Board</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Enter board name"
+                            <ModalInput id="createBoardInputText"
+                                        placeholder="Enter board name"
                                         required="required"
                                         onChange={ this.onInputChange }
                                         value={ this.state.name } />
