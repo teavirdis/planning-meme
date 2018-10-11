@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import MemeUtil from "../../util/MemeUtil";
 import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
@@ -12,6 +13,10 @@ class EditStory extends Component {
         super(props);
 
         this.state = {description: ""};
+    }
+
+    componentDidMount() {
+        MemeUtil.setFocus("editStory", "editStoryModalInput");
     }
 
     editStory() {
@@ -42,7 +47,9 @@ class EditStory extends Component {
                             <ModalTitle>Edit Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput id="editStoryModalInput" placeholder={this.props.storyNameToEdit} onChange={this.onInputChange}
+                            <ModalInput id="editStoryModalInput"
+                                        placeholder={this.props.storyNameToEdit}
+                                        onChange={this.onInputChange}
                                         required="required"/>
                         </ModalBody>
                         <ModalFooter>

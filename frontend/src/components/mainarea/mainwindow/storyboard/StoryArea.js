@@ -165,26 +165,6 @@ class StoryArea extends Component {
         })
     }
 
-    /*addChildStoryElement(story) {
-        const stories = this.state.stories;
-
-        this.setState(() => ({
-            stories: stories.concat(
-                <StoryElement
-                    key={story.id}
-                    id={story.id}
-                    description={story.description}
-                    startTime={story.startTime}
-                    finishTime={story.finishTime}
-                    estimation={story.estimation}
-                    onChangeStoryIdToDelete={this.changeStoryIdToDeleteStateChange}
-                    onChangeStoryIdToEdit={this.changeStoryIdToEditStateChange}
-                    onChangeStoryNameToEdit={this.changeStoryNameToEditStateChange}
-                    {...this.props} />
-            )
-        }));
-    }*/
-
     loadElements(elements) {
         this.setState(() => ({
             stories: elements.slice()
