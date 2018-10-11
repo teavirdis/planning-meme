@@ -38,13 +38,21 @@ const TableTrClickableTitle = styled.tr.attrs({
 cursor: pointer;
 `;
 
-const ButtonAttribute = styled.a.attrs({
+const CreateBoardButtonAttribute = styled.a.attrs({
     className: "btn btn-primary pull-right fa btn btn-default",
     'data-target': "#createBoard",
     'data-toggle': "modal"
 })`padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.428571429;
     text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;
     border: 1px solid transparent; border-radius: 4px;`;
+
+    const CreateStoryButtonAttribute = styled.a.attrs({
+        className: "btn btn-primary pull-right fa btn btn-default",
+        'data-target': "#createStory",
+        'data-toggle': "modal"
+    })`padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; line-height: 1.428571429;
+        text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;
+        border: 1px solid transparent; border-radius: 4px;`;
 
 const CreateButton = styled.div.attrs({
     className: "no-left-padding"
@@ -99,7 +107,8 @@ export {
     TableThStyle,
     TableThStyleHidden,
     TableThStyleModal,
-    ButtonAttribute,
+    CreateBoardButtonAttribute,
+    CreateStoryButtonAttribute,
     CreateButton,
     Divider
 }

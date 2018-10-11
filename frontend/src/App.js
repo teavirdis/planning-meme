@@ -27,7 +27,6 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-
         let status = window.localStorage.getItem("isLoggedIn");
         this.state = {
             isLoggedIn: status === "true" ? true : false,

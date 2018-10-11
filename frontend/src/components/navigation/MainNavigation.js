@@ -16,14 +16,21 @@ class MainNavigation extends React.Component {
         this.state = {username: ""};
     }
 
-    componentDidMount() {
-        this.setState({username: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).username});
+    static handleSignOut() {
+         MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
+         window.localStorage.removeItem("isLoggedIn");
     }
 
-    static handleSignOut() {
-        MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
-        window.localStorage.removeItem("isLoggedIn");
+    componentDidMount() {
+        try{
+            this.setState({username: JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME)).username});
+        }catch(err){
+            MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
+            window.localStorage.removeItem("isLoggedIn");
+            window.location.reload();
+        }
     }
+
 
     render() {
         return (
