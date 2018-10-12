@@ -210,6 +210,7 @@ class StoryArea extends Component {
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) =>
                                    <PlayAreaWrapper isUserMemberOfBoard={this.state.isUserMemberOfBoard}
+                                                    isUserAdminOfBoard={this.state.isUserAdminOfBoard}
                                                     storyName={this.state.storyName}
                                                     {...props}/>}/>
                         <div>

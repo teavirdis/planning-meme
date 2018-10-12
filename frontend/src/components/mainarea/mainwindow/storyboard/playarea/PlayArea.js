@@ -57,10 +57,10 @@ class PlayArea extends Component {
                     </CardsUl>
                 </PlayingArea>
                 <div className="col-md-2 col-md-offset-1 text-center">
-                    <div style={StartPlayStyle}>
-                    <Timer {...this.props}/>
+                    { this.props.isUserAdminOfBoard ===true && <div style={StartPlayStyle}>
+                        <Timer {...this.props}/>
+                    </div> }
                     <MemberList/>
-                    </div>
                 </div>
             </div>
         );
