@@ -15,10 +15,6 @@ class EditBoard extends Component {
         this.state = {name: this.props.boardNameToEdit};
     }
 
-    componentDidMount() {
-            MemeUtil.setFocus("editBoard" , "editBoardModalInput");
-    }
-
     editBoard() {
         axios.put('/meme/users/current-user/boards/' + this.props.boardIdToEdit, {
             name: this.state.name
