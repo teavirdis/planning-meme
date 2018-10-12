@@ -1,4 +1,5 @@
 import {DEFAULT_COOKIE_REGEX, DEFAULT_COOKIE_VALUE} from "./TextConstant";
+import $ from "jquery"
 
 class MemeUtil {
     static identifyCookieByName(name) {
@@ -35,6 +36,10 @@ class MemeUtil {
         let resultGroupMatch = regex.exec(currentUrl)[1];
         regex.lastIndex = 0;
         return resultGroupMatch;
+    }
+
+    static focusBoardNameInput(selector){
+            $(selector).focus();
     }
 }
 

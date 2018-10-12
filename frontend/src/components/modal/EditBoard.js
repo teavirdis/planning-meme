@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from "axios";
+import MemeUtil from "../../util/MemeUtil";
 import {
     Button, CloseButton, ModalBody, ModalContent, ModalDialog, ModalDialogDiv, ModalFooter, ModalHeader, ModalInput,
     ModalTitle, SmallCloseButton
@@ -12,6 +13,10 @@ class EditBoard extends Component {
         super(props);
 
         this.state = {name: this.props.boardNameToEdit};
+    }
+
+    componentDidMount() {
+            MemeUtil.setFocus("editBoard" , "editBoardModalInput");
     }
 
     editBoard() {
@@ -41,7 +46,9 @@ class EditBoard extends Component {
                             <ModalTitle>Update Board</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput id="editBoardModalInput" placeholder={this.props.boardNameToEdit} onChange={this.onInputChange}
+                            <ModalInput id="editBoardModalInput"
+                                        placeholder={this.props.boardNameToEdit}
+                                        onChange={this.onInputChange}
                                         required="required"/>
                         </ModalBody>
                         <ModalFooter>

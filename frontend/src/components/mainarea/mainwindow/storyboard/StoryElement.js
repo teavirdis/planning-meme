@@ -7,6 +7,8 @@ import {
     TableTrClickableTitle
 } from "../style/MainWindowStyle";
 import {StoryDeleteTdAttribute, StoryEditIAttribute} from "./style/StoryAreaStyle";
+import MemeUtil from "../../../../util/MemeUtil";
+import $ from "jquery"
 
 class StoryElement extends Component {
 
@@ -30,6 +32,7 @@ class StoryElement extends Component {
     editStory() {
         this.props.onChangeStoryIdToEdit(this.props.id);
         this.props.onChangeStoryNameToEdit(this.props.description);
+        MemeUtil.focusBoardNameInput("#editStoryModalInput");
     }
 
     render() {

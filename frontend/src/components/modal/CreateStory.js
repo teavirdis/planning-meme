@@ -50,7 +50,8 @@ class CreateStory extends Component {
                             <ModalTitle>Create New Story</ModalTitle>
                         </ModalHeader>
                         <ModalBody>
-                            <ModalInput placeholder="Put your stories text here."
+                            <ModalInput id="createStoryInputText"
+                                        placeholder="Put your stories text here."
                                         onChange={ this.onInputChange }
                                         required=""
                                         value={ this.state.description }/>

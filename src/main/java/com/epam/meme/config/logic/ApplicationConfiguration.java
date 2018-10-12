@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.annotation.RequestScope;
 
@@ -23,10 +24,12 @@ import java.util.Properties;
 @ComponentScan({"com.epam.meme.service",
         "com.epam.meme.repository",
         "com.epam.meme.dtoconverter",
+        "com.epam.meme.scheduler",
         "com.epam.meme.filter",
         "com.epam.meme.resource"})
 @PropertySource("classpath:database.properties")
 @EnableTransactionManagement
+@EnableScheduling
 @EnableJpaRepositories("com.epam.meme.repository")
 @Import({HanaConfigurationImpl.class, TestConfigurationImpl.class, PostgresConfigurationImpl.class})
 public class ApplicationConfiguration {
