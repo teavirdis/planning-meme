@@ -18,6 +18,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Path("/users")
@@ -51,9 +52,12 @@ public class UserResource {
 
         Optional<User> optionalUser;
         User user = userConverter.convertToEntity(userDto);
+        user.setLastActivityTime(LocalDateTime.now());
 
         if (!(optionalUser = userService.findByUsername(user.getUsername())).isPresent()) {
             optionalUser = Optional.of(userService.create(user));
+        } else{
+            userService.updateByUsername(user.getLastActivityTime(), user.getUsername());
         }
         UserCookieDto userCookieDto = userConverter.convertToCookieDto(
                 optionalUser.orElseThrow(NotFoundException::new));

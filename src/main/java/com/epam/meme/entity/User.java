@@ -6,6 +6,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -36,6 +37,11 @@ public class User {
     private String password;
 
     @JsonbTransient
-    @ManyToMany(mappedBy = "users")
+    @Column(name = "last_activity_time")
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime lastActivityTime;
+
+    @JsonbTransient
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
     private List<Board> boards;
 }

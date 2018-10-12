@@ -11,12 +11,7 @@ class EditStory extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {description: ""};
-    }
-
-    componentDidMount() {
-        MemeUtil.setFocus("editStory", "editStoryModalInput");
     }
 
     editStory() {

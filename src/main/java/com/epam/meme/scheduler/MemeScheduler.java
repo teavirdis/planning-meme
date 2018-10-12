@@ -6,17 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class MemeScheduler {
 
     @Autowired
     private UserService userService;
 
-    @Scheduled(cron="*/10 * * * * *")
+    @Scheduled(cron="*/5 * * * * *")
     public void trackDullUsers(){
         System.out.println("Schedule is running...");
-        for (User user: userService.findAll()){
-            System.out.println(user);
+        for (User user: userService.deleteAllByTime(LocalDateTime.now().minusDays(3))){
+            userService.delete(user);
+          //  System.out.println(user);
         }
     }
 }
