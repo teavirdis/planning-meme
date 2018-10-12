@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> deleteAllByTime(LocalDateTime curDate){
-        return repository.deleteAllByTime(curDate);
+    public List<User> identifyDullUsers(LocalDateTime curDate){
+        return repository.identifyDullUsers(curDate);
     }
 }

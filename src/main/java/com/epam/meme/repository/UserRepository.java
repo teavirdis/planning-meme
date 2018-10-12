@@ -28,8 +28,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select board from User user join user.boards board where user.id = :id")
     Page<Board> findUserBoards(@Param("id") Long id, Pageable pageable);
 
-//    @Modifying
-//   @Query("delete from User user where user.lastActivityTime<=:curDate")
     @Query("select user from User user where user.lastActivityTime<=:curDate")
-    List<User> deleteAllByTime(@Param("curDate") LocalDateTime curDate);
+    List<User> identifyDullUsers(@Param("curDate") LocalDateTime curDate);
 }

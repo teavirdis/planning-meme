@@ -14,5 +14,5 @@ public interface UserService extends BaseService<User> {
     Optional<User> findByEmail(String email);
     Page<Board> findUserBoards(Long id, Pageable pageable);
     void updateByUsername(LocalDateTime curDate, String username);
-    List<User> deleteAllByTime(LocalDateTime curDate);
+    List<User> identifyDullUsers(LocalDateTime curDate);
 }

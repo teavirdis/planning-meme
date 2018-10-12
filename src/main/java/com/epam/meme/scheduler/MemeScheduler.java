@@ -17,9 +17,8 @@ public class MemeScheduler {
     @Scheduled(cron="*/5 * * * * *")
     public void trackDullUsers(){
         System.out.println("Schedule is running...");
-        for (User user: userService.deleteAllByTime(LocalDateTime.now().minusDays(3))){
+        for (User user: userService.identifyDullUsers(LocalDateTime.now().minusDays(3))){
             userService.delete(user);
-          //  System.out.println(user);
         }
     }
 }
