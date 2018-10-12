@@ -51,9 +51,10 @@ class StoryArea extends Component {
         this.setState(()=>({
             boardId: boardId
         }));
+        this.checkUserAdmin(boardId);
         this.loadBoardName(boardId);
         this.checkUserMembership(boardId);
-        this.checkUserAdmin(boardId);
+
 
         this.loadStories(this.state.pageNumber, boardId);
     }
