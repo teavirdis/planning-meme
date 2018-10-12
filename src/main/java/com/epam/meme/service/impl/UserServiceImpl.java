@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -65,5 +67,15 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public Page<Board> findUserBoards(Long id, Pageable pageable) {
         return repository.findUserBoards(id, pageable);
+    }
+
+    @Override
+    public void updateByUsername(LocalDateTime curDate, String username){
+        repository.updateByUsername(curDate, username);
+    }
+
+    @Override
+    public List<User> identifyDullUsers(LocalDateTime curDate){
+        return repository.identifyDullUsers(curDate);
     }
 }
