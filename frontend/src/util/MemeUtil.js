@@ -41,6 +41,10 @@ class MemeUtil {
     static focusBoardNameInput(selector){
             $(selector).focus();
     }
+
+    static closeModal(id){
+            $(id).click();
+    }
 }
 
 export default MemeUtil;

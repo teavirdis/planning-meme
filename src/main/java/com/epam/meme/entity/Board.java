@@ -34,11 +34,11 @@ public class Board {
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime startTime;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "admin_id")
     private User admin;
 
-    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "boards_users",
             joinColumns = {@JoinColumn(name = "board_id")},

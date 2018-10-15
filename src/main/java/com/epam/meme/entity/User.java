@@ -42,6 +42,6 @@ public class User {
     private LocalDateTime lastActivityTime;
 
     @JsonbTransient
-    @ManyToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "users")
     private List<Board> boards;
 }
