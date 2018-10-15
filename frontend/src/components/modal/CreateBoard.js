@@ -16,8 +16,7 @@ class CreateBoard extends Component {
         name: ''
     };
 
-    addValue = (e) => {
-        e.preventDefault();
+    createBoard() {
         let boardName = this.validateBoardName();
         let admin = JSON.parse(MemeUtil.identifyCookieByName(USER_COOKIE_NAME));
 
@@ -38,8 +37,21 @@ class CreateBoard extends Component {
                     name: ""
                 })
             });
+    }
+
+    addValue = (e) => {
+        e.preventDefault();
+        this.createBoard();
         return false;
     };
+
+    onKeyPressed = (e) => {
+        if (e.key === 'Enter') {
+             this.createBoard();
+             MemeUtil.closeModal("#closeButton");
+        }
+        return false;
+    }
 
     validateBoardName() {
         let name = "Empty";
@@ -57,6 +69,7 @@ class CreateBoard extends Component {
         });
     };
 
+
     render() {
         return (
             <ModalDialogDiv id="createBoard">
@@ -71,11 +84,12 @@ class CreateBoard extends Component {
                                         placeholder="Enter board name"
                                         required="required"
                                         onChange={ this.onInputChange }
+                                        onKeyPress={ this.onKeyPressed }
                                         value={ this.state.name } />
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={this.addValue}>Create</Button>
-                            <CloseButton>Close</CloseButton>
+                            <CloseButton id="closeButton">Close</CloseButton>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

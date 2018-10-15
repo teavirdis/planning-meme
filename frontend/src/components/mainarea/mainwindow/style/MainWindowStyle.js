@@ -46,7 +46,7 @@ const CreateBoardButtonAttribute = styled.a.attrs({
     text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; background-image: none;
     border: 1px solid transparent; border-radius: 4px;`;
 
-    const CreateStoryButtonAttribute = styled.a.attrs({
+const CreateStoryButtonAttribute = styled.a.attrs({
         className: "btn btn-primary pull-right fa btn btn-default",
         'data-target': "#createStory",
         'data-toggle': "modal"
