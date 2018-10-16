@@ -25,7 +25,7 @@ class SignIn extends Component {
                 this.props.onAuthStateChange();
 
                 let webSocketSession = MemeUtil.initializeTeamMember();
-                sessionStorage.setItem("webSocket", webSocketSession);
+                //sessionStorage.setItem("webSocket", webSocketSession);
                 this.props.onWebSocketSessionConnected(webSocketSession);
 
                 MemeUtil.connect(webSocketSession);
