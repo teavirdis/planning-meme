@@ -63,6 +63,7 @@ dependencies {
 
     compile "org.projectlombok:lombok:${lombokVersion}"
     compile "org.eclipse.persistence:org.eclipse.persistence.jpa:${eclipsePersistenceVersion}"
+    compileOnly 'javax.websocket:javax.websocket-api:1.1'
 
     compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 

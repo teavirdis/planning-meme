@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import MemeUtil from "../../../util/MemeUtil";
 import SignForm, {Button, H2, Input, SignDiv} from "./style/SignInStyle";
 
 class SignIn extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            teamMember: undefined
+        }
     }
 
     state = {
@@ -18,6 +23,20 @@ class SignIn extends Component {
         })
             .then(() => {
                 this.props.onAuthStateChange();
+
+                let webSocketSession = MemeUtil.initializeTeamMember();
+                sessionStorage.setItem("webSocket", webSocketSession);
+                this.props.onWebSocketSessionConnected(webSocketSession);
+
+                MemeUtil.connect(webSocketSession);
+//                if(!webSocketSession.readyState){
+//                     setTimeout(function (){
+//                          MemeUtil.sendMessage(webSocketSession);
+//                     },100);
+//                }else{
+//                      MemeUtil.sendMessage(webSocketSession);
+//                 }
+
             })
             .catch(error => {
                 alert(error);
