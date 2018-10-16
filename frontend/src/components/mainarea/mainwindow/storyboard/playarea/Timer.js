@@ -27,13 +27,12 @@ class Timer extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        window.clearInterval(this.timer);
         if (this.props.location != prevProps.location) {
-            this.loadStory();
             this.refreshTimer();
-            console.log("load stypty");
+            this.loadStory();
         } else {
             if (this.state.start != 0 && this.timer == undefined) {
-                console.log("else inner");
                 this.timer = setInterval(() => this.setState({
                     time: Date.now() - this.state.start
                 }), 1000);
@@ -42,15 +41,16 @@ class Timer extends Component {
     }
 
     refreshTimer() {
-        clearInterval(this.timer);
+        //window.clearInterval(this.timer);
         this.setState({
             start: 0,
-            isOn: false
+            isOn: false,
+            time: 0
         });
     }
 
     componentWillUnmount() {
-        clearInterval(this.timer);
+        //window.clearInterval(this.timer);
     }
 
     loadStory() {
@@ -61,11 +61,14 @@ class Timer extends Component {
             + "/stories/"
             + this.props.match.params.storyId)
             .then(response => {
-                if (response.data.finishTime === undefined) {
+                if (!response.data.finishTime && response.data.startTime) {
                     this.setState({
                         start: new Date(response.data.startTime),
                         isOn: true
                     });
+                    this.timer = setInterval(() => this.setState({
+                        time: Date.now() - this.state.start
+                    }), 1000);
                 }
             })
             .catch(error => {
@@ -76,7 +79,6 @@ class Timer extends Component {
     startTimer = () => {
         this.setState({
             isOn: true,
-            time: this.state.time,
             start: Date.now()
         });
 
@@ -99,6 +101,7 @@ class Timer extends Component {
         this.timer = setInterval(() => this.setState({
             time: Date.now() - this.state.start
         }), 1000);
+        //this.props.onReloadPage();
     }
 
     stopTimer() {
@@ -128,16 +131,17 @@ class Timer extends Component {
             .catch(err => {
                 console.log(err.response.data);
             });
+        //this.props.onReloadPage();
     }
 
-    changeImg(id){
-        $('#'+id).attr('src', 'resources/images/34.png');
+    changeImg(id) {
+        $('#' + id).attr('src', 'resources/images/34.png');
         let header = document.getElementById("all_cards");
         let liImages = header.getElementsByClassName("cardImg");
-                for (let i = 0; i < liImages.length; i++) {
-                    let currentImage = liImages[i].firstChild;
-                    currentImage.className = currentImage.className.replace("filterImg", "");
-                }
+        for (let i = 0; i < liImages.length; i++) {
+            let currentImage = liImages[i].firstChild;
+            currentImage.className = currentImage.className.replace("filterImg", "");
+        }
     }
 
     render() {
