@@ -73,12 +73,16 @@ class Timer extends Component {
             });
     }
 
-    startTimer() {
+    startTimer = () => {
         this.setState({
             isOn: true,
             time: this.state.time,
             start: Date.now()
         });
+
+        console.log(sessionStorage.getItem("webSocket"));
+        MemeUtil.sendMessage(sessionStorage.getItem("webSocket"));
+        //MemeUtil.sendMessage(this.props.webSocketSession);
 
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
         let updStory = { setStartTime: true };

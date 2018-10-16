@@ -12,8 +12,7 @@ class MainArea extends Component {
             <div className="container">
                 <div className="starter-template">
                     <div className="login-form">
-                         <SignIn onAuthStateChange={ this.props.onAuthStateChange }
-                                 isLoggedIn={ this.props.isLoggedIn }/>
+                         <SignIn {...this.props}/>
                     </div>
                 </div>
             </div>

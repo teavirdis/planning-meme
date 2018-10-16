@@ -11,7 +11,7 @@ class NavigationBar extends React.Component {
     }
 
     render() {
-        let navBar = (this.props.isLoggedIn) ? <MainNavigation/> : <LoginNavigation/>;
+        let navBar = (this.props.isLoggedIn) ? <MainNavigation {...this.props}/> : <LoginNavigation/>;
 
         return (
             <NavigationArea>
