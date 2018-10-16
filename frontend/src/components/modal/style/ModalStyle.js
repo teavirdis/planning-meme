@@ -54,7 +54,7 @@ const SmallCloseButton = styled.button.attrs({
     'aria-hidden': "true"
 })``;
 
-const CloseButton = styled.a.attrs({
+const CloseButton = styled.button.attrs({
     className: "btn btn-danger btn-ok",
     'data-dismiss': "modal"
 })``;

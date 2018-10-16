@@ -15,18 +15,26 @@ class EditBoard extends Component {
         this.state = {name: this.props.boardNameToEdit};
     }
 
-    editBoard() {
-        axios.put('/meme/users/current-user/boards/' + this.props.boardIdToEdit, {
-            name: this.state.name
-        })
-            .then(() => {
-                this.props.onReloadPage();
-                $("#editBoardModalInput").val("");
+    editBoard(){
+            axios.put('/meme/users/current-user/boards/' + this.props.boardIdToEdit, {
+                name: this.state.name
             })
-            .catch((error) => {
-                console.log(error.data);
-            });
-    };
+                .then(() => {
+                    this.props.onReloadPage();
+                    $("#editBoardModalInput").val("");
+                })
+                .catch((error) => {
+                    console.log(error.data);
+                });
+    }
+
+    onKeyPressed = (e) => {
+        if (e.key === 'Enter') {
+             this.editBoard();
+             MemeUtil.closeModal("#closeEditBoardButton");
+        }
+        return false;
+    }
 
     onInputChange = (e) => this.setState({
         name: e.target.value
@@ -45,11 +53,12 @@ class EditBoard extends Component {
                             <ModalInput id="editBoardModalInput"
                                         placeholder={this.props.boardNameToEdit}
                                         onChange={this.onInputChange}
+                                        onKeyPress={ this.onKeyPressed }
                                         required="required"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={(e) => this.editBoard(e)}>Edit</Button>
-                            <CloseButton>Close</CloseButton>
+                            <CloseButton id="closeEditBoardButton">Close</CloseButton>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

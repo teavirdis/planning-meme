@@ -18,7 +18,8 @@ public class MemeScheduler {
     public void trackDullUsers(){
         System.out.println("Schedule is running...");
         for (User user: userService.identifyDullUsers(LocalDateTime.now().minusDays(3))){
-            userService.delete(user);
+            System.out.println(user);
+            //userService.delete(user);
         }
     }
 }

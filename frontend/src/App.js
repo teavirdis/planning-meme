@@ -15,8 +15,7 @@ class Home extends React.Component {
     render () {
         return (
             <div>
-                <NavigationBar onAuthStateChange={ this.props.onAuthStateChange }
-                               isLoggedIn={ this.props.isLoggedIn } />
+                <NavigationBar {...this.props} />
                 <Footer/>
             </div>
         )
@@ -30,7 +29,9 @@ class App extends Component {
         let status = window.localStorage.getItem("isLoggedIn");
         this.state = {
             isLoggedIn: status === "true" ? true : false,
+            webSocketSession: null
         }
+        this.handleWebSocketSessionConnected = this.handleWebSocketSessionConnected.bind(this);
         this.handleAuthStatusChange = this.handleAuthStatusChange.bind(this);
     }
 
@@ -42,26 +43,35 @@ class App extends Component {
         window.localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
     }
 
+    handleWebSocketSessionConnected = (e) =>{
+        this.setState(state=>({
+            webSocketSession: e
+        }));
+    }
+
     render() {
         return (
             <div>
                 <Route path="/"
                        render={(props) => <Home onAuthStateChange={ this.handleAuthStatusChange }
-                                                isLoggedIn={ this.state.isLoggedIn } { ...props } /> } />
-                { this.state.isLoggedIn
-                    ?
+                                                isLoggedIn={ this.state.isLoggedIn }
+                                                webSocketSession = {this.state.webSocketSession} { ...props } /> } />
+                {
+
+                this.state.isLoggedIn ?
                     <Switch>
                         <Route exact={true} path="/boards"
                                render={(props) => <BoardArea { ...props } /> }/>
                         <Route path="/boards/:boardId/stories"
-                               render={(props) => <StoryArea {...props}/>} />
+                               render={(props) => <StoryArea webSocketSession = {this.state.webSocketSession} {...props}/>} />
                         <Redirect to="/boards" />
                     </Switch>
                     :
                     <Switch>
                         <Route exact={true} path="/sign-in"
                                render={(props) => <MainArea onAuthStateChange={ this.handleAuthStatusChange }
-                                                            isLoggedIn={ this.state.isLoggedIn } { ...props } /> } />
+                                                            isLoggedIn={ this.state.isLoggedIn }
+                                                            onWebSocketSessionConnected = {this.handleWebSocketSessionConnected} { ...props } /> } />
                         <Redirect from="/" to="/sign-in" />
                     </Switch>
                 }

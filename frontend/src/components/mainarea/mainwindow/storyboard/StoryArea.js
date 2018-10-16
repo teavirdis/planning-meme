@@ -51,9 +51,10 @@ class StoryArea extends Component {
         this.setState(()=>({
             boardId: boardId
         }));
+        this.checkUserAdmin(boardId);
         this.loadBoardName(boardId);
         this.checkUserMembership(boardId);
-        this.checkUserAdmin(boardId);
+
 
         this.loadStories(this.state.pageNumber, boardId);
     }
@@ -209,7 +210,9 @@ class StoryArea extends Component {
                         <Route path={`${this.props.match.url}/:storyId`}
                                render={(props) =>
                                    <PlayAreaWrapper isUserMemberOfBoard={this.state.isUserMemberOfBoard}
+                                                    isUserAdminOfBoard={this.state.isUserAdminOfBoard}
                                                     storyName={this.state.storyName}
+                                                    webSocketSession={this.props.webSocketSession}
                                                     onReloadPage={this.reloadPage}
                                                     {...props}/>}/>
                         <div>

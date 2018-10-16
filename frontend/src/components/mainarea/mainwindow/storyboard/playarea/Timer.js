@@ -76,11 +76,14 @@ class Timer extends Component {
             });
     }
 
-    startTimer() {
+    startTimer = () => {
         this.setState({
             isOn: true,
             start: Date.now()
         });
+
+        console.log(this.props.webSocketSession);
+        MemeUtil.sendMessage(this.props.webSocketSession);
 
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
         let updStory = { setStartTime: true };
@@ -107,6 +110,10 @@ class Timer extends Component {
             result: $('.filterImg').attr('alt'),
             chosenCardId: $('.filterImg').attr('id')
         });
+
+        console.log(this.props.webSocketSession);
+        MemeUtil.sendMessage(this.props.webSocketSession);
+
         clearInterval(this.timer);
 
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);

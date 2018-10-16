@@ -28,6 +28,13 @@ class EditStory extends Component {
             });
     };
 
+    onKeyPressed = (e) => {
+        if (e.key === 'Enter') {
+             this.editStory();
+             MemeUtil.closeModal("#closeEditStoryButton");
+        }
+        return false;
+    }
     onInputChange = (e) => this.setState({
         description: e.target.value
     });
@@ -45,11 +52,12 @@ class EditStory extends Component {
                             <ModalInput id="editStoryModalInput"
                                         placeholder={this.props.storyNameToEdit}
                                         onChange={this.onInputChange}
+                                        onKeyPress={ this.onKeyPressed }
                                         required="required"/>
                         </ModalBody>
                         <ModalFooter>
                             <Button onClick={(e) => this.editStory(e)}>Edit</Button>
-                            <CloseButton>Close</CloseButton>
+                            <CloseButton id="closeEditStoryButton">Close</CloseButton>
                         </ModalFooter>
                     </ModalContent>
                 </ModalDialog>

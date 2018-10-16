@@ -41,6 +41,37 @@ class MemeUtil {
     static focusBoardNameInput(selector){
             $(selector).focus();
     }
+
+    static closeModal(id){
+            $(id).click();
+    }
+
+    static connect(memeClient){
+        memeClient.onmessage = function (event) {
+            var jsonObj = JSON.parse(event.data);
+            var message = jsonObj.user + ": " + jsonObj.message;
+            //alert(message);
+            alert("Voting is started");
+        };
+    }
+
+    static disconnect(memeClient) {
+        memeClient.close();
+    }
+
+    static initializeTeamMember(){
+        var host = window.location.host;
+        var path = window.location.pathname;
+        var webCtx = path.substring(0, path.indexOf('/', 1));
+        var endPointURL = "ws://" + window.location.host + webCtx + "/meme/start";
+        return new WebSocket(endPointURL);
+    }
+
+    static sendMessage(ws) {
+            ws.send(JSON.stringify({
+                      "user" : "1", "message" : "2"
+            }));
+    }
 }
 
 export default MemeUtil;

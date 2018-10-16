@@ -14,11 +14,16 @@ class MainNavigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {username: ""};
+        this.handleSignOut = this.handleSignOut.bind(this);
     }
 
-    static handleSignOut() {
+    handleSignOut = () => {
          MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
          window.localStorage.removeItem("isLoggedIn");
+         if(this.props.webSocketSession !=null){
+            //sessionStorage.setItem("webSocket", "");
+            MemeUtil.disconnect(this.props.webSocketSession);
+         }
     }
 
     componentDidMount() {
@@ -44,7 +49,7 @@ class MainNavigation extends React.Component {
                             <li><a href={"/#/boards"}>My boards</a></li>
                             <li className="divider"/>
                             <li>
-                                <SignOutButton href="/" onClick={MainNavigation.handleSignOut}>Sign Out</SignOutButton>
+                                <SignOutButton href="/" onClick={this.handleSignOut}>Sign Out</SignOutButton>
                             </li>
                         </DropdownMenu>
                     </DropdownButton>

@@ -22,14 +22,19 @@ const StartPlayStyle = {
 };
 
 class PlayArea extends Component {
-    state = {
-        data: ["resources/images/0_card.png", "resources/images/half_card.png", "resources/images/1_card.png",
-            "resources/images/2_card.png", "resources/images/3_card.png", "resources/images/5_card.png",
-            "resources/images/8_card.png", "resources/images/13_card.png",
-            "resources/images/20_card.png", "resources/images/40_card.png", "resources/images/100_card.png",
-            "resources/images/coffee_card.png", "resources/images/question_card.png"],
-        values: ["0","1/2","1","2","3","5","8","13","20","40","100","break","no idea"]
-    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+                         data: ["resources/images/0_card.png", "resources/images/half_card.png", "resources/images/1_card.png",
+                             "resources/images/2_card.png", "resources/images/3_card.png", "resources/images/5_card.png",
+                             "resources/images/8_card.png", "resources/images/13_card.png",
+                             "resources/images/20_card.png", "resources/images/40_card.png", "resources/images/100_card.png",
+                             "resources/images/coffee_card.png", "resources/images/question_card.png"],
+                         values: ["0","1/2","1","2","3","5","8","13","20","40","100","break","no idea"]
+                     };
+    }
 
     initializeDataMap() {
         let map = new Map();
@@ -57,10 +62,10 @@ class PlayArea extends Component {
                     </CardsUl>
                 </PlayingArea>
                 <div className="col-md-2 col-md-offset-1 text-center">
-                    <div style={StartPlayStyle}>
-                    <Timer {...this.props}/>
+                    { this.props.isUserAdminOfBoard ===true && <div style={StartPlayStyle}>
+                        <Timer {...this.props}/>
+                    </div> }
                     <MemberList/>
-                    </div>
                 </div>
             </div>
         );
