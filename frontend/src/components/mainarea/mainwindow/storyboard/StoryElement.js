@@ -26,6 +26,7 @@ class StoryElement extends Component {
     }
 
     deleteStory() {
+        console.log(this.props.webSocketSession);
         this.props.onChangeStoryIdToDelete(this.props.id);
     }
 

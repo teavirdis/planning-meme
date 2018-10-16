@@ -11,7 +11,6 @@ class PlayAreaWrapper extends Component {
         super(props);
 
         this.state = {storyName: ""};
-
         this.loadStoryName = this.loadStoryName.bind(this);
     }
 
