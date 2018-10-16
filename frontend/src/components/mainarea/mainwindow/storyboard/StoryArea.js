@@ -84,16 +84,16 @@ class StoryArea extends Component {
     }
 
     checkStoryCount(boardId) {
-            axios.get('/meme/users/current-user/boards/'+ boardId)
-                .then((response) => {
-                    this.setState({
-                        storyCount: response.data.countOfStories
-                    });
-                })
-                .catch(error => {
-                    console.log(error.data);
+        axios.get('/meme/users/current-user/boards/' + boardId)
+            .then((response) => {
+                this.setState({
+                    storyCount: response.data.countOfStories
                 });
-        }
+            })
+            .catch(error => {
+                console.log(error.data);
+            });
+    }
 
     loadStories(pageNumber, boardId) {
         if (boardId != null) {
@@ -210,6 +210,7 @@ class StoryArea extends Component {
                                render={(props) =>
                                    <PlayAreaWrapper isUserMemberOfBoard={this.state.isUserMemberOfBoard}
                                                     storyName={this.state.storyName}
+                                                    onReloadPage={this.reloadPage}
                                                     {...props}/>}/>
                         <div>
                             <CreateStory onAdd={ this.reloadPage } {...this.props}/>
