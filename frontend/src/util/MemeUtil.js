@@ -49,9 +49,8 @@ class MemeUtil {
     static connect(memeClient){
         memeClient.onmessage = function (event) {
             var jsonObj = JSON.parse(event.data);
-            var message = jsonObj.user + ": " + jsonObj.message;
-            //alert(message);
-            alert("Voting is started");
+            var message = jsonObj.user + ": " + jsonObj.boardId;
+            alert("Voting is started: " + message);
         };
     }
 
@@ -60,17 +59,18 @@ class MemeUtil {
     }
 
     static initializeTeamMember(){
-        var host = window.location.host;
-        var path = window.location.pathname;
-        var webCtx = path.substring(0, path.indexOf('/', 1));
-        var endPointURL = "ws://" + window.location.host + webCtx + "/meme/start";
+        let host = window.location.host;
+        let path = window.location.pathname;
+        let webCtx = path.substring(0, path.indexOf('/', 1));
+        let endPointURL = "ws://" + window.location.host + webCtx + "/meme/start";
         return new WebSocket(endPointURL);
     }
 
-    static sendMessage(ws) {
+    static sendMessage(ws, boardId) {
             ws.send(JSON.stringify({
-                      "user" : "1", "message" : "2"
-            }));
+                      "user" : "1", "boardId" : boardId
+                       })
+            );
     }
 }
 

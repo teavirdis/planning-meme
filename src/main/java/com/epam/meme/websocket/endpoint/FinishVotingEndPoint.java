@@ -1,11 +1,12 @@
 package com.epam.meme.websocket.endpoint;
 
 import com.epam.meme.websocket.configurator.WebSocketConfigurator;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
-
+@Slf4j
 @ServerEndpoint(value = "/meme/finish", configurator = WebSocketConfigurator.class)
 public class FinishVotingEndPoint extends AbstractWebSocketEndPoint{
 
@@ -24,5 +25,10 @@ public class FinishVotingEndPoint extends AbstractWebSocketEndPoint{
         for (Session session : getUserSessions()) {
             session.getAsyncRemote().sendText(msg);
         }
+    }
+
+    @OnError
+    public void onError(Throwable throwable){
+        log.error(throwable.getLocalizedMessage());
     }
 }

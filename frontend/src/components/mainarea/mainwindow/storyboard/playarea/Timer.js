@@ -13,6 +13,7 @@ class Timer extends Component {
         this.state = {
             start: 0,
             isOn: false,
+            isVoted: false,
             time: 0,
             chosenCardId: 0,
             result: null
@@ -20,6 +21,7 @@ class Timer extends Component {
 
         this.startTimer = this.startTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
+        this.vote = this.vote.bind(this);
         this.loadStory = this.loadStory.bind(this);
         this.refreshTimer = this.refreshTimer.bind(this);
 
@@ -27,7 +29,7 @@ class Timer extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        window.clearInterval(this.timer);
+        //window.clearInterval(this.timer);
         if (this.props.location != prevProps.location) {
             this.refreshTimer();
             this.loadStory();
@@ -41,7 +43,7 @@ class Timer extends Component {
     }
 
     refreshTimer() {
-        //window.clearInterval(this.timer);
+        window.clearInterval(this.timer);
         this.setState({
             start: 0,
             isOn: false,
@@ -83,9 +85,9 @@ class Timer extends Component {
         });
 
         console.log(this.props.webSocketSession);
-        MemeUtil.sendMessage(this.props.webSocketSession);
-
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+        MemeUtil.sendMessage(this.props.webSocketSession, boardId);
+
         let updStory = { setStartTime: true };
         axios.put("/meme/users/current-user/boards/"
             + boardId
@@ -101,26 +103,22 @@ class Timer extends Component {
         this.timer = setInterval(() => this.setState({
             time: Date.now() - this.state.start
         }), 1000);
-        //this.props.onReloadPage();
     }
 
-    stopTimer() {
+    vote(){
         this.setState({
-            isOn: false,
-            result: $('.filterImg').attr('alt'),
-            chosenCardId: $('.filterImg').attr('id')
+               result: $('.filterImg').attr('alt'),
+               chosenCardId: $('.filterImg').attr('id'),
+               isVoted: true
         });
 
-        console.log(this.props.webSocketSession);
-        MemeUtil.sendMessage(this.props.webSocketSession);
-
-        clearInterval(this.timer);
-
         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+
         let updStory = {
             setFinishTime: true,
             estimation: $('.filterImg').attr('alt')
         };
+
         axios.put("/meme/users/current-user/boards/"
             + boardId
             + "/stories/"
@@ -131,6 +129,18 @@ class Timer extends Component {
             .catch(err => {
                 console.log(err.response.data);
             });
+    }
+
+    stopTimer() {
+         this.setState({
+            isOn: false
+         });
+
+         clearInterval(this.timer);
+
+         console.log(this.props.webSocketSession);
+         let boardId = MemeUtil.findIdByUrl(BOARD_URL_REGEX, window.location.href);
+         MemeUtil.sendMessage(this.props.webSocketSession, boardId);
         //this.props.onReloadPage();
     }
 
@@ -145,12 +155,16 @@ class Timer extends Component {
     }
 
     render() {
-        let start = (this.state.time === 0)
+        let start = (this.props.isUserAdminOfBoard ===true && this.state.time === 0)
             ? <div onClick={this.startTimer}><StartButton name={"Start voting"}/></div>
             : null;
-        let stop = (this.state.time === 0 || !this.state.isOn)
+        let stop = (this.props.isUserAdminOfBoard ===true && (this.state.time === 0 || !this.state.isOn))
             ? null
             : <div onClick={this.stopTimer}><StartButton name={"Finish voting"}/></div>;
+        let vote = (this.state.time != 0 && !this.state.isVoted)
+            ? <div onClick={this.vote}><StartButton name={"Vote"}/></div>
+            : null;
+
         let result = null;
         if (!this.state.isOn && this.state.start > 0 && this.state.chosenCardId!=0){
             this.changeImg(this.state.chosenCardId);
@@ -160,6 +174,7 @@ class Timer extends Component {
             <div>
                 <h3>Time: {MemeUtil.formatTime(this.state.time/1000)}</h3>
                 {start}
+                {vote}
                 {stop}
                 {result}
             </div>
