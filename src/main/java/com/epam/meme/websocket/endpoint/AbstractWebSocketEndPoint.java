@@ -16,4 +16,6 @@ public abstract class AbstractWebSocketEndPoint {
     public abstract void onClose(Session userSession);
 
     public abstract void onMessage(String msg);
+
+    public abstract void onError(Throwable throwable);
 }
