@@ -24,7 +24,7 @@ public class WebAppInitializerConfig implements WebApplicationInitializer {
     private static final String RS_APPLICATION = "javax.ws.rs.Application";
 
     private static final String API_VERSION = "1.0.0";
-    private static final String SWAGGER_BASE_PATH = "http://localhost:8081/meme"; //TODO
+    private static final String SWAGGER_BASE_PATH = "/meme"; //TODO
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {

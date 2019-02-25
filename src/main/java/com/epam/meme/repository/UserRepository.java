@@ -31,3 +31,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select user from User user where user.lastActivityTime<=:curDate")
     List<User> identifyDullUsers(@Param("curDate") LocalDateTime curDate);
 }
+
+

@@ -119,6 +119,7 @@ class Timer extends Component {
             estimation: $('.filterImg').attr('alt')
         };
 
+
         axios.put("/meme/users/current-user/boards/"
             + boardId
             + "/stories/"
