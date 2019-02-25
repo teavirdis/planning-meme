@@ -18,6 +18,7 @@ class SignIn extends Component {
 
     addUser = (e) => {
         e.preventDefault();
+
         axios.post('/meme/users/', {
             username: this.state.username
         })

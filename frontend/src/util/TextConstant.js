@@ -1,6 +1,7 @@
 const DEFAULT_COOKIE_REGEX = `/([.$?*|()\[\]\\\/+^])/g`;
 
 const DEFAULT_COOKIE_VALUE = '=; path=/; domain=.hanatrial.ondemand.com; expires=Session';
+//const DEFAULT_COOKIE_VALUE = '=; path=/; domain=localhost; expires=Session';
 
 const BOARD_URL_REGEX = /boards\/([\d]+)\/stories/g;
 

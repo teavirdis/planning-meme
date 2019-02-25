@@ -19,6 +19,7 @@ class MainNavigation extends React.Component {
 
     handleSignOut = () => {
          MemeUtil.deleteCookieByName(USER_COOKIE_NAME);
+
          window.localStorage.removeItem("isLoggedIn");
          if(this.props.webSocketSession !=null){
             //sessionStorage.setItem("webSocket", "");
